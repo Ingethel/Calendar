@@ -1,0 +1,13 @@
+<Entries>
+	<NewEntry>
+		<StartTime>09:00</StartTime>
+		<EndTime>10:00</EndTime>
+		<NameOfTeam>Blue Team</NameOfTeam>
+		<NumberOfPeople>10</NumberOfPeople>
+		<PersonInCharge>Anastopoulos</PersonInCharge>
+		<Telephone>0123456789</Telephone>
+		<ConfirmationDate>1/1/1</ConfirmationDate>
+		<Guide>Anastopoulos</Guide>
+		<Notes>Test</Notes>
+	</NewEntry>
+</Entries>
