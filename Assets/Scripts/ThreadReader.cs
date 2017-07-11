@@ -56,7 +56,6 @@ public class ThreadReader /*: ThreadJob*/ {
     public Dictionary<string, List<NewEntry>> Read(string filename)
     {
         Dictionary<string, List<NewEntry>> monthInfo = new Dictionary<string, List<NewEntry>>();
-        Debug.Log(File.Exists(filename));
         if (File.Exists(filename))
         {
             

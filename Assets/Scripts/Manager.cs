@@ -15,7 +15,8 @@ public class Manager : MonoBehaviour {
         ILLEGAL
     };
 
-    public DateTime currentDate {
+    public DateTime currentDate
+    {
         private set; get;
     }
     private DateTime lastGivenDate;
@@ -32,7 +33,8 @@ public class Manager : MonoBehaviour {
     
     private Dictionary<string, List<NewEntry>> entries;
 
-    void Start () {
+    void Start ()
+    {
         currentState = ViewState.ILLEGAL;
         currentDate = DateTime.Now;
         ThreadReader reader = new ThreadReader();
@@ -45,16 +47,17 @@ public class Manager : MonoBehaviour {
         DailyView.enabled = false;
 
         string filepath = Application.dataPath + @"/Calendar Data/Data/" + currentDate.Year.ToString() + "/" + currentDate.Month.ToString() + "/"+Strings.file;
-        Debug.Log(filepath);
         entries = reader.Read(filepath);
-        Debug.Log(entries.Count);
         
         SetView(currentDate);
     }
 
-	void Update () {
-		
-	}
+    public SearchResult GetEntries(string id)
+    {
+        SearchResult res = new SearchResult();
+        res.value = entries.TryGetValue(id, out res.info);
+        return res;
+    }
 
     public void ChangeView(int i)
     {
@@ -74,7 +77,8 @@ public class Manager : MonoBehaviour {
         SetView(lastGivenDate);
     }
 
-    public void RequestView(DateTime date, ViewState state) {
+    public void RequestView(DateTime date, ViewState state)
+    {
         view.value = (int)state;
         SetView(date);
     }
@@ -100,18 +104,12 @@ public class Manager : MonoBehaviour {
 
     public void NewEntry()
     {
-
         NewEntryView.SetActive(!NewEntryView.activeSelf);
     }
 
     public void Search()
     {
         SearchView.SetActive(true);
-    }
-
-    public void CreateEntry()
-    {
-
     }
 
     void ChangeState(ViewState state)
@@ -139,4 +137,9 @@ public class Manager : MonoBehaviour {
         }
     }
 
+}
+
+public class SearchResult {
+    public bool value;
+    public List<NewEntry> info;
 }
