@@ -29,11 +29,13 @@ public class Manager : MonoBehaviour {
     private Canvas currentView;
     private ViewState currentState;
     public GameObject NewEntryView, SearchView;
-    private List<NewEntryClass> entries;
+    
+    private Dictionary<string, List<NewEntry>> entries;
 
     void Start () {
         currentState = ViewState.ILLEGAL;
         currentDate = DateTime.Now;
+        ThreadReader reader = new ThreadReader();
         monthViewManager = FindObjectOfType<MonthManager>();
         dayViewManager = FindObjectOfType<DayManager>();
         NewEntryView.SetActive(false);
@@ -42,6 +44,11 @@ public class Manager : MonoBehaviour {
         MonthlyView.enabled = false;
         DailyView.enabled = false;
 
+        string filepath = Application.dataPath + @"/Calendar Data/Data/" + currentDate.Year.ToString() + "/" + currentDate.Month.ToString() + "/"+Strings.file;
+        Debug.Log(filepath);
+        entries = reader.Read(filepath);
+        Debug.Log(entries.Count);
+        
         SetView(currentDate);
     }
 
@@ -130,35 +137,6 @@ public class Manager : MonoBehaviour {
 
             currentView.enabled = true;
         }
-    }
-
-}
-
-public class NewEntryClass
-{
-
-    private string nameOfTeam, numberOfPeople, personInCharge, telephone, dateOfConfirmation, guide, notes;
-
-    public NewEntryClass()
-    {
-        nameOfTeam = "";
-        numberOfPeople = "";
-        personInCharge = "";
-        telephone = "";
-        dateOfConfirmation = "";
-        guide = "";
-        notes = "";
-    }
-
-    public NewEntryClass(string i_nameOfTeam, string i_numberOfPeople, string i_personInCharge, string i_telephone, string i_dateOfConfirmation, string i_guide, string i_notes)
-    {
-        nameOfTeam = i_nameOfTeam;
-        numberOfPeople = i_numberOfPeople;
-        personInCharge = i_personInCharge;
-        telephone = i_telephone;
-        dateOfConfirmation = i_dateOfConfirmation;
-        guide = i_guide;
-        notes = i_notes;
     }
 
 }

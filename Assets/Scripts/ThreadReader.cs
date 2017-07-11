@@ -1,56 +1,86 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
+using System.IO;
+using System.Text;
 using UnityEngine;
 
-public class ThreadReader : ThreadJob {
-
-    public TextAsset GameAsset;
+public class ThreadReader /*: ThreadJob*/ {
     
-    List<Dictionary<string, string>> levels = new List<Dictionary<string, string>>();
-    Dictionary<string, string> obj;
-
-    public void GetLevel()
-    {
-        XmlDocument xmlDoc = new XmlDocument();
-        xmlDoc.LoadXml(GameAsset.text); // load the file.
-        XmlNodeList levelsList = xmlDoc.GetElementsByTagName("level"); // array of the level nodes.
-
-        foreach (XmlNode levelInfo in levelsList)
+    private List<NewEntry> GetDayInfo(XmlElement day) {
+        List<NewEntry> dayInfo = new List<NewEntry>();
+        XmlNodeList entries = day.GetElementsByTagName(Strings.NewEntry);
+        foreach (XmlNode entry in entries)
         {
-            XmlNodeList levelcontent = levelInfo.ChildNodes;
-            obj = new Dictionary<string, string>(); // Create a object(Dictionary) to colect the both nodes inside the level node and then put into levels[] array.
-
-            foreach (XmlNode levelsItens in levelcontent) // levels itens nodes.
+            NewEntry newGuide = new NewEntry();
+            XmlNodeList entryInfo = entry.ChildNodes;
+            foreach (XmlElement element in entryInfo)
             {
-                if (levelsItens.Name == "name")
-                {
-                    obj.Add("name", levelsItens.InnerText); // put this in the dictionary.
-                }
-
-                if (levelsItens.Name == "tutorial")
-                {
-                    obj.Add("tutorial", levelsItens.InnerText); // put this in the dictionary.
-                }
-
-                if (levelsItens.Name == "object")
-                {
-                    switch (levelsItens.Attributes["name"].Value)
-                    {
-                        case "Cube": obj.Add("Cube", levelsItens.InnerText); break; // put this in the dictionary.
-                        case "Cylinder": obj.Add("Cylinder", levelsItens.InnerText); break; // put this in the dictionary.
-                        case "Capsule": obj.Add("Capsule", levelsItens.InnerText); break; // put this in the dictionary.
-                        case "Sphere": obj.Add("Sphere", levelsItens.InnerText); break; // put this in the dictionary.
-                    }
-                }
-
-                if (levelsItens.Name == "finaltext")
-                {
-                    obj.Add("finaltext", levelsItens.InnerText); // put this in the dictionary.
-                }
+                if (element.Name == Strings.StartTime)
+                    newGuide.startTime = element.InnerText;
+                else if (element.Name == Strings.EndTime)
+                    newGuide.startTime = element.InnerText;
+                else if (element.Name == Strings.NameOfTeam)
+                    newGuide.startTime = element.InnerText;
+                else if (element.Name == Strings.NumberOfPeople)
+                    newGuide.startTime = element.InnerText;
+                else if (element.Name == Strings.PersonInCharge)
+                    newGuide.startTime = element.InnerText;
+                else if (element.Name == Strings.Telephone)
+                    newGuide.startTime = element.InnerText;
+                else if (element.Name == Strings.ConfirmationDate)
+                    newGuide.startTime = element.InnerText;
+                else if (element.Name == Strings.Guide)
+                    newGuide.startTime = element.InnerText;
+                else if (element.Name == Strings.Notes)
+                    newGuide.startTime = element.InnerText;
             }
-            levels.Add(obj); // add whole obj dictionary in the levels[].
+            dayInfo.Add(newGuide);
         }
+        return dayInfo;
+    }
+
+    // Read By Day
+    public List<NewEntry> Read(string filename, string ID) {
+        List<NewEntry> dayInfo = new List<NewEntry>();
+        if (File.Exists(filename)) {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filename);
+            XmlElement day = doc.GetElementById(ID);
+            dayInfo = GetDayInfo(day);
+        }
+        return dayInfo;
+    }
+
+    // Read By Month
+    public Dictionary<string, List<NewEntry>> Read(string filename)
+    {
+        Dictionary<string, List<NewEntry>> monthInfo = new Dictionary<string, List<NewEntry>>();
+        Debug.Log(File.Exists(filename));
+        if (File.Exists(filename))
+        {
+            
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filename);
+            XmlNodeList entries = doc.GetElementsByTagName(Strings.Day);
+            foreach(XmlElement day in entries)
+            {
+                string id = day.GetAttribute("id");
+                monthInfo.Add(id, GetDayInfo(day));
+            }
+        }
+        return monthInfo;
+    }
+
+
+    public void Write(string filename)
+    {
+        XmlDocument doc = new XmlDocument();
+        if (!File.Exists(filename))
+        {
+            doc.Save(filename);
+        }
+        doc.Load(filename);
     }
 
 }
