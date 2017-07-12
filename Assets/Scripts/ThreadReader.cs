@@ -16,24 +16,13 @@ public class ThreadReader /*: ThreadJob*/ {
             XmlNodeList entryInfo = entry.ChildNodes;
             foreach (XmlElement element in entryInfo)
             {
-                if (element.Name == Strings.StartTime)
-                    newGuide.startTime = element.InnerText;
-                else if (element.Name == Strings.EndTime)
-                    newGuide.startTime = element.InnerText;
-                else if (element.Name == Strings.NameOfTeam)
-                    newGuide.startTime = element.InnerText;
-                else if (element.Name == Strings.NumberOfPeople)
-                    newGuide.startTime = element.InnerText;
-                else if (element.Name == Strings.PersonInCharge)
-                    newGuide.startTime = element.InnerText;
-                else if (element.Name == Strings.Telephone)
-                    newGuide.startTime = element.InnerText;
-                else if (element.Name == Strings.ConfirmationDate)
-                    newGuide.startTime = element.InnerText;
-                else if (element.Name == Strings.Guide)
-                    newGuide.startTime = element.InnerText;
-                else if (element.Name == Strings.Notes)
-                    newGuide.startTime = element.InnerText;
+                for (int i = 0; i < newGuide.attributes.Length; i++) {
+                    if (element.Name == newGuide.labels[i])
+                    {
+                        newGuide.attributes[i] = element.InnerText;
+                        break;
+                    }
+                }
             }
             dayInfo.Add(newGuide);
         }
@@ -72,14 +61,36 @@ public class ThreadReader /*: ThreadJob*/ {
     }
 
 
-    public void Write(string filename)
+    public void Write(string filename, string tag, List<NewEntry> list)
     {
         XmlDocument doc = new XmlDocument();
         if (!File.Exists(filename))
         {
+            XmlElement root = doc.DocumentElement;
+            XmlElement e = doc.CreateElement(Strings.Entries);
+            root.AppendChild(e);
             doc.Save(filename);
         }
         doc.Load(filename);
-    }
+        XmlElement day = doc.GetElementById(tag);
+        if(day == null)
+        {
+            day = doc.CreateElement(Strings.Day);
+            day.SetAttribute("id", tag);
+            doc.AppendChild(day);
+        }
 
+        foreach(NewEntry n in list)
+        {
+            XmlElement NE = doc.CreateElement(Strings.NewEntry);
+            for(int i = 0; i < n.attributes.Length; i++)
+            {
+                XmlElement e = doc.CreateElement(n.labels[i]);
+                e.InnerText = n.attributes[i];
+                NE.AppendChild(e);
+            }
+            day.AppendChild(NE);
+        }
+        doc.Save(filename);
+    }
 }

@@ -1,28 +1,14 @@
 ﻿public class NewEntry
 {
 
-    public string startTime, endTime, nameOfTeam, numberOfPeople, personInCharge, telephone, dateOfConfirmation, guide, notes;
+    public string[] labels = {Strings.StartTime, Strings.EndTime, Strings.NameOfTeam, Strings.NumberOfPeople,Strings.PersonInCharge, Strings.Telephone, Strings.ConfirmationDate, Strings.Guide, Strings.Notes };
 
-    public NewEntry()
+    public string[] attributes = { "", "", "", "", "", "", "", "", "" };
+
+    public NewEntry() { }
+
+    public NewEntry(string[] list)
     {
-        nameOfTeam = "";
-        numberOfPeople = "";
-        personInCharge = "";
-        telephone = "";
-        dateOfConfirmation = "";
-        guide = "";
-        notes = "";
+        attributes = list;
     }
-
-    public NewEntry(string i_nameOfTeam, string i_numberOfPeople, string i_personInCharge, string i_telephone, string i_dateOfConfirmation, string i_guide, string i_notes)
-    {
-        nameOfTeam = i_nameOfTeam;
-        numberOfPeople = i_numberOfPeople;
-        personInCharge = i_personInCharge;
-        telephone = i_telephone;
-        dateOfConfirmation = i_dateOfConfirmation;
-        guide = i_guide;
-        notes = i_notes;
-    }
-
 }
