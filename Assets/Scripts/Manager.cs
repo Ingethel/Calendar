@@ -107,6 +107,11 @@ public class Manager : MonoBehaviour {
         NewEntryView.SetActive(!NewEntryView.activeSelf);
     }
 
+    public void SaveEntry()
+    {
+
+    }
+
     public void Search()
     {
         SearchView.SetActive(true);
