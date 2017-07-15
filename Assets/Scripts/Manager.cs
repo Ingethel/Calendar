@@ -107,9 +107,20 @@ public class Manager : MonoBehaviour {
         NewEntryView.SetActive(!NewEntryView.activeSelf);
     }
 
-    public void SaveEntry()
+    public void SaveEntry(NewEntry e)
     {
-
+        string filename = e.year + "/" + e.month;
+        string tag = e.day + "." + e.month + "." + e.year;
+        ThreadReader reader = new ThreadReader();
+        List<NewEntry> list;
+        if (!entries.TryGetValue(tag, out list))
+            list = new List<NewEntry>();
+        list.Add(e);
+        entries[tag] = list;
+        reader.Write(filename, tag, list);
+        NewEntry();
+        DateTime date = new DateTime(e.year, e.month, e.day);
+        RequestView(date, ViewState.DAILY);
     }
 
     public void Search()

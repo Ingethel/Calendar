@@ -1,15 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE Entries[<!ELEMENT Entries ANY ><!ELEMENT Day ANY><!ELEMENT NewEntry ANY ><!ATTLIST Day id ID #REQUIRED>]>
 <Entries>
-  <Day id ="1.7.2017">
+  <Day id="1.7.2017">
     <NewEntry>
-      <StartTime>09:00</StartTime>
-      <EndTime>10:00</EndTime>
-      <NameOfTeam>Blue Team</NameOfTeam>
-      <NumberOfPeople>10</NumberOfPeople>
-      <PersonInCharge>Anastopoulos</PersonInCharge>
-      <Telephone>0123456789</Telephone>
-      <ConfirmationDate>1/1/1</ConfirmationDate>
-      <Guide>Anastopoulos</Guide>
-      <Notes>Test</Notes>
+      <StartTime>23</StartTime>
+      <EndTime>24</EndTime>
+      <NameOfTeam>asd</NameOfTeam>
+      <NumberOfPeople>asda</NumberOfPeople>
+      <PersonInCharge>sda</PersonInCharge>
+      <Telephone>asd</Telephone>
+      <ConfirmationDate>asd</ConfirmationDate>
+      <Guide>asd</Guide>
+      <Notes>asd</Notes>
+    </NewEntry>
+    <NewEntry>
+      <StartTime>23</StartTime>
+      <EndTime>24</EndTime>
+      <NameOfTeam>asd</NameOfTeam>
+      <NumberOfPeople>asda</NumberOfPeople>
+      <PersonInCharge>sda</PersonInCharge>
+      <Telephone>asd</Telephone>
+      <ConfirmationDate>asd</ConfirmationDate>
+      <Guide>asd</Guide>
+      <Notes>asd</Notes>
+    </NewEntry>
+    <NewEntry>
+      <StartTime>1</StartTime>
+      <EndTime>2</EndTime>
+      <NameOfTeam>sda</NameOfTeam>
+      <NumberOfPeople>dasd</NumberOfPeople>
+      <PersonInCharge>asdas</PersonInCharge>
+      <Telephone>dasd</Telephone>
+      <ConfirmationDate>dasd</ConfirmationDate>
+      <Guide>asdas</Guide>
+      <Notes>asd</Notes>
     </NewEntry>
   </Day>
 </Entries>

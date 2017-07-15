@@ -59,25 +59,40 @@ public class ThreadReader /*: ThreadJob*/ {
         }
         return monthInfo;
     }
-
-
-    public void Write(string filename, string tag, List<NewEntry> list)
+    
+    public void Write(string filePath, string tag, List<NewEntry> list)
     {
+        filePath = Application.dataPath + @"/Calendar Data/Data/" + filePath;
+        string filename;
+        if (!Directory.Exists(filePath))
+            Directory.CreateDirectory(filePath);
+        filename = filePath + "/" + Strings.file;
+
         XmlDocument doc = new XmlDocument();
+        
         if (!File.Exists(filename))
         {
-            XmlElement root = doc.DocumentElement;
-            XmlElement e = doc.CreateElement(Strings.Entries);
-            root.AppendChild(e);
             doc.Save(filename);
+            XmlTextWriter writer = new XmlTextWriter(filename, null);
+            writer.Formatting = Formatting.Indented;
+            writer.WriteStartDocument();
+            writer.WriteDocType("Entries", null, null, "<!ELEMENT Entries ANY ><!ELEMENT Day ANY><!ELEMENT NewEntry ANY ><!ATTLIST Day id ID #REQUIRED>");
+            writer.WriteStartElement("Entries");
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
+            writer.Flush();
+            writer.Close();
         }
+
         doc.Load(filename);
         XmlElement day = doc.GetElementById(tag);
         if(day == null)
         {
             day = doc.CreateElement(Strings.Day);
             day.SetAttribute("id", tag);
-            doc.AppendChild(day);
+
+            XmlElement root = doc.DocumentElement;
+            root.AppendChild(day);
         }
 
         foreach(NewEntry n in list)

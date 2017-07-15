@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE Entries[<!ELEMENT Entries ANY ><!ELEMENT Day ANY><!ELEMENT NewEntry ANY ><!ATTLIST Day id ID #REQUIRED>]>
+<Entries>
+  <Day id="1.1.2017">
+    <NewEntry>
+      <StartTime>1</StartTime>
+      <EndTime>2</EndTime>
+      <NameOfTeam>sda</NameOfTeam>
+      <NumberOfPeople>sdas</NumberOfPeople>
+      <PersonInCharge>dasda</PersonInCharge>
+      <Telephone>sdasd</Telephone>
+      <ConfirmationDate>asd</ConfirmationDate>
+      <Guide>asd</Guide>
+      <Notes>asd</Notes>
+    </NewEntry>
+  </Day>
+</Entries>
