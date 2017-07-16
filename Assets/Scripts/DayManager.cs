@@ -22,6 +22,8 @@ public class DayManager : IViewManager {
         if (o_view != null)
         {
             o_view.SetTime(n.attributes[0] + " - " + n.attributes[1]);
+            if(!n.filler)
+                o_view.SetDetails(n.attributes[2] + ", "+n.attributes[3]+", "+n.attributes[4] + ", "+n.attributes[7]);
         }
     }
 
@@ -32,12 +34,8 @@ public class DayManager : IViewManager {
             info = new NewEntryList();
             for (int i = 0; i < setTime.Length - 1; i++)
             {
-                NewEntry n = new NewEntry();
-                n.attributes[0] = NewEntry.IntTimeToString(setTime[i]);
-                n.attributes[1] = NewEntry.IntTimeToString(setTime[i + 1]);
-                info.Add(n);
+                AddFiller(setTime[i], setTime[i + 1]);
             }
-
         }
         base.DisplayInfo();
     }

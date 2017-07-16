@@ -48,7 +48,6 @@ public class NewEntryPanelHandler : Panel {
             int.TryParse(Day.text, out n.day);
             int.TryParse(Month.text, out n.month);
             int.TryParse(Year.text, out n.year);
-            
             manager.SaveEntry(n);
             Close();
         }

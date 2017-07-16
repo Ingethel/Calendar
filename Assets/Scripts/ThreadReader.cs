@@ -24,6 +24,7 @@ public class ThreadReader /*: ThreadJob*/ {
                     }
                 }
             }
+            newGuide.filler = false;
             dayInfo.Add(newGuide);
         }
         return dayInfo;

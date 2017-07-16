@@ -7,56 +7,27 @@ public class NewEntry
 
     public string[] attributes = { "", "", "", "", "", "", "", "", "" };
     public int day, month, year;
-    public NewEntry() { }
+    public bool filler;
+
+    public NewEntry()
+    {
+        filler = true;
+    }
 
     public NewEntry(string[] list)
     {
         attributes = list;
-    }
-
-    private int[] SplitTime(string s)
-    {
-        string[] time_s = s.Split(':');
-        int[] time_int = new int[time_s.Length];
-        for (int i = 0; i < time_s.Length; i++)
-            int.TryParse(time_s[i], out time_int[i]);
-        return time_int;
-    }
-
-    private int GetIntTime(string s)
-    {
-        string[] time_s = s.Split(':');
-        string time = "";
-        for (int i = 0; i < time_s.Length; i++)
-            time += time_s[i];
-        int time_i = 0;
-        int.TryParse(time, out time_i);
-        return time_i;
-    }
-
-    public static string IntTimeToString(int time)
-    {
-        string minutes = (time % 100).ToString();
-        string hours = (time / 100).ToString();
-        while(hours.Length < 2)
-        {
-            hours = "0" + hours;
-        }
-        while (minutes.Length < 2)
-        {
-            minutes = "0" + minutes;
-        }
-        return hours + ":" + minutes;
+        filler = false;
     }
 
     public int GetStartTime()
     {
-        return GetIntTime(attributes[0]);
+        return TimeConversions.StringTimeToInt(attributes[0]);
     }
 
     public int GetEndTime()
     {
-        return GetIntTime(attributes[1]);
+        return TimeConversions.StringTimeToInt(attributes[1]);
     }
 }
 
@@ -129,5 +100,39 @@ public class NewEntryList
             n = null;
             return false;
         }
+    }
+}
+
+public class TimeConversions
+{
+    public static string IntTimeToString(int time)
+    {
+        string minutes = (time % 100).ToString();
+        string hours = (time / 100).ToString();
+        while (hours.Length < 2)
+        {
+            hours = "0" + hours;
+        }
+        while (minutes.Length < 2)
+        {
+            minutes = "0" + minutes;
+        }
+        return hours + ":" + minutes;
+    }
+
+    private static int[] SplitTime(string s)
+    {
+        string[] time_s = s.Split(':');
+        int[] time_int = new int[time_s.Length];
+        for (int i = 0; i < time_s.Length; i++)
+            int.TryParse(time_s[i], out time_int[i]);
+        return time_int;
+    }
+
+    public static int StringTimeToInt(string s)
+    {
+        int[] c_time = SplitTime(s);
+        int time_i = c_time[0] * 60 + c_time[1];
+        return time_i;
     }
 }
