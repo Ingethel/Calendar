@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class ThreadReader /*: ThreadJob*/ {
     
-    private List<NewEntry> GetDayInfo(XmlElement day) {
-        List<NewEntry> dayInfo = new List<NewEntry>();
+    private NewEntryList GetDayInfo(XmlElement day) {
+        NewEntryList dayInfo = new NewEntryList();
         XmlNodeList entries = day.GetElementsByTagName(Strings.NewEntry);
         foreach (XmlNode entry in entries)
         {
@@ -30,8 +30,8 @@ public class ThreadReader /*: ThreadJob*/ {
     }
 
     // Read By Day
-    public List<NewEntry> Read(string filename, string ID) {
-        List<NewEntry> dayInfo = new List<NewEntry>();
+    public NewEntryList Read(string filename, string ID) {
+        NewEntryList dayInfo = new NewEntryList();
         if (File.Exists(filename)) {
             XmlDocument doc = new XmlDocument();
             doc.Load(filename);
@@ -42,9 +42,9 @@ public class ThreadReader /*: ThreadJob*/ {
     }
 
     // Read By Month
-    public Dictionary<string, List<NewEntry>> Read(string filename)
+    public Dictionary<string, NewEntryList> Read(string filename)
     {
-        Dictionary<string, List<NewEntry>> monthInfo = new Dictionary<string, List<NewEntry>>();
+        Dictionary<string, NewEntryList> monthInfo = new Dictionary<string, NewEntryList>();
         if (File.Exists(filename))
         {
             
@@ -59,8 +59,8 @@ public class ThreadReader /*: ThreadJob*/ {
         }
         return monthInfo;
     }
-    
-    public void Write(string filePath, string tag, List<NewEntry> list)
+
+    public void Write(string filePath, string tag, NewEntryList list)
     {
         filePath = Application.dataPath + @"/Calendar Data/Data/" + filePath;
         string filename;
@@ -69,7 +69,7 @@ public class ThreadReader /*: ThreadJob*/ {
         filename = filePath + "/" + Strings.file;
 
         XmlDocument doc = new XmlDocument();
-        
+
         if (!File.Exists(filename))
         {
             doc.Save(filename);
@@ -86,7 +86,7 @@ public class ThreadReader /*: ThreadJob*/ {
 
         doc.Load(filename);
         XmlElement day = doc.GetElementById(tag);
-        if(day == null)
+        if (day == null)
         {
             day = doc.CreateElement(Strings.Day);
             day.SetAttribute("id", tag);
@@ -95,17 +95,21 @@ public class ThreadReader /*: ThreadJob*/ {
             root.AppendChild(day);
         }
 
-        foreach(NewEntry n in list)
+        for (int y = 0; y < list.Count(); y++)
         {
-            XmlElement NE = doc.CreateElement(Strings.NewEntry);
-            for(int i = 0; i < n.attributes.Length; i++)
+            NewEntry n;
+            if (list.TryGet(y, out n))
             {
-                XmlElement e = doc.CreateElement(n.labels[i]);
-                e.InnerText = n.attributes[i];
-                NE.AppendChild(e);
+                XmlElement NE = doc.CreateElement(Strings.NewEntry);
+                for (int i = 0; i < n.attributes.Length; i++)
+                {
+                    XmlElement e = doc.CreateElement(n.labels[i]);
+                    e.InnerText = n.attributes[i];
+                    NE.AppendChild(e);
+                }
+                day.AppendChild(NE);
             }
-            day.AppendChild(NE);
+            doc.Save(filename);
         }
-        doc.Save(filename);
     }
 }

@@ -31,8 +31,7 @@ public class Manager : MonoBehaviour {
     private ViewState currentState;
     public GameObject NewEntryView, SearchView;
     
-    private Dictionary<string, List<NewEntry>> entries;
-
+    private Dictionary<string, NewEntryList> entries;
     void Start ()
     {
         currentState = ViewState.ILLEGAL;
@@ -112,13 +111,14 @@ public class Manager : MonoBehaviour {
         string filename = e.year + "/" + e.month;
         string tag = e.day + "." + e.month + "." + e.year;
         ThreadReader reader = new ThreadReader();
-        List<NewEntry> list;
+        NewEntryList list;
         if (!entries.TryGetValue(tag, out list))
-            list = new List<NewEntry>();
+            list = new NewEntryList();
+
         list.Add(e);
+        
         entries[tag] = list;
         reader.Write(filename, tag, list);
-        NewEntry();
         DateTime date = new DateTime(e.year, e.month, e.day);
         RequestView(date, ViewState.DAILY);
     }
@@ -157,5 +157,5 @@ public class Manager : MonoBehaviour {
 
 public class SearchResult {
     public bool value;
-    public List<NewEntry> info;
+    public NewEntryList info;
 }

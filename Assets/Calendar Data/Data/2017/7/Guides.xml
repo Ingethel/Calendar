@@ -3,37 +3,22 @@
 <Entries>
   <Day id="1.7.2017">
     <NewEntry>
-      <StartTime>23</StartTime>
-      <EndTime>24</EndTime>
-      <NameOfTeam>asd</NameOfTeam>
-      <NumberOfPeople>asda</NumberOfPeople>
-      <PersonInCharge>sda</PersonInCharge>
-      <Telephone>asd</Telephone>
-      <ConfirmationDate>asd</ConfirmationDate>
-      <Guide>asd</Guide>
-      <Notes>asd</Notes>
-    </NewEntry>
-    <NewEntry>
-      <StartTime>23</StartTime>
-      <EndTime>24</EndTime>
-      <NameOfTeam>asd</NameOfTeam>
-      <NumberOfPeople>asda</NumberOfPeople>
-      <PersonInCharge>sda</PersonInCharge>
-      <Telephone>asd</Telephone>
-      <ConfirmationDate>asd</ConfirmationDate>
-      <Guide>asd</Guide>
-      <Notes>asd</Notes>
-    </NewEntry>
-    <NewEntry>
-      <StartTime>1</StartTime>
-      <EndTime>2</EndTime>
-      <NameOfTeam>sda</NameOfTeam>
-      <NumberOfPeople>dasd</NumberOfPeople>
-      <PersonInCharge>asdas</PersonInCharge>
-      <Telephone>dasd</Telephone>
-      <ConfirmationDate>dasd</ConfirmationDate>
-      <Guide>asdas</Guide>
-      <Notes>asd</Notes>
+      <StartTime>09:00</StartTime>
+      <EndTime>10:00</EndTime>
+      <NameOfTeam>
+      </NameOfTeam>
+      <NumberOfPeople>
+      </NumberOfPeople>
+      <PersonInCharge>
+      </PersonInCharge>
+      <Telephone>
+      </Telephone>
+      <ConfirmationDate>
+      </ConfirmationDate>
+      <Guide>
+      </Guide>
+      <Notes>
+      </Notes>
     </NewEntry>
   </Day>
 </Entries>

@@ -28,5 +28,5 @@ public class MonthManager : IViewManager {
             if (dayofweek == 0) weekCounter++;
         }
     }
-
+    
 }

@@ -1,22 +1,21 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class DayOfMonth : IViewManager {
+public class DayOfMonth : IViewManager, ISelectHandler {
 
     public GameObject DayPanel;
-    HoverPanelAnimation hoverScript;
-    private List<NewEntry> info;
+    Selectable selectable;
 
     private void Start()
     {
-        hoverScript = GetComponent<HoverPanelAnimation>();
-        Reset();
+        selectable = GetComponent<Selectable>();
     }
 
     public void Reset()
     {
         DayPanel.SetActive(false);
-        hoverScript.hoverActive = false;
+        selectable.interactable = false;
     }
 
     protected override void SetHeader()
@@ -25,8 +24,9 @@ public class DayOfMonth : IViewManager {
     }
 
     protected override void OnSetView() {
+        RequestData();
         DayPanel.SetActive(true);
-        hoverScript.hoverActive = true;
+        selectable.interactable = true;
     }
 
     protected override void SetTag()
@@ -39,12 +39,8 @@ public class DayOfMonth : IViewManager {
         manager.RequestView(assignedDate, Manager.ViewState.DAILY);
     }
 
-    protected override void RequestData() {
-        SearchResult res = manager.GetEntries(_tag);
-        if (res.value)
-        {
-            info = res.info;
-        }
+    public void OnSelect(BaseEventData eventData)
+    {
+        RequestView();
     }
-
 }
