@@ -19,6 +19,7 @@ public class IViewManager : Panel
     private void Awake()
     {
         manager = FindObjectOfType<Manager>();
+        info = new NewEntryList();
     }
 
     protected virtual void SetHeader() {}
@@ -31,21 +32,17 @@ public class IViewManager : Panel
 
     protected void RequestData()
     {
-        SearchResult res = manager.GetEntries(_tag);
+        SearchResult res = manager.TryGetEntries(_tag);
         if (res.value)
         {
-            info = res.info;       
+            info = res.info;
         }
-        DisplayInfo();
     }
 
     protected virtual void DisplayInfo()
     {
-        if (info != null)
+        if(info != null)
         {
-            if (info.Count() < 3)
-                AnalyseData();
-
             for (int i = 0; i < info.Count(); i++)
             {
                 NewEntry n;
@@ -59,7 +56,7 @@ public class IViewManager : Panel
         }
     }
 
-    protected void AddFiller(String startTime, String endTime)
+    protected void AddFiller(string startTime, string endTime)
     {
         NewEntry n = new NewEntry();
         n.attributes[0] = startTime;
@@ -67,7 +64,7 @@ public class IViewManager : Panel
         info.Add(n);
     }
 
-    private void AnalyseData()
+    protected void FillEmptySlots()
     {
         for (int i = 0; i < info.Count(); i++)
         {
@@ -86,13 +83,14 @@ public class IViewManager : Panel
                     {
                         if (n1.GetStartTime() - TimeConversions.StringTimeToInt(setTime[k]) < 45)
                         {
-                            int y = 0;
-                            while(y < k) {
+                            int y = k - 1;
+                            if (y >= 0) {
+                                AddFiller(setTime[y], n1.attributes[0]);
+                            }
+                            while(y < k - 1) {
                                 AddFiller(setTime[y], setTime[y + 1]);
                                 y++;
-                            }
-                            if(n1.GetStartTime() - TimeConversions.StringTimeToInt(setTime[y]) > 45)
-                                AddFiller(setTime[y], n1.attributes[0]);
+                            }    
                             break;
                         }
                     }
@@ -103,16 +101,15 @@ public class IViewManager : Panel
                     {
                         if (TimeConversions.StringTimeToInt(setTime[k]) - n1.GetEndTime() < 45)
                         {
-                            int y = setTime.Length - 1;
-                            while(y > k)
-                            {
-                                AddFiller(setTime[y-1], setTime[y]);
-                                y--;
-                            }
-                            if (TimeConversions.StringTimeToInt(setTime[y]) - n1.GetEndTime() > 45)
+                            int y = k + 1;
+                            if (y < setTime.Length)
                                 AddFiller(n1.attributes[1], setTime[y]);
-                            
-                        break;
+                            while(y < setTime.Length - 1)
+                            {
+                                AddFiller(setTime[y], setTime[y + 1]);
+                                y++;
+                            }
+                            break;
                         }
                     }
                 }    
@@ -123,9 +120,9 @@ public class IViewManager : Panel
 
     protected virtual void AssignInfo(GameObject o, NewEntry n) {}
 
-    private void Refresh()
+    protected virtual void Refresh()
     {
-        info = null;
+        info = new NewEntryList();
         if(guideList != null)
             foreach (Transform t in guideList.transform)
                 Destroy(t.gameObject);

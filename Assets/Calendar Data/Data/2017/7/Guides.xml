@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!DOCTYPE Entries[<!ELEMENT Entries ANY ><!ELEMENT Day ANY><!ELEMENT NewEntry ANY ><!ATTLIST Day id ID #REQUIRED>]>
+<Entries>
+  <Day id="1.7.2017">
+    <NewEntry>
+      <StartTime>09:30</StartTime>
+      <EndTime>10:30</EndTime>
+      <NameOfTeam>Anastopoulos</NameOfTeam>
+      <NumberOfPeople>50</NumberOfPeople>
+      <PersonInCharge>
+      </PersonInCharge>
+      <Telephone>
+      </Telephone>
+      <ConfirmationDate>
+      </ConfirmationDate>
+      <Guide>Tzanis</Guide>
+      <Notes>
+      </Notes>
+    </NewEntry>
+    <NewEntry>
+      <StartTime>12:00</StartTime>
+      <EndTime>13:00</EndTime>
+      <NameOfTeam>Anastopoulos</NameOfTeam>
+      <NumberOfPeople>50</NumberOfPeople>
+      <PersonInCharge>
+      </PersonInCharge>
+      <Telephone>
+      </Telephone>
+      <ConfirmationDate>
+      </ConfirmationDate>
+      <Guide>Tzanis</Guide>
+      <Notes>
+      </Notes>
+    </NewEntry>
+  </Day>
+  <Day id="2.7.2017">
+    <NewEntry>
+      <StartTime>12:00</StartTime>
+      <EndTime>13:00</EndTime>
+      <NameOfTeam>Anastopoulos</NameOfTeam>
+      <NumberOfPeople>50</NumberOfPeople>
+      <PersonInCharge>
+      </PersonInCharge>
+      <Telephone>
+      </Telephone>
+      <ConfirmationDate>
+      </ConfirmationDate>
+      <Guide>Tzanis</Guide>
+      <Notes>
+      </Notes>
+    </NewEntry>
+  </Day>
+  <Day id="3.7.2017">
+    <NewEntry>
+      <StartTime>11:00</StartTime>
+      <EndTime>13:00</EndTime>
+      <NameOfTeam>Anastopoulos</NameOfTeam>
+      <NumberOfPeople>50</NumberOfPeople>
+      <PersonInCharge>
+      </PersonInCharge>
+      <Telephone>
+      </Telephone>
+      <ConfirmationDate>
+      </ConfirmationDate>
+      <Guide>Tzanis</Guide>
+      <Notes>
+      </Notes>
+    </NewEntry>
+  </Day>
+  <Day id="7.7.2017">
+    <NewEntry>
+      <StartTime>10:00</StartTime>
+      <EndTime>11:00</EndTime>
+      <NameOfTeam>Anastopoulos</NameOfTeam>
+      <NumberOfPeople>50</NumberOfPeople>
+      <PersonInCharge>
+      </PersonInCharge>
+      <Telephone>
+      </Telephone>
+      <ConfirmationDate>
+      </ConfirmationDate>
+      <Guide>Tzanis</Guide>
+      <Notes>
+      </Notes>
+    </NewEntry>
+  </Day>
+</Entries>

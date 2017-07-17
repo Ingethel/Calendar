@@ -61,7 +61,7 @@ public class ThreadReader /*: ThreadJob*/ {
         return monthInfo;
     }
 
-    public void Write(string filePath, string tag, NewEntryList list)
+    private string InitialiseDoc(string filePath)
     {
         filePath = Application.dataPath + @"/Calendar Data/Data/" + filePath;
         string filename;
@@ -84,6 +84,45 @@ public class ThreadReader /*: ThreadJob*/ {
             writer.Flush();
             writer.Close();
         }
+        return filename;
+    }
+
+    // write element
+    public void Write(string filePath, string tag, NewEntry item) {
+        string filename = InitialiseDoc(filePath);
+
+        XmlDocument doc = new XmlDocument();
+
+        doc.Load(filename);
+        XmlElement day = doc.GetElementById(tag);
+        if (day == null)
+        {
+            day = doc.CreateElement(Strings.Day);
+            day.SetAttribute("id", tag);
+
+            XmlElement root = doc.DocumentElement;
+            root.AppendChild(day);
+        }
+        if (!item.filler)
+        {
+            XmlElement NE = doc.CreateElement(Strings.NewEntry);
+            for (int i = 0; i < item.attributes.Length; i++)
+            {
+                XmlElement e = doc.CreateElement(item.labels[i]);
+                e.InnerText = item.attributes[i];
+                NE.AppendChild(e);
+            }
+            day.AppendChild(NE);
+        }
+        doc.Save(filename);
+    }
+
+    // write list
+    public void Write(string filePath, string tag, NewEntryList list)
+    {
+        string filename = InitialiseDoc(filePath);
+
+        XmlDocument doc = new XmlDocument();
 
         doc.Load(filename);
         XmlElement day = doc.GetElementById(tag);
@@ -101,14 +140,16 @@ public class ThreadReader /*: ThreadJob*/ {
             NewEntry n;
             if (list.TryGet(y, out n))
             {
-                XmlElement NE = doc.CreateElement(Strings.NewEntry);
-                for (int i = 0; i < n.attributes.Length; i++)
-                {
-                    XmlElement e = doc.CreateElement(n.labels[i]);
-                    e.InnerText = n.attributes[i];
-                    NE.AppendChild(e);
+                if (!n.filler) {
+                    XmlElement NE = doc.CreateElement(Strings.NewEntry);
+                    for (int i = 0; i < n.attributes.Length; i++)
+                    {
+                        XmlElement e = doc.CreateElement(n.labels[i]);
+                        e.InnerText = n.attributes[i];
+                        NE.AppendChild(e);
+                    }
+                    day.AppendChild(NE);
                 }
-                day.AppendChild(NE);
             }
             doc.Save(filename);
         }

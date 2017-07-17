@@ -51,10 +51,13 @@ public class Manager : MonoBehaviour {
         SetView(currentDate);
     }
 
-    public SearchResult GetEntries(string id)
+    public SearchResult TryGetEntries(string id)
     {
         SearchResult res = new SearchResult();
-        res.value = entries.TryGetValue(id, out res.info);
+        NewEntryList list;
+        res.value = entries.TryGetValue(id, out list);
+        if (res.value)
+            res.info = (NewEntryList)list.Clone();
         return res;
     }
 
@@ -118,7 +121,7 @@ public class Manager : MonoBehaviour {
         list.Add(e);
         
         entries[tag] = list;
-        reader.Write(filename, tag, list);
+        reader.Write(filename, tag, e);
         DateTime date = new DateTime(e.year, e.month, e.day);
         RequestView(date, ViewState.DAILY);
     }

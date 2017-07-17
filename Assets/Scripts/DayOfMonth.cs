@@ -4,18 +4,25 @@ using UnityEngine.EventSystems;
 
 public class DayOfMonth : IViewManager, ISelectHandler {
 
-    public GameObject DayPanel;
+    public GameObject DateIndicatorPanel;
     Selectable selectable;
-
+    public Color Filled;
+    
     private void Start()
     {
         selectable = GetComponent<Selectable>();
     }
+    
+    protected override void Refresh()
+    {
+        base.Refresh();
+        DateIndicatorPanel.SetActive(false);
+        selectable.interactable = false;
+    }
 
     public void Reset()
     {
-        DayPanel.SetActive(false);
-        selectable.interactable = false;
+        Refresh();
     }
 
     protected override void SetHeader()
@@ -23,10 +30,32 @@ public class DayOfMonth : IViewManager, ISelectHandler {
         header.text = assignedDate.Day.ToString();
     }
 
+    protected override void DisplayInfo()
+    {
+        DateIndicatorPanel.SetActive(true);
+        selectable.interactable = true;
+        if (assignedDate.DayOfWeek == System.DayOfWeek.Monday)
+        {
+            Image img = GetComponent<Image>();
+            if (img)
+            {
+                img.color = new Color(Color.red.r, Color.red.g, Color.red.b, 0.5f);
+            }
+        }
+        else
+        {
+            if (info.Count() < setTime.Length - 1)
+            {
+                Debug.Log("Filling Empty Slots");
+                FillEmptySlots();
+            }
+        }
+        base.DisplayInfo();
+    }
+
     protected override void OnSetView() {
         RequestData();
-        DayPanel.SetActive(true);
-        selectable.interactable = true;
+        DisplayInfo();
     }
 
     protected override void SetTag()
@@ -42,5 +71,18 @@ public class DayOfMonth : IViewManager, ISelectHandler {
     public void OnSelect(BaseEventData eventData)
     {
         RequestView();
+    }
+
+
+    protected override void AssignInfo(GameObject o, NewEntry n)
+    {
+        if (!n.filler) {
+            Image img = o.GetComponent<Image>();
+            if (img)
+            {
+                img.color = Filled;
+            }
+        }
+        
     }
 }

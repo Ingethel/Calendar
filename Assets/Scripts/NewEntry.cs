@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 public class NewEntry
 {
@@ -33,6 +34,8 @@ public class NewEntry
 
 public class NewEntryComparer : IComparer<NewEntry>
 {
+    
+
     public int Compare(NewEntry x, NewEntry y)
     {
         int time_x = x.GetStartTime();
@@ -58,7 +61,7 @@ public class NewEntryComparer : IComparer<NewEntry>
     }
 }
 
-public class NewEntryList
+public class NewEntryList : ICloneable
 {
     private List<NewEntry> list; 
     private NewEntryComparer comparer;
@@ -66,6 +69,11 @@ public class NewEntryList
     public NewEntryList()
     {
         comparer = new NewEntryComparer();
+    }
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
     }
 
     public void Add(NewEntry e)
@@ -78,6 +86,12 @@ public class NewEntryList
             if (index < 0)
                 list.Insert(~index, e);
         }
+    }
+
+    public void Clear()
+    {
+        if (list != null && list.Count > 0)
+            list.Clear();
     }
 
     public int Count()
