@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System;
 using UnityEngine;
@@ -23,32 +22,43 @@ public class Manager : MonoBehaviour {
 
     public static Calendar calendar = CultureInfo.InvariantCulture.Calendar;
     public Dropdown view;
-    private MonthManager monthViewManager;
-    private DayManager dayViewManager;
-
+    private MonthViewManager monthViewManager;
+    private WeekViewManager weekViewManager;
+    private DayViewManager dayViewManager;
+    
     public Canvas MonthlyView, WeeklyView, DailyView;
     private Canvas currentView;
     private ViewState currentState;
     public GameObject NewEntryView, SearchView;
     
     private Dictionary<string, NewEntryList> entries;
+
     void Start ()
     {
         currentState = ViewState.ILLEGAL;
         currentDate = DateTime.Now;
+
         ThreadReader reader = new ThreadReader();
-        monthViewManager = FindObjectOfType<MonthManager>();
-        dayViewManager = FindObjectOfType<DayManager>();
+
         NewEntryView.SetActive(false);
         SearchView.SetActive(false);
 
+        monthViewManager = FindObjectOfType<MonthViewManager>();
+        weekViewManager = FindObjectOfType<WeekViewManager>();
+        dayViewManager = FindObjectOfType<DayViewManager>();
+
+
         MonthlyView.enabled = false;
+        WeeklyView.enabled = false;
         DailyView.enabled = false;
 
         string filepath = Application.dataPath + @"/Calendar Data/Data/" + currentDate.Year.ToString() + "/" + currentDate.Month.ToString() + "/"+Strings.file;
         entries = reader.Read(filepath);
-        
-        SetView(currentDate);
+
+        if (currentDate.DayOfWeek == System.DayOfWeek.Monday)
+            RequestView(currentDate, ViewState.WEEKLY);
+        else
+            RequestView(currentDate, ViewState.MONTHLY);
     }
 
     public SearchResult TryGetEntries(string id)
@@ -81,6 +91,8 @@ public class Manager : MonoBehaviour {
 
     public void RequestView(DateTime date, ViewState state)
     {
+
+        ChangeState(state);
         view.value = (int)state;
         SetView(date);
     }
@@ -88,14 +100,13 @@ public class Manager : MonoBehaviour {
     private void SetView(DateTime date)
     {
         lastGivenDate = date;
-        ChangeState((ViewState)view.value);
         switch (view.value)
         {
             case 2:
                 dayViewManager.SetView(lastGivenDate);
                 break;
             case 1:
-                //weekViewManager.SetView(lastGivenDate);
+                weekViewManager.SetView(lastGivenDate);
                 break;
             case 0:
             default:

@@ -46,11 +46,11 @@ public class DayOfMonth : IViewManager, ISelectHandler {
         {
             if (info.Count() < setTime.Length - 1)
             {
-                Debug.Log("Filling Empty Slots");
                 FillEmptySlots();
             }
+
+            base.DisplayInfo();
         }
-        base.DisplayInfo();
     }
 
     protected override void OnSetView() {

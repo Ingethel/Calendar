@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
+﻿using System;
 
-public class MonthManager : IViewManager {
-    private string[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-
+public class MonthViewManager : IViewManager {
+    
     public WeekOfMonth[] weeks;
     
 	void Start () {
@@ -12,7 +9,7 @@ public class MonthManager : IViewManager {
     }
 
     protected override void SetHeader() {
-        header.text = months[assignedDate.Month - 1] + " " + assignedDate.Year.ToString();
+        header.text = TimeConversions.GetMonth(assignedDate.Month - 1) + " " + assignedDate.Year.ToString();
     }
 
     protected override void Refresh()
@@ -34,14 +31,14 @@ public class MonthManager : IViewManager {
         }
         // previous month
         DateTime day_lastMonth = new DateTime(assignedDate.Year, assignedDate.Month - 1, DateTime.DaysInMonth(assignedDate.Year, assignedDate.Month-1));
-        while (day_lastMonth.DayOfWeek != DayOfWeek.Sunday)
+        while (day_lastMonth.DayOfWeek != System.DayOfWeek.Sunday)
         {
             weeks[0].days[(byte)day_lastMonth.DayOfWeek].SetView(day_lastMonth);
             day_lastMonth = day_lastMonth.AddDays(-1);
         }
         // next month
         DateTime day_nextMoth = new DateTime(assignedDate.Year, assignedDate.Month + 1, 1);
-        while(day_nextMoth.DayOfWeek != DayOfWeek.Monday)
+        while(day_nextMoth.DayOfWeek != System.DayOfWeek.Monday)
         {
             weeks[weekCounter].days[(byte)day_nextMoth.DayOfWeek].SetView(day_nextMoth);
             day_nextMoth = day_nextMoth.AddDays(1);

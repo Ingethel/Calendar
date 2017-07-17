@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-public class DayManager : IViewManager {
+
+public class DayViewManager : IViewManager {
 
     string[] weekendTimes = { "10:30", "12:00", "13:30", "15:00", "17:30" };
 
@@ -43,7 +44,6 @@ public class DayManager : IViewManager {
     {
         if (info == null || info.Count() == 0)
         {
-            Debug.Log("List Empty. Filling with template");
             info = new NewEntryList();
             for (int i = 0; i < setTime.Length - 1; i++)
             {
@@ -51,14 +51,12 @@ public class DayManager : IViewManager {
             }
         }
         else {
-            Debug.Log("List Not Empty. List Size: "+info.Count());
             if (info.Count() < setTime.Length - 1) {
                 Debug.Log("Filling Empty Slots");
                 FillEmptySlots();
             }
         }
         base.DisplayInfo();
-        Debug.Log("Displaying List Size: " + info.Count());
     }
 
 }
