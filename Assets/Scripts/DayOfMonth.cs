@@ -7,7 +7,8 @@ public class DayOfMonth : IViewManager, ISelectHandler {
     public GameObject DateIndicatorPanel;
     Selectable selectable;
     public Color Filled;
-    
+    bool isMonday;
+
     private void Start()
     {
         selectable = GetComponent<Selectable>();
@@ -34,7 +35,7 @@ public class DayOfMonth : IViewManager, ISelectHandler {
     {
         DateIndicatorPanel.SetActive(true);
         selectable.interactable = true;
-        if (assignedDate.DayOfWeek == System.DayOfWeek.Monday)
+        if (isMonday)
         {
             Image img = GetComponent<Image>();
             if (img)
@@ -54,7 +55,11 @@ public class DayOfMonth : IViewManager, ISelectHandler {
     }
 
     protected override void OnSetView() {
-        RequestData();
+        isMonday = assignedDate.DayOfWeek == System.DayOfWeek.Monday;
+        if (!isMonday)
+        {
+            RequestData();
+        }
         DisplayInfo();
     }
 
@@ -65,7 +70,13 @@ public class DayOfMonth : IViewManager, ISelectHandler {
 
     public override void RequestView()
     {
-        manager.RequestView(assignedDate, Manager.ViewState.DAILY);
+        if (isMonday) {
+            manager.RequestView(assignedDate, Manager.ViewState.WEEKLY);
+        }
+        else
+        {
+            manager.RequestView(assignedDate, Manager.ViewState.DAILY);
+        }
     }
 
     public void OnSelect(BaseEventData eventData)

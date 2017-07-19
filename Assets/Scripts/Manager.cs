@@ -4,7 +4,8 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Manager : MonoBehaviour {
+public class Manager : MonoBehaviour
+{
 
     public enum ViewState
     {
@@ -22,37 +23,30 @@ public class Manager : MonoBehaviour {
 
     public static Calendar calendar = CultureInfo.InvariantCulture.Calendar;
     public Dropdown view;
-    private MonthViewManager monthViewManager;
-    private WeekViewManager weekViewManager;
-    private DayViewManager dayViewManager;
     
-    public Canvas MonthlyView, WeeklyView, DailyView;
-    private Canvas currentView;
+    public GameObject[] viewModes;
+    private IViewManager viewManager;
+    private GameObject currentView;
+    
     private ViewState currentState;
     public GameObject NewEntryView, SearchView;
-    
+
     private Dictionary<string, NewEntryList> entries;
 
-    void Start ()
+    void Start()
     {
         currentState = ViewState.ILLEGAL;
         currentDate = DateTime.Now;
+
+        foreach (GameObject o in viewModes)
+            o.SetActive(false);
 
         ThreadReader reader = new ThreadReader();
 
         NewEntryView.SetActive(false);
         SearchView.SetActive(false);
-
-        monthViewManager = FindObjectOfType<MonthViewManager>();
-        weekViewManager = FindObjectOfType<WeekViewManager>();
-        dayViewManager = FindObjectOfType<DayViewManager>();
-
-
-        MonthlyView.enabled = false;
-        WeeklyView.enabled = false;
-        DailyView.enabled = false;
-
-        string filepath = Application.dataPath + @"/Calendar Data/Data/" + currentDate.Year.ToString() + "/" + currentDate.Month.ToString() + "/"+Strings.file;
+        
+        string filepath = Application.dataPath + @"/Calendar Data/Data/" + currentDate.Year.ToString() + "/" + currentDate.Month.ToString() + "/" + Strings.file;
         entries = reader.Read(filepath);
 
         if (currentDate.DayOfWeek == System.DayOfWeek.Monday)
@@ -73,26 +67,23 @@ public class Manager : MonoBehaviour {
 
     public void ChangeView(int i)
     {
-        if(i != 0)
-            switch (view.value)
-            {
-                case 2:
-                    lastGivenDate = calendar.AddDays(lastGivenDate, i);
-                    break;
-                case 1:
-                    lastGivenDate = calendar.AddWeeks(lastGivenDate, i);
-                    break;
-                case 0:
-                    lastGivenDate = calendar.AddMonths(lastGivenDate, i);
-                    break;
-            }
+        switch (view.value)
+        {
+            case 2:
+                lastGivenDate = calendar.AddDays(lastGivenDate, i);
+                break;
+            case 1:
+                lastGivenDate = calendar.AddWeeks(lastGivenDate, i);
+                break;
+            case 0:
+                lastGivenDate = calendar.AddMonths(lastGivenDate, i);
+                break;
+        }
         SetView(lastGivenDate);
     }
 
     public void RequestView(DateTime date, ViewState state)
     {
-
-        ChangeState(state);
         view.value = (int)state;
         SetView(date);
     }
@@ -100,19 +91,8 @@ public class Manager : MonoBehaviour {
     private void SetView(DateTime date)
     {
         lastGivenDate = date;
-        switch (view.value)
-        {
-            case 2:
-                dayViewManager.SetView(lastGivenDate);
-                break;
-            case 1:
-                weekViewManager.SetView(lastGivenDate);
-                break;
-            case 0:
-            default:
-                monthViewManager.SetView(lastGivenDate);
-                break;
-        }
+        ChangeState((ViewState)view.value);
+        viewManager.SetView(lastGivenDate);
     }
 
     public void NewEntry()
@@ -130,7 +110,7 @@ public class Manager : MonoBehaviour {
             list = new NewEntryList();
 
         list.Add(e);
-        
+
         entries[tag] = list;
         reader.Write(filename, tag, e);
         DateTime date = new DateTime(e.year, e.month, e.day);
@@ -141,35 +121,27 @@ public class Manager : MonoBehaviour {
     {
         SearchView.SetActive(true);
     }
-
+    
     void ChangeState(ViewState state)
     {
-        if (currentState != state) {
+        if (currentState != state)
+        {
             if (currentView != null)
-                currentView.enabled = false;
+                currentView.SetActive(false);
 
             currentState = state;
-
-            switch (currentState)
-            {
-                case ViewState.MONTHLY:
-                    currentView = MonthlyView;
-                    break;
-                case ViewState.WEEKLY:
-                    currentView = WeeklyView;
-                    break;
-                case ViewState.DAILY:
-                    currentView = DailyView;
-                    break;
-            }
-
-            currentView.enabled = true;
+            currentView = viewModes[(int)state];
+            viewManager = currentView.GetComponentInChildren<IViewManager>();
+            currentView.SetActive(true);
         }
     }
 
+    public void SearchTerm(string text) { }
+
 }
 
-public class SearchResult {
+public class SearchResult
+{
     public bool value;
     public NewEntryList info;
 }

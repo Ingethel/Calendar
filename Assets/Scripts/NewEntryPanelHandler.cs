@@ -5,11 +5,9 @@ using UnityEngine.EventSystems;
 public class NewEntryPanelHandler : Panel {
 
     public InputField StartTimeH, StartTimeM, EndTimeH, EndTimeM, Day, Month, Year, NameOfTeam, NumberOfPeople, PersonInCharge, Telephone, ConfirmationDate, Guide, Notes;
-    private Manager manager;
     private EventSystem system;
 
     void Start() {
-        manager = FindObjectOfType<Manager>();
         system = EventSystem.current;
     }
 

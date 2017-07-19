@@ -25,22 +25,26 @@ public class MonthViewManager : IViewManager {
         int weekCounter = 0;
         for (int i = 0; i < maxDays; i++) {
             DateTime day = new DateTime(assignedDate.Year, assignedDate.Month, i+1);
-            byte dayofweek = (byte)day.DayOfWeek;
+            int dayofweek = (byte)day.DayOfWeek - 1;
+            if (dayofweek < 0) dayofweek = 6;
             weeks[weekCounter].days[dayofweek].SetView(day);
-            if (dayofweek == 0) weekCounter++;
+            if (dayofweek == 6) weekCounter++;
         }
         // previous month
         DateTime day_lastMonth = new DateTime(assignedDate.Year, assignedDate.Month - 1, DateTime.DaysInMonth(assignedDate.Year, assignedDate.Month-1));
         while (day_lastMonth.DayOfWeek != System.DayOfWeek.Sunday)
         {
-            weeks[0].days[(byte)day_lastMonth.DayOfWeek].SetView(day_lastMonth);
+            weeks[0].days[(byte)day_lastMonth.DayOfWeek - 1].SetView(day_lastMonth);
             day_lastMonth = day_lastMonth.AddDays(-1);
         }
         // next month
         DateTime day_nextMoth = new DateTime(assignedDate.Year, assignedDate.Month + 1, 1);
         while(day_nextMoth.DayOfWeek != System.DayOfWeek.Monday)
         {
-            weeks[weekCounter].days[(byte)day_nextMoth.DayOfWeek].SetView(day_nextMoth);
+            int dayofweek = (byte)day_nextMoth.DayOfWeek - 1;
+            if (dayofweek < 0) dayofweek = 6;
+
+            weeks[weekCounter].days[dayofweek].SetView(day_nextMoth);
             day_nextMoth = day_nextMoth.AddDays(1);
         }
     }

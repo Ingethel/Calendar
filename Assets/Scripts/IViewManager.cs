@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class IViewManager : Panel
 {
-    protected Manager manager;
     protected NewEntryList info;
 
     protected DateTime assignedDate;
@@ -16,9 +15,9 @@ public class IViewManager : Panel
 
     protected string[] setTime = { "09:00", "10:30", "12:00", "13:30" };
 
-    private void Awake()
+    protected override void Awake()
     {
-        manager = FindObjectOfType<Manager>();
+        base.Awake();
         info = new NewEntryList();
     }
 

@@ -14,6 +14,7 @@
 
     protected override void OnSetView()
     {
+        assignedDate = assignedDate.AddDays(-(byte)assignedDate.DayOfWeek + 1);
         for (int i = 0; i < 7; i++)
             days[i].SetView(assignedDate.AddDays(i));
     }
