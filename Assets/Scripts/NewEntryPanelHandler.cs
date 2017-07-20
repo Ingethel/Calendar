@@ -6,7 +6,7 @@ public class NewEntryPanelHandler : Panel {
 
     public InputField StartTimeH, StartTimeM, EndTimeH, EndTimeM, Day, Month, Year, NameOfTeam, NumberOfPeople, PersonInCharge, Telephone, ConfirmationDate, Guide, Notes;
     private EventSystem system;
-
+    
     void Start() {
         system = EventSystem.current;
     }
@@ -46,7 +46,9 @@ public class NewEntryPanelHandler : Panel {
             int.TryParse(Day.text, out n.day);
             int.TryParse(Month.text, out n.month);
             int.TryParse(Year.text, out n.year);
-            manager.SaveEntry(n);
+            dataManager.RequestWrite(n);
+            System.DateTime date = new System.DateTime(n.year, n.month, n.day);
+            calendarController.RequestView(CalendarViewController.State.DAILY, date);
             Close();
         }
     }

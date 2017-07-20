@@ -8,16 +8,13 @@ public class DayOfMonth : IViewManager, ISelectHandler {
     Selectable selectable;
     public Color Filled;
     bool isMonday;
-
-    private void Start()
-    {
-        selectable = GetComponent<Selectable>();
-    }
     
     protected override void Refresh()
     {
         base.Refresh();
         DateIndicatorPanel.SetActive(false);
+        if(selectable == null)
+            selectable = GetComponent<Selectable>();
         selectable.interactable = false;
     }
 
@@ -71,11 +68,11 @@ public class DayOfMonth : IViewManager, ISelectHandler {
     public override void RequestView()
     {
         if (isMonday) {
-            manager.RequestView(assignedDate, Manager.ViewState.WEEKLY);
+            calendarController.RequestView(CalendarViewController.State.WEEKLY, assignedDate);
         }
         else
         {
-            manager.RequestView(assignedDate, Manager.ViewState.DAILY);
+            calendarController.RequestView(CalendarViewController.State.DAILY, assignedDate);
         }
     }
 

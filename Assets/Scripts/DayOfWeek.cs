@@ -6,7 +6,7 @@ public class DayOfWeek : IViewManager, ISelectHandler
 
     public override void RequestView()
     {
-        manager.RequestView(assignedDate, Manager.ViewState.DAILY);
+        calendarController.RequestView(CalendarViewController.State.DAILY, assignedDate);
     }
 
     public void OnSelect(BaseEventData eventData)

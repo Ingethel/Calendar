@@ -2,11 +2,13 @@
 
 public class Panel : MonoBehaviour {
 
-    protected Manager manager;
+    protected CalendarViewController calendarController;
+    protected DataManager dataManager;
 
     protected virtual void Awake()
     {
-        manager = FindObjectOfType<Manager>();
+        calendarController = FindObjectOfType<CalendarViewController>();
+        dataManager = FindObjectOfType<DataManager>();
     }
 
     public virtual void Open()

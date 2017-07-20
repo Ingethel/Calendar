@@ -37,7 +37,8 @@ public class ThreadReader /*: ThreadJob*/ {
             XmlDocument doc = new XmlDocument();
             doc.Load(filename);
             XmlElement day = doc.GetElementById(ID);
-            dayInfo = GetDayInfo(day);
+            if(day != null)
+                dayInfo = GetDayInfo(day);
         }
         return dayInfo;
     }

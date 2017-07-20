@@ -14,7 +14,8 @@ public class SearchPanelHandler : Panel
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            manager.SearchTerm(input.text);
+            dataManager.SearchTerm(input.text);
+            Close();
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {

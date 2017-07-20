@@ -3,8 +3,10 @@
 public class MonthViewManager : IViewManager {
     
     public WeekOfMonth[] weeks;
-    
-	void Start () {
+
+    protected override void Awake()
+    {
+        base.Awake();
         weeks = GetComponentsInChildren<WeekOfMonth>();
     }
 

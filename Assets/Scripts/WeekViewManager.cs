@@ -2,8 +2,9 @@
 {
     DayOfWeek[] days;
 
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
         days = GetComponentsInChildren<DayOfWeek>();
     }
 
@@ -18,4 +19,5 @@
         for (int i = 0; i < 7; i++)
             days[i].SetView(assignedDate.AddDays(i));
     }
+
 }

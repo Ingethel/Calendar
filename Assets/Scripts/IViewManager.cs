@@ -31,7 +31,7 @@ public class IViewManager : Panel
 
     protected void RequestData()
     {
-        SearchResult res = manager.TryGetEntries(_tag);
+        SearchResult res = dataManager.TryGetEntries(_tag);
         if (res.value)
         {
             info = res.info;
