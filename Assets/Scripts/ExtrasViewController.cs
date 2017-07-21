@@ -13,4 +13,13 @@
     {
         ChangeView((int)s);
     }
+
+    public void RequestEntryPreview(NewEntry n) {
+        ChangeView((int)State.NEWENTRY);
+        NewEntryPanelHandler handler = currentView.GetComponent<NewEntryPanelHandler>();
+        if (handler)
+        {
+            handler.PreviouEntry(n);
+        }
+    }
 }

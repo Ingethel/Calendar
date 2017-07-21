@@ -17,15 +17,14 @@ public class ViewController : MonoBehaviour {
 
     protected void ChangeView(int i)
     {
-        if (i != currentViewIndex)
+        if (currentView != null)
+            currentView.SetActive(false);
+
+        if (i < viewModes.Length)
         {
-            if (currentView != null)
-                currentView.SetActive(false);
-            if (i < viewModes.Length)
-            {
-                currentView = viewModes[i];
-                currentView.SetActive(true);
-            }
+            currentView = viewModes[i];
+            currentView.SetActive(true);
         }
+        currentViewIndex = i;
     }
 }

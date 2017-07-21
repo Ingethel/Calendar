@@ -8,6 +8,7 @@ public class NewEntry
 
     public string[] attributes = { "", "", "", "", "", "", "", "", "" };
     public int day, month, year;
+    public string date;
     public bool filler;
 
     public NewEntry()
@@ -15,20 +16,21 @@ public class NewEntry
         filler = true;
     }
 
-    public NewEntry(string[] list)
+    public NewEntry(string[] list, string d)
     {
         attributes = list;
+        date = d;
         filler = false;
     }
 
     public int GetStartTime()
     {
-        return TimeConversions.StringTimeToInt(attributes[0]);
+        return TimeConversions.StringTimeToInt(attributes[0], 60);
     }
 
     public int GetEndTime()
     {
-        return TimeConversions.StringTimeToInt(attributes[1]);
+        return TimeConversions.StringTimeToInt(attributes[1], 60);
     }
 }
 
@@ -136,10 +138,10 @@ public class TimeConversions
         return months[0];
     }
 
-    public static string IntTimeToString(int time)
+    public static string IntTimeToString(int time, int mod)
     {
-        string minutes = (time % 100).ToString();
-        string hours = (time / 100).ToString();
+        string minutes = (time % mod).ToString();
+        string hours = (time / mod).ToString();
         while (hours.Length < 2)
         {
             hours = "0" + hours;
@@ -160,10 +162,10 @@ public class TimeConversions
         return time_int;
     }
 
-    public static int StringTimeToInt(string s)
+    public static int StringTimeToInt(string s, int mod)
     {
         int[] c_time = SplitTime(s);
-        int time_i = c_time[0] * 60 + c_time[1];
+        int time_i = c_time[0] * mod + c_time[1];
         return time_i;
     }
 }

@@ -2,14 +2,6 @@
 
 public class DayViewManager : IViewManager {
 
-    string[] weekendTimes = { "10:30", "12:00", "13:30", "15:00", "17:30" };
-
-    void Start()
-    {
-        if (assignedDate.DayOfWeek == System.DayOfWeek.Saturday || assignedDate.DayOfWeek == System.DayOfWeek.Sunday)
-            setTime = weekendTimes;
-    }
-
     protected override void SetHeader() {
         header.text = assignedDate.DayOfWeek.ToString() + " " + assignedDate.Day.ToString() + " / " + assignedDate.Month.ToString()  + " / " + assignedDate.Year.ToString();
     }
@@ -34,9 +26,7 @@ public class DayViewManager : IViewManager {
         DayGuideView o_view = o.GetComponent<DayGuideView>();
         if (o_view != null)
         {
-            o_view.SetTime(n.attributes[0] + " - " + n.attributes[1]);
-            if(!n.filler)
-                o_view.SetDetails(n.attributes[2] + ", #"+n.attributes[3]+", "+n.attributes[7]);
+            o_view.Allocate(n);
         }
     }
 
@@ -52,7 +42,6 @@ public class DayViewManager : IViewManager {
         }
         else {
             if (info.Count() < setTime.Length - 1) {
-                Debug.Log("Filling Empty Slots");
                 FillEmptySlots();
             }
         }

@@ -25,6 +25,7 @@ public class ThreadReader /*: ThreadJob*/ {
                 }
             }
             newGuide.filler = false;
+            newGuide.date = day.GetAttribute("id");
             dayInfo.Add(newGuide);
         }
         return dayInfo;

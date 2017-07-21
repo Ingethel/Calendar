@@ -10,6 +10,7 @@ public class SideOptionsController : MonoBehaviour {
     {
         optionsController = FindObjectOfType<ExtrasViewController>();
         calendarController = FindObjectOfType<CalendarViewController>();
+        OpenCompact();
     }
 
     public void AlarmPressed()

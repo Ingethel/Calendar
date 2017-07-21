@@ -13,7 +13,9 @@ public class IViewManager : Panel
     public GameObject guideView;
     public GameObject guideList;
 
-    protected string[] setTime = { "09:00", "10:30", "12:00", "13:30" };
+    protected string[] weekTimes = { "09:00", "10:30", "12:00", "13:30" };
+    protected string[] weekendTimes = { "10:30", "12:00", "13:30", "15:00", "17:30" };
+    protected string[] setTime;
 
     protected override void Awake()
     {
@@ -73,36 +75,41 @@ public class IViewManager : Panel
                 if (info.TryGet(i + 1, out n2))
                 {
                     if (n2.GetStartTime() - n1.GetEndTime() > 45) {
-                        AddFiller(TimeConversions.IntTimeToString(n1.GetStartTime()), TimeConversions.IntTimeToString(n2.GetStartTime()));
+                        AddFiller(n1.attributes[1], n2.attributes[0]);
                     }
                 }
                 if (i == 0)
                 {
-                    for(int k = 0; k < setTime.Length - 1; k++)
+                    for(int k = 1; k < setTime.Length - 1; k++)
                     {
-                        if (n1.GetStartTime() - TimeConversions.StringTimeToInt(setTime[k]) < 45)
+                        int timeDif = n1.GetStartTime() - TimeConversions.StringTimeToInt(setTime[k], 60);
+                        if ( /*timeDif >= 0 &&*/ timeDif < 45)
                         {
-                            int y = k - 1;
-                            if (y >= 0) {
-                                AddFiller(setTime[y], n1.attributes[0]);
-                            }
-                            while(y < k - 1) {
+                            int y = 0;
+                            while (y < k - 1)
+                            {
                                 AddFiller(setTime[y], setTime[y + 1]);
                                 y++;
-                            }    
+                            }
+                            {
+                                if(n1.GetStartTime() - TimeConversions.StringTimeToInt(setTime[y], 60) >= 45)
+                                    AddFiller(setTime[y], n1.attributes[0]);
+                            }
                             break;
                         }
                     }
                 }
                 if (i == info.Count() - 1)
                 {
-                    for (int k = setTime.Length - 1; k > 0; k--)
+                    for (int k = setTime.Length - 2; k > 0; k--)
                     {
-                        if (TimeConversions.StringTimeToInt(setTime[k]) - n1.GetEndTime() < 45)
+                        int timeDif = TimeConversions.StringTimeToInt(setTime[k], 60) - n1.GetEndTime();
+                        if ( /*timeDif >= 0 &&*/ timeDif < 45)
                         {
                             int y = k + 1;
                             if (y < setTime.Length)
-                                AddFiller(n1.attributes[1], setTime[y]);
+                                if(TimeConversions.StringTimeToInt(setTime[y], 60) - n1.GetEndTime() >= 45)
+                                    AddFiller(n1.attributes[1], setTime[y]);
                             while(y < setTime.Length - 1)
                             {
                                 AddFiller(setTime[y], setTime[y + 1]);
@@ -126,11 +133,16 @@ public class IViewManager : Panel
             foreach (Transform t in guideList.transform)
                 Destroy(t.gameObject);
         _tag = "";
+
+        if (assignedDate.DayOfWeek == System.DayOfWeek.Saturday || assignedDate.DayOfWeek == System.DayOfWeek.Sunday)
+            setTime = weekendTimes;
+        else
+            setTime = weekTimes;
     }
 
     public void SetView(DateTime date) {
-        Refresh();
         assignedDate = date;
+        Refresh();
         SetTag();
         SetHeader();
         OnSetView();

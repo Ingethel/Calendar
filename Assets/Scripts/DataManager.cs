@@ -28,7 +28,7 @@ public class DataManager : MonoBehaviour
         Append(reader.Read(filepath));
     }
     
-    public void RequestReadDay(String id)
+    public void RequestReadDay(string id)
     {
         string[] split = id.Split('.');
         string filepath = Application.dataPath + @"/Calendar Data/Data/" + split[2] + "/" + split[1] + "/" + Strings.file;
@@ -42,7 +42,7 @@ public class DataManager : MonoBehaviour
     public void RequestWrite(NewEntry e)
     {
         string filename = e.year + "/" + e.month;
-        string tag = e.day + "." + e.month + "." + e.year;
+        string tag = e.date;
         ThreadReader reader = new ThreadReader();
         NewEntryList list;
         if (!entries.TryGetValue(tag, out list))
