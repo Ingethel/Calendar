@@ -19,6 +19,21 @@
 <!ATTLIST NewEntry id ID #REQUIRED>
 <!ATTLIST Event id ID #REQUIRED>]>
 <Entries>
-  <Day id="_20.7.2017">
+  <Day id="_15.6.2017">
+    <NewEntry id="_15.6.2017_0">
+      <StartTime>10:30</StartTime>
+      <EndTime>12:00</EndTime>
+      <NameOfTeam>Anasto</NameOfTeam>
+      <NumberOfPeople>67</NumberOfPeople>
+      <PersonInCharge>
+      </PersonInCharge>
+      <Telephone>
+      </Telephone>
+      <ConfirmationDate>
+      </ConfirmationDate>
+      <Guide>me</Guide>
+      <Notes>
+      </Notes>
+    </NewEntry>
   </Day>
 </Entries>

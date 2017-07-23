@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class ViewController : MonoBehaviour {
     
@@ -26,5 +25,15 @@ public class ViewController : MonoBehaviour {
             currentView.SetActive(true);
         }
         currentViewIndex = i;
+    }
+
+    public void SetAsBackground()
+    {
+        if(currentView != null)
+        {
+            GraphicRaycaster r = currentView.GetComponent<GraphicRaycaster> ();
+            if (r)
+                r.enabled = !r.enabled;
+        }
     }
 }

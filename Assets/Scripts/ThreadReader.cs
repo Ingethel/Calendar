@@ -6,38 +6,75 @@ using System.Text;
 using UnityEngine;
 
 public class ThreadReader /*: ThreadJob*/ {
+
+    XmlDocument doc;
     
-    private NewEntryList GetDayInfo(XmlElement day) {
-        NewEntryList dayInfo = new NewEntryList();
-        XmlNodeList entries = day.GetElementsByTagName(Strings.NewEntry);
-        foreach (XmlNode entry in entries)
+private string GetElementID(XmlElement e)
+    {
+        string[] temp = e.GetAttribute("id").Split('_');
+        return temp[1];
+    }
+
+    private XmlElement GetElementById(string id)
+    {
+        return doc.GetElementById("_" + id);
+    }
+
+    private DAY GetDayInfo(XmlElement day) {
+        DAY dayInfo = new DAY();
         {
-            NewEntry newGuide = new NewEntry();
-            XmlNodeList entryInfo = entry.ChildNodes;
-            foreach (XmlElement element in entryInfo)
+            XmlNodeList entries = day.GetElementsByTagName(Strings.NewEntry);
+            foreach (XmlNode entry in entries)
             {
-                for (int i = 0; i < newGuide.attributes.Length; i++) {
-                    if (element.Name == newGuide.labels[i])
+                NewEntry newGuide = new NewEntry();
+                XmlNodeList entryInfo = entry.ChildNodes;
+                foreach (XmlElement element in entryInfo)
+                {
+                    for (int i = 0; i < newGuide.attributes.Length; i++)
                     {
-                        newGuide.attributes[i] = element.InnerText;
-                        break;
+                        if (element.Name == newGuide.labels[i])
+                        {
+                            newGuide.attributes[i] = element.InnerText;
+                            break;
+                        }
                     }
                 }
+                newGuide.filler = false;
+                newGuide.SetDate(GetElementID(day));
+                dayInfo.AddGuide(newGuide);
             }
-            newGuide.filler = false;
-            newGuide.date = day.GetAttribute("id");
-            dayInfo.Add(newGuide);
+        }
+        {
+            XmlNodeList entries = day.GetElementsByTagName(Strings.Event);
+            foreach (XmlNode entry in entries)
+            {
+                Alarm alarm = new Alarm();
+                XmlNodeList entryInfo = entry.ChildNodes;
+                foreach (XmlElement element in entryInfo)
+                {
+                    for (int i = 0; i < alarm.attributes.Length; i++)
+                    {
+                        if (element.Name == alarm.labels[i])
+                        {
+                            alarm.attributes[i] = element.InnerText;
+                            break;
+                        }
+                    }
+                }
+                alarm.SetDate(GetElementID(day));
+                dayInfo.AddEvent(alarm);
+            }
         }
         return dayInfo;
     }
 
     // Read By Day
-    public NewEntryList Read(string filename, string ID) {
-        NewEntryList dayInfo = new NewEntryList();
+    public DAY Read(string filename, string ID) {
+        DAY dayInfo = new DAY();
         if (File.Exists(filename)) {
-            XmlDocument doc = new XmlDocument();
+            doc = new XmlDocument();
             doc.Load(filename);
-            XmlElement day = doc.GetElementById(ID);
+            XmlElement day = GetElementById(ID);
             if(day != null)
                 dayInfo = GetDayInfo(day);
         }
@@ -45,18 +82,18 @@ public class ThreadReader /*: ThreadJob*/ {
     }
 
     // Read By Month
-    public Dictionary<string, NewEntryList> Read(string filename)
+    public Dictionary<string, DAY> Read(string filename)
     {
-        Dictionary<string, NewEntryList> monthInfo = new Dictionary<string, NewEntryList>();
+        Dictionary<string, DAY> monthInfo = new Dictionary<string, DAY>();
         if (File.Exists(filename))
         {
             
-            XmlDocument doc = new XmlDocument();
+            doc = new XmlDocument();
             doc.Load(filename);
             XmlNodeList entries = doc.GetElementsByTagName(Strings.Day);
             foreach(XmlElement day in entries)
             {
-                string id = day.GetAttribute("id");
+                string id = GetElementID(day);
                 monthInfo.Add(id, GetDayInfo(day));
             }
         }
@@ -65,49 +102,68 @@ public class ThreadReader /*: ThreadJob*/ {
 
     private string InitialiseDoc(string filePath)
     {
-        filePath = Application.dataPath + @"/Calendar Data/Data/" + filePath;
-        string filename;
-        if (!Directory.Exists(filePath))
-            Directory.CreateDirectory(filePath);
-        filename = filePath + "/" + Strings.file;
+        string files = filePath.Substring(0, filePath.LastIndexOf('/'));
+        if (!Directory.Exists(files))
+            Directory.CreateDirectory(files);
 
-        XmlDocument doc = new XmlDocument();
+        doc = new XmlDocument();
 
-        if (!File.Exists(filename))
+        if (!File.Exists(filePath))
         {
-            doc.Save(filename);
-            XmlTextWriter writer = new XmlTextWriter(filename, null);
+            doc.Save(filePath);
+            XmlTextWriter writer = new XmlTextWriter(filePath, null);
             writer.Formatting = Formatting.Indented;
             writer.WriteStartDocument();
-            writer.WriteDocType("Entries", null, null, "<!ELEMENT Entries ANY ><!ELEMENT Day ANY><!ELEMENT NewEntry ANY ><!ATTLIST Day id ID #REQUIRED>");
+            writer.WriteDocType("Entries", null, null, Strings.doctype);
             writer.WriteStartElement("Entries");
             writer.WriteEndElement();
             writer.WriteEndDocument();
             writer.Flush();
             writer.Close();
         }
-        return filename;
+        return filePath;
     }
 
     // write element
-    public void Write(string filePath, string tag, NewEntry item) {
+    public void Write(string filePath, NewEntry item) {
         string filename = InitialiseDoc(filePath);
 
-        XmlDocument doc = new XmlDocument();
+        doc = new XmlDocument();
 
         doc.Load(filename);
-        XmlElement day = doc.GetElementById(tag);
+        XmlElement day = GetElementById("_" + item.Date);
         if (day == null)
         {
             day = doc.CreateElement(Strings.Day);
-            day.SetAttribute("id", tag);
+            day.SetAttribute("id", "_" + item.Date);
 
             XmlElement root = doc.DocumentElement;
             root.AppendChild(day);
         }
         if (!item.filler)
         {
-            XmlElement NE = doc.CreateElement(Strings.NewEntry);
+            XmlNodeList NList = day.GetElementsByTagName(Strings.NewEntry);
+            XmlElement NE = null;
+            bool exists = false;
+            if (NList != null)
+            {
+                foreach (XmlElement element in NList)
+                {
+                    if (GetElementID(element) == item.id)
+                    {
+                        NE = element;
+                        NE.IsEmpty = true;
+                        exists = true;
+                        break;
+                    }
+                }
+            }
+            if (!exists)
+            {
+                NE = doc.CreateElement(Strings.NewEntry);
+                NE.SetAttribute("id", "_" + item.id);
+            }
+
             for (int i = 0; i < item.attributes.Length; i++)
             {
                 XmlElement e = doc.CreateElement(item.labels[i]);
@@ -118,42 +174,27 @@ public class ThreadReader /*: ThreadJob*/ {
         }
         doc.Save(filename);
     }
-
-    // write list
-    public void Write(string filePath, string tag, NewEntryList list)
+    
+    public void DeleteItem(string filePath, NewEntry n)
     {
-        string filename = InitialiseDoc(filePath);
-
-        XmlDocument doc = new XmlDocument();
-
-        doc.Load(filename);
-        XmlElement day = doc.GetElementById(tag);
-        if (day == null)
+        Debug.Log("requesting delete");
+        Debug.Log(filePath);
+        
+        Debug.Log(File.Exists(filePath));
+        if (File.Exists(filePath))
         {
-            day = doc.CreateElement(Strings.Day);
-            day.SetAttribute("id", tag);
-
-            XmlElement root = doc.DocumentElement;
-            root.AppendChild(day);
-        }
-
-        for (int y = 0; y < list.Count(); y++)
-        {
-            NewEntry n;
-            if (list.TryGet(y, out n))
+            doc = new XmlDocument();
+            doc.Load(filePath);
+            XmlElement element = GetElementById(n.id);
+            Debug.Log(n.id);
+            if (element != null)
             {
-                if (!n.filler) {
-                    XmlElement NE = doc.CreateElement(Strings.NewEntry);
-                    for (int i = 0; i < n.attributes.Length; i++)
-                    {
-                        XmlElement e = doc.CreateElement(n.labels[i]);
-                        e.InnerText = n.attributes[i];
-                        NE.AppendChild(e);
-                    }
-                    day.AppendChild(NE);
-                }
+                Debug.Log("deleting");
+                XmlNode parent = element.ParentNode;
+                parent.RemoveChild(element);
             }
-            doc.Save(filename);
+            doc.Save(filePath);
         }
     }
+
 }

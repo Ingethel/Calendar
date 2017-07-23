@@ -19,7 +19,12 @@ public class CalendarViewController : ViewController
     {
         base.Start();
         DataManager data = FindObjectOfType<DataManager>();
+
+        data.RequestReadMonth(calendar.AddMonths(DateTime.Now, -1));
         data.RequestReadMonth(DateTime.Now);
+        data.RequestReadMonth(calendar.AddMonths(DateTime.Now, 1));
+        data.RequestReadMonth(calendar.AddMonths(DateTime.Now, 2));
+
         RequestTodaysView();
     }
 

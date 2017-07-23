@@ -19,7 +19,7 @@
         NewEntryPanelHandler handler = currentView.GetComponent<NewEntryPanelHandler>();
         if (handler)
         {
-            handler.PreviouEntry(n);
+            handler.PreviewEntry(n);
         }
     }
 }

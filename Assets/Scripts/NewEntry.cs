@@ -1,25 +1,42 @@
 ﻿using System.Collections.Generic;
 using System;
 
-public class NewEntry
+public class Item
 {
+    public string[] labels;
+    public string[] attributes;
+    public string Date {
+        get; protected set;
+    }
+    public string id = "";
+}
 
-    public string[] labels = {Strings.StartTime, Strings.EndTime, Strings.NameOfTeam, Strings.NumberOfPeople,Strings.PersonInCharge, Strings.Telephone, Strings.ConfirmationDate, Strings.Guide, Strings.Notes };
-
-    public string[] attributes = { "", "", "", "", "", "", "", "", "" };
+public class NewEntry : Item
+{
     public int day, month, year;
-    public string date;
     public bool filler;
+
+    public void SetDate(string s)
+    {
+        Date = s;
+        string[] temp = Date.Split('.');
+        int.TryParse(temp[0], out day);
+        int.TryParse(temp[1], out month);
+        int.TryParse(temp[2], out year);
+    }
 
     public NewEntry()
     {
+        labels = new string[]{ Strings.StartTime, Strings.EndTime, Strings.NameOfTeam, Strings.NumberOfPeople, Strings.PersonInCharge, Strings.Telephone, Strings.ConfirmationDate, Strings.Guide, Strings.Notes };
+        attributes = new string[] { "", "", "", "", "", "", "", "", "" };
         filler = true;
     }
 
     public NewEntry(string[] list, string d)
     {
+        labels = new string[] { Strings.StartTime, Strings.EndTime, Strings.NameOfTeam, Strings.NumberOfPeople, Strings.PersonInCharge, Strings.Telephone, Strings.ConfirmationDate, Strings.Guide, Strings.Notes };
         attributes = list;
-        date = d;
+        SetDate(d);
         filler = false;
     }
 
@@ -33,6 +50,51 @@ public class NewEntry
         return TimeConversions.StringTimeToInt(attributes[1], 60);
     }
 }
+
+public class Alarm : Item
+{
+    public string note = "";
+    public int repeat_days = 0, repeat_months = 0, repeat_years = 0;
+
+    public void SetDate(string s)
+    {
+        Date = s;
+    }
+
+    public Alarm()
+    {
+        labels = new string[] { Strings.Notes, Strings.R_Days, Strings.R_Months, Strings.R_Years};
+        attributes = new string[] { "", "", "", "" };
+    }
+
+    public Alarm(string d, string n)
+    {
+        SetDate(d);
+        note = n;
+    }
+
+    public Alarm(string d, string n, int repeat, int by)
+    {
+        SetDate(d);
+        note = n;
+        switch (by)
+        {
+            case 0:
+                repeat_days = by;
+                break;
+            case 1:
+                repeat_months = by;
+                break;
+            case 2:
+                repeat_years = by;
+                break;
+            default:
+                break;
+        }
+    }
+
+}
+
 
 public class NewEntryComparer : IComparer<NewEntry>
 {
@@ -71,6 +133,11 @@ public class NewEntryList : ICloneable
     public NewEntryList()
     {
         comparer = new NewEntryComparer();
+    }
+
+    public void Remove(NewEntry e)
+    {
+        list.Remove(e);
     }
 
     public object Clone()
@@ -167,5 +234,30 @@ public class TimeConversions
         int[] c_time = SplitTime(s);
         int time_i = c_time[0] * mod + c_time[1];
         return time_i;
+    }
+}
+
+public class DAY
+{
+    public NewEntryList guides;
+    public List<Alarm> events;
+
+    public DAY()
+    {
+        guides = new NewEntryList();
+        events = new List<Alarm>();
+    }
+
+    public void AddGuide(NewEntry n)
+    {
+        if(!n.filler)
+            n.id = n.Date + "_" + guides.Count();
+        guides.Add(n);
+    }
+
+    public void AddEvent(Alarm n)
+    {
+        n.id = n.Date + "+" + events.Count;
+        events.Add(n);
     }
 }

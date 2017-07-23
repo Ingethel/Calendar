@@ -5,8 +5,9 @@ using UnityEngine.EventSystems;
 public class DayOfMonth : IViewManager, ISelectHandler {
 
     public GameObject DateIndicatorPanel;
+    public GameObject AlarmIndicatorPanel;
     Selectable selectable;
-    public Color Filled;
+    public Color filled;
     bool isMonday;
     
     protected override void Refresh()
@@ -42,7 +43,7 @@ public class DayOfMonth : IViewManager, ISelectHandler {
         }
         else
         {
-            if (info.Count() < setTime.Length - 1)
+            if (info.guides.Count() < setTime.Length - 1)
             {
                 FillEmptySlots();
             }
@@ -88,7 +89,7 @@ public class DayOfMonth : IViewManager, ISelectHandler {
             Image img = o.GetComponent<Image>();
             if (img)
             {
-                img.color = Filled;
+                img.color = filled;
             }
         }
         

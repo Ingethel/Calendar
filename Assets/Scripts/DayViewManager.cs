@@ -32,16 +32,16 @@ public class DayViewManager : IViewManager {
 
     protected override void DisplayInfo()
     {
-        if (info == null || info.Count() == 0)
+        if (info == null || info.guides.Count() == 0)
         {
-            info = new NewEntryList();
+            info = new DAY();
             for (int i = 0; i < setTime.Length - 1; i++)
             {
                 AddFiller(setTime[i], setTime[i + 1]);
             }
         }
         else {
-            if (info.Count() < setTime.Length - 1) {
+            if (info.guides.Count() < setTime.Length - 1) {
                 FillEmptySlots();
             }
         }

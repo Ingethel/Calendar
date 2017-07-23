@@ -6,7 +6,6 @@ public class DayGuideView : MonoBehaviour, ISelectHandler
 {
 
     public Text Time, Details;
-    public int id;
     private NewEntry guide;
 
     public void Allocate(NewEntry n)

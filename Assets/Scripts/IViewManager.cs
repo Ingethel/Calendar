@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class IViewManager : Panel
 {
-    protected NewEntryList info;
+    protected DAY info;
 
     protected DateTime assignedDate;
     public string _tag;
@@ -20,7 +20,7 @@ public class IViewManager : Panel
     protected override void Awake()
     {
         base.Awake();
-        info = new NewEntryList();
+        info = new DAY();
     }
 
     protected virtual void SetHeader() {}
@@ -44,10 +44,10 @@ public class IViewManager : Panel
     {
         if(info != null)
         {
-            for (int i = 0; i < info.Count(); i++)
+            for (int i = 0; i < info.guides.Count(); i++)
             {
                 NewEntry n;
-                if (info.TryGet(i, out n)){
+                if (info.guides.TryGet(i, out n)){
                     GameObject o = Instantiate(guideView);
                     o.transform.SetParent(guideList.transform);
                     o.transform.localScale = Vector3.one;
@@ -62,17 +62,19 @@ public class IViewManager : Panel
         NewEntry n = new NewEntry();
         n.attributes[0] = startTime;
         n.attributes[1] = endTime;
-        info.Add(n);
+        n.SetDate(assignedDate.Day.ToString() + "." + assignedDate.Month.ToString() + "." + assignedDate.Year.ToString());
+        n.filler = true;
+        info.AddGuide(n);
     }
 
     protected void FillEmptySlots()
     {
-        for (int i = 0; i < info.Count(); i++)
+        for (int i = 0; i < info.guides.Count(); i++)
         {
             NewEntry n1, n2;
-            if (info.TryGet(i, out n1))
+            if (info.guides.TryGet(i, out n1))
             {
-                if (info.TryGet(i + 1, out n2))
+                if (info.guides.TryGet(i + 1, out n2))
                 {
                     if (n2.GetStartTime() - n1.GetEndTime() > 45) {
                         AddFiller(n1.attributes[1], n2.attributes[0]);
@@ -83,7 +85,7 @@ public class IViewManager : Panel
                     for(int k = 1; k < setTime.Length - 1; k++)
                     {
                         int timeDif = n1.GetStartTime() - TimeConversions.StringTimeToInt(setTime[k], 60);
-                        if ( /*timeDif >= 0 &&*/ timeDif < 45)
+                        if (timeDif < 45)
                         {
                             int y = 0;
                             while (y < k - 1)
@@ -99,12 +101,12 @@ public class IViewManager : Panel
                         }
                     }
                 }
-                if (i == info.Count() - 1)
+                if (i == info.guides.Count() - 1)
                 {
                     for (int k = setTime.Length - 2; k > 0; k--)
                     {
                         int timeDif = TimeConversions.StringTimeToInt(setTime[k], 60) - n1.GetEndTime();
-                        if ( /*timeDif >= 0 &&*/ timeDif < 45)
+                        if (timeDif < 45)
                         {
                             int y = k + 1;
                             if (y < setTime.Length)
@@ -128,7 +130,7 @@ public class IViewManager : Panel
 
     protected virtual void Refresh()
     {
-        info = new NewEntryList();
+        info = new DAY();
         if(guideList != null)
             foreach (Transform t in guideList.transform)
                 Destroy(t.gameObject);

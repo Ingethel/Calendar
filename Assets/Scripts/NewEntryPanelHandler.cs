@@ -11,6 +11,8 @@ public class NewEntryPanelHandler : Panel {
 
     public GameObject editButtons, newEntryButtons;
 
+    private NewEntry guide;
+
     void Start() {
         system = EventSystem.current;
         fields = new InputField[]{ StartTimeH, StartTimeM, EndTimeH, EndTimeM, Day, Month, Year, NameOfTeam, NumberOfPeople, PersonInCharge, Telephone, ConfirmationDate, Guide, Notes };
@@ -44,18 +46,24 @@ public class NewEntryPanelHandler : Panel {
     public void Save()
     {
         if (CheckSaveEligibility()) {
-            string[] inputs = { StartTimeH.text + ":" + StartTimeM.text, EndTimeH.text + ":" + EndTimeM.text,
-                TryGetText(NameOfTeam), TryGetText(NumberOfPeople), TryGetText(PersonInCharge), TryGetText(Telephone),
-                TryGetText(ConfirmationDate), TryGetText(Guide), TryGetText(Notes)};
-            NewEntry n = new NewEntry(inputs, Day.text+"."+ Month.text+"."+ Year.text);
-            int.TryParse(Day.text, out n.day);
-            int.TryParse(Month.text, out n.month);
-            int.TryParse(Year.text, out n.year);
-            dataManager.RequestWrite(n);
-            System.DateTime date = new System.DateTime(n.year, n.month, n.day);
-            calendarController.RequestView(CalendarViewController.State.DAILY, date);
+
+            if (guide != null)
+               if(guide.Date != Day.text + "." + Month.text + "." + Year.text)
+                    dataManager.RequestDelete(guide);
+             
+            SaveInfo();
+            dataManager.RequestWrite(guide);
+            calendarController.RequestView(CalendarViewController.State.DAILY, new System.DateTime(guide.year, guide.month, guide.day));
+            guide = null;
             Close();
         }
+    }
+
+    public void Delete()
+    {
+        dataManager.RequestDelete(guide);
+        calendarController.RefreshView();
+        Close();
     }
 
     private bool CheckSaveEligibility()
@@ -74,7 +82,7 @@ public class NewEntryPanelHandler : Panel {
         return a.text;
     }
 
-    public void PreviouEntry(NewEntry n)
+    public void PreviewEntry(NewEntry n)
     {
         foreach (InputField field in fields)
             field.interactable = false;
@@ -82,23 +90,36 @@ public class NewEntryPanelHandler : Panel {
         newEntryButtons.SetActive(false);
         editButtons.SetActive(true);
 
-        string[] split = n.attributes[0].Split(':');
+        guide = n;
+        DisplayInfo();
+    }
+
+    private void DisplayInfo()
+    {
+        string[] split = guide.attributes[0].Split(':');
         StartTimeH.text = split[0];
         StartTimeM.text = split[1];
-        split = n.attributes[1].Split(':');
+        split = guide.attributes[1].Split(':');
         EndTimeH.text = split[0];
         EndTimeM.text = split[1];
-        split = n.date.Split('.');
-        Day.text = split[0];
-        Month.text = split[1];
-        Year.text = split[2];
-        NameOfTeam.text = n.attributes[2];
-        NumberOfPeople.text = n.attributes[3];
-        PersonInCharge.text = n.attributes[4];
-        Telephone.text = n.attributes[5];
-        ConfirmationDate.text = n.attributes[6];
-        Guide.text = n.attributes[7];
-        Notes.text = n.attributes[8];
+        Day.text = guide.day.ToString();
+        Month.text = guide.month.ToString();
+        Year.text = guide.year.ToString();
+        NameOfTeam.text = guide.attributes[2];
+        NumberOfPeople.text = guide.attributes[3];
+        PersonInCharge.text = guide.attributes[4];
+        Telephone.text = guide.attributes[5];
+        ConfirmationDate.text = guide.attributes[6];
+        Guide.text = guide.attributes[7];
+        Notes.text = guide.attributes[8];
+    }
+
+    private void SaveInfo()
+    {
+        string[] inputs = { StartTimeH.text + ":" + StartTimeM.text, EndTimeH.text + ":" + EndTimeM.text,
+                TryGetText(NameOfTeam), TryGetText(NumberOfPeople), TryGetText(PersonInCharge), TryGetText(Telephone),
+                TryGetText(ConfirmationDate), TryGetText(Guide), TryGetText(Notes)};
+        guide = new NewEntry(inputs, Day.text + "." + Month.text + "." + Year.text);
     }
 
     public void EditEntry()
