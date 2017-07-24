@@ -9,7 +9,7 @@ public class ThreadReader /*: ThreadJob*/ {
 
     XmlDocument doc;
     
-private string GetElementID(XmlElement e)
+    private string GetElementID(XmlElement e)
     {
         string[] temp = e.GetAttribute("id").Split('_');
         return temp[1];
@@ -20,6 +20,22 @@ private string GetElementID(XmlElement e)
         return doc.GetElementById("_" + id);
     }
 
+    private T ReadItem<T>(XmlNodeList list, T item) where T : Item
+    {
+        foreach (XmlElement element in list)
+        {
+            for (int i = 0; i < item.attributes.Length; i++)
+            {
+                if (element.Name == item.labels[i])
+                {
+                    item.attributes[i] = element.InnerText;
+                    break;
+                }
+            }
+        }
+        return item;
+    }
+
     private DAY GetDayInfo(XmlElement day) {
         DAY dayInfo = new DAY();
         {
@@ -28,17 +44,7 @@ private string GetElementID(XmlElement e)
             {
                 NewEntry newGuide = new NewEntry();
                 XmlNodeList entryInfo = entry.ChildNodes;
-                foreach (XmlElement element in entryInfo)
-                {
-                    for (int i = 0; i < newGuide.attributes.Length; i++)
-                    {
-                        if (element.Name == newGuide.labels[i])
-                        {
-                            newGuide.attributes[i] = element.InnerText;
-                            break;
-                        }
-                    }
-                }
+                newGuide = ReadItem(entryInfo, newGuide);
                 newGuide.filler = false;
                 newGuide.SetDate(GetElementID(day));
                 dayInfo.AddGuide(newGuide);
@@ -50,17 +56,7 @@ private string GetElementID(XmlElement e)
             {
                 Alarm alarm = new Alarm();
                 XmlNodeList entryInfo = entry.ChildNodes;
-                foreach (XmlElement element in entryInfo)
-                {
-                    for (int i = 0; i < alarm.attributes.Length; i++)
-                    {
-                        if (element.Name == alarm.labels[i])
-                        {
-                            alarm.attributes[i] = element.InnerText;
-                            break;
-                        }
-                    }
-                }
+                alarm = ReadItem(entryInfo, alarm);
                 alarm.SetDate(GetElementID(day));
                 dayInfo.AddEvent(alarm);
             }

@@ -84,11 +84,13 @@ public class NewEntryPanelHandler : Panel {
 
     public void PreviewEntry(NewEntry n)
     {
-        foreach (InputField field in fields)
-            field.interactable = false;
+        bool flag = n.filler;
 
-        newEntryButtons.SetActive(false);
-        editButtons.SetActive(true);
+        foreach (InputField field in fields)
+            field.interactable = flag;
+
+        newEntryButtons.SetActive(flag);
+        editButtons.SetActive(!flag);
 
         guide = n;
         DisplayInfo();
