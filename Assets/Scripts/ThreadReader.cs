@@ -121,13 +121,13 @@ public class ThreadReader /*: ThreadJob*/ {
     }
 
     // write element
-    public void Write(string filePath, NewEntry item) {
+    public void Write(string filePath, Item item) {
         string filename = InitialiseDoc(filePath);
 
         doc = new XmlDocument();
 
         doc.Load(filename);
-        XmlElement day = GetElementById("_" + item.Date);
+        XmlElement day = GetElementById(item.Date);
         if (day == null)
         {
             day = doc.CreateElement(Strings.Day);
@@ -138,7 +138,7 @@ public class ThreadReader /*: ThreadJob*/ {
         }
         if (!item.filler)
         {
-            XmlNodeList NList = day.GetElementsByTagName(Strings.NewEntry);
+            XmlNodeList NList = day.GetElementsByTagName(item.tag);
             XmlElement NE = null;
             bool exists = false;
             if (NList != null)
@@ -156,8 +156,8 @@ public class ThreadReader /*: ThreadJob*/ {
             }
             if (!exists)
             {
-                NE = doc.CreateElement(Strings.NewEntry);
-                NE.SetAttribute("id", "_" + item.id);
+                NE = doc.CreateElement(item.tag);
+                NE.SetAttribute("id", item.id);
             }
 
             for (int i = 0; i < item.attributes.Length; i++)
@@ -171,26 +171,79 @@ public class ThreadReader /*: ThreadJob*/ {
         doc.Save(filename);
     }
     
-    public void DeleteItem(string filePath, NewEntry n)
+    public void DeleteItem(string filePath, Item item)
     {
-        Debug.Log("requesting delete");
-        Debug.Log(filePath);
-        
-        Debug.Log(File.Exists(filePath));
         if (File.Exists(filePath))
         {
             doc = new XmlDocument();
             doc.Load(filePath);
-            XmlElement element = GetElementById(n.id);
-            Debug.Log(n.id);
+            XmlElement element = GetElementById(item.id);
             if (element != null)
             {
-                Debug.Log("deleting");
                 XmlNode parent = element.ParentNode;
                 parent.RemoveChild(element);
             }
             doc.Save(filePath);
         }
     }
+    
+    public DAY SearchItem(string searchTerm)
+    {
+        searchTerm = searchTerm.ToLower();
+        DAY result = new DAY();
+        string dataPath = Application.dataPath + @"/Calendar Data/Data";
 
+        string[] years = Directory.GetDirectories(dataPath);
+        foreach(string year in years)
+        {
+            string[] months = Directory.GetDirectories(year);
+            foreach(string month in months)
+            {
+                string[] files = Directory.GetFiles(month);
+                foreach(string file in files)
+                {
+                    if(file.EndsWith(".xml"))
+                        if (File.Exists(file))
+                        {
+                            doc = new XmlDocument();
+                            doc.Load(file);
+                            XmlNodeList days = doc.GetElementsByTagName(Strings.Day);
+                            foreach(XmlElement day in days)
+                            {
+                                XmlNodeList teams = day.GetElementsByTagName(Strings.NameOfTeam);
+                                XmlNodeList guides = day.GetElementsByTagName(Strings.Guide);
+
+                                foreach (XmlElement entry in teams)
+                                {
+                                    if (entry.InnerText.ToLower().Contains(searchTerm))
+                                    {
+                                        XmlNodeList entryInfo = entry.ParentNode.ChildNodes;
+                                        NewEntry guide = new NewEntry();
+                                        guide = ReadItem(entryInfo, guide);
+                                        guide.filler = false;
+                                        guide.SetDate(GetElementID(day));
+                                        result.AddGuide(guide);
+                                    }
+                                }
+
+                                foreach (XmlElement entry in guides)
+                                {
+                                    if (entry.InnerText.ToLower().Contains(searchTerm))
+                                    {
+                                        XmlNodeList entryInfo = entry.ParentNode.ChildNodes;
+                                        NewEntry guide = new NewEntry();
+                                        guide = ReadItem(entryInfo, guide);
+                                        guide.filler = false;
+                                        guide.SetDate(GetElementID(day));
+                                        result.AddGuide(guide);
+                                    }
+                                }
+                            }
+                        }
+                }
+            }
+        }
+
+        return result;
+    }
 }

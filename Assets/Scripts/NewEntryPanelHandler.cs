@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System;
 
 public class NewEntryPanelHandler : Panel {
 
@@ -12,7 +11,7 @@ public class NewEntryPanelHandler : Panel {
     public GameObject editButtons, newEntryButtons;
 
     private NewEntry guide;
-
+    
     void Start() {
         system = EventSystem.current;
         fields = new InputField[]{ StartTimeH, StartTimeM, EndTimeH, EndTimeM, Day, Month, Year, NameOfTeam, NumberOfPeople, PersonInCharge, Telephone, ConfirmationDate, Guide, Notes };
@@ -99,14 +98,20 @@ public class NewEntryPanelHandler : Panel {
     private void DisplayInfo()
     {
         string[] split = guide.attributes[0].Split(':');
-        StartTimeH.text = split[0];
-        StartTimeM.text = split[1];
+        if(split.Length == 2)
+        {
+            StartTimeH.text = split[0];
+            StartTimeM.text = split[1];
+        }
         split = guide.attributes[1].Split(':');
-        EndTimeH.text = split[0];
-        EndTimeM.text = split[1];
-        Day.text = guide.day.ToString();
-        Month.text = guide.month.ToString();
-        Year.text = guide.year.ToString();
+        if (split.Length == 2)
+        {
+            EndTimeH.text = split[0];
+            EndTimeM.text = split[1];
+        }
+        Day.text = guide.day != 0 ? guide.day.ToString() : "";
+        Month.text = guide.month != 0 ? guide.month.ToString() : "";
+        Year.text = guide.year != 0 ? guide.year.ToString() : "";
         NameOfTeam.text = guide.attributes[2];
         NumberOfPeople.text = guide.attributes[3];
         PersonInCharge.text = guide.attributes[4];

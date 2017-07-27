@@ -23,6 +23,11 @@ public class IViewManager : Panel
         info = new DAY();
     }
 
+    public virtual void OnClick()
+    {
+        RequestView();
+    }
+
     protected virtual void SetHeader() {}
 
     protected virtual void OnSetView() {}
@@ -69,6 +74,7 @@ public class IViewManager : Panel
 
     protected void FillEmptySlots()
     {
+        int threshold = PlayerPrefs.GetInt("TimeThreshold");
         for (int i = 0; i < info.guides.Count(); i++)
         {
             NewEntry n1, n2;
@@ -76,7 +82,7 @@ public class IViewManager : Panel
             {
                 if (info.guides.TryGet(i + 1, out n2))
                 {
-                    if (n2.GetStartTime() - n1.GetEndTime() > 45) {
+                    if (n2.GetStartTime() - n1.GetEndTime() > threshold) {
                         AddFiller(n1.attributes[1], n2.attributes[0]);
                     }
                 }
@@ -94,7 +100,7 @@ public class IViewManager : Panel
                                 y++;
                             }
                             {
-                                if(n1.GetStartTime() - TimeConversions.StringTimeToInt(setTime[y], 60) >= 45)
+                                if(n1.GetStartTime() - TimeConversions.StringTimeToInt(setTime[y], 60) >= threshold)
                                     AddFiller(setTime[y], n1.attributes[0]);
                             }
                             break;
@@ -110,7 +116,7 @@ public class IViewManager : Panel
                         {
                             int y = k + 1;
                             if (y < setTime.Length)
-                                if(TimeConversions.StringTimeToInt(setTime[y], 60) - n1.GetEndTime() >= 45)
+                                if(TimeConversions.StringTimeToInt(setTime[y], 60) - n1.GetEndTime() >= threshold)
                                     AddFiller(n1.attributes[1], setTime[y]);
                             while(y < setTime.Length - 1)
                             {

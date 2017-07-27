@@ -1,32 +1,12 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
-
-public class DayGuideView : MonoBehaviour, ISelectHandler
+﻿public class DayGuideView : IItemListView
 {
-
-    public Text Time, Details;
-    private NewEntry guide;
-
-    public void Allocate(NewEntry n)
+    
+    public override void Allocate(NewEntry n)
     {
-        guide = n;
+        base.Allocate(n);
         SetTime(n.attributes[0] + " - " + n.attributes[1]);
         if (!n.filler)
             SetDetails(n.attributes[2] + ", #" + n.attributes[3] + ", " + n.attributes[7]);
     }
-
-    public void SetTime(string s) {
-        Time.text = s;
-    }
-
-    public void SetDetails(string s) {
-        Details.text = s;
-    }
-
-    public void OnSelect(BaseEventData eventData)
-    {
-        FindObjectOfType<ExtrasViewController>().RequestEntryPreview(guide);
-    }
-
+    
 }

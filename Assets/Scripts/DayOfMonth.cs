@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
-public class DayOfMonth : IViewManager, ISelectHandler {
+public class DayOfMonth : IViewManager{
 
     public GameObject DateIndicatorPanel;
     public GameObject AlarmIndicatorPanel;
@@ -50,6 +49,8 @@ public class DayOfMonth : IViewManager, ISelectHandler {
 
             base.DisplayInfo();
         }
+        if (info.events.Count > 0)
+            AlarmIndicatorPanel.SetActive(true);
     }
 
     protected override void OnSetView() {
@@ -76,13 +77,7 @@ public class DayOfMonth : IViewManager, ISelectHandler {
             calendarController.RequestView(CalendarViewController.State.DAILY, assignedDate);
         }
     }
-
-    public void OnSelect(BaseEventData eventData)
-    {
-        RequestView();
-    }
-
-
+    
     protected override void AssignInfo(GameObject o, NewEntry n)
     {
         if (!n.filler) {

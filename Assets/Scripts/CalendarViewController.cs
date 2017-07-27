@@ -9,6 +9,7 @@ public class CalendarViewController : ViewController
         MONTHLY,
         WEEKLY,
         DAILY,
+        SEARCH,
         ILLEGAL
     };
     
@@ -82,5 +83,12 @@ public class CalendarViewController : ViewController
     {
         viewManager = currentView.GetComponentInChildren<IViewManager>();
         viewManager.SetView(lastGivenDate);
+    }
+
+    public void DisplayResultView(DAY day, string result)
+    {
+        ChangeView((int)State.SEARCH);
+        SearchViewManager s_viewManager = currentView.GetComponentInChildren<SearchViewManager>();
+        s_viewManager.SetView(day, result);
     }
 }

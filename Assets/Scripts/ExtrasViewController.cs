@@ -11,6 +11,8 @@
 
     public void RequestView(State s)
     {
+        if (s == State.NEWENTRY)
+            RequestEntryPreview(new NewEntry());
         ChangeView((int)s);
     }
 

@@ -9,13 +9,14 @@ public class Item
         get; protected set;
     }
     public string id = "";
+    public bool filler = false;
+    public string tag;
 }
 
 public class NewEntry : Item
 {
     public int day, month, year;
-    public bool filler;
-
+    
     public void SetDate(string s)
     {
         Date = s;
@@ -27,6 +28,7 @@ public class NewEntry : Item
 
     public NewEntry()
     {
+        tag = Strings.NewEntry;
         labels = new string[]{ Strings.StartTime, Strings.EndTime, Strings.NameOfTeam, Strings.NumberOfPeople, Strings.PersonInCharge, Strings.Telephone, Strings.ConfirmationDate, Strings.Guide, Strings.Notes };
         attributes = new string[] { "", "", "", "", "", "", "", "", "" };
         filler = true;
@@ -34,6 +36,7 @@ public class NewEntry : Item
 
     public NewEntry(string[] list, string d)
     {
+        tag = Strings.NewEntry;
         labels = new string[] { Strings.StartTime, Strings.EndTime, Strings.NameOfTeam, Strings.NumberOfPeople, Strings.PersonInCharge, Strings.Telephone, Strings.ConfirmationDate, Strings.Guide, Strings.Notes };
         attributes = list;
         SetDate(d);
@@ -53,8 +56,6 @@ public class NewEntry : Item
 
 public class Alarm : Item
 {
-    public string note = "";
-    public int repeat_days = 0, repeat_months = 0, repeat_years = 0;
 
     public void SetDate(string s)
     {
@@ -63,30 +64,35 @@ public class Alarm : Item
 
     public Alarm()
     {
+        tag = Strings.Event;
         labels = new string[] { Strings.Notes, Strings.R_Days, Strings.R_Months, Strings.R_Years};
         attributes = new string[] { "", "", "", "" };
     }
 
     public Alarm(string d, string n)
     {
+        tag = Strings.Event;
         SetDate(d);
-        note = n;
+        labels = new string[] { Strings.Notes, Strings.R_Days, Strings.R_Months, Strings.R_Years };
+        attributes = new string[] { n, "0", "0", "0" };
     }
 
     public Alarm(string d, string n, int repeat, int by)
     {
+        tag = Strings.Event;
         SetDate(d);
-        note = n;
+        labels = new string[] { Strings.Notes, Strings.R_Days, Strings.R_Months, Strings.R_Years };
+        attributes = new string[] { n, "0", "0", "0" };
         switch (by)
         {
             case 0:
-                repeat_days = by;
+                attributes[1] = repeat.ToString();
                 break;
             case 1:
-                repeat_months = by;
+                attributes[2] = repeat.ToString();
                 break;
             case 2:
-                repeat_years = by;
+                attributes[3] = repeat.ToString();
                 break;
             default:
                 break;
@@ -99,7 +105,6 @@ public class Alarm : Item
 public class NewEntryComparer : IComparer<NewEntry>
 {
     
-
     public int Compare(NewEntry x, NewEntry y)
     {
         int time_x = x.GetStartTime();
@@ -251,13 +256,13 @@ public class DAY
     public void AddGuide(NewEntry n)
     {
         if(!n.filler)
-            n.id = n.Date + "_" + guides.Count();
+            n.id = "_guide:" + DataManager.GenerateNewIdFor("Guide");
         guides.Add(n);
     }
 
     public void AddEvent(Alarm n)
     {
-        n.id = n.Date + "+" + events.Count;
+        n.id = "_event:" + DataManager.GenerateNewIdFor("Event");
         events.Add(n);
     }
 }

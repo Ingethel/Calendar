@@ -1,17 +1,11 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class DayOfWeek : IViewManager, ISelectHandler
+public class DayOfWeek : IViewManager
 {
 
     public override void RequestView()
     {
         calendarController.RequestView(CalendarViewController.State.DAILY, assignedDate);
-    }
-
-    public void OnSelect(BaseEventData eventData)
-    {
-        RequestView();
     }
 
     protected override void SetHeader()
@@ -36,13 +30,9 @@ public class DayOfWeek : IViewManager, ISelectHandler
 
     protected override void AssignInfo(GameObject o, NewEntry n)
     {
-        DayGuideView o_view = o.GetComponent<DayGuideView>();
+        IItemListView o_view = o.GetComponent<IItemListView>();
         if (o_view != null)
-        {
-            o_view.SetTime(n.attributes[0] + " - " + n.attributes[1]);
-            if (!n.filler)
-                o_view.SetDetails(n.attributes[2] + ", #" + n.attributes[3] + ", " + n.attributes[7]);
-        }
+            o_view.Allocate(n);
     }
     
 }

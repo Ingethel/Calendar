@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class AlarmIndicatorHandler : MonoBehaviour, ISelectHandler
+public class AlarmIndicatorHandler : MonoBehaviour
 {
-    public void OnSelect(BaseEventData eventData)
+    public void OnClick()
     {
+
     }
-    
 }

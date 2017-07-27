@@ -10,11 +10,18 @@ public class SearchPanelHandler : Panel
         KeybordInputHandler();
     }
 
+    public override void Close()
+    {
+        input.text = "";
+        base.Close();
+    }
+
     protected override void KeybordInputHandler()
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
             dataManager.SearchTerm(input.text);
+            
             Close();
         }
         if (Input.GetKeyDown(KeyCode.Escape))
