@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE Entries[<!ELEMENT Entries (Day*)>
+<!ELEMENT Day (NewEntry*, Event*)>
+<!ELEMENT NewEntry (StartTime, EndTime, NameOfTeam, NumberOfPeople, PersonInCharge, Telephone, ConfirmationDate, Guide, Notes)>
+<!ELEMENT Event (Notes, RepeatDays, RepeatMoths, RepeatYears)>
+<!ELEMENT StartTime (#PCDATA)>
+<!ELEMENT EndTime (#PCDATA)>
+<!ELEMENT NameOfTeam (#PCDATA)>
+<!ELEMENT NumberOfPeople (#PCDATA)>
+<!ELEMENT PersonInCharge (#PCDATA)>
+<!ELEMENT Telephone (#PCDATA)>
+<!ELEMENT ConfirmationDate (#PCDATA)>
+<!ELEMENT Guide (#PCDATA)>
+<!ELEMENT Notes (#PCDATA)>
+<!ELEMENT RepeatDays (#PCDATA)>
+<!ELEMENT RepeatMoths (#PCDATA)>
+<!ELEMENT RepeatYears (#PCDATA)>
+<!ATTLIST Day id ID #REQUIRED>
+<!ATTLIST NewEntry id ID #REQUIRED>
+<!ATTLIST Event id ID #REQUIRED>]>
+<Entries>
+  <Day id="_7.7.2017">
+    <NewEntry id="_guide:0">
+      <StartTime>9:00</StartTime>
+      <EndTime>10:00</EndTime>
+      <NameOfTeam>anasto</NameOfTeam>
+      <NumberOfPeople>50</NumberOfPeople>
+      <PersonInCharge>
+      </PersonInCharge>
+      <Telephone>
+      </Telephone>
+      <ConfirmationDate>
+      </ConfirmationDate>
+      <Guide>tzanis</Guide>
+      <Notes>
+      </Notes>
+    </NewEntry>
+    <Event id="_event:0">
+      <Notes>test</Notes>
+      <RepeatDays>0</RepeatDays>
+      <RepeatMonths>0</RepeatMonths>
+      <RepeatYears>0</RepeatYears>
+    </Event>
+  </Day>
+</Entries>

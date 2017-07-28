@@ -1,4 +1,4 @@
-﻿public class SearchViewItem : IItemListView {
+﻿public class SearchViewItem : IItemListView<NewEntry> {
 
     public override void Allocate(NewEntry n)
     {

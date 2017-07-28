@@ -6,9 +6,14 @@ using UnityEditor;
 public class GameManager : MonoBehaviour {
 
     public GameObject headerObj;
+    public string DATA_FOLDER;
+    public string DESKTOP;
 
     void Awake()
     {
+        DATA_FOLDER = Application.dataPath + @"/Calendar Data";
+        DESKTOP = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
+
         int spacing = PlayerPrefs.GetInt("TimeThreshold");
         if (spacing == 0)
             PlayerPrefs.SetInt("TimeThreshold", 45);
@@ -64,6 +69,9 @@ public class GameManager : MonoBehaviour {
             case "RESET_IDS":
                 PlayerPrefs.SetInt("Guide", 0);
                 PlayerPrefs.SetInt("Event", 0);
+                break;
+            case "BACKUP":
+                ThreadReader.BackUp(DATA_FOLDER, DESKTOP);
                 break;
             default:
                 break;

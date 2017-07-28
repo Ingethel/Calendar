@@ -11,7 +11,7 @@ public class SearchViewManager : IViewManager {
 
     protected override void AssignInfo(GameObject o, NewEntry n)
     {
-        IItemListView o_view = o.GetComponent<IItemListView>();
+        IItemListView<NewEntry> o_view = o.GetComponent<IItemListView<NewEntry>>();
         if (o_view != null)
             o_view.Allocate(n);
     }

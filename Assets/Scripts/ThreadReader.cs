@@ -4,6 +4,7 @@ using System.Xml;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using System.Linq;
 
 public class ThreadReader /*: ThreadJob*/ {
 
@@ -245,5 +246,13 @@ public class ThreadReader /*: ThreadJob*/ {
         }
 
         return result;
+    }
+
+    public static void BackUp(string source, string destination)
+    {
+        foreach (string dir in Directory.GetDirectories(source, "*", SearchOption.AllDirectories))
+            Directory.CreateDirectory(dir.Replace(source, destination));
+        foreach (string file in Directory.GetFiles(source, "*.*", SearchOption.AllDirectories).Where(name => !name.EndsWith(".meta")))
+            File.Copy(file, file.Replace(source, destination), true);
     }
 }

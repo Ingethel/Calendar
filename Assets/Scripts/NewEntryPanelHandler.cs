@@ -13,6 +13,7 @@ public class NewEntryPanelHandler : Panel {
     private NewEntry guide;
     
     void Start() {
+        guide = null;
         system = EventSystem.current;
         fields = new InputField[]{ StartTimeH, StartTimeM, EndTimeH, EndTimeM, Day, Month, Year, NameOfTeam, NumberOfPeople, PersonInCharge, Telephone, ConfirmationDate, Guide, Notes };
     }

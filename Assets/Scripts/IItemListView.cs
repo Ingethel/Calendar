@@ -2,26 +2,18 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class IItemListView : MonoBehaviour
+public class IItemListView<T> : MonoBehaviour where T : Item
 {
 
     public Text Date, Time, Details;
-    protected NewEntry guide;
+    protected T item;
 
-    public virtual void Allocate(NewEntry n)
+    public virtual void Allocate(T n)
     {
-        guide = n;
+        item = n;
     }
-
-    public virtual void OnSelect(BaseEventData eventData)
-    {
-        FindObjectOfType<ExtrasViewController>().RequestEntryPreview(guide);
-    }
-
-    public virtual void OnClick()
-    {
-        FindObjectOfType<ExtrasViewController>().RequestEntryPreview(guide);
-    }
+    
+    public virtual void OnClick() {}
 
     protected void SetTime(string s)
     {

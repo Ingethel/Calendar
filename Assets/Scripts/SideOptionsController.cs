@@ -5,6 +5,7 @@ public class SideOptionsController : MonoBehaviour {
     public GameObject[] SideOptions;
     ExtrasViewController optionsController;
     CalendarViewController calendarController;
+    public UnityEngine.UI.Dropdown specialSnowflake;
 
     private void Start()
     {
@@ -36,7 +37,7 @@ public class SideOptionsController : MonoBehaviour {
     public void ViewChanged(int i)
     {
         optionsController.RequestView(ExtrasViewController.State.ILLEGAL);
-        calendarController.RequestView((CalendarViewController.State)i);
+        calendarController.RequestView((CalendarViewController.State)specialSnowflake.value);
     }
     
     public void CloseCurrentView()

@@ -1,4 +1,6 @@
-﻿public class ExtrasViewController : ViewController {
+﻿using System.Collections.Generic;
+
+public class ExtrasViewController : ViewController {
     
     public enum State
     {
@@ -6,6 +8,7 @@
         SEARCH,
         ALARM,
         VIEWMODE,
+        ALARMPREVIEW,
         ILLEGAL
     };
 
@@ -20,8 +23,14 @@
         ChangeView((int)State.NEWENTRY);
         NewEntryPanelHandler handler = currentView.GetComponent<NewEntryPanelHandler>();
         if (handler)
-        {
             handler.PreviewEntry(n);
-        }
+    }
+
+    public void RequestAlarmPreview(List<Alarm> alarms)
+    {
+        ChangeView((int)State.ALARMPREVIEW);
+        AlarmPreviewerHandler handler = currentView.GetComponent<AlarmPreviewerHandler>();
+        if (handler)
+            handler.SetView(alarms);
     }
 }

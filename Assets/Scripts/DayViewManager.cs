@@ -46,6 +46,11 @@ public class DayViewManager : IViewManager {
             }
         }
         base.DisplayInfo();
+        if(info.events.Count > 0)
+        {
+            ExtrasViewController extras = FindObjectOfType<ExtrasViewController>();
+            extras.RequestAlarmPreview(info.events);
+        }
     }
 
 }
