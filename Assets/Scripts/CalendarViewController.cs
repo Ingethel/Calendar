@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using UnityEngine;
 
 public class CalendarViewController : ViewController
 {
@@ -15,6 +16,9 @@ public class CalendarViewController : ViewController
     
     public static Calendar calendar = CultureInfo.InvariantCulture.Calendar;
     private DateTime lastGivenDate;
+    bool printflag;
+
+    public GameObject background;
 
     protected override void Start()
     {
@@ -27,6 +31,8 @@ public class CalendarViewController : ViewController
         data.RequestReadMonth(calendar.AddMonths(DateTime.Now, 2));
 
         RequestTodaysView();
+        printflag = false;
+        gManager.printMode += PrintMode;
     }
 
     public void ChangeDay(int i)
@@ -81,6 +87,7 @@ public class CalendarViewController : ViewController
 
     public void RefreshView()
     {
+        SetAsBackground(false);
         viewManager = currentView.GetComponentInChildren<IViewManager>();
         viewManager.SetView(lastGivenDate);
     }
@@ -91,4 +98,14 @@ public class CalendarViewController : ViewController
         SearchViewManager s_viewManager = currentView.GetComponentInChildren<SearchViewManager>();
         s_viewManager.SetView(day, result);
     }
+
+    public void PrintMode()
+    {
+        background.SetActive(printflag);
+        SetActiveRaycast(printflag);
+
+        printflag = !printflag;
+        lockedAccess = printflag;
+    }
+
 }

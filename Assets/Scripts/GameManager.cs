@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 #if UNITY_EDITOR 
 using UnityEditor;
 #endif
@@ -6,12 +8,18 @@ using UnityEditor;
 public class GameManager : MonoBehaviour {
 
     public GameObject headerObj;
-    public string DATA_FOLDER;
+    [HideInInspector]
+    public string DATA_FOLDER, LEGACY_FOLDER;
+    [HideInInspector]
     public string DESKTOP;
+
+    public event Action printMode;
+
 
     void Awake()
     {
-        DATA_FOLDER = Application.dataPath + @"/Calendar Data";
+        DATA_FOLDER = Application.dataPath + @"/Calendar Data/Data";
+        LEGACY_FOLDER = Application.dataPath + @"/Calendar Data/Legacy";
         DESKTOP = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
 
         int spacing = PlayerPrefs.GetInt("TimeThreshold");
@@ -42,7 +50,24 @@ public class GameManager : MonoBehaviour {
 
     public void Print()
     {
-        Application.CaptureScreenshot(Application.persistentDataPath+"Calendar.png");
+        StartCoroutine(PrintProcess());
+    }
+
+    IEnumerator PrintProcess()
+    {
+        bool headerFlag = headerObj.activeSelf;
+        if (printMode != null)
+            printMode();
+        if (headerFlag)
+            headerObj.SetActive(false);
+        yield return new WaitForSeconds(1);
+        Application.CaptureScreenshot(DESKTOP + "/Calendar.png");
+        yield return 0;
+        if (printMode != null)
+            printMode();
+        if (headerFlag)
+            headerObj.SetActive(true);
+        yield return 0;
     }
 
     public void Command(string[] s)

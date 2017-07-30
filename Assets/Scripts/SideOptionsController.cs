@@ -1,17 +1,23 @@
-﻿using UnityEngine;
+﻿public class SideOptionsController : ViewController {
+    
+    public enum State
+    {
+        COMPACT,
+        EXTENDED,
+        ILLEGAL
+    };
 
-public class SideOptionsController : MonoBehaviour {
-
-    public GameObject[] SideOptions;
     ExtrasViewController optionsController;
     CalendarViewController calendarController;
     public UnityEngine.UI.Dropdown specialSnowflake;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         optionsController = FindObjectOfType<ExtrasViewController>();
         calendarController = FindObjectOfType<CalendarViewController>();
         OpenCompact();
+        gManager.printMode += PrintMode;
     }
 
     public void AlarmPressed()
@@ -44,16 +50,24 @@ public class SideOptionsController : MonoBehaviour {
     {
         optionsController.RequestView(ExtrasViewController.State.ILLEGAL);
     }
-
+    
     public void OpenCompact()
     {
-        SideOptions[1].SetActive(false);
-        SideOptions[0].SetActive(true);
+        ChangeView((int)State.COMPACT);
     }
 
     public void OpenExtended()
     {
-        SideOptions[0].SetActive(false);
-        SideOptions[1].SetActive(true);
+        ChangeView((int)State.EXTENDED);
+    }
+
+    public override void CloseView()
+    {
+        ChangeView((int)State.ILLEGAL);
+    }
+    
+    public void PrintMode()
+    {
+        currentView.SetActive(!currentView.activeSelf);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class ExtrasViewController : ViewController {
     
@@ -12,11 +13,50 @@ public class ExtrasViewController : ViewController {
         ILLEGAL
     };
 
+    CalendarViewController calendarController;
+
+    protected override void Start()
+    {
+        base.Start();
+        calendarController = FindObjectOfType<CalendarViewController>();
+        gManager.printMode += CloseView;
+    }
+
+    void Update()
+    {
+        if(currentView != null)
+            HideIfClickedOutside();
+    }
+
+    private void HideIfClickedOutside()
+    {
+        if (Input.GetMouseButton(0) && currentView.activeSelf &&
+            !RectTransformUtility.RectangleContainsScreenPoint(
+                currentView.GetComponent<RectTransform>(),
+                Input.mousePosition,
+                Camera.main))
+        {
+            CloseView();
+        }
+    }
+
+    public override void CloseView()
+    {
+        RequestView(State.ILLEGAL);
+    }
+
     public void RequestView(State s)
     {
+        if(s == State.ILLEGAL)
+            calendarController.SetAsBackground(false);
+        else
+            calendarController.SetAsBackground(true);
+
         if (s == State.NEWENTRY)
             RequestEntryPreview(new NewEntry());
-        ChangeView((int)s);
+        else
+            ChangeView((int)s);
+
     }
 
     public void RequestEntryPreview(NewEntry n) {
@@ -33,4 +73,5 @@ public class ExtrasViewController : ViewController {
         if (handler)
             handler.SetView(alarms);
     }
+    
 }

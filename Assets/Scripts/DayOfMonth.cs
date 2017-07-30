@@ -8,12 +8,27 @@ public class DayOfMonth : IViewManager{
     Selectable selectable;
     public Color filled;
     bool isMonday;
-    
+    bool flagAlrm;
+
+    void Start()
+    {
+        gManager = FindObjectOfType<GameManager>();
+        gManager.printMode += PrintMode;
+    }
+
+    public void PrintMode()
+    {
+        if (flagAlrm)
+            AlarmIndicatorPanel.SetActive(!AlarmIndicatorPanel.activeSelf);
+    }
+
     protected override void Refresh()
     {
         base.Refresh();
         DateIndicatorPanel.SetActive(false);
-        if(selectable == null)
+        AlarmIndicatorPanel.SetActive(false);
+        flagAlrm = false;
+        if (selectable == null)
             selectable = GetComponent<Selectable>();
         selectable.interactable = false;
     }
@@ -50,7 +65,10 @@ public class DayOfMonth : IViewManager{
             base.DisplayInfo();
         }
         if (info.events.Count > 0)
+        {
             AlarmIndicatorPanel.SetActive(true);
+            flagAlrm = true;
+        }
     }
 
     protected override void OnSetView() {
