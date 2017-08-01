@@ -15,9 +15,12 @@ public class GameManager : MonoBehaviour {
 
     public event Action printMode;
 
+    public Language language;
 
     void Awake()
     {
+        language = new Greek();
+        headerObj.GetComponentInChildren<UnityEngine.UI.Text>().text = language.Title;
         DATA_FOLDER = Application.dataPath + @"/Calendar Data/Data";
         LEGACY_FOLDER = Application.dataPath + @"/Calendar Data/Legacy";
         DESKTOP = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);

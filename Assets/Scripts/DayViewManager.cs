@@ -2,8 +2,16 @@
 
 public class DayViewManager : IViewManager {
 
+    protected override void Awake()
+    {
+        base.Awake();
+        gManager = FindObjectOfType<GameManager>();
+    }
+
     protected override void SetHeader() {
-        header.text = assignedDate.DayOfWeek.ToString() + " " + assignedDate.Day.ToString() + " / " + assignedDate.Month.ToString()  + " / " + assignedDate.Year.ToString();
+        int dayIndex = (byte)assignedDate.DayOfWeek - 1;
+        if (dayIndex < 0) dayIndex = 6;
+        header.text = gManager.language.GetDay(dayIndex) + " " + assignedDate.Day.ToString() + "/" + assignedDate.Month.ToString() + "/" + assignedDate.Year.ToString();
     }
 
     protected override void OnSetView()
@@ -25,9 +33,7 @@ public class DayViewManager : IViewManager {
     {
         DayGuideView o_view = o.GetComponent<DayGuideView>();
         if (o_view != null)
-        {
             o_view.Allocate(n);
-        }
     }
 
     protected override void DisplayInfo()

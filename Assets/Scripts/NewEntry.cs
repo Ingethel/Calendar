@@ -193,22 +193,6 @@ public class NewEntryList : ICloneable
 
 public class TimeConversions
 {
-    private static string[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
-    private static string[] days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
-
-    public static string GetDay(int i)
-    {
-        if (i < days.Length)
-            return days[i];
-        return days[0];
-    }
-
-    public static string GetMonth(int i)
-    {
-        if (i < months.Length)
-            return months[i];
-        return months[0];
-    }
 
     public static string IntTimeToString(int time, int mod)
     {

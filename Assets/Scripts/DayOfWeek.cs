@@ -3,6 +3,12 @@
 public class DayOfWeek : IViewManager
 {
 
+    protected override void Awake()
+    {
+        base.Awake();
+        gManager = FindObjectOfType<GameManager>();
+    }
+
     public override void RequestView()
     {
         calendarController.RequestView(CalendarViewController.State.DAILY, assignedDate);
@@ -10,7 +16,9 @@ public class DayOfWeek : IViewManager
 
     protected override void SetHeader()
     {
-        header.text = assignedDate.DayOfWeek.ToString() + " " + assignedDate.Day.ToString() + "/" + assignedDate.Month.ToString() + "/" + assignedDate.Year.ToString();
+        int dayIndex = (byte)assignedDate.DayOfWeek - 1;
+        if (dayIndex < 0) dayIndex = 6;
+        header.text = gManager.language.GetDay(dayIndex) + " " + assignedDate.Day.ToString() + "/" + assignedDate.Month.ToString() + "/" + assignedDate.Year.ToString();
     }
 
     protected override void OnSetView()

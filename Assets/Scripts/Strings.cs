@@ -3,6 +3,41 @@
 public abstract class Language
 {
     public string Title { protected set; get; }
+    public string Time { protected set; get; }
+    public string Details { protected set; get; }
+    public string Date { protected set; get; }
+    public string NameOfTeaam { protected set; get; }
+    public string NumberOfPeople { protected set; get; }
+    public string PersonInCharge { protected set; get; }
+    public string Telephone { protected set; get; }
+    public string DateOfConfirmation { protected set; get; }
+    public string Guide { protected set; get; }
+    public string Notes { protected set; get; }
+    public string Search { protected set; get; }
+    public string Monthly { protected set; get; }
+    public string Weekly { protected set; get; }
+    public string Daily { protected set; get; }
+    public string RepeatEvery { protected set; get; }
+    public string Days { protected set; get; }
+    public string Months { protected set; get; }
+    public string Weeks { protected set; get; }
+
+    protected string[] MonthLabels;
+    protected string[] DayLabels;
+
+    public string GetDay(int i)
+    {
+        if (i < DayLabels.Length)
+            return DayLabels[i];
+        return DayLabels[0];
+    }
+
+    public string GetMonth(int i)
+    {
+        if (i < MonthLabels.Length)
+            return MonthLabels[i];
+        return MonthLabels[0];
+    }
 }
 
 public class English : Language
@@ -10,6 +45,26 @@ public class English : Language
     public English()
     {
         Title = "Battleship G. Averof";
+        MonthLabels = new string[]{ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+        DayLabels = new string[]{ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+        Time = "Time";
+        Details = "Details";
+        Date = "Date";
+        NameOfTeaam = "Name of Team";
+        NumberOfPeople = "Number of People";
+        PersonInCharge = "Person in Charge";
+        Telephone = "Telephone";
+        DateOfConfirmation = "Date of Confirmation";
+        Guide = "Guide";
+        Notes = "Notes";
+        Search = "Search";
+        Monthly = "Monthly";
+        Weekly = "Weekly";
+        Daily = "Daily";
+        Months = "Months";
+        Weeks = "Weeks";
+        Days = "Days";
+        RepeatEvery = "Repeat every ";
     }
 }
 
@@ -19,6 +74,26 @@ public class Greek : Language
     public Greek()
     {
         Title = "Θ/Κ Γ. Αβέρωφ";
+        MonthLabels = new string[]{ "Ιανουάριος", "Φεβρουάριος", "Μάρτιος", "Απρίλιος", "Μάιος", "Ιούνιος", "Ιούλιος", "Αύγουστος", "Σεπτέμβριος", "Οκτόβριος", "Νοέμβριος", "Δεκέμβριος" };
+        DayLabels = new string[] { "Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο", "Κυριακή" };
+        Time = "Time";
+        Details = "Details";
+        Date = "Date";
+        NameOfTeaam = "Name of Team";
+        NumberOfPeople = "Number of People";
+        PersonInCharge = "Person in Charge";
+        Telephone = "Telephone";
+        DateOfConfirmation = "Date of Confirmation";
+        Guide = "Guide";
+        Notes = "Notes";
+        Search = "Search";
+        Monthly = "Monthly";
+        Weekly = "Weekly";
+        Daily = "Daily";
+        Months = "Months";
+        Weeks = "Weeks";
+        Days = "Days";
+        RepeatEvery = "Repeat every ";
     }
 }
 

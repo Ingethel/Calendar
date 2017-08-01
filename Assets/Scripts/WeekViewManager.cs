@@ -6,11 +6,14 @@
     {
         base.Awake();
         days = GetComponentsInChildren<DayOfWeek>();
+        if (!gManager)
+            gManager = FindObjectOfType<GameManager>();
+
     }
 
     protected override void SetHeader()
     {
-        header.text = TimeConversions.GetMonth(assignedDate.Month - 1) + " " + assignedDate.Year.ToString();
+        header.text = gManager.language.GetMonth(assignedDate.Month - 1) + " " + assignedDate.Year.ToString();
     }
 
     protected override void OnSetView()

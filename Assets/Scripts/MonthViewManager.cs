@@ -1,17 +1,22 @@
 ﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class MonthViewManager : IViewManager {
     
     public WeekOfMonth[] weeks;
+    public Text[] dayLabels;
 
     protected override void Awake()
     {
         base.Awake();
         weeks = GetComponentsInChildren<WeekOfMonth>();
+        if (!gManager)
+            gManager = FindObjectOfType<GameManager>();
     }
 
     protected override void SetHeader() {
-        header.text = TimeConversions.GetMonth(assignedDate.Month - 1) + " " + assignedDate.Year.ToString();
+        header.text = gManager.language.GetMonth(assignedDate.Month - 1) + " " + assignedDate.Year.ToString();
     }
 
     protected override void Refresh()
@@ -19,6 +24,8 @@ public class MonthViewManager : IViewManager {
         foreach (WeekOfMonth w in weeks)
             foreach (DayOfMonth d in w.days)
                 d.Reset();
+        for (int i = 0; i < dayLabels.Length; i++)
+            dayLabels[i].text = gManager.language.GetDay(i);
     }
 
     protected override void OnSetView() {

@@ -16,7 +16,6 @@ public class ViewModesDropdownHandler : Panel {
 
     public void OnValueChange(int i)
     {
-        Debug.Log(i);
         calendarController.RequestView((CalendarViewController.State)i);
         Close();
     }
