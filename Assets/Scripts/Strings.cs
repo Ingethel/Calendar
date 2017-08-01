@@ -1,5 +1,27 @@
 ﻿using System;
 
+public abstract class Language
+{
+    public string Title { protected set; get; }
+}
+
+public class English : Language
+{
+    public English()
+    {
+        Title = "Battleship G. Averof";
+    }
+}
+
+
+public class Greek : Language
+{
+    public Greek()
+    {
+        Title = "Θ/Κ Γ. Αβέρωφ";
+    }
+}
+
 public class Strings{
 
     public static string Entries = "Entries";

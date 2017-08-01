@@ -53,9 +53,6 @@ public class ViewController : MonoBehaviour {
     public void SetAsBackground(bool flag)
     {
         if (!lockedAccess)
-        {
-            SetActiveRaycast(!flag);   
-        }
-        
+            SetActiveRaycast(!flag);
     }
 }

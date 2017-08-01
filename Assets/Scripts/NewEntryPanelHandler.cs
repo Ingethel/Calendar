@@ -9,6 +9,8 @@ public class NewEntryPanelHandler : Panel {
     private EventSystem system;
 
     public GameObject editButtons, newEntryButtons;
+    public DateValidator dateValidator;
+    public TimeValidator timeValidator;
 
     private NewEntry guide;
     
@@ -68,9 +70,7 @@ public class NewEntryPanelHandler : Panel {
 
     private bool CheckSaveEligibility()
     {
-        if (StartTimeH.text != "" && StartTimeM.text != "" && 
-            EndTimeH.text != "" && EndTimeM.text != "" && 
-            Day.text != "" && Month.text != "" && Year.text != "")
+        if (dateValidator.Validate() && timeValidator.Validate())
             return true;
         return false;
     }

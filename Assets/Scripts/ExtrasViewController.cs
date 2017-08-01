@@ -21,13 +21,13 @@ public class ExtrasViewController : ViewController {
         calendarController = FindObjectOfType<CalendarViewController>();
         gManager.printMode += CloseView;
     }
-
+/*
     void Update()
     {
         if(currentView != null)
             HideIfClickedOutside();
     }
-
+    */
     private void HideIfClickedOutside()
     {
         if (Input.GetMouseButton(0) && currentView.activeSelf &&

@@ -240,6 +240,11 @@ public class TimeConversions
         int time_i = c_time[0] * mod + c_time[1];
         return time_i;
     }
+
+    public static bool IntInRange(int i, int min, int max)
+    {
+        return i >= min && i <= max;
+    }
 }
 
 public class DAY
