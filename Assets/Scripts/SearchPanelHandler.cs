@@ -4,6 +4,12 @@ using UnityEngine.UI;
 public class SearchPanelHandler : Panel
 {
     public Text input;
+    public Text label;
+
+    void Start()
+    {
+        Refresh();
+    }
 
     void Update()
     {
@@ -14,6 +20,11 @@ public class SearchPanelHandler : Panel
     {
         input.text = "";
         base.Close();
+    }
+
+    public override void Refresh()
+    {
+        label.text = gManager.language.Search;
     }
 
     protected override void KeybordInputHandler()

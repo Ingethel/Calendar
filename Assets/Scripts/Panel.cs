@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Panel : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Panel : MonoBehaviour
         calendarController = FindObjectOfType<CalendarViewController>();
         dataManager = FindObjectOfType<DataManager>();
         controller = GetComponentInParent<ViewController>();
+        gManager = FindObjectOfType<GameManager>();
     }
 
     public virtual void Open()
@@ -37,4 +39,13 @@ public class Panel : MonoBehaviour
     {
 
     }
+
+    public virtual void Refresh(){}
+}
+
+[System.Serializable]
+public class InputFieldObject
+{
+    public InputField[] inputs;
+    public Text label;
 }

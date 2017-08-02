@@ -22,7 +22,7 @@ public class DayOfMonth : IViewManager{
             AlarmIndicatorPanel.SetActive(!AlarmIndicatorPanel.activeSelf);
     }
 
-    protected override void Refresh()
+    public override void Refresh()
     {
         base.Refresh();
         DateIndicatorPanel.SetActive(false);

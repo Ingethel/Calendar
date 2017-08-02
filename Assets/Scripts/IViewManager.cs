@@ -134,7 +134,7 @@ public class IViewManager : Panel
 
     protected virtual void AssignInfo(GameObject o, NewEntry n) {}
 
-    protected virtual void Refresh()
+    public override void Refresh()
     {
         info = new DAY();
         if(guideList != null)

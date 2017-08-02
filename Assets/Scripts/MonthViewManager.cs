@@ -19,7 +19,7 @@ public class MonthViewManager : IViewManager {
         header.text = gManager.language.GetMonth(assignedDate.Month - 1) + " " + assignedDate.Year.ToString();
     }
 
-    protected override void Refresh()
+    public override void Refresh()
     {
         foreach (WeekOfMonth w in weeks)
             foreach (DayOfMonth d in w.days)

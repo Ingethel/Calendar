@@ -6,7 +6,7 @@ public abstract class Language
     public string Time { protected set; get; }
     public string Details { protected set; get; }
     public string Date { protected set; get; }
-    public string NameOfTeaam { protected set; get; }
+    public string NameOfTeam { protected set; get; }
     public string NumberOfPeople { protected set; get; }
     public string PersonInCharge { protected set; get; }
     public string Telephone { protected set; get; }
@@ -21,7 +21,9 @@ public abstract class Language
     public string Days { protected set; get; }
     public string Months { protected set; get; }
     public string Weeks { protected set; get; }
-
+    public string NewEntry { protected set; get; }
+    public string NewEntryPreview { protected set; get; }
+    
     protected string[] MonthLabels;
     protected string[] DayLabels;
 
@@ -50,7 +52,7 @@ public class English : Language
         Time = "Time";
         Details = "Details";
         Date = "Date";
-        NameOfTeaam = "Name of Team";
+        NameOfTeam = "Name of Team";
         NumberOfPeople = "Number of People";
         PersonInCharge = "Person in Charge";
         Telephone = "Telephone";
@@ -65,6 +67,8 @@ public class English : Language
         Weeks = "Weeks";
         Days = "Days";
         RepeatEvery = "Repeat every ";
+        NewEntry = "Add Guided Tour";
+        NewEntryPreview = "Guided Tour";
     }
 }
 
@@ -76,24 +80,26 @@ public class Greek : Language
         Title = "Θ/Κ Γ. Αβέρωφ";
         MonthLabels = new string[]{ "Ιανουάριος", "Φεβρουάριος", "Μάρτιος", "Απρίλιος", "Μάιος", "Ιούνιος", "Ιούλιος", "Αύγουστος", "Σεπτέμβριος", "Οκτόβριος", "Νοέμβριος", "Δεκέμβριος" };
         DayLabels = new string[] { "Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο", "Κυριακή" };
-        Time = "Time";
-        Details = "Details";
-        Date = "Date";
-        NameOfTeaam = "Name of Team";
-        NumberOfPeople = "Number of People";
-        PersonInCharge = "Person in Charge";
-        Telephone = "Telephone";
-        DateOfConfirmation = "Date of Confirmation";
-        Guide = "Guide";
-        Notes = "Notes";
-        Search = "Search";
-        Monthly = "Monthly";
-        Weekly = "Weekly";
-        Daily = "Daily";
-        Months = "Months";
-        Weeks = "Weeks";
-        Days = "Days";
-        RepeatEvery = "Repeat every ";
+        Time = "Ώρα";
+        Details = "Πληροφορίες";
+        Date = "Ημερομηνία";
+        NameOfTeam = "Όνομα Ομάδας";
+        NumberOfPeople = "Αριθμός Ατόμων";
+        PersonInCharge = "Υπεύθηνος Ομάδας";
+        Telephone = "Τηλέφονο";
+        DateOfConfirmation = "Ημερομηνία Αποδοχής";
+        Guide = "Ξεναγός";
+        Notes = "Συμείωση";
+        Search = "Αναζήτηση";
+        Monthly = "Μηνειέα";
+        Weekly = "Ευδομαδειέα";
+        Daily = "Ημερίσια";
+        Months = "Μήνες";
+        Weeks = "Ευδομάδες";
+        Days = "Μέρες";
+        RepeatEvery = "Επανάληψη καθε ";
+        NewEntry = "Εισαγωγή Ξενάγησης";
+        NewEntryPreview = "Ξενάγηση";
     }
 }
 

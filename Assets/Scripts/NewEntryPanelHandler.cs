@@ -4,8 +4,8 @@ using UnityEngine.EventSystems;
 
 public class NewEntryPanelHandler : Panel {
 
-    public InputField StartTimeH, StartTimeM, EndTimeH, EndTimeM, Day, Month, Year, NameOfTeam, NumberOfPeople, PersonInCharge, Telephone, ConfirmationDate, Guide, Notes;
-    public InputField[] fields;
+    public InputFieldObject[] fields;
+    public Text title;
     private EventSystem system;
 
     public GameObject editButtons, newEntryButtons;
@@ -17,12 +17,26 @@ public class NewEntryPanelHandler : Panel {
     void Start() {
         guide = null;
         system = EventSystem.current;
-        fields = new InputField[]{ StartTimeH, StartTimeM, EndTimeH, EndTimeM, Day, Month, Year, NameOfTeam, NumberOfPeople, PersonInCharge, Telephone, ConfirmationDate, Guide, Notes };
+        Refresh();
     }
 
     void Update()
     {
         KeybordInputHandler();
+    }
+
+    public override void Refresh()
+    {
+        title.text = gManager.language.NewEntry;
+        fields[0].label.text = gManager.language.NameOfTeam;
+        fields[1].label.text = gManager.language.NumberOfPeople;
+        fields[2].label.text = gManager.language.PersonInCharge;
+        fields[3].label.text = gManager.language.Telephone;
+        fields[4].label.text = gManager.language.Date;
+        fields[5].label.text = gManager.language.Time;
+        fields[6].label.text = gManager.language.DateOfConfirmation;
+        fields[7].label.text = gManager.language.Guide;
+        fields[8].label.text = gManager.language.Notes;
     }
 
     protected override void KeybordInputHandler()
@@ -50,7 +64,7 @@ public class NewEntryPanelHandler : Panel {
         if (CheckSaveEligibility()) {
 
             if (guide != null)
-               if(guide.Date != Day.text + "." + Month.text + "." + Year.text)
+               if(guide.Date != fields[4].inputs[0].text + "." + fields[4].inputs[1].text + "." + fields[4].inputs[2].text)
                     dataManager.RequestDelete(guide);
              
             SaveInfo();
@@ -86,9 +100,12 @@ public class NewEntryPanelHandler : Panel {
     {
         bool flag = n.filler;
 
-        foreach (InputField field in fields)
-            field.interactable = flag;
+        foreach (InputFieldObject fieldObj in fields)
+            foreach(InputField field in fieldObj.inputs)
+                field.interactable = flag;
 
+        title.text = flag ? gManager.language.NewEntry : gManager.language.NewEntryPreview;
+        
         newEntryButtons.SetActive(flag);
         editButtons.SetActive(!flag);
 
@@ -101,39 +118,42 @@ public class NewEntryPanelHandler : Panel {
         string[] split = guide.attributes[0].Split(':');
         if(split.Length == 2)
         {
-            StartTimeH.text = split[0];
-            StartTimeM.text = split[1];
+            fields[5].inputs[0].text = split[0];
+            fields[5].inputs[1].text = split[1];
         }
         split = guide.attributes[1].Split(':');
         if (split.Length == 2)
         {
-            EndTimeH.text = split[0];
-            EndTimeM.text = split[1];
+            fields[5].inputs[2].text = split[0];
+            fields[5].inputs[3].text = split[1];
         }
-        Day.text = guide.day != 0 ? guide.day.ToString() : "";
-        Month.text = guide.month != 0 ? guide.month.ToString() : "";
-        Year.text = guide.year != 0 ? guide.year.ToString() : "";
-        NameOfTeam.text = guide.attributes[2];
-        NumberOfPeople.text = guide.attributes[3];
-        PersonInCharge.text = guide.attributes[4];
-        Telephone.text = guide.attributes[5];
-        ConfirmationDate.text = guide.attributes[6];
-        Guide.text = guide.attributes[7];
-        Notes.text = guide.attributes[8];
+        fields[4].inputs[0].text = guide.day != 0 ? guide.day.ToString() : "";
+        fields[4].inputs[1].text = guide.month != 0 ? guide.month.ToString() : "";
+        fields[4].inputs[2].text = guide.year != 0 ? guide.year.ToString() : "";
+        fields[0].inputs[0].text = guide.attributes[2];
+        fields[1].inputs[0].text = guide.attributes[3];
+        fields[2].inputs[0].text = guide.attributes[4];
+        fields[3].inputs[0].text = guide.attributes[5];
+        fields[6].inputs[0].text = guide.attributes[6];
+        fields[7].inputs[0].text = guide.attributes[7];
+        fields[8].inputs[0].text = guide.attributes[8];
     }
 
     private void SaveInfo()
     {
-        string[] inputs = { StartTimeH.text + ":" + StartTimeM.text, EndTimeH.text + ":" + EndTimeM.text,
-                TryGetText(NameOfTeam), TryGetText(NumberOfPeople), TryGetText(PersonInCharge), TryGetText(Telephone),
-                TryGetText(ConfirmationDate), TryGetText(Guide), TryGetText(Notes)};
-        guide = new NewEntry(inputs, Day.text + "." + Month.text + "." + Year.text);
+        string[] inputs = { fields[5].inputs[0].text + ":" + fields[5].inputs[1].text, fields[5].inputs[2].text + ":" + fields[5].inputs[3].text,
+                TryGetText(fields[0].inputs[0]), TryGetText(fields[1].inputs[0]), TryGetText(fields[2].inputs[0]), TryGetText(fields[3].inputs[0]),
+                TryGetText(fields[6].inputs[0]), TryGetText(fields[7].inputs[0]), TryGetText(fields[8].inputs[0])};
+        guide = new NewEntry(inputs, fields[4].inputs[0].text + "." + fields[4].inputs[1].text + "." + fields[4].inputs[2].text);
     }
 
     public void EditEntry()
     {
-        foreach (InputField field in fields)
+        foreach(InputFieldObject fieldObj in fields)
+            foreach (InputField field in fieldObj.inputs)
             field.interactable = true;
+
+        title.text = gManager.language.NewEntry;
 
         editButtons.SetActive(false);
         newEntryButtons.SetActive(true);
