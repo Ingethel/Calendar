@@ -154,7 +154,9 @@ public class NewEntryList
         {
             int index = list.BinarySearch(e, comparer);
             if (index < 0)
-                list.Insert(~index, e);
+                index = ~index;
+
+            list.Insert(index, e);
         }
     }
 

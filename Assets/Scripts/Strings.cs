@@ -91,8 +91,8 @@ public class Greek : Language
         Guide = "Ξεναγός";
         Notes = "Συμείωση";
         Search = "Αναζήτηση";
-        Monthly = "Μηνειέα";
-        Weekly = "Ευδομαδειέα";
+        Monthly = "Μηνιέα";
+        Weekly = "Εβδομαδιέα";
         Daily = "Ημερίσια";
         Months = "Μήνες";
         Weeks = "Ευδομάδες";
