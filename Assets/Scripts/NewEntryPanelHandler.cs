@@ -12,10 +12,9 @@ public class NewEntryPanelHandler : Panel {
     public DateValidator dateValidator;
     public TimeValidator timeValidator;
 
-    private NewEntry guide;
+    public NewEntry guide = null;
     
     void Start() {
-        guide = null;
         system = EventSystem.current;
         Refresh();
     }
@@ -23,6 +22,12 @@ public class NewEntryPanelHandler : Panel {
     void Update()
     {
         KeybordInputHandler();
+    }
+
+    public override void Close()
+    {
+        guide = null;
+        base.Close();
     }
 
     public override void Refresh()
@@ -63,14 +68,12 @@ public class NewEntryPanelHandler : Panel {
     {
         if (CheckSaveEligibility()) {
 
-            if (guide != null)
-               if(guide.Date != fields[4].inputs[0].text + "." + fields[4].inputs[1].text + "." + fields[4].inputs[2].text)
+            if (guide != null && !guide.filler)
                     dataManager.RequestDelete(guide);
              
             SaveInfo();
             dataManager.RequestWrite(guide);
             calendarController.RequestView(CalendarViewController.State.DAILY, new System.DateTime(guide.year, guide.month, guide.day));
-            guide = null;
             Close();
         }
     }
@@ -98,6 +101,7 @@ public class NewEntryPanelHandler : Panel {
 
     public void PreviewEntry(NewEntry n)
     {
+        guide = n;
         bool flag = n.filler;
 
         foreach (InputFieldObject fieldObj in fields)
@@ -109,7 +113,6 @@ public class NewEntryPanelHandler : Panel {
         newEntryButtons.SetActive(flag);
         editButtons.SetActive(!flag);
 
-        guide = n;
         DisplayInfo();
     }
 

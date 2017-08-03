@@ -80,8 +80,6 @@ public class GameManager : MonoBehaviour {
             case "FULLSCREEN":
                 SetFullScreen(s[2] == "ON" ? true : false);
                 break;
-            case "CLEAR_DATA":
-                break;
             case "CLEAR_LEGACY":
                 break;
             case "SEARCH_LEGACY":
@@ -100,6 +98,9 @@ public class GameManager : MonoBehaviour {
                 break;
             case "BACKUP":
                 ThreadReader.BackUp(DATA_FOLDER, DESKTOP);
+                break;
+            case "IMPORT":
+                ThreadReader.BackUp(s[2], DATA_FOLDER);
                 break;
             default:
                 break;

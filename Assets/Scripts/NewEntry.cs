@@ -13,6 +13,7 @@ public class Item
     public string tag;
 }
 
+[Serializable]
 public class NewEntry : Item
 {
     public int day, month, year;
@@ -130,7 +131,7 @@ public class NewEntryComparer : IComparer<NewEntry>
     }
 }
 
-public class NewEntryList : ICloneable
+public class NewEntryList
 {
     private List<NewEntry> list; 
     private NewEntryComparer comparer;
@@ -143,11 +144,6 @@ public class NewEntryList : ICloneable
     public void Remove(NewEntry e)
     {
         list.Remove(e);
-    }
-
-    public object Clone()
-    {
-        return this.MemberwiseClone();
     }
 
     public void Add(NewEntry e)
@@ -245,13 +241,15 @@ public class DAY
     public void AddGuide(NewEntry n)
     {
         if(!n.filler)
-            n.id = "_guide:" + DataManager.GenerateNewIdFor("Guide");
+            if(n.id == "")
+                n.id = "_guide:" + DataManager.GenerateNewIdFor("Guide");
         guides.Add(n);
     }
 
     public void AddEvent(Alarm n)
     {
-        n.id = "_event:" + DataManager.GenerateNewIdFor("Event");
+        if(n.id == "")
+            n.id = "_event:" + DataManager.GenerateNewIdFor("Event");
         events.Add(n);
     }
 }

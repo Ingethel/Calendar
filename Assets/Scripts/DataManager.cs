@@ -63,20 +63,6 @@ public class DataManager : MonoBehaviour
             entries[id] = new DAY();
         }
     }
-
-    public void RequestWrite(NewEntry e)
-    {
-        string filename = TagToPath(e.Date);
-        DAY day_info;
-        if (!entries.TryGetValue(e.Date, out day_info))
-            day_info = new DAY();
-
-        day_info.AddGuide(e);
-
-        entries[e.Date] = day_info;
-        reader.Write(filename, e);
-    }
-    
     
     public void RequestWrite<T>(T e) where T : Item
     {
@@ -98,7 +84,6 @@ public class DataManager : MonoBehaviour
     public void RequestDelete(NewEntry e)
     {
         string filename = TagToPath(e.Date);
-        Debug.Log(e.Date);
         DAY day_info;
         if (entries.TryGetValue(e.Date, out day_info))
         {
@@ -168,11 +153,8 @@ public class DataManager : MonoBehaviour
         else
         {
             DAY dayInfo = reader.SearchItem(text);
-            if (dayInfo != null && dayInfo.guides.Count() > 0)
-            {
-                CalendarViewController calendarController = FindObjectOfType<CalendarViewController>();
-                calendarController.DisplayResultView(dayInfo, text);
-            }
+            CalendarViewController calendarController = FindObjectOfType<CalendarViewController>();
+            calendarController.DisplayResultView(dayInfo, text);
         }
     }
 }

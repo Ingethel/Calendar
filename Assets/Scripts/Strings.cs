@@ -128,7 +128,7 @@ public class Strings{
         "<!ELEMENT Entries (Day*)>" + Environment.NewLine + 
         "<!ELEMENT Day (NewEntry*, Event*)>" + Environment.NewLine + 
         "<!ELEMENT NewEntry (StartTime, EndTime, NameOfTeam, NumberOfPeople, PersonInCharge, Telephone, ConfirmationDate, Guide, Notes)>" + Environment.NewLine + 
-        "<!ELEMENT Event (Notes, RepeatDays, RepeatMoths, RepeatYears)>" + Environment.NewLine + 
+        "<!ELEMENT Event (Notes, RepeatDays, RepeatMonths, RepeatYears)>" + Environment.NewLine + 
         "<!ELEMENT StartTime (#PCDATA)>" + Environment.NewLine +
         "<!ELEMENT EndTime (#PCDATA)>" + Environment.NewLine +
         "<!ELEMENT NameOfTeam (#PCDATA)>" + Environment.NewLine +
@@ -139,7 +139,7 @@ public class Strings{
         "<!ELEMENT Guide (#PCDATA)>" + Environment.NewLine +
         "<!ELEMENT Notes (#PCDATA)>" + Environment.NewLine +
         "<!ELEMENT RepeatDays (#PCDATA)>" + Environment.NewLine +
-        "<!ELEMENT RepeatMoths (#PCDATA)>" + Environment.NewLine +
+        "<!ELEMENT RepeatMonths (#PCDATA)>" + Environment.NewLine +
         "<!ELEMENT RepeatYears (#PCDATA)>" + Environment.NewLine +
         "<!ATTLIST Day id ID #REQUIRED>" + Environment.NewLine +
         "<!ATTLIST NewEntry id ID #REQUIRED>" + Environment.NewLine +

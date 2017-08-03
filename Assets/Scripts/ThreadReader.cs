@@ -41,24 +41,26 @@ public class ThreadReader /*: ThreadJob*/ {
         DAY dayInfo = new DAY();
         {
             XmlNodeList entries = day.GetElementsByTagName(Strings.NewEntry);
-            foreach (XmlNode entry in entries)
+            foreach (XmlElement entry in entries)
             {
                 NewEntry newGuide = new NewEntry();
                 XmlNodeList entryInfo = entry.ChildNodes;
                 newGuide = ReadItem(entryInfo, newGuide);
                 newGuide.filler = false;
                 newGuide.SetDate(GetElementID(day));
+                newGuide.id = GetElementID(entry);
                 dayInfo.AddGuide(newGuide);
             }
         }
         {
             XmlNodeList entries = day.GetElementsByTagName(Strings.Event);
-            foreach (XmlNode entry in entries)
+            foreach (XmlElement entry in entries)
             {
                 Alarm alarm = new Alarm();
                 XmlNodeList entryInfo = entry.ChildNodes;
                 alarm = ReadItem(entryInfo, alarm);
                 alarm.SetDate(GetElementID(day));
+                alarm.id = GetElementID(entry);
                 dayInfo.AddEvent(alarm);
             }
         }
@@ -223,6 +225,7 @@ public class ThreadReader /*: ThreadJob*/ {
                                         guide = ReadItem(entryInfo, guide);
                                         guide.filler = false;
                                         guide.SetDate(GetElementID(day));
+                                        guide.id = GetElementID(entry.ParentNode as XmlElement);
                                         result.AddGuide(guide);
                                     }
                                 }
@@ -236,6 +239,7 @@ public class ThreadReader /*: ThreadJob*/ {
                                         guide = ReadItem(entryInfo, guide);
                                         guide.filler = false;
                                         guide.SetDate(GetElementID(day));
+                                        guide.id = GetElementID(entry.ParentNode as XmlElement);
                                         result.AddGuide(guide);
                                     }
                                 }
