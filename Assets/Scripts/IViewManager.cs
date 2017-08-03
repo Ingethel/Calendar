@@ -36,9 +36,9 @@ public class IViewManager : Panel
 
     protected virtual void SetTag() {}
 
-    protected void RequestData()
+    protected virtual void RequestData()
     {
-        SearchResult res = dataManager.TryGetEntries(_tag);
+        SearchResult res = dataManager.TryGetEntries(_tag, !TimeConversions.IntInRange(assignedDate.Month, assignedDate.Month-1, assignedDate.Month+2));
         if (res.value)
         {
             info = res.info;
@@ -155,5 +155,10 @@ public class IViewManager : Panel
         SetHeader();
         OnSetView();
     }
-    
+
+    public void OnClickAlarmIndicator()
+    {
+        ExtrasViewController extras = FindObjectOfType<ExtrasViewController>();
+        extras.RequestAlarmPreview(info.events);
+    }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class MonthViewManager : IViewManager {
@@ -27,7 +26,7 @@ public class MonthViewManager : IViewManager {
         for (int i = 0; i < dayLabels.Length; i++)
             dayLabels[i].text = gManager.language.GetDay(i);
     }
-
+    
     protected override void OnSetView() {
         // current month
         int maxDays = DateTime.DaysInMonth(assignedDate.Year, assignedDate.Month);
@@ -40,14 +39,22 @@ public class MonthViewManager : IViewManager {
             if (dayofweek == 6) weekCounter++;
         }
         // previous month
-        DateTime day_lastMonth = new DateTime(assignedDate.Year, assignedDate.Month - 1, DateTime.DaysInMonth(assignedDate.Year, assignedDate.Month-1));
+        DateTime day_lastMonth;
+        if (assignedDate.Month == 1)
+            day_lastMonth = new DateTime(assignedDate.Year-1, 12, DateTime.DaysInMonth(assignedDate.Year-1, 12));
+        else
+            day_lastMonth = new DateTime(assignedDate.Year, assignedDate.Month - 1, DateTime.DaysInMonth(assignedDate.Year, assignedDate.Month-1));
         while (day_lastMonth.DayOfWeek != System.DayOfWeek.Sunday)
         {
             weeks[0].days[(byte)day_lastMonth.DayOfWeek - 1].SetView(day_lastMonth);
             day_lastMonth = day_lastMonth.AddDays(-1);
         }
         // next month
-        DateTime day_nextMoth = new DateTime(assignedDate.Year, assignedDate.Month + 1, 1);
+        DateTime day_nextMoth;
+        if (assignedDate.Month == 12)
+            day_nextMoth = new DateTime(assignedDate.Year + 1, 1, 1);
+        else
+            day_nextMoth = new DateTime(assignedDate.Year, assignedDate.Month + 1, 1);
         while(day_nextMoth.DayOfWeek != System.DayOfWeek.Monday)
         {
             int dayofweek = (byte)day_nextMoth.DayOfWeek - 1;

@@ -19,11 +19,11 @@ public class CalendarViewController : ViewController
     bool printflag;
 
     public GameObject background;
-
+    DataManager data;
     protected override void Start()
     {
         base.Start();
-        DataManager data = FindObjectOfType<DataManager>();
+        data = FindObjectOfType<DataManager>();
 
         data.RequestReadMonth(calendar.AddMonths(DateTime.Now, -1));
         data.RequestReadMonth(DateTime.Now);
@@ -64,6 +64,14 @@ public class CalendarViewController : ViewController
         else
 
             RequestView(State.MONTHLY, currentDate);
+
+        SearchResult search = data.TryGetEntries(currentDate.Day.ToString() + "." + currentDate.Month.ToString() + "." + currentDate.Year.ToString(), false);
+        if (search.value)
+            if(search.info.events.Count > 0)
+            {
+                ExtrasViewController extras = FindObjectOfType<ExtrasViewController>();
+                extras.RequestAlarmPreview(search.info.events);
+            }
     }
 
     public void RequestView(State e, DateTime date)

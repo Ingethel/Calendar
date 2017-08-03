@@ -107,10 +107,5 @@ public class DayOfMonth : IViewManager{
         }
         
     }
-
-    public void OnClickAlarmIndicator()
-    {
-        ExtrasViewController extras = FindObjectOfType<ExtrasViewController>();
-        extras.RequestAlarmPreview(info.events);
-    }
+    
 }

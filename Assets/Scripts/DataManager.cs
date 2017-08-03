@@ -43,8 +43,7 @@ public class DataManager : MonoBehaviour
         string[] split = s.Split('.');
         return Application.dataPath + @"/Calendar Data/Data/" + split[2] + "/" + split[1] + "/" + Strings.file;
     }
-
-
+    
     public void RequestReadMonth(DateTime date)
     {
         string filepath = DateToPath(date);
@@ -58,6 +57,10 @@ public class DataManager : MonoBehaviour
         if(list != null)
         {
             entries[id] = list;
+        }
+        else
+        {
+            entries[id] = new DAY();
         }
     }
 
@@ -105,21 +108,22 @@ public class DataManager : MonoBehaviour
         reader.DeleteItem(filename, e);
     }
 
-    public SearchResult TryGetEntries(string id)
+    public SearchResult TryGetEntries(string id, bool searchFileData)
     {
         SearchResult res = new SearchResult();
         DAY day_info;
         res.value = entries.TryGetValue(id, out day_info);
-        if (!res.value)
+        if (!res.value && searchFileData)
         {
             RequestReadDay(id);
             res.value = entries.TryGetValue(id, out day_info);
         }
         if (res.value)
             res.info = day_info;
+
         return res;
     }
-
+    
     private bool RequestDayView(string[] temp)
     {
         if (temp.Length == 3) {

@@ -18,6 +18,14 @@ public class AlarmPreviewerHandler : Panel {
         }
     }
 
+    public override void Close()
+    {
+        if (ViewList != null)
+            foreach (Transform t in ViewList.transform)
+                Destroy(t.gameObject);
+        base.Close();
+    }
+
     public void SetView(List<Alarm> list)
     {
         foreach(Alarm a in list)
