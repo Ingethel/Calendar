@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class DayViewManager : IViewManager {
 
-    protected override void Awake()
+    public Text[] headers;
+    public GameObject weeklyButton;
+
+    void Start()
     {
-        base.Awake();
-        gManager = FindObjectOfType<GameManager>();
+        weeklyButton.SetActive(false);
     }
 
     protected override void SetHeader() {
@@ -14,14 +17,28 @@ public class DayViewManager : IViewManager {
         header.text = gManager.language.GetDay(dayIndex) + " " + assignedDate.Day.ToString() + "/" + assignedDate.Month.ToString() + "/" + assignedDate.Year.ToString();
     }
 
+    public override void Refresh()
+    {
+        base.Refresh();
+        weeklyButton.GetComponentInChildren<Text>().text = gManager.language.WeeklyButton;
+        weeklyButton.SetActive(false);
+        headers[0].text = gManager.language.OfficerOnDuty;
+        headers[1].GetComponentInParent<InputField>().text = "";
+        headers[2].text = gManager.language.Time;
+        headers[3].text = gManager.language.Details;
+    }
+
     protected override void OnSetView()
     {
-        if (assignedDate.DayOfWeek == System.DayOfWeek.Monday) { }
+        RequestData();
+        if (assignedDate.DayOfWeek == System.DayOfWeek.Monday) {
+            weeklyButton.SetActive(true);
+        }
         else
         {
-            RequestData();
             DisplayInfo();
         }
+        headers[1].GetComponentInParent<InputField>().text = info.officer;
     }
 
     protected override void SetTag()
@@ -59,4 +76,13 @@ public class DayViewManager : IViewManager {
         }
     }
 
+    public void SetOfficerOnDuty()
+    {
+        dataManager.RequestWriteOfficer(_tag, headers[1].text);
+    }
+
+    public void OnClickWeeklyButton()
+    {
+        calendarController.RequestView(CalendarViewController.State.WEEKLY, assignedDate);
+    }
 }

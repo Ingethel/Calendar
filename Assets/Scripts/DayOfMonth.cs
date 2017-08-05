@@ -12,7 +12,6 @@ public class DayOfMonth : IViewManager{
 
     void Start()
     {
-        gManager = FindObjectOfType<GameManager>();
         gManager.printMode += PrintMode;
     }
 

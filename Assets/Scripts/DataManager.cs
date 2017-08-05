@@ -80,6 +80,18 @@ public class DataManager : MonoBehaviour
         reader.Write(filename, e);
     }
 
+    public void RequestWriteOfficer(string id, string officer)
+    {
+        string filename = TagToPath(id);
+        DAY day_info;
+        if (!entries.TryGetValue(id, out day_info))
+            day_info = new DAY();
+
+        day_info.officer = officer;
+
+        entries[id] = day_info;
+        reader.Write(filename, id, officer);
+    }
 
     public void RequestDelete(NewEntry e)
     {

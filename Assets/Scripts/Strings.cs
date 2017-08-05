@@ -23,7 +23,13 @@ public abstract class Language
     public string Weeks { protected set; get; }
     public string NewEntry { protected set; get; }
     public string NewEntryPreview { protected set; get; }
-    
+    public string SearchResult { protected set; get; }
+    public string OfficerOnDuty { protected set; get; }
+    public string NavalOfficer { protected set; get; }
+    public string ChiefOfMuseum { protected set; get; }
+    public string WeeklyGuideSchedule { protected set; get; }
+    public string WeeklyButton { protected set; get; }
+
     protected string[] MonthLabels;
     protected string[] DayLabels;
 
@@ -69,6 +75,12 @@ public class English : Language
         RepeatEvery = "Repeat every ";
         NewEntry = "Add Guided Tour";
         NewEntryPreview = "Guided Tour";
+        SearchResult = "Search Result for: ";
+        OfficerOnDuty = "Officer on Duty: ";
+        NavalOfficer = "   Naval Officer";
+        ChiefOfMuseum = "   Chief of Museum Department";
+        WeeklyGuideSchedule = "Weekly Guide Scedule";
+        WeeklyButton = "Show Weekly Schedule";
     }
 }
 
@@ -86,20 +98,26 @@ public class Greek : Language
         NameOfTeam = "Όνομα Ομάδας";
         NumberOfPeople = "Αριθμός Ατόμων";
         PersonInCharge = "Υπεύθηνος Ομάδας";
-        Telephone = "Τηλέφονο";
+        Telephone = "Τηλέφωνο";
         DateOfConfirmation = "Ημερομηνία Αποδοχής";
         Guide = "Ξεναγός";
         Notes = "Συμείωση";
         Search = "Αναζήτηση";
-        Monthly = "Μηνιέα";
-        Weekly = "Εβδομαδιέα";
-        Daily = "Ημερίσια";
+        Monthly = "Μηνιαία";
+        Weekly = "Εβδομαδιαία";
+        Daily = "Ημερήσια";
         Months = "Μήνες";
-        Weeks = "Ευδομάδες";
+        Weeks = "Εβδομάδες";
         Days = "Μέρες";
         RepeatEvery = "Επανάληψη καθε ";
         NewEntry = "Εισαγωγή Ξενάγησης";
         NewEntryPreview = "Ξενάγηση";
+        SearchResult = "Αποτέλεσμα Αναζήτησης: ";
+        OfficerOnDuty = "ΑΦ: ";
+        NavalOfficer = "   Ύπαρχος";
+        ChiefOfMuseum = "   Τμηματάρχης Μουσείου";
+        WeeklyGuideSchedule = "Εβδομαδιαίο Πρόγραμμα Ξεωαγήσεων";
+        WeeklyButton = "Προβολή Εβδομαδιαίου Προγράμματος";
     }
 }
 
@@ -107,6 +125,7 @@ public class Strings{
 
     public static string Entries = "Entries";
     public static string NewEntry = "NewEntry";
+    public static string Officer = "Officer";
     public static string StartTime = "StartTime";
     public static string EndTime = "EndTime";
     public static string NameOfTeam = "NameOfTeam";
@@ -128,7 +147,7 @@ public class Strings{
         "<!ELEMENT Entries (Day*)>" + Environment.NewLine + 
         "<!ELEMENT Day (NewEntry*, Event*)>" + Environment.NewLine + 
         "<!ELEMENT NewEntry (StartTime, EndTime, NameOfTeam, NumberOfPeople, PersonInCharge, Telephone, ConfirmationDate, Guide, Notes)>" + Environment.NewLine + 
-        "<!ELEMENT Event (Notes, RepeatDays, RepeatMonths, RepeatYears)>" + Environment.NewLine + 
+        "<!ELEMENT Event (Notes, RepeatDays, RepeatMonths, RepeatYears)>" + Environment.NewLine +
         "<!ELEMENT StartTime (#PCDATA)>" + Environment.NewLine +
         "<!ELEMENT EndTime (#PCDATA)>" + Environment.NewLine +
         "<!ELEMENT NameOfTeam (#PCDATA)>" + Environment.NewLine +
@@ -142,6 +161,7 @@ public class Strings{
         "<!ELEMENT RepeatMonths (#PCDATA)>" + Environment.NewLine +
         "<!ELEMENT RepeatYears (#PCDATA)>" + Environment.NewLine +
         "<!ATTLIST Day id ID #REQUIRED>" + Environment.NewLine +
+        "<!ATTLIST Day officer CDATA #IMPLIED>" + Environment.NewLine +
         "<!ATTLIST NewEntry id ID #REQUIRED>" + Environment.NewLine +
         "<!ATTLIST Event id ID #REQUIRED>";
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Globalization;
 using UnityEngine;
 
@@ -20,19 +21,20 @@ public class CalendarViewController : ViewController
 
     public GameObject background;
     DataManager data;
+
     protected override void Start()
     {
         base.Start();
         data = FindObjectOfType<DataManager>();
+        printflag = false;
+        gManager.printMode += PrintMode;
 
         data.RequestReadMonth(calendar.AddMonths(DateTime.Now, -1));
         data.RequestReadMonth(DateTime.Now);
         data.RequestReadMonth(calendar.AddMonths(DateTime.Now, 1));
         data.RequestReadMonth(calendar.AddMonths(DateTime.Now, 2));
 
-        RequestTodaysView();
-        printflag = false;
-        gManager.printMode += PrintMode;
+        StartCoroutine(RequestTodaysView());
     }
 
     public void ChangeDay(int i)
@@ -54,20 +56,20 @@ public class CalendarViewController : ViewController
                 break;
         }
         RequestView(lastGivenDate);
-    }
-
-    public void RequestTodaysView()
+    } 
+    
+    IEnumerator RequestTodaysView()
     {
+        yield return 0;
         DateTime currentDate = DateTime.Now;
         if (currentDate.DayOfWeek == System.DayOfWeek.Monday)
             RequestView(State.WEEKLY, currentDate);
         else
-
             RequestView(State.MONTHLY, currentDate);
-
+        yield return 0;
         SearchResult search = data.TryGetEntries(currentDate.Day.ToString() + "." + currentDate.Month.ToString() + "." + currentDate.Year.ToString(), false);
         if (search.value)
-            if(search.info.events.Count > 0)
+            if (search.info.events.Count > 0)
             {
                 ExtrasViewController extras = FindObjectOfType<ExtrasViewController>();
                 extras.RequestAlarmPreview(search.info.events);

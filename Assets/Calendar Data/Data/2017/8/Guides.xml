@@ -13,13 +13,13 @@
 <!ELEMENT Guide (#PCDATA)>
 <!ELEMENT Notes (#PCDATA)>
 <!ELEMENT RepeatDays (#PCDATA)>
-<!ELEMENT RepeatMoths (#PCDATA)>
+<!ELEMENT RepeatMonths (#PCDATA)>
 <!ELEMENT RepeatYears (#PCDATA)>
 <!ATTLIST Day id ID #REQUIRED>
 <!ATTLIST NewEntry id ID #REQUIRED>
 <!ATTLIST Event id ID #REQUIRED>]>
 <Entries>
-  <Day id="_4.8.2017">
+  <Day id="_5.8.2017">
     <Event id="_event:85">
       <Notes>test</Notes>
       <RepeatDays>0</RepeatDays>
@@ -28,21 +28,6 @@
     </Event>
   </Day>
   <Day id="_12.8.2017">
-    <NewEntry id="_guide:105">
-      <StartTime>12:00</StartTime>
-      <EndTime>13:30</EndTime>
-      <NameOfTeam>ansto</NameOfTeam>
-      <NumberOfPeople>80</NumberOfPeople>
-      <PersonInCharge>
-      </PersonInCharge>
-      <Telephone>
-      </Telephone>
-      <ConfirmationDate>
-      </ConfirmationDate>
-      <Guide>tzanis</Guide>
-      <Notes>
-      </Notes>
-    </NewEntry>
     <NewEntry id="_guide:106">
       <StartTime>13:30</StartTime>
       <EndTime>15:00</EndTime>
@@ -165,23 +150,8 @@
       <Notes>
       </Notes>
     </NewEntry>
-    <NewEntry id="_guide:171">
-      <StartTime>10:30</StartTime>
-      <EndTime>12:30</EndTime>
-      <NameOfTeam>thn</NameOfTeam>
-      <NumberOfPeople>40</NumberOfPeople>
-      <PersonInCharge>
-      </PersonInCharge>
-      <Telephone>
-      </Telephone>
-      <ConfirmationDate>
-      </ConfirmationDate>
-      <Guide>sajkd</Guide>
-      <Notes>
-      </Notes>
-    </NewEntry>
   </Day>
-  <Day id="_10.8.2017">
+  <Day id="_10.8.2017" officer="JHGJHG">
     <NewEntry id="_guide:183">
       <StartTime>10:30</StartTime>
       <EndTime>12:00</EndTime>
@@ -194,21 +164,6 @@
       <ConfirmationDate>
       </ConfirmationDate>
       <Guide>ikn</Guide>
-      <Notes>
-      </Notes>
-    </NewEntry>
-    <NewEntry id="_guide:196">
-      <StartTime>10:30</StartTime>
-      <EndTime>12:00</EndTime>
-      <NameOfTeam>egw</NameOfTeam>
-      <NumberOfPeople>45</NumberOfPeople>
-      <PersonInCharge>
-      </PersonInCharge>
-      <Telephone>
-      </Telephone>
-      <ConfirmationDate>
-      </ConfirmationDate>
-      <Guide>esi</Guide>
       <Notes>
       </Notes>
     </NewEntry>

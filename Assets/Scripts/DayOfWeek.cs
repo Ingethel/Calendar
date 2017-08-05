@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class DayOfWeek : IViewManager
 {
 
-    protected override void Awake()
+    public Text AF;
+
+    public override void Refresh()
     {
-        base.Awake();
-        gManager = FindObjectOfType<GameManager>();
+        base.Refresh();
+        AF.text = "";
     }
 
     public override void RequestView()
@@ -23,12 +26,13 @@ public class DayOfWeek : IViewManager
 
     protected override void OnSetView()
     {
+        RequestData();
         if (assignedDate.DayOfWeek == System.DayOfWeek.Monday) { }
         else
         {
-            RequestData();
             DisplayInfo();
         }
+        AF.text = info.officer;
     }
 
     protected override void SetTag()

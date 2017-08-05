@@ -1,14 +1,34 @@
-﻿public class WeekViewManager : IViewManager
+﻿using UnityEngine;
+using UnityEngine.UI;
+
+public class WeekViewManager : IViewManager
 {
     DayOfWeek[] days;
+    public GameObject signPanel;
 
     protected override void Awake()
     {
         base.Awake();
         days = GetComponentsInChildren<DayOfWeek>();
-        if (!gManager)
-            gManager = FindObjectOfType<GameManager>();
+        signPanel.SetActive(false);
+    }
 
+    void Start()
+    {
+        gManager.printMode += PrintMode;
+    }
+
+    public void PrintMode()
+    {
+        signPanel.SetActive(!signPanel.activeSelf);
+        Text[] signs = signPanel.GetComponentsInChildren<Text>();
+        signs[0].text = gManager.language.ChiefOfMuseum;
+        signs[1].text = gManager.language.NavalOfficer;
+        bool flag = signPanel.activeSelf;
+        if (flag)
+            header.text = gManager.language.WeeklyGuideSchedule;
+        else
+            SetHeader();
     }
 
     protected override void SetHeader()

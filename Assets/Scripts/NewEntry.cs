@@ -233,11 +233,15 @@ public class DAY
 {
     public NewEntryList guides;
     public List<Alarm> events;
+    public string officer;
+    public string id;
 
     public DAY()
     {
         guides = new NewEntryList();
         events = new List<Alarm>();
+        officer = "";
+        id = "";
     }
 
     public void AddGuide(NewEntry n)

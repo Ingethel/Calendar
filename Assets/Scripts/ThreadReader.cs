@@ -39,6 +39,7 @@ public class ThreadReader /*: ThreadJob*/ {
 
     private DAY GetDayInfo(XmlElement day) {
         DAY dayInfo = new DAY();
+        dayInfo.id = GetElementID(day);
         {
             XmlNodeList entries = day.GetElementsByTagName(Strings.NewEntry);
             foreach (XmlElement entry in entries)
@@ -47,7 +48,7 @@ public class ThreadReader /*: ThreadJob*/ {
                 XmlNodeList entryInfo = entry.ChildNodes;
                 newGuide = ReadItem(entryInfo, newGuide);
                 newGuide.filler = false;
-                newGuide.SetDate(GetElementID(day));
+                newGuide.SetDate(dayInfo.id);
                 newGuide.id = GetElementID(entry);
                 dayInfo.AddGuide(newGuide);
             }
@@ -59,11 +60,13 @@ public class ThreadReader /*: ThreadJob*/ {
                 Alarm alarm = new Alarm();
                 XmlNodeList entryInfo = entry.ChildNodes;
                 alarm = ReadItem(entryInfo, alarm);
-                alarm.SetDate(GetElementID(day));
+                alarm.SetDate(dayInfo.id);
                 alarm.id = GetElementID(entry);
                 dayInfo.AddEvent(alarm);
             }
         }
+        dayInfo.officer = day.GetAttribute("officer");
+        
         return dayInfo;
     }
 
@@ -121,6 +124,26 @@ public class ThreadReader /*: ThreadJob*/ {
             writer.Close();
         }
         return filePath;
+    }
+    
+    public void Write(string filePath, string id, string officer)
+    {
+        string filename = InitialiseDoc(filePath);
+
+        doc = new XmlDocument();
+
+        doc.Load(filename);
+        XmlElement day = GetElementById(id);
+        if (day == null)
+        {
+            day = doc.CreateElement(Strings.Day);
+            day.SetAttribute("id", "_" + id);
+
+        }
+        day.SetAttribute("officer", officer);
+        XmlElement root = doc.DocumentElement;
+        root.AppendChild(day);
+        doc.Save(filename);
     }
 
     // write element

@@ -10,8 +10,6 @@ public class MonthViewManager : IViewManager {
     {
         base.Awake();
         weeks = GetComponentsInChildren<WeekOfMonth>();
-        if (!gManager)
-            gManager = FindObjectOfType<GameManager>();
     }
 
     protected override void SetHeader() {
