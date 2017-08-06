@@ -10,7 +10,7 @@ public class ViewHeaderHandler : MonoBehaviour {
     void Start()
     {
         gManager = FindObjectOfType<GameManager>();
-        gManager.printMode += PrintMode;
+        gManager.PrintMode += PrintMode;
     }
 
     public void PrintMode()

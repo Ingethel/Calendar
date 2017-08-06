@@ -16,7 +16,6 @@ public class NewEntryPanelHandler : Panel {
     
     void Start() {
         system = EventSystem.current;
-        Refresh();
     }
 
     void Update()
@@ -30,7 +29,7 @@ public class NewEntryPanelHandler : Panel {
         base.Close();
     }
 
-    public override void Refresh()
+    public override void SetLanguage()
     {
         title.text = gManager.language.NewEntry;
         fields[0].label.text = gManager.language.NameOfTeam;

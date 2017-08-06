@@ -3,8 +3,12 @@ using UnityEngine.UI;
 
 public class DayOfWeek : IViewManager
 {
-
     public Text AF;
+
+    private void Start()
+    {
+        gManager.OnLanguageChange += SetLanguage;
+    }
 
     public override void Refresh()
     {
@@ -33,6 +37,11 @@ public class DayOfWeek : IViewManager
             DisplayInfo();
         }
         AF.text = info.officer;
+    }
+
+    public override void SetLanguage()
+    {
+        SetHeader();
     }
 
     protected override void SetTag()

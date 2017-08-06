@@ -5,6 +5,7 @@ public class ViewController : MonoBehaviour {
     
     public GameObject[] viewModes;
     protected IViewManager viewManager;
+    protected Panel panel;
     protected GameObject currentView;
     protected int currentViewIndex;
     
@@ -22,20 +23,31 @@ public class ViewController : MonoBehaviour {
         foreach (GameObject o in viewModes)
             o.SetActive(false);
         gManager = FindObjectOfType<GameManager>();
+        gManager.OnLanguageChange += SetLanguage;
     }
-
+    
     protected void ChangeView(int i)
     {
-            if (currentView != null)
+        if (currentView != null)
+        {
+            panel = currentView.GetComponent<Panel>();
+            if (panel)
+                panel.Close();
+            else
                 currentView.SetActive(false);
-
-            if (i < viewModes.Length)
-            {
-                currentView = viewModes[i];
-                currentView.SetActive(true);
-            }
-            currentViewIndex = i;
+        }
         
+        if (i < viewModes.Length)
+        {
+            currentView = viewModes[i];
+            panel = currentView.GetComponent<Panel>();
+            if (panel)
+                panel.Open();
+            else
+                currentView.SetActive(true);
+        }
+
+        currentViewIndex = i;
     }
 
     public virtual void CloseView(){}
@@ -55,4 +67,8 @@ public class ViewController : MonoBehaviour {
         if (!lockedAccess)
             SetActiveRaycast(!flag);
     }
+
+    public virtual void NotifyIllegal(){}
+
+    public virtual void SetLanguage(){}
 }

@@ -5,12 +5,7 @@ public class SearchPanelHandler : Panel
 {
     public Text input;
     public Text label;
-
-    void Start()
-    {
-        Refresh();
-    }
-
+    
     void Update()
     {
         KeybordInputHandler();
@@ -22,7 +17,7 @@ public class SearchPanelHandler : Panel
         base.Close();
     }
 
-    public override void Refresh()
+    public override void SetLanguage()
     {
         label.text = gManager.language.Search;
     }

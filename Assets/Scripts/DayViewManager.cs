@@ -22,10 +22,16 @@ public class DayViewManager : IViewManager {
         base.Refresh();
         weeklyButton.GetComponentInChildren<Text>().text = gManager.language.WeeklyButton;
         weeklyButton.SetActive(false);
-        headers[0].text = gManager.language.OfficerOnDuty;
+
         headers[1].GetComponentInParent<InputField>().text = "";
+    }
+
+    public override void SetLanguage()
+    {
+        headers[0].text = gManager.language.OfficerOnDuty;
         headers[2].text = gManager.language.Time;
         headers[3].text = gManager.language.Details;
+        SetHeader();
     }
 
     protected override void OnSetView()

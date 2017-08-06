@@ -19,7 +19,7 @@ public class ExtrasViewController : ViewController {
     {
         base.Start();
         calendarController = FindObjectOfType<CalendarViewController>();
-        gManager.printMode += CloseView;
+        gManager.PrintMode += CloseView;
     }
 /*
     void Update()
@@ -45,6 +45,12 @@ public class ExtrasViewController : ViewController {
         RequestView(State.ILLEGAL);
     }
 
+    public override void NotifyIllegal()
+    {
+        currentViewIndex = (int)State.ILLEGAL;
+        calendarController.SetAsBackground(false);
+    }
+
     public void RequestView(State s)
     {
         if(s == State.ILLEGAL)
@@ -63,7 +69,9 @@ public class ExtrasViewController : ViewController {
         ChangeView((int)State.NEWENTRY);
         NewEntryPanelHandler handler = currentView.GetComponent<NewEntryPanelHandler>();
         if (handler)
+        {
             handler.PreviewEntry(n);
+        }
     }
 
     public void RequestAlarmPreview(List<Alarm> alarms)
@@ -71,7 +79,19 @@ public class ExtrasViewController : ViewController {
         ChangeView((int)State.ALARMPREVIEW);
         AlarmPreviewerHandler handler = currentView.GetComponent<AlarmPreviewerHandler>();
         if (handler)
+        {
             handler.SetView(alarms);
+        }
     }
-    
+
+    public override void SetLanguage()
+    {
+        if (currentView != null)
+        {
+            Panel p = currentView.GetComponent<Panel>();
+            if (p)
+                p.SetLanguage();
+        }
+    }
+
 }

@@ -17,7 +17,7 @@
         optionsController = FindObjectOfType<ExtrasViewController>();
         calendarController = FindObjectOfType<CalendarViewController>();
         OpenCompact();
-        gManager.printMode += PrintMode;
+        gManager.PrintMode += PrintMode;
     }
 
     public void AlarmPressed()

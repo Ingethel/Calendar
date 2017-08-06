@@ -13,30 +13,43 @@ public class GameManager : MonoBehaviour {
     [HideInInspector]
     public string DESKTOP;
 
-    public event Action printMode;
+    public event Action PrintMode;
+    public event Action OnLanguageChange;
 
     public Language language;
 
     void Awake()
     {
-        language = new Greek();
-        headerObj.GetComponentInChildren<UnityEngine.UI.Text>().text = language.Title;
         DATA_FOLDER = Application.dataPath + @"/Calendar Data/Data";
         LEGACY_FOLDER = Application.dataPath + @"/Calendar Data/Legacy";
         DESKTOP = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
 
-        int spacing = PlayerPrefs.GetInt("TimeThreshold");
-        if (spacing == 0)
+        int value = PlayerPrefs.GetInt("TimeThreshold");
+        if (value == 0)
             PlayerPrefs.SetInt("TimeThreshold", 45);
     }
-
+    
     void Start()
     {
         Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
         headerObj.SetActive(true);
+        SetLanguage(PlayerPrefs.GetInt("Language"));
     }
 
-	public void ExitApplication()
+    public void SetLanguage(int value)
+    {
+        if (value == 0)
+            language = new English();
+        else if (value == 1)
+            language = new Greek();
+        PlayerPrefs.SetInt("Language", value);
+
+        if (OnLanguageChange != null)
+            OnLanguageChange();
+        headerObj.GetComponentInChildren<UnityEngine.UI.Text>().text = language.Title;
+    }
+
+    public void ExitApplication()
     {
 #if UNITY_EDITOR
         EditorApplication.isPlaying = false;
@@ -59,15 +72,15 @@ public class GameManager : MonoBehaviour {
     IEnumerator PrintProcess()
     {
         bool headerFlag = headerObj.activeSelf;
-        if (printMode != null)
-            printMode();
+        if (PrintMode != null)
+            PrintMode();
         if (headerFlag)
             headerObj.SetActive(false);
         yield return new WaitForSeconds(1);
         Application.CaptureScreenshot(DESKTOP + "/Calendar.png");
         yield return 0;
-        if (printMode != null)
-            printMode();
+        if (PrintMode != null)
+            PrintMode();
         if (headerFlag)
             headerObj.SetActive(true);
         yield return 0;

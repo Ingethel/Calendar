@@ -27,7 +27,7 @@ public class CalendarViewController : ViewController
         base.Start();
         data = FindObjectOfType<DataManager>();
         printflag = false;
-        gManager.printMode += PrintMode;
+        gManager.PrintMode += PrintMode;
 
         data.RequestReadMonth(calendar.AddMonths(DateTime.Now, -1));
         data.RequestReadMonth(DateTime.Now);
@@ -98,14 +98,20 @@ public class CalendarViewController : ViewController
     public void RefreshView()
     {
         SetAsBackground(false);
-        viewManager = currentView.GetComponentInChildren<IViewManager>();
+        viewManager = currentView.GetComponent<IViewManager>();
         viewManager.SetView(lastGivenDate);
+    }
+    
+    public override void SetLanguage()
+    {
+        if(viewManager)
+            viewManager.SetLanguage();
     }
 
     public void DisplayResultView(DAY day, string result)
     {
         ChangeView((int)State.SEARCH);
-        SearchViewManager s_viewManager = currentView.GetComponentInChildren<SearchViewManager>();
+        SearchViewManager s_viewManager = currentView.GetComponent<SearchViewManager>();
         s_viewManager.SetView(day, result);
     }
 

@@ -12,7 +12,7 @@ public class DayOfMonth : IViewManager{
 
     void Start()
     {
-        gManager.printMode += PrintMode;
+        gManager.PrintMode += PrintMode;
     }
 
     public void PrintMode()

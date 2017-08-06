@@ -15,7 +15,7 @@ public class WeekViewManager : IViewManager
 
     void Start()
     {
-        gManager.printMode += PrintMode;
+        gManager.PrintMode += PrintMode;
     }
 
     public void PrintMode()
@@ -30,7 +30,7 @@ public class WeekViewManager : IViewManager
         else
             SetHeader();
     }
-
+    
     protected override void SetHeader()
     {
         header.text = gManager.language.GetMonth(assignedDate.Month - 1) + " " + assignedDate.Year.ToString();
@@ -43,4 +43,8 @@ public class WeekViewManager : IViewManager
             days[i].SetView(assignedDate.AddDays(i));
     }
 
+    public override void SetLanguage()
+    {
+        SetHeader();
+    }
 }

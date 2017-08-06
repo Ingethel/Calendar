@@ -14,7 +14,6 @@ public class AlarmPanelHandler : Panel {
     void Start ()
     {
         system = EventSystem.current;
-        Refresh();
     }
 
     void Update ()
@@ -22,7 +21,7 @@ public class AlarmPanelHandler : Panel {
         KeybordInputHandler();
     }
 
-    public override void Refresh()
+    public override void SetLanguage()
     {
         fields[0].label.text = gManager.language.Date;
         fields[1].label.text = gManager.language.RepeatEvery;

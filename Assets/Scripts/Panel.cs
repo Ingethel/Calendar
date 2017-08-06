@@ -20,27 +20,27 @@ public class Panel : MonoBehaviour
     public virtual void Open()
     {
         gameObject.SetActive(true);
+        SetLanguage();
     }
 
     public virtual void Close()
     {
         if (controller)
-            controller.CloseView();
-        else
-            gameObject.SetActive(false);
+            controller.NotifyIllegal();
+
+        gameObject.SetActive(false);
     }
     
-    public void Kill()
+    public virtual void Kill()
     {
         Destroy(gameObject.transform.parent.gameObject);
     }
 
-    protected virtual void KeybordInputHandler()
-    {
-
-    }
-
+    protected virtual void KeybordInputHandler(){}
+    
     public virtual void Refresh(){}
+
+    public virtual void SetLanguage(){}
 }
 
 [System.Serializable]
