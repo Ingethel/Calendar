@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour {
         Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
         headerObj.SetActive(true);
         SetLanguage(PlayerPrefs.GetInt("Language"));
+        ReportGeneration.CreatePDF(DESKTOP, new string[] { });
     }
 
     public void SetLanguage(int value)
