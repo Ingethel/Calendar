@@ -79,7 +79,7 @@ public class English : Language
         OfficerOnDuty = "Officer on Duty: ";
         NavalOfficer = "   Naval Officer";
         ChiefOfMuseum = "   Chief of Museum Department";
-        WeeklyGuideSchedule = "Weekly Guide Scedule";
+        WeeklyGuideSchedule = "Weekly Guide Scedule Battleship Averof";
         WeeklyButton = "Show Weekly Schedule";
     }
 }
@@ -116,7 +116,7 @@ public class Greek : Language
         OfficerOnDuty = "ΑΦ: ";
         NavalOfficer = "   Ύπαρχος";
         ChiefOfMuseum = "   Τμηματάρχης Μουσείου";
-        WeeklyGuideSchedule = "Εβδομαδιαίο Πρόγραμμα Ξεωαγήσεων";
+        WeeklyGuideSchedule = "Εβδομαδιαίο Πρόγραμμα Ξεωαγήσεων Θ/Κ Αβέρωφ";
         WeeklyButton = "Προβολή Εβδομαδιαίου Προγράμματος";
     }
 }

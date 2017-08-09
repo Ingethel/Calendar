@@ -74,7 +74,7 @@ public class ReportGeneration : MonoBehaviour {
             WidthPercentage = 100,
         };
         table.SetWidths(new float[] { 1, .5f, .5f, .1f, 1, .5f });
-        table.AddCell(AddCell("ΑΝΑΦΟΡΑ ΕΠΙΣΚΕΠΤΩΝ 1ΟΥ ΤΡΙΜΗΝΟΥ 2017", 6, Element.ALIGN_CENTER, boldFont));
+        table.AddCell(AddCell("ΑΝΑΦΟΡΑ ΕΠΙΣΚΕΠΤΩΝ      ΤΡΙΜΗΝΟΥ      ", 6, Element.ALIGN_CENTER, boldFont));
         table.AddCell(AddCell(" ", 6, 1, tableFont));
         table.AddCell(AddCell("ΕΠΙΣΚΕΠΤΕΣ ΜΕ ΜΕΙΩΜΕΝΟ ΕΙΣΙΤΗΡΙΟ", 3, Element.ALIGN_CENTER, boldFont));
         table.AddCell(AddCell("", 1, 17, Element.ALIGN_CENTER, tableFont));
