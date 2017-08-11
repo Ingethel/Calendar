@@ -20,12 +20,6 @@
 <!ATTLIST Event id ID #REQUIRED>]>
 <Entries>
   <Day id="_5.8.2017">
-    <Event id="_event:85">
-      <Notes>test</Notes>
-      <RepeatDays>0</RepeatDays>
-      <RepeatMonths>0</RepeatMonths>
-      <RepeatYears>0</RepeatYears>
-    </Event>
   </Day>
   <Day id="_12.8.2017">
     <NewEntry id="_guide:106">
@@ -103,53 +97,11 @@
       <Notes>
       </Notes>
     </NewEntry>
+    <Event id="_event:146">
+      <Notes>ballz</Notes>
+    </Event>
   </Day>
   <Day id="_8.8.2017">
-    <NewEntry id="_guide:112">
-      <StartTime>10:30</StartTime>
-      <EndTime>12:00</EndTime>
-      <NameOfTeam>jhg</NameOfTeam>
-      <NumberOfPeople>56</NumberOfPeople>
-      <PersonInCharge>
-      </PersonInCharge>
-      <Telephone>
-      </Telephone>
-      <ConfirmationDate>
-      </ConfirmationDate>
-      <Guide>oj</Guide>
-      <Notes>
-      </Notes>
-    </NewEntry>
-    <NewEntry id="_guide:113">
-      <StartTime>09:00</StartTime>
-      <EndTime>10:30</EndTime>
-      <NameOfTeam>tha</NameOfTeam>
-      <NumberOfPeople>10</NumberOfPeople>
-      <PersonInCharge>
-      </PersonInCharge>
-      <Telephone>
-      </Telephone>
-      <ConfirmationDate>
-      </ConfirmationDate>
-      <Guide>oij</Guide>
-      <Notes>
-      </Notes>
-    </NewEntry>
-    <NewEntry id="_guide:152">
-      <StartTime>12:00</StartTime>
-      <EndTime>13:30</EndTime>
-      <NameOfTeam>tyhm</NameOfTeam>
-      <NumberOfPeople>56</NumberOfPeople>
-      <PersonInCharge>
-      </PersonInCharge>
-      <Telephone>
-      </Telephone>
-      <ConfirmationDate>
-      </ConfirmationDate>
-      <Guide>uhjnm</Guide>
-      <Notes>
-      </Notes>
-    </NewEntry>
   </Day>
   <Day id="_10.8.2017" officer="JHGJHG">
     <NewEntry id="_guide:183">
@@ -182,20 +134,15 @@
       <Notes>
       </Notes>
     </NewEntry>
-    <NewEntry id="_guide:239">
-      <StartTime>10:30</StartTime>
-      <EndTime>12:00</EndTime>
-      <NameOfTeam>egw</NameOfTeam>
-      <NumberOfPeople>45</NumberOfPeople>
-      <PersonInCharge>
-      </PersonInCharge>
-      <Telephone>
-      </Telephone>
-      <ConfirmationDate>
-      </ConfirmationDate>
-      <Guide>esi</Guide>
-      <Notes>
-      </Notes>
-    </NewEntry>
+  </Day>
+  <Day id="_24.8.2017">
+    <Event id="_event:148">
+      <Notes>balzy2</Notes>
+    </Event>
+  </Day>
+  <Day id="_15.8.2017">
+    <Event id="_event:149">
+      <Notes>15.8</Notes>
+    </Event>
   </Day>
 </Entries>

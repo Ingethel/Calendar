@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class DayOfWeek : IViewManager
+public class DayOfWeek : IDayView
 {
     public Text AF;
-
-    private void Start()
+    
+    protected override void Start()
     {
+        base.Start();
         gManager.OnLanguageChange += SetLanguage;
     }
 
@@ -15,7 +16,7 @@ public class DayOfWeek : IViewManager
         base.Refresh();
         AF.text = "";
     }
-
+    
     public override void RequestView()
     {
         calendarController.RequestView(CalendarViewController.State.DAILY, assignedDate);
@@ -30,13 +31,23 @@ public class DayOfWeek : IViewManager
 
     protected override void OnSetView()
     {
+        base.OnSetView();
         RequestData();
-        if (assignedDate.DayOfWeek == System.DayOfWeek.Monday) { }
-        else
-        {
-            DisplayInfo();
-        }
+        DisplayInfo();
         AF.text = info.officer;
+    }
+
+    protected override void DisplayInfo()
+    {
+        if (!isMonday)
+        { 
+            base.DisplayInfo();
+        }
+        if (info.events.Count > 0)
+        {
+            AlarmIndicatorPanel.SetActive(true);
+            flagAlrm = true;
+        }
     }
 
     public override void SetLanguage()

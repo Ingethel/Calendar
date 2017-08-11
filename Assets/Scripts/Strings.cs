@@ -29,6 +29,9 @@ public abstract class Language
     public string ChiefOfMuseum { protected set; get; }
     public string WeeklyGuideSchedule { protected set; get; }
     public string WeeklyButton { protected set; get; }
+    public string NewAlarm { protected set; get; }
+    public string AlarmPreview { protected set; get; }
+
 
     protected string[] MonthLabels;
     protected string[] DayLabels;
@@ -81,6 +84,8 @@ public class English : Language
         ChiefOfMuseum = "   Chief of Museum Department";
         WeeklyGuideSchedule = "Weekly Guide Scedule Battleship Averof";
         WeeklyButton = "Show Weekly Schedule";
+        NewAlarm = "Add Alarm";
+        AlarmPreview = "Alarm";
     }
 }
 
@@ -118,6 +123,8 @@ public class Greek : Language
         ChiefOfMuseum = "   Τμηματάρχης Μουσείου";
         WeeklyGuideSchedule = "Εβδομαδιαίο Πρόγραμμα Ξεωαγήσεων Θ/Κ Αβέρωφ";
         WeeklyButton = "Προβολή Εβδομαδιαίου Προγράμματος";
+        NewAlarm = "Εισαγωγή Υπενθύμισης";
+        AlarmPreview = "Υπενθύμιση";
     }
 }
 

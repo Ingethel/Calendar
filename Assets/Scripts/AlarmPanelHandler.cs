@@ -1,85 +1,59 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
+﻿public class AlarmPanelHandler : ItemPanel<Alarm> {
 
-public class AlarmPanelHandler : Panel {
-
-    private EventSystem system;
-    public InputFieldObject[] fields;
-    public DateValidator dateValidator;
-    public Dropdown Modifier;
-    private int RepeatFreqModifier;
-    Alarm alarm;
-
-    void Start ()
-    {
-        system = EventSystem.current;
-    }
-
-    void Update ()
-    {
-        KeybordInputHandler();
-    }
+//    public Dropdown Modifier;
+//    private int RepeatFreqModifier;
 
     public override void SetLanguage()
     {
+        setTitle();
         fields[0].label.text = gManager.language.Date;
         fields[1].label.text = gManager.language.RepeatEvery;
         fields[2].label.text = gManager.language.Notes;
-        Modifier.options[0].text = gManager.language.Days;
+        /*Modifier.options[0].text = gManager.language.Days;
         Modifier.options[1].text = gManager.language.Weeks;
-        Modifier.options[2].text = gManager.language.Months;
+        Modifier.options[2].text = gManager.language.Months;*/
     }
 
-    protected override void KeybordInputHandler()
+    protected override void CalendarRequestOnSave()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Return))
-        {
-            Selectable next = system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnDown();
-            if (next != null)
-            {
-                InputField inputfield = next.GetComponent<InputField>();
-                if (inputfield != null)
-                {
-                    inputfield.OnPointerClick(new PointerEventData(system));
-                }
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Close();
-        }
+        calendarController.RefreshView();
     }
 
-    private bool CheckSaveEligibility()
+    protected override bool CheckSaveEligibility()
     {
         if (dateValidator.Validate() && fields[2].inputs[0].text != "")
             return true;
         return false;
     }
 
-    private void SaveInfo()
+    protected override void DisplayInfo()
     {
-        int temp;
-        if (int.TryParse(fields[1].inputs[0].text, out temp))
-            alarm = new Alarm(fields[0].inputs[0].text + "." + fields[0].inputs[1].text + "." + fields[0].inputs[2].text, fields[2].inputs[0].text, temp, RepeatFreqModifier);
-        else
-            alarm = new Alarm(fields[0].inputs[0].text + "." + fields[0].inputs[1].text + "." + fields[0].inputs[2].text, fields[2].inputs[0].text);
+        setTitle();
+        fields[0].inputs[0].text = item.day != 0 ? item.day.ToString() : "";
+        fields[0].inputs[1].text = item.month != 0 ? item.month.ToString() : "";
+        fields[0].inputs[2].text = item.year != 0 ? item.year.ToString() : "";
+
+        fields[2].inputs[0].text = item.attributes[0];
     }
 
-    public void Save()
+    protected override void SaveInfo()
     {
-        if (CheckSaveEligibility())
-        {
-            SaveInfo();
-            dataManager.RequestWrite(alarm);
-            calendarController.RefreshView();
-            Close();
-        }
+        base.SaveInfo();
+
+        /*      int temp;
+                if (int.TryParse(fields[1].inputs[0].text, out temp))
+                    item = new Alarm(fields[0].inputs[0].text + "." + fields[0].inputs[1].text + "." + fields[0].inputs[2].text, fields[2].inputs[0].text, temp, RepeatFreqModifier);
+                else*/
+        item = new Alarm(fields[0].inputs[0].text + "." + fields[0].inputs[1].text + "." + fields[0].inputs[2].text, fields[2].inputs[0].text);
     }
 
-    public void ChangeModifier(int i)
+    protected override void setTitle()
     {
-        RepeatFreqModifier = i;
+        title.text = flag ? gManager.language.NewAlarm : gManager.language.AlarmPreview;
     }
+    /*
+public void ChangeModifier(int i)
+{
+    RepeatFreqModifier = i;
+}*/
 }

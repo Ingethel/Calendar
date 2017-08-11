@@ -59,15 +59,17 @@ public class ExtrasViewController : ViewController {
             calendarController.SetAsBackground(true);
 
         if (s == State.NEWENTRY)
-            RequestEntryPreview(new NewEntry());
+            RequestEntryPreview(new NewEntry(), s);
+        else if (s == State.ALARM)
+            RequestEntryPreview(new Alarm(), s);
         else
             ChangeView((int)s);
 
     }
 
-    public void RequestEntryPreview(NewEntry n) {
-        ChangeView((int)State.NEWENTRY);
-        NewEntryPanelHandler handler = currentView.GetComponent<NewEntryPanelHandler>();
+    public void RequestEntryPreview<T>(T n, State s) where T : Item{
+        ChangeView((int)s);
+        ItemPanel<T> handler = currentView.GetComponent<ItemPanel<T>>();
         if (handler)
         {
             handler.PreviewEntry(n);

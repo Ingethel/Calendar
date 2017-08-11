@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class DayViewManager : IViewManager {
+public class DayViewManager : IDayView {
 
     public Text[] headers;
     public GameObject weeklyButton;
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         weeklyButton.SetActive(false);
     }
 
@@ -37,7 +38,7 @@ public class DayViewManager : IViewManager {
     protected override void OnSetView()
     {
         RequestData();
-        if (assignedDate.DayOfWeek == System.DayOfWeek.Monday) {
+        if (isMonday) {
             weeklyButton.SetActive(true);
         }
         else
@@ -45,6 +46,11 @@ public class DayViewManager : IViewManager {
             DisplayInfo();
         }
         headers[1].GetComponentInParent<InputField>().text = info.officer;
+        if (info.events.Count > 0)
+        {
+            AlarmIndicatorPanel.SetActive(true);
+            flagAlrm = true;
+        }
     }
 
     protected override void SetTag()

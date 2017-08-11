@@ -93,13 +93,17 @@ public class DataManager : MonoBehaviour
         reader.Write(filename, id, officer);
     }
 
-    public void RequestDelete(NewEntry e)
+    public void RequestDelete<T>(T e) where T : Item
     {
         string filename = TagToPath(e.Date);
         DAY day_info;
         if (entries.TryGetValue(e.Date, out day_info))
         {
-            day_info.guides.Remove(e);
+            if (e.tag == Strings.NewEntry)
+                day_info.guides.Remove(e as NewEntry);
+            else if (e.tag == Strings.Event)
+                day_info.events.Remove(e as Alarm);
+
             entries[e.Date] = day_info;
         }
         reader.DeleteItem(filename, e);

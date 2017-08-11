@@ -156,9 +156,5 @@ public class IViewManager : Panel
         OnSetView();
     }
 
-    public void OnClickAlarmIndicator()
-    {
-        ExtrasViewController extras = FindObjectOfType<ExtrasViewController>();
-        extras.RequestAlarmPreview(info.events);
-    }
+
 }

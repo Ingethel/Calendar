@@ -13,7 +13,7 @@ public class MonthViewManager : IViewManager {
     protected override void Awake()
     {
         base.Awake();
-        weeks = weekParent.GetComponentsInChildren<WeekOfMonth>();
+        weeks = GetComponentsInChildren<WeekOfMonth>();
         int i = 0;
         dayLabels = new Text[7];
         foreach (Transform t in dayLabelsParent.transform)

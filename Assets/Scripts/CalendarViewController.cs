@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class CalendarViewController : ViewController
         WEEKLY,
         DAILY,
         SEARCH,
+        REPORT,
         ILLEGAL
     };
     
@@ -67,13 +69,22 @@ public class CalendarViewController : ViewController
         else
             RequestView(State.MONTHLY, currentDate);
         yield return 0;
-        SearchResult search = data.TryGetEntries(currentDate.Day.ToString() + "." + currentDate.Month.ToString() + "." + currentDate.Year.ToString(), false);
-        if (search.value)
-            if (search.info.events.Count > 0)
-            {
-                ExtrasViewController extras = FindObjectOfType<ExtrasViewController>();
-                extras.RequestAlarmPreview(search.info.events);
-            }
+        List<Alarm> eventsThisWeek = new List<Alarm>();
+        DateTime temp = currentDate;
+        for(int i = 0; i < 6; i++)
+        {
+            temp = temp.AddDays(i);
+            SearchResult search = data.TryGetEntries(temp.Day.ToString() + "." + temp.Month.ToString() + "." + temp.Year.ToString(), false);
+            if (search.value)
+                if (search.info.events.Count > 0)
+                    eventsThisWeek.AddRange(search.info.events);
+        }
+        if (eventsThisWeek.Count > 0)
+        {
+            ExtrasViewController extras = FindObjectOfType<ExtrasViewController>();
+            if(extras)
+                extras.RequestAlarmPreview(eventsThisWeek);
+        }
     }
 
     public void RequestView(State e, DateTime date)
@@ -99,7 +110,8 @@ public class CalendarViewController : ViewController
     {
         SetAsBackground(false);
         viewManager = currentView.GetComponent<IViewManager>();
-        viewManager.SetView(lastGivenDate);
+        if(viewManager)
+            viewManager.SetView(lastGivenDate);
     }
     
     public override void SetLanguage()

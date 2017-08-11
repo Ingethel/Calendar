@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour {
         Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
         headerObj.SetActive(true);
         SetLanguage(PlayerPrefs.GetInt("Language"));
-        ReportGeneration.CreatePDF(DESKTOP, new string[] { });
     }
 
     public void SetLanguage(int value)
@@ -115,6 +114,13 @@ public class GameManager : MonoBehaviour {
                 break;
             case "IMPORT":
                 ThreadReader.BackUp(s[2], DATA_FOLDER);
+                break;
+            case "REPORT":
+                CalendarViewController viewController = FindObjectOfType<CalendarViewController>();
+                if (viewController)
+                {
+                    viewController.RequestView(CalendarViewController.State.REPORT);
+                }
                 break;
             default:
                 break;

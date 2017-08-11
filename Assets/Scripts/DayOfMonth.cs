@@ -1,32 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class DayOfMonth : IViewManager{
+public class DayOfMonth : IDayView{
 
     public GameObject DateIndicatorPanel;
-    public GameObject AlarmIndicatorPanel;
     Selectable selectable;
     public Color filled;
-    bool isMonday;
-    bool flagAlrm;
-
-    void Start()
-    {
-        gManager.PrintMode += PrintMode;
-    }
-
-    public void PrintMode()
-    {
-        if (flagAlrm)
-            AlarmIndicatorPanel.SetActive(!AlarmIndicatorPanel.activeSelf);
-    }
-
+    
     public override void Refresh()
     {
         base.Refresh();
         DateIndicatorPanel.SetActive(false);
-        AlarmIndicatorPanel.SetActive(false);
-        flagAlrm = false;
         if (selectable == null)
             selectable = GetComponent<Selectable>();
         selectable.interactable = false;
@@ -71,7 +55,7 @@ public class DayOfMonth : IViewManager{
     }
 
     protected override void OnSetView() {
-        isMonday = assignedDate.DayOfWeek == System.DayOfWeek.Monday;
+        base.OnSetView();
         if (!isMonday)
         {
             RequestData();
@@ -106,5 +90,5 @@ public class DayOfMonth : IViewManager{
         }
         
     }
-    
+
 }

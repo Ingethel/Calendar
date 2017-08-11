@@ -60,6 +60,7 @@ public class ThreadReader /*: ThreadJob*/ {
                 Alarm alarm = new Alarm();
                 XmlNodeList entryInfo = entry.ChildNodes;
                 alarm = ReadItem(entryInfo, alarm);
+                alarm.filler = false;
                 alarm.SetDate(dayInfo.id);
                 alarm.id = GetElementID(entry);
                 dayInfo.AddEvent(alarm);

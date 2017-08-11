@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class DynamicTextArea : MonoBehaviour {
@@ -23,13 +21,40 @@ public class DynamicTextArea : MonoBehaviour {
         extenderButton.gameObject.SetActive(false);
     }
 
-    public void UpdateText()
+    public string GetText()
     {
+        int i = 0;
+        string compactText = "";
         InputField[] inputs = list.GetComponentsInChildren<InputField>();
         foreach (InputField input in inputs)
         {
-
+            string s;
+            if(TryGetText(input, out s))
+            {
+                i++;
+                compactText += i.ToString() + "  " + s + System.Environment.NewLine;
+            }
         }
+        if(i == 0)
+        {
+            compactText = "Nothing";
+        }
+        Debug.Log(compactText);
+        return compactText;
+    }
+
+    bool TryGetText(InputField input, out string s)
+    {
+        if (input)
+        {
+            if(input.text != null && input.text != "" && input.text != " ")
+            {
+                s = input.text;
+                return true;
+            }
+        }
+        s = "";
+        return false;
     }
 
     public void SpawnItem()

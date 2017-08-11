@@ -11,6 +11,6 @@
     
     public override void OnClick()
     {
-        FindObjectOfType<ExtrasViewController>().RequestEntryPreview(item);
+        FindObjectOfType<ExtrasViewController>().RequestEntryPreview(item, ExtrasViewController.State.NEWENTRY);
     }
 }

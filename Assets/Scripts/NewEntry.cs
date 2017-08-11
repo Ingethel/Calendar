@@ -11,13 +11,9 @@ public class Item
     public string id = "";
     public bool filler = false;
     public string tag;
-}
 
-[Serializable]
-public class NewEntry : Item
-{
     public int day, month, year;
-    
+
     public void SetDate(string s)
     {
         Date = s;
@@ -26,7 +22,12 @@ public class NewEntry : Item
         int.TryParse(temp[1], out month);
         int.TryParse(temp[2], out year);
     }
+}
 
+[Serializable]
+public class NewEntry : Item
+{
+    
     public NewEntry()
     {
         tag = Strings.NewEntry;
@@ -55,29 +56,27 @@ public class NewEntry : Item
     }
 }
 
+[Serializable]
 public class Alarm : Item
 {
-
-    public void SetDate(string s)
-    {
-        Date = s;
-    }
-
+    
     public Alarm()
     {
         tag = Strings.Event;
-        labels = new string[] { Strings.Notes, Strings.R_Days, Strings.R_Months, Strings.R_Years};
-        attributes = new string[] { "", "", "", "" };
+        labels = new string[] { Strings.Notes/*, Strings.R_Days, Strings.R_Months, Strings.R_Years*/};
+        attributes = new string[] { ""/*, "", "", ""*/ };
+        filler = true;
     }
 
     public Alarm(string d, string n)
     {
         tag = Strings.Event;
         SetDate(d);
-        labels = new string[] { Strings.Notes, Strings.R_Days, Strings.R_Months, Strings.R_Years };
-        attributes = new string[] { n, "0", "0", "0" };
+        labels = new string[] { Strings.Notes/*, Strings.R_Days, Strings.R_Months, Strings.R_Years*/ };
+        attributes = new string[] { n/*, "0", "0", "0"*/ };
+        filler = false;
     }
-
+    /*
     public Alarm(string d, string n, int repeat, int by)
     {
         tag = Strings.Event;
@@ -99,7 +98,7 @@ public class Alarm : Item
                 break;
         }
     }
-
+    */
 }
 
 
