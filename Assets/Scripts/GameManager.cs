@@ -171,8 +171,7 @@ public class GameManager : MonoBehaviour {
                     for (int i = 3; i < s.Length; i++)
                         path = path + " " + s[i];
                     ThreadReader.BackUp(path, ALL_DATA, false);
-                    CalendarViewController calendar = FindObjectOfType<CalendarViewController>();
-                    calendar.RefreshView();
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
                 }
                 break;
             case "REPORT":
