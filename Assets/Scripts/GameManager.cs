@@ -165,8 +165,15 @@ public class GameManager : MonoBehaviour {
 
                 break;
             case "IMPORT":
-                if(s.Length > 2)
-                    ThreadReader.BackUp(s[2], DATA_FOLDER, false);
+                if (s.Length > 2)
+                {
+                    string path = s[2];
+                    for (int i = 3; i < s.Length; i++)
+                        path = path + " " + s[i];
+                    ThreadReader.BackUp(path, ALL_DATA, false);
+                    CalendarViewController calendar = FindObjectOfType<CalendarViewController>();
+                    calendar.RefreshView();
+                }
                 break;
             case "REPORT":
                 CalendarViewController viewController = FindObjectOfType<CalendarViewController>();

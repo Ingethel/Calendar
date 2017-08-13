@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class SearchPanelHandler : Panel
 {
-    public Text input;
+    public InputField input;
     public Text label;
     
     void Update()
@@ -26,6 +26,7 @@ public class SearchPanelHandler : Panel
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            Debug.Log(input.text);
             dataManager.SearchTerm(input.text);
             
             Close();
