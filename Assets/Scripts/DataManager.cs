@@ -29,9 +29,7 @@ public class DataManager : MonoBehaviour
     private void Append(Dictionary<string, DAY> temp)
     {
         foreach(string s in temp.Keys)
-        {
             entries[s] = temp[s];
-        }
     }
 
     private string DateToPath(DateTime date) {
@@ -55,13 +53,9 @@ public class DataManager : MonoBehaviour
         string filepath = TagToPath(id);
         DAY list = reader.Read(filepath, id);
         if(list != null)
-        {
             entries[id] = list;
-        }
         else
-        {
             entries[id] = new DAY();
-        }
     }
     
     public void RequestWrite<T>(T e) where T : Item
@@ -168,10 +162,17 @@ public class DataManager : MonoBehaviour
         // general term
         else
         {
-            DAY dayInfo = reader.SearchItem(text);
+            DAY dayInfo = reader.SearchItem(text, manager.DATA_FOLDER);
             CalendarViewController calendarController = FindObjectOfType<CalendarViewController>();
             calendarController.DisplayResultView(dayInfo, text);
         }
+    }
+
+    public void SearchLegacy(string term)
+    {
+        DAY dayInfo = reader.SearchItem(term, manager.LEGACY_FOLDER);
+        CalendarViewController calendarController = FindObjectOfType<CalendarViewController>();
+        calendarController.DisplayResultView(dayInfo, term);
     }
 }
 

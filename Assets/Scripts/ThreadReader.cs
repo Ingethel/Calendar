@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Xml;
 using System.IO;
-using System.Text;
-using UnityEngine;
 using System.Linq;
 
 public class ThreadReader /*: ThreadJob*/ {
@@ -214,12 +211,11 @@ public class ThreadReader /*: ThreadJob*/ {
         }
     }
     
-    public DAY SearchItem(string searchTerm)
+    public DAY SearchItem(string searchTerm, string dataPath)
     {
         searchTerm = searchTerm.ToLower();
         DAY result = new DAY();
-        string dataPath = Application.dataPath + @"/Calendar Data/Data";
-
+        
         string[] years = Directory.GetDirectories(dataPath);
         foreach(string year in years)
         {
@@ -276,11 +272,21 @@ public class ThreadReader /*: ThreadJob*/ {
         return result;
     }
 
-    public static void BackUp(string source, string destination)
+    public static void BackUp(string source, string destination, bool cleanDestination)
     {
+        if (cleanDestination && Directory.Exists(destination))
+            DeleteFolder(destination);
+        if (!Directory.Exists(destination))
+            Directory.CreateDirectory(destination);
         foreach (string dir in Directory.GetDirectories(source, "*", SearchOption.AllDirectories))
             Directory.CreateDirectory(dir.Replace(source, destination));
         foreach (string file in Directory.GetFiles(source, "*.*", SearchOption.AllDirectories).Where(name => !name.EndsWith(".meta")))
             File.Copy(file, file.Replace(source, destination), true);
     }
+
+    public static void DeleteFolder(string path)
+    {
+        Directory.Delete(path, true);
+    }
+    
 }

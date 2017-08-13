@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.IO;
 using UnityEngine;
 #if UNITY_EDITOR 
 using UnityEditor;
@@ -9,7 +10,7 @@ public class GameManager : MonoBehaviour {
 
     public GameObject headerObj;
     [HideInInspector]
-    public string DATA_FOLDER, LEGACY_FOLDER;
+    public string DATA_FOLDER, LEGACY_FOLDER, ALL_DATA;
     [HideInInspector]
     public string DESKTOP;
 
@@ -18,15 +19,24 @@ public class GameManager : MonoBehaviour {
 
     public Language language;
 
+    DateTime currentDate;
+
     void Awake()
     {
+        currentDate = DateTime.Now;
+        ALL_DATA = Application.dataPath + @"/Calendar Data";
         DATA_FOLDER = Application.dataPath + @"/Calendar Data/Data";
         LEGACY_FOLDER = Application.dataPath + @"/Calendar Data/Legacy";
         DESKTOP = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
 
-        int value = PlayerPrefs.GetInt("TimeThreshold");
-        if (value == 0)
+        if (PlayerPrefs.GetString("LastIdReset") == "")
+            ResetIDs();
+
+        if (PlayerPrefs.GetInt("TimeThreshold") == 0)
             PlayerPrefs.SetInt("TimeThreshold", 45);
+
+        if (PlayerPrefs.GetInt("OldDataThreshold") == 0)
+            PlayerPrefs.SetInt("OldDataThreshold", 2);
     }
     
     void Start()
@@ -34,6 +44,29 @@ public class GameManager : MonoBehaviour {
         Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
         headerObj.SetActive(true);
         SetLanguage(PlayerPrefs.GetInt("Language"));
+
+        if(currentDate.Month == 1 && currentDate.Day == 1 && PlayerPrefs.GetString("LastIdReset") != TimeConversions.DateTimeToString(currentDate))
+            ResetIDs();
+
+        if (currentDate.Day == 1)
+        {
+            RearrangeData();
+            ThreadReader.BackUp(ALL_DATA, DESKTOP, true);
+        }
+    }
+
+    void RearrangeData()
+    {
+        foreach (string dir in Directory.GetDirectories(DATA_FOLDER, "*", SearchOption.AllDirectories))
+        {
+            int folderMonth = 0;
+            if (int.TryParse(dir.Substring(dir.LastIndexOf('\\') + 1), out folderMonth))
+                if (currentDate.Month - folderMonth >= PlayerPrefs.GetInt("OldDataThreshold"))
+                {
+                    ThreadReader.BackUp(dir, LEGACY_FOLDER + dir.Substring(DATA_FOLDER.Length), false);
+                    Directory.Delete(dir);
+                }
+        }
     }
 
     public void SetLanguage(int value)
@@ -86,6 +119,13 @@ public class GameManager : MonoBehaviour {
         yield return 0;
     }
 
+    void ResetIDs()
+    {
+        PlayerPrefs.SetInt("Guide", 0);
+        PlayerPrefs.SetInt("Event", 0);
+        PlayerPrefs.SetString("LastIdReset", TimeConversions.DateTimeToString(currentDate));
+    }
+
     public void Command(string[] s)
     {
         switch (s[1])
@@ -94,8 +134,12 @@ public class GameManager : MonoBehaviour {
                 SetFullScreen(s[2] == "ON" ? true : false);
                 break;
             case "CLEAR_LEGACY":
+                if(s.Length > 2 && s[2] == "TRUE")
+                    Directory.Delete(LEGACY_FOLDER, true);
                 break;
             case "SEARCH_LEGACY":
+                if(s.Length > 2)
+                GetComponent<DataManager>().SearchLegacy(s[2]);
                 break;
             case "TIME_THRESHOLD":
                 int spacing = 0;
@@ -106,21 +150,28 @@ public class GameManager : MonoBehaviour {
                 ExitApplication();
                 break;
             case "RESET_IDS":
-                PlayerPrefs.SetInt("Guide", 0);
-                PlayerPrefs.SetInt("Event", 0);
+                ResetIDs();
                 break;
             case "BACKUP":
-                ThreadReader.BackUp(DATA_FOLDER, DESKTOP);
+                if (s.Length == 3)
+                {
+                    if (s[2] == "DATA")
+                        ThreadReader.BackUp(DATA_FOLDER, DESKTOP + "/CalendarDataBackUp/Data", true);
+                    else if (s[2] == "LEGACY")
+                        ThreadReader.BackUp(LEGACY_FOLDER, DESKTOP + "/CalendarDataBackUp/Legacy", true);
+                }
+                else if (s.Length == 2)
+                    ThreadReader.BackUp(ALL_DATA, DESKTOP + "/CalendarDataBackUp", true);
+
                 break;
             case "IMPORT":
-                ThreadReader.BackUp(s[2], DATA_FOLDER);
+                if(s.Length > 2)
+                    ThreadReader.BackUp(s[2], DATA_FOLDER, false);
                 break;
             case "REPORT":
                 CalendarViewController viewController = FindObjectOfType<CalendarViewController>();
                 if (viewController)
-                {
                     viewController.RequestView(CalendarViewController.State.REPORT);
-                }
                 break;
             default:
                 break;
