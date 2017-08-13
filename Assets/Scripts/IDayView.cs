@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class IDayView : IViewManager
 {
@@ -37,4 +35,20 @@ public class IDayView : IViewManager
         extras.RequestAlarmPreview(info.events);
     }
 
+    protected override void SetTag()
+    {
+        _tag = TimeConversions.DateTimeToString(assignedDate);
+    }
+
+    protected override void RequestData()
+    {
+        base.RequestData();
+        if (assignedDate.Month % 3 == 0 && TimeConversions.IntInRange(assignedDate.Day, 20, 30))
+        {
+            Alarm reportAlarm = new Alarm();
+            reportAlarm.attributes[0] = "Prepare Semester Report";
+            reportAlarm.report = true;
+            info.events.Insert(0, reportAlarm);
+        }
+    }
 }

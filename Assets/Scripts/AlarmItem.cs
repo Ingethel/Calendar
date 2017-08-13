@@ -10,4 +10,15 @@
     {
         FindObjectOfType<ExtrasViewController>().RequestEntryPreview(item, ExtrasViewController.State.ALARM);
     }
+
+    public void ReportAlarmOnClick()
+    {
+        CalendarViewController viewController = FindObjectOfType<CalendarViewController>();
+        if (viewController)
+            viewController.RequestView(CalendarViewController.State.REPORT);
+            
+        ExtrasViewController exrasController = FindObjectOfType<ExtrasViewController>();
+        if (exrasController)
+            exrasController.RequestView(ExtrasViewController.State.ILLEGAL); 
+    }
 }

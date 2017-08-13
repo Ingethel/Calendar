@@ -62,12 +62,7 @@ public class DayOfMonth : IDayView{
         }
         DisplayInfo();
     }
-
-    protected override void SetTag()
-    {
-        _tag = assignedDate.Day.ToString() + "." + assignedDate.Month.ToString() + "." + assignedDate.Year.ToString();
-    }
-
+    
     public override void RequestView()
     {
         if (isMonday) {

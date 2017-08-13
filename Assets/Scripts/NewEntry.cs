@@ -59,7 +59,7 @@ public class NewEntry : Item
 [Serializable]
 public class Alarm : Item
 {
-    
+    public bool report = false;
     public Alarm()
     {
         tag = Strings.Event;
@@ -76,6 +76,7 @@ public class Alarm : Item
         attributes = new string[] { n/*, "0", "0", "0"*/ };
         filler = false;
     }
+    
     /*
     public Alarm(string d, string n, int repeat, int by)
     {
@@ -225,6 +226,11 @@ public class TimeConversions
     public static bool IntInRange(int i, int min, int max)
     {
         return i >= min && i <= max;
+    }
+
+    public static string DateTimeToString(DateTime d)
+    {
+        return d.Day.ToString() + "." + d.Month.ToString() + "." + d.Year.ToString();
     }
 }
 

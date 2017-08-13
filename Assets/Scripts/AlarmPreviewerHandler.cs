@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Globalization;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AlarmPreviewerHandler : Panel {
 
-    public GameObject ViewList, ViewItem;
+    public GameObject ViewList, ViewItem, ReportItem;
 
     void Update()
     {
@@ -30,7 +32,11 @@ public class AlarmPreviewerHandler : Panel {
     {
         foreach(Alarm a in list)
         {
-            GameObject o = Instantiate(ViewItem);
+            GameObject o;
+            if (a.report)
+                o = Instantiate(ReportItem);
+            else
+                o = Instantiate(ViewItem);
             o.transform.SetParent(ViewList.transform);
             o.transform.localScale = Vector3.one;
             IItemListView<Alarm> o_view = o.GetComponent<IItemListView<Alarm>>();

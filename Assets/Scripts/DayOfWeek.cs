@@ -54,12 +54,7 @@ public class DayOfWeek : IDayView
     {
         SetHeader();
     }
-
-    protected override void SetTag()
-    {
-        _tag = assignedDate.Day.ToString() + "." + assignedDate.Month.ToString() + "." + assignedDate.Year.ToString();
-    }
-
+    
     protected override void AssignInfo(GameObject o, NewEntry n)
     {
         IItemListView<NewEntry> o_view = o.GetComponent<IItemListView<NewEntry>>();

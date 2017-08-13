@@ -62,12 +62,14 @@ public class CalendarViewController : ViewController
     
     IEnumerator RequestTodaysView()
     {
+        // today's view
         yield return 0;
         DateTime currentDate = DateTime.Now;
         if (currentDate.DayOfWeek == System.DayOfWeek.Monday)
             RequestView(State.WEEKLY, currentDate);
         else
             RequestView(State.MONTHLY, currentDate);
+        // get upcoming events
         yield return 0;
         List<Alarm> eventsThisWeek = new List<Alarm>();
         DateTime temp = currentDate;
@@ -79,6 +81,15 @@ public class CalendarViewController : ViewController
                 if (search.info.events.Count > 0)
                     eventsThisWeek.AddRange(search.info.events);
         }
+        // check for semester report
+        if(currentDate.Month % 3 == 0 && TimeConversions.IntInRange(currentDate.Day, 20, 30))
+        {
+            Alarm reportAlarm = new Alarm();
+            reportAlarm.attributes[0] = "Prepare Semester Report";
+            reportAlarm.report = true;
+            eventsThisWeek.Insert(0, reportAlarm);
+        }
+
         if (eventsThisWeek.Count > 0)
         {
             ExtrasViewController extras = FindObjectOfType<ExtrasViewController>();

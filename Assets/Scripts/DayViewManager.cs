@@ -52,11 +52,6 @@ public class DayViewManager : IDayView {
             flagAlrm = true;
         }
     }
-
-    protected override void SetTag()
-    {
-        _tag = assignedDate.Day.ToString() + "." + assignedDate.Month.ToString() + "." + assignedDate.Year.ToString();
-    }
     
     protected override void AssignInfo(GameObject o, NewEntry n)
     {
