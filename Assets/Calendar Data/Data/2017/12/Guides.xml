@@ -19,7 +19,7 @@
 <!ATTLIST NewEntry id ID #REQUIRED>
 <!ATTLIST Event id ID #REQUIRED>]>
 <Entries>
-  <Day id="_1.8.2017">
+  <Day id="_1.12.2017">
     <NewEntry id="_guide:0">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -72,7 +72,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_2.8.2017">
+  <Day id="_2.12.2017">
     <NewEntry id="_guide:3">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -125,7 +125,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_24.8.2017">
+  <Day id="_24.12.2017">
     <NewEntry id="_guide:6">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -178,7 +178,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_4.8.2017">
+  <Day id="_4.12.2017">
     <NewEntry id="_guide:9">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -231,7 +231,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_5.8.2017">
+  <Day id="_5.12.2017">
     <NewEntry id="_guide:12">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -284,7 +284,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_6.8.2017">
+  <Day id="_6.12.2017">
     <NewEntry id="_guide:15">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -337,7 +337,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_7.8.2017">
+  <Day id="_7.12.2017">
     <NewEntry id="_guide:18">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -390,7 +390,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_8.8.2017">
+  <Day id="_8.12.2017">
     <NewEntry id="_guide:21">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -443,7 +443,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_9.8.2017">
+  <Day id="_9.12.2017">
     <NewEntry id="_guide:24">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -496,7 +496,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_25.8.2017">
+  <Day id="_25.12.2017">
     <NewEntry id="_guide:27">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -549,7 +549,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_11.8.2017">
+  <Day id="_11.12.2017">
     <NewEntry id="_guide:30">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -602,7 +602,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_12.8.2017">
+  <Day id="_12.12.2017">
     <NewEntry id="_guide:33">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -655,7 +655,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_13.8.2017">
+  <Day id="_13.12.2017">
     <NewEntry id="_guide:36">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -708,7 +708,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_14.8.2017">
+  <Day id="_14.12.2017">
     <NewEntry id="_guide:39">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -761,7 +761,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_15.8.2017">
+  <Day id="_15.12.2017">
     <NewEntry id="_guide:42">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -814,7 +814,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_16.8.2017">
+  <Day id="_16.12.2017">
     <NewEntry id="_guide:45">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -867,7 +867,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_26.8.2017">
+  <Day id="_26.12.2017">
     <NewEntry id="_guide:48">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -920,7 +920,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_18.8.2017">
+  <Day id="_18.12.2017">
     <NewEntry id="_guide:51">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -973,7 +973,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_19.8.2017">
+  <Day id="_19.12.2017">
     <NewEntry id="_guide:54">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -1026,7 +1026,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_20.8.2017">
+  <Day id="_20.12.2017">
     <NewEntry id="_guide:57">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -1079,7 +1079,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_21.8.2017">
+  <Day id="_21.12.2017">
     <NewEntry id="_guide:60">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -1132,7 +1132,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_22.8.2017">
+  <Day id="_22.12.2017">
     <NewEntry id="_guide:63">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -1185,7 +1185,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_23.8.2017">
+  <Day id="_23.12.2017">
     <NewEntry id="_guide:66">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -1238,7 +1238,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_27.8.2017">
+  <Day id="_27.12.2017">
     <NewEntry id="_guide:69">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -1291,7 +1291,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_28.8.2017">
+  <Day id="_28.12.2017">
     <NewEntry id="_guide:72">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -1344,7 +1344,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_29.8.2017">
+  <Day id="_29.12.2017">
     <NewEntry id="_guide:75">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>
@@ -1397,7 +1397,7 @@
       <RepeatYears>0</RepeatYears>
     </Event>
   </Day>
-  <Day id="_30.8.2017">
+  <Day id="_30.12.2017">
     <NewEntry id="_guide:78">
       <StartTime>9:00</StartTime>
       <EndTime>10:00</EndTime>

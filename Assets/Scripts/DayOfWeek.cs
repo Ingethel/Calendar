@@ -60,6 +60,5 @@ public class DayOfWeek : IDayView
         IItemListView<NewEntry> o_view = o.GetComponent<IItemListView<NewEntry>>();
         if (o_view != null)
             o_view.Allocate(n);
-    }
-    
+    } 
 }

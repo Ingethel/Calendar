@@ -37,6 +37,7 @@ public class DayViewManager : IDayView {
 
     protected override void OnSetView()
     {
+        base.OnSetView();
         RequestData();
         if (isMonday) {
             weeklyButton.SetActive(true);
@@ -46,11 +47,6 @@ public class DayViewManager : IDayView {
             DisplayInfo();
         }
         headers[1].GetComponentInParent<InputField>().text = info.officer;
-        if (info.events.Count > 0)
-        {
-            AlarmIndicatorPanel.SetActive(true);
-            flagAlrm = true;
-        }
     }
     
     protected override void AssignInfo(GameObject o, NewEntry n)
@@ -64,7 +60,6 @@ public class DayViewManager : IDayView {
     {
         if (info == null || info.guides.Count() == 0)
         {
-            info = new DAY();
             for (int i = 0; i < setTime.Length - 1; i++)
             {
                 AddFiller(setTime[i], setTime[i + 1]);
@@ -76,10 +71,10 @@ public class DayViewManager : IDayView {
             }
         }
         base.DisplayInfo();
-        if(info.events.Count > 0)
+        if (info.events.Count > 0)
         {
-            ExtrasViewController extras = FindObjectOfType<ExtrasViewController>();
-            extras.RequestAlarmPreview(info.events);
+            AlarmIndicatorPanel.SetActive(true);
+            flagAlrm = true;
         }
     }
 

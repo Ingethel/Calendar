@@ -72,17 +72,18 @@ public class CalendarViewController : ViewController
         // get upcoming events
         yield return 0;
         List<Alarm> eventsThisWeek = new List<Alarm>();
-        DateTime temp = currentDate;
+        DateTime temp;
         for(int i = 0; i < 6; i++)
         {
-            temp = temp.AddDays(i);
+            temp = currentDate.AddDays(i);
             SearchResult search = data.TryGetEntries(temp.Day.ToString() + "." + temp.Month.ToString() + "." + temp.Year.ToString(), false);
             if (search.value)
                 if (search.info.events.Count > 0)
                     eventsThisWeek.AddRange(search.info.events);
         }
+        yield return 0;
         // check for semester report
-        if(currentDate.Month % 3 == 0 && TimeConversions.IntInRange(currentDate.Day, 20, 30))
+        if (currentDate.Month % 3 == 0 && TimeConversions.IntInRange(currentDate.Day, 20, 30))
         {
             Alarm reportAlarm = new Alarm();
             reportAlarm.attributes[0] = "Prepare Semester Report";

@@ -155,6 +155,4 @@ public class IViewManager : Panel
         SetHeader();
         OnSetView();
     }
-
-
 }
