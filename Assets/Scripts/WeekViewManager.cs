@@ -47,4 +47,10 @@ public class WeekViewManager : IViewManager
     {
         SetHeader();
     }
+
+    public override void RequestLegacyData()
+    {
+        for (int i = 0; i < 7; i++)
+            days[i].RequestLegacyData();
+    }
 }

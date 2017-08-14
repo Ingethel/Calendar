@@ -5,6 +5,7 @@ public class IDayView : IViewManager
     public GameObject AlarmIndicatorPanel;
     protected bool isMonday;
     protected bool flagAlrm;
+    protected bool searchLegacy;
 
     protected virtual void Start ()
     {
@@ -42,13 +43,32 @@ public class IDayView : IViewManager
 
     protected override void RequestData()
     {
-        base.RequestData();
-        if (assignedDate.Month % 3 == 0 && TimeConversions.IntInRange(assignedDate.Day, 20, 30))
+        SearchResult res;
+
+        if (searchLegacy)
+            res = dataManager.TryGetEntries(_tag, true);
+        else
+            res = dataManager.TryGetEntries(_tag, assignedDate.Month > gManager.currentDate.Month + 2);
+
+        if (res.value)
+        {
+            info = res.info;
+        }
+
+        if (assignedDate.Month >= gManager.currentDate.Month && 
+            assignedDate.Month % 3 == 0 && 
+            TimeConversions.IntInRange(assignedDate.Day, 20, 30))
         {
             Alarm reportAlarm = new Alarm();
-            reportAlarm.attributes[0] = "Prepare Semester Report";
+            reportAlarm.attributes[0] = gManager.language.ReportAlarmNotes;
             reportAlarm.report = true;
             info.events.Insert(0, reportAlarm);
         }
+    }
+
+    public override void RequestLegacyData()
+    {
+        searchLegacy = true;
+        SetView(assignedDate);
     }
 }

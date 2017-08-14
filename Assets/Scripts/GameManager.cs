@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
 
     public Language language;
 
-    DateTime currentDate;
+    public DateTime currentDate;
 
     void Awake()
     {

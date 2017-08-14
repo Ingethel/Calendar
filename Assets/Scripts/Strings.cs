@@ -31,7 +31,7 @@ public abstract class Language
     public string WeeklyButton { protected set; get; }
     public string NewAlarm { protected set; get; }
     public string AlarmPreview { protected set; get; }
-
+    public string ReportAlarmNotes { protected set; get; }
 
     protected string[] MonthLabels;
     protected string[] DayLabels;
@@ -86,6 +86,7 @@ public class English : Language
         WeeklyButton = "Show Weekly Schedule";
         NewAlarm = "Add Alarm";
         AlarmPreview = "Alarm";
+        ReportAlarmNotes = "Prepare Semester Report";
     }
 }
 
@@ -125,6 +126,7 @@ public class Greek : Language
         WeeklyButton = "Προβολή Εβδομαδιαίου Προγράμματος";
         NewAlarm = "Εισαγωγή Υπενθύμισης";
         AlarmPreview = "Υπενθύμιση";
+        ReportAlarmNotes = "Υπενθύμιση Τριμηνιαίας Αναφοράς";
     }
 }
 

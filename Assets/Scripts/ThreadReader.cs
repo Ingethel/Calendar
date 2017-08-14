@@ -3,7 +3,12 @@ using System.Xml;
 using System.IO;
 using System.Linq;
 
-public class ThreadReader /*: ThreadJob*/ {
+public class ThreadReader
+/* : ThreadJob  
+ * After dummy testing, there is no need for threading. 
+ * Can visit it again later after testing on the field.
+ */
+{
 
     XmlDocument doc;
     
@@ -35,8 +40,10 @@ public class ThreadReader /*: ThreadJob*/ {
     }
 
     private DAY GetDayInfo(XmlElement day) {
-        DAY dayInfo = new DAY();
-        dayInfo.id = GetElementID(day);
+        DAY dayInfo = new DAY()
+        {
+            id = GetElementID(day)
+        };
         {
             XmlNodeList entries = day.GetElementsByTagName(Strings.NewEntry);
             foreach (XmlElement entry in entries)
@@ -87,7 +94,6 @@ public class ThreadReader /*: ThreadJob*/ {
         Dictionary<string, DAY> monthInfo = new Dictionary<string, DAY>();
         if (File.Exists(filename))
         {
-            
             doc = new XmlDocument();
             doc.Load(filename);
             XmlNodeList entries = doc.GetElementsByTagName(Strings.Day);

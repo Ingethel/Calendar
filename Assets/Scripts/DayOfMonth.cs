@@ -34,17 +34,13 @@ public class DayOfMonth : IDayView{
         {
             Image img = GetComponent<Image>();
             if (img)
-            {
                 img.color = new Color(Color.red.r, Color.red.g, Color.red.b, 0.5f);
-            }
         }
         else
         {
             if (info.guides.Count() < setTime.Length - 1)
-            {
                 FillEmptySlots();
-            }
-
+            
             base.DisplayInfo();
         }
         if (info.events.Count > 0)
@@ -57,21 +53,16 @@ public class DayOfMonth : IDayView{
     protected override void OnSetView() {
         base.OnSetView();
         if (!isMonday)
-        {
             RequestData();
-        }
         DisplayInfo();
     }
     
     public override void RequestView()
     {
-        if (isMonday) {
+        if (isMonday)
             calendarController.RequestView(CalendarViewController.State.WEEKLY, assignedDate);
-        }
         else
-        {
             calendarController.RequestView(CalendarViewController.State.DAILY, assignedDate);
-        }
     }
     
     protected override void AssignInfo(GameObject o, NewEntry n)
@@ -79,11 +70,13 @@ public class DayOfMonth : IDayView{
         if (!n.filler) {
             Image img = o.GetComponent<Image>();
             if (img)
-            {
                 img.color = filled;
-            }
         }
-        
     }
 
+    public override void RequestLegacyData()
+    {
+        if(DateIndicatorPanel.activeSelf)
+            base.RequestLegacyData();
+    }
 }

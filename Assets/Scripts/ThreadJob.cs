@@ -1,9 +1,9 @@
-﻿using System.Threading;
+﻿/* ---  Unused ---
+using System.Threading;
 using System.Collections;
 
 public class ThreadJob
 {
-
     private bool _KeepAwake = false;
     private bool _IsDone = false;
     private object _Handle_IsDone = new object();
@@ -90,8 +90,7 @@ public class ThreadJob
         else
             DoJob();
     }
-
-
+    
     public void Redo()
     {
         if (KeepAwake)
@@ -116,3 +115,4 @@ public class ThreadJob
         }
     }
 }
+*/
