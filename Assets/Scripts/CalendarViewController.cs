@@ -24,12 +24,16 @@ public class CalendarViewController : ViewController
     public GameObject background;
     DataManager data;
 
+    public GameObject LegacyButton;
+    
     protected override void Start()
     {
         base.Start();
+        LegacyButton.SetActive(false);
         data = FindObjectOfType<DataManager>();
         printflag = false;
         gManager.PrintMode += PrintMode;
+        gManager.OnLanguageChange += SetLanguage;
 
         data.RequestReadMonth(calendar.AddMonths(DateTime.Now, -1));
         data.RequestReadMonth(DateTime.Now);
@@ -83,7 +87,7 @@ public class CalendarViewController : ViewController
         }
         yield return 0;
         // check for semester report
-        if (currentDate.Month % 3 == 0 && TimeConversions.IntInRange(currentDate.Day, 20, 30))
+        if (currentDate.Month % 3 == 0 && TimeConversions.IntInRange(currentDate.Day, 20, 31))
         {
             Alarm reportAlarm = new Alarm();
             reportAlarm.attributes[0] = "Prepare Semester Report";
@@ -122,12 +126,13 @@ public class CalendarViewController : ViewController
     {
         SetAsBackground(false);
         viewManager = currentView.GetComponent<IViewManager>();
-        if(viewManager)
+        if (viewManager)
             viewManager.SetView(lastGivenDate);
     }
     
     public override void SetLanguage()
     {
+        LegacyButton.GetComponentInChildren<UnityEngine.UI.Text>().text = gManager.language.LegacyButton;
         if(viewManager)
             viewManager.SetLanguage();
     }
@@ -148,4 +153,10 @@ public class CalendarViewController : ViewController
         lockedAccess = printflag;
     }
 
+    public void OnClickLegacyRequest()
+    {
+        if (viewManager)
+            viewManager.RequestLegacyData();
+        LegacyButton.SetActive(false);
+    }
 }

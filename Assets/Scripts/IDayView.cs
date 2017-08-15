@@ -55,9 +55,14 @@ public class IDayView : IViewManager
             info = res.info;
         }
 
+        if (!isMonday && assignedDate.Month < gManager.currentDate.Month - 1 && info.guides.Count() == 0)
+            if(!calendarController.LegacyButton.activeSelf)
+                calendarController.LegacyButton.SetActive(true);
+        
+
         if (assignedDate.Month >= gManager.currentDate.Month && 
             assignedDate.Month % 3 == 0 && 
-            TimeConversions.IntInRange(assignedDate.Day, 20, 30))
+            TimeConversions.IntInRange(assignedDate.Day, 20, 31))
         {
             Alarm reportAlarm = new Alarm();
             reportAlarm.attributes[0] = gManager.language.ReportAlarmNotes;
@@ -70,5 +75,6 @@ public class IDayView : IViewManager
     {
         searchLegacy = true;
         SetView(assignedDate);
+        searchLegacy = false;
     }
 }
