@@ -84,7 +84,7 @@ public class ItemPanel<T> : Panel where T : Item {
 
     protected virtual void DisplayInfo() { }
 
-    public void EditEntry()
+    public virtual void EditEntry()
     {
         foreach (InputFieldObject fieldObj in fields)
             foreach (InputField field in fieldObj.inputs)

@@ -1,5 +1,20 @@
-﻿public class NewEntryPanelHandler : ItemPanel<NewEntry> {
+﻿using UnityEngine;
 
+public class NewEntryPanelHandler : ItemPanel<NewEntry> {
+
+    public GameObject slotExpander;
+    public GameObject slotPanel;
+    public GameObject slotItem;
+    public Sprite expand, collapse;
+
+    public override void PreviewEntry(NewEntry n)
+    {
+        base.PreviewEntry(n);
+
+        slotExpander.SetActive(false);
+        slotPanel.SetActive(false);
+    }
+    
     public override void SetLanguage()
     {
         setTitle();
@@ -65,5 +80,54 @@
     protected override void setTitle()
     {
         title.text = flag ? gManager.language.NewEntry : gManager.language.NewEntryPreview;
+    }
+
+    public void RequestAvalableSlots()
+    {
+        int year, month, day;
+        int.TryParse(fields[4].inputs[0].text, out day);
+        int.TryParse(fields[4].inputs[1].text, out month);
+        int.TryParse(fields[4].inputs[2].text, out year);
+
+        string[] slots = calendarController.RequestEmptySlots(new System.DateTime(year, month, day));
+        if (slots != null && slots.Length > 0)
+        {
+            foreach(string s in slots)
+            {
+                GameObject o = Instantiate(slotItem);
+                o.transform.SetParent(slotPanel.transform);
+                o.transform.localScale = Vector3.one;
+                o.GetComponentInChildren<UnityEngine.UI.Text>().text = s;
+            }
+            //slotPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, (slots.Length - 1) / 2 * -15, 0);
+        }
+        else
+        {
+            slotPanel.SetActive(false);
+            slotExpander.SetActive(false);
+        }
+    }
+
+    public void OnClickSlotExpander()
+    {
+        slotPanel.SetActive(!slotPanel.activeSelf);
+        if (slotPanel.activeSelf)
+        {
+            slotExpander.GetComponent<UnityEngine.UI.Image>().sprite = collapse;
+            RequestAvalableSlots();
+        }
+        else
+        {
+            slotExpander.GetComponent<UnityEngine.UI.Image>().sprite = expand;
+        }
+    }
+    
+    public void OnDateReady()
+    {
+        if (dateValidator.Validate())
+        {
+            slotExpander.SetActive(true);
+            slotExpander.GetComponent<UnityEngine.UI.Image>().sprite = expand;
+        }
     }
 }

@@ -159,4 +159,18 @@ public class CalendarViewController : ViewController
             viewManager.RequestLegacyData();
         LegacyButton.SetActive(false);
     }
+
+    public string[] RequestEmptySlots(DateTime date)
+    {
+        SetAsBackground(true);
+        ChangeView((int)State.DAILY);
+        DayViewManager d_viewManager = currentView.GetComponent<DayViewManager>();
+        if (d_viewManager)
+        {
+            d_viewManager.SetView(date);
+            return d_viewManager.GetEmptySlots();
+        }
+        else
+            return new string[] { };
+    }
 }

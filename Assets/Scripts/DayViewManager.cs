@@ -1,10 +1,25 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class DayViewManager : IDayView {
 
     public Text[] headers;
     public GameObject weeklyButton;
+
+    public string[] GetEmptySlots() {
+        List<string>  EmptySlots = new List<string>();
+        for (int i = 0; i < info.guides.Count(); i++)
+        {
+            NewEntry n;
+            info.guides.TryGet(i, out n);
+            if (n.filler)
+            {
+                EmptySlots.Add(n.attributes[0] + " - " + n.attributes[1]);
+            }
+        }
+        return EmptySlots.ToArray();
+    }
 
     protected override void Start()
     {

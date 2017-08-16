@@ -17,6 +17,8 @@ public class IViewManager : Panel
     protected string[] weekendTimes = { "10:30", "12:00", "13:30", "15:00", "17:30" };
     protected string[] setTime;
 
+    protected int fillerSlots;
+
     protected override void Awake()
     {
         base.Awake();
@@ -41,7 +43,6 @@ public class IViewManager : Panel
     protected virtual void DisplayInfo()
     {
         if(info != null)
-        {
             for (int i = 0; i < info.guides.Count(); i++)
             {
                 NewEntry n;
@@ -52,7 +53,6 @@ public class IViewManager : Panel
                     AssignInfo(o, n);
                 }
             }
-        }
     }
 
     protected void AddFiller(string startTime, string endTime)
@@ -63,6 +63,8 @@ public class IViewManager : Panel
         n.SetDate(assignedDate.Day.ToString() + "." + assignedDate.Month.ToString() + "." + assignedDate.Year.ToString());
         n.filler = true;
         info.AddGuide(n);
+        fillerSlots++;
+        Debug.Log(fillerSlots);
     }
 
     protected void FillEmptySlots()
@@ -129,6 +131,7 @@ public class IViewManager : Panel
 
     public override void Refresh()
     {
+        fillerSlots = 0;
         info = new DAY();
         if(guideList != null)
             foreach (Transform t in guideList.transform)
