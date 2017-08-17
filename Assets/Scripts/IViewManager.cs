@@ -63,8 +63,6 @@ public class IViewManager : Panel
         n.SetDate(assignedDate.Day.ToString() + "." + assignedDate.Month.ToString() + "." + assignedDate.Year.ToString());
         n.filler = true;
         info.AddGuide(n);
-        fillerSlots++;
-        Debug.Log(fillerSlots);
     }
 
     protected void FillEmptySlots()

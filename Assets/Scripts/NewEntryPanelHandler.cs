@@ -4,9 +4,8 @@ public class NewEntryPanelHandler : ItemPanel<NewEntry> {
 
     public GameObject slotExpander;
     public GameObject slotPanel;
-    public GameObject slotItem;
     public Sprite expand, collapse;
-
+    
     public override void PreviewEntry(NewEntry n)
     {
         base.PreviewEntry(n);
@@ -81,53 +80,46 @@ public class NewEntryPanelHandler : ItemPanel<NewEntry> {
     {
         title.text = flag ? gManager.language.NewEntry : gManager.language.NewEntryPreview;
     }
-
-    public void RequestAvalableSlots()
-    {
-        int year, month, day;
-        int.TryParse(fields[4].inputs[0].text, out day);
-        int.TryParse(fields[4].inputs[1].text, out month);
-        int.TryParse(fields[4].inputs[2].text, out year);
-
-        string[] slots = calendarController.RequestEmptySlots(new System.DateTime(year, month, day));
-        if (slots != null && slots.Length > 0)
-        {
-            foreach(string s in slots)
-            {
-                GameObject o = Instantiate(slotItem);
-                o.transform.SetParent(slotPanel.transform);
-                o.transform.localScale = Vector3.one;
-                o.GetComponentInChildren<UnityEngine.UI.Text>().text = s;
-            }
-            //slotPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, (slots.Length - 1) / 2 * -15, 0);
-        }
-        else
-        {
-            slotPanel.SetActive(false);
-            slotExpander.SetActive(false);
-        }
-    }
-
+    
     public void OnClickSlotExpander()
     {
-        slotPanel.SetActive(!slotPanel.activeSelf);
-        if (slotPanel.activeSelf)
+        if (!slotPanel.activeSelf)
         {
+            slotPanel.SetActive(true);
+            slotPanel.GetComponent<AvailableSlotsPanelHandler>().SetData(new string[] { fields[4].inputs[0].text, fields[4].inputs[1].text, fields[4].inputs[2].text });
             slotExpander.GetComponent<UnityEngine.UI.Image>().sprite = collapse;
-            RequestAvalableSlots();
         }
         else
         {
             slotExpander.GetComponent<UnityEngine.UI.Image>().sprite = expand;
+            slotPanel.GetComponent<AvailableSlotsPanelHandler>().Clear();
+            slotPanel.SetActive(false);
         }
     }
     
     public void OnDateReady()
     {
+        if (slotPanel.activeSelf)
+        {
+            slotPanel.GetComponent<AvailableSlotsPanelHandler>().Clear();
+            slotPanel.SetActive(false);
+        }
+
         if (dateValidator.Validate())
         {
             slotExpander.SetActive(true);
             slotExpander.GetComponent<UnityEngine.UI.Image>().sprite = expand;
         }
+    }
+
+    public void SetTime(string time)
+    {
+        string[] times = time.Split('-');
+        string[] start = times[0].Split(':');
+        string[] end = times[1].Split(':');
+        fields[5].inputs[0].text = start[0];
+        fields[5].inputs[1].text = start[1];
+        fields[5].inputs[2].text = end[0];
+        fields[5].inputs[3].text = end[1];
     }
 }

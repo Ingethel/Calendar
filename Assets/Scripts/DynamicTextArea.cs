@@ -70,6 +70,7 @@ public class DynamicTextArea : MonoBehaviour {
         GameObject o = Instantiate(listItem) as GameObject;
         o.transform.SetParent(list.transform);
         o.transform.localScale = Vector3.one;
+        panelRectTr.localPosition += new Vector3(0, 30, 0);
     }
 
     public void Collapse()

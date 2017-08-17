@@ -15,7 +15,7 @@ public class DayViewManager : IDayView {
             info.guides.TryGet(i, out n);
             if (n.filler)
             {
-                EmptySlots.Add(n.attributes[0] + " - " + n.attributes[1]);
+                EmptySlots.Add(n.attributes[0] + "-" + n.attributes[1]);
             }
         }
         return EmptySlots.ToArray();
