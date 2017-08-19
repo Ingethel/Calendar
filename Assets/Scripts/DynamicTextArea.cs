@@ -13,10 +13,14 @@ public class DynamicTextArea : MonoBehaviour {
     RectTransform panelRectTr;
 
     string compactText;
+    Vector3 initialPos;
+    Vector3 expandedPos;
 
     private void Start()
     {
         panelRectTr = list.GetComponent<RectTransform>();
+        initialPos = panelRectTr.localPosition;
+        expandedPos = initialPos;
         panelSizeFitter = list.GetComponent<ContentSizeFitter>();
         extenderButton.gameObject.SetActive(false);
     }
@@ -70,22 +74,23 @@ public class DynamicTextArea : MonoBehaviour {
         GameObject o = Instantiate(listItem) as GameObject;
         o.transform.SetParent(list.transform);
         o.transform.localScale = Vector3.one;
-        panelRectTr.localPosition += new Vector3(0, 30, 0);
+        expandedPos += new Vector3(0, 15, 0);
+        panelRectTr.localPosition = expandedPos;
     }
 
     public void Collapse()
     {
         if (panelSizeFitter.enabled)
         {
-            Vector3 temp = panelRectTr.localPosition;
             panelSizeFitter.enabled = false;
             panelRectTr.sizeDelta = new Vector2(0, 30);
-            panelRectTr.localPosition = temp;
+            panelRectTr.localPosition = initialPos;
             extenderButton.image.sprite = extend;
         }
         else
         {
             panelSizeFitter.enabled = true;
+            panelRectTr.localPosition = expandedPos;
             extenderButton.image.sprite = collapse;
         }
     }

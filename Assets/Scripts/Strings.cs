@@ -33,6 +33,10 @@ public abstract class Language
     public string AlarmPreview { protected set; get; }
     public string ReportAlarmNotes { protected set; get; }
     public string LegacyButton { protected set; get; }
+    public string AddGuide { protected set; get; }
+    public string AddAlarm { protected set; get; }
+    public string Print { protected set; get; }
+    public string ViewBy { protected set; get; }
 
     protected string[] MonthLabels;
     protected string[] DayLabels;
@@ -89,6 +93,10 @@ public class English : Language
         AlarmPreview = "Alarm";
         ReportAlarmNotes = "Prepare Semester Report";
         LegacyButton = "Associated data is marked as old." + Environment.NewLine + Environment.NewLine + "Click to retrieve it.";
+        AddGuide = "Add Guide";
+        AddAlarm = "Add Alarm";
+        Print = "Print";
+        ViewBy = "View By";
     }
 }
 
@@ -130,6 +138,10 @@ public class Greek : Language
         AlarmPreview = "Υπενθύμιση";
         ReportAlarmNotes = "Υπενθύμιση Τριμηνιαίας Αναφοράς";
         LegacyButton = "Τα σχετικά δεδομένα είναι παλαιά." + Environment.NewLine + Environment.NewLine + "Πατήστε για να ανακτηθούν.";
+        AddGuide = "Εισ. Ξεν.";
+        AddAlarm = "Εισ. Ειδ.";
+        Print = "Εκτύπωση";
+        ViewBy = "Προβολή";
     }
 }
 
