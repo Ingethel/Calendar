@@ -37,6 +37,7 @@ public abstract class Language
     public string AddAlarm { protected set; get; }
     public string Print { protected set; get; }
     public string ViewBy { protected set; get; }
+    public string Help { protected set; get; }
 
     protected string[] MonthLabels;
     protected string[] DayLabels;
@@ -97,9 +98,9 @@ public class English : Language
         AddAlarm = "Add Alarm";
         Print = "Print";
         ViewBy = "View By";
+        Help = "For any enquiry please refer to the manual or contact me at stavros_anast@hotmail.com";
     }
 }
-
 
 public class Greek : Language
 {
@@ -142,6 +143,7 @@ public class Greek : Language
         AddAlarm = "Εισ. Ειδ.";
         Print = "Εκτύπωση";
         ViewBy = "Προβολή";
+        Help = "Εάν εχετε ερωτήσεις παρακαλώ αναφερθείτε στο εγχειρίδιο, αλλιώς επικοινωνήστε στο stavros_anast@hotmail.com";
     }
 }
 

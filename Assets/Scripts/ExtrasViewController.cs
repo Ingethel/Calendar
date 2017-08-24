@@ -10,6 +10,7 @@ public class ExtrasViewController : ViewController {
         ALARM,
         VIEWMODE,
         ALARMPREVIEW,
+        HELP,
         ILLEGAL
     };
 

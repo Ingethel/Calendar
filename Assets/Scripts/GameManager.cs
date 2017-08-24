@@ -179,6 +179,11 @@ public class GameManager : MonoBehaviour {
                 if (viewController)
                     viewController.RequestView(CalendarViewController.State.REPORT);
                 break;
+            case "HELP":
+                ExtrasViewController extras = FindObjectOfType<ExtrasViewController>();
+                if (extras)
+                    extras.RequestView(ExtrasViewController.State.HELP);
+                break;
             default:
                 break;
         }
