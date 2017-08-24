@@ -70,7 +70,7 @@ public class ThreadReader
                 dayInfo.AddEvent(alarm);
             }
         }
-        dayInfo.officer = day.GetAttribute("officer");
+        dayInfo.SetOfficer(day.GetAttribute("officer"));
         
         return dayInfo;
     }
@@ -239,6 +239,17 @@ public class ThreadReader
                             XmlNodeList days = doc.GetElementsByTagName(Strings.Day);
                             foreach(XmlElement day in days)
                             {
+                                string officer = day.GetAttribute("officer");
+                                if (officer.Contains(searchTerm))
+                                {
+                                    NewEntry n = new NewEntry();
+                                    n.SetDate(GetElementID(day));
+                                    n.attributes[8] = officer;
+                                    n.attributes[0] = "00:00";
+                                    n.attributes[1] = "00:00";
+                                    result.AddGuide(n);
+                                }
+
                                 XmlNodeList teams = day.GetElementsByTagName(Strings.NameOfTeam);
                                 XmlNodeList guides = day.GetElementsByTagName(Strings.Guide);
 

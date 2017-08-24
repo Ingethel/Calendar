@@ -43,10 +43,10 @@ public class IViewManager : Panel
     protected virtual void DisplayInfo()
     {
         if(info != null)
-            for (int i = 0; i < info.guides.Count(); i++)
+            for (int i = 0; i < info.Guides.Count(); i++)
             {
                 NewEntry n;
-                if (info.guides.TryGet(i, out n)){
+                if (info.Guides.TryGet(i, out n)){
                     GameObject o = Instantiate(guideView);
                     o.transform.SetParent(guideList.transform);
                     o.transform.localScale = Vector3.one;
@@ -68,12 +68,12 @@ public class IViewManager : Panel
     protected void FillEmptySlots()
     {
         int threshold = PlayerPrefs.GetInt("TimeThreshold");
-        for (int i = 0; i < info.guides.Count(); i++)
+        for (int i = 0; i < info.Guides.Count(); i++)
         {
             NewEntry n1, n2;
-            if (info.guides.TryGet(i, out n1))
+            if (info.Guides.TryGet(i, out n1))
             {
-                if (info.guides.TryGet(i + 1, out n2))
+                if (info.Guides.TryGet(i + 1, out n2))
                 {
                     if (n2.GetStartTime() - n1.GetEndTime() > threshold) {
                         AddFiller(n1.attributes[1], n2.attributes[0]);
@@ -100,7 +100,7 @@ public class IViewManager : Panel
                         }
                     }
                 }
-                if (i == info.guides.Count() - 1)
+                if (i == info.Guides.Count() - 1)
                 {
                     for (int k = setTime.Length - 2; k > 0; k--)
                     {

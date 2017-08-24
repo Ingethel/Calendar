@@ -82,8 +82,8 @@ public class CalendarViewController : ViewController
             temp = currentDate.AddDays(i);
             SearchResult search = data.TryGetEntries(temp.Day.ToString() + "." + temp.Month.ToString() + "." + temp.Year.ToString(), false);
             if (search.value)
-                if (search.info.events.Count > 0)
-                    eventsThisWeek.AddRange(search.info.events);
+                if (search.info.Events.Count > 0)
+                    eventsThisWeek.AddRange(search.info.Events);
         }
         yield return 0;
         // check for semester report

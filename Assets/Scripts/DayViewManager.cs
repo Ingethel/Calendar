@@ -9,10 +9,10 @@ public class DayViewManager : IDayView {
 
     public string[] GetEmptySlots() {
         List<string>  EmptySlots = new List<string>();
-        for (int i = 0; i < info.guides.Count(); i++)
+        for (int i = 0; i < info.Guides.Count(); i++)
         {
             NewEntry n;
-            info.guides.TryGet(i, out n);
+            info.Guides.TryGet(i, out n);
             if (n.filler)
             {
                 EmptySlots.Add(n.attributes[0] + "-" + n.attributes[1]);
@@ -61,7 +61,7 @@ public class DayViewManager : IDayView {
         {
             DisplayInfo();
         }
-        headers[1].GetComponentInParent<InputField>().text = info.officer;
+        headers[1].GetComponentInParent<InputField>().text = info.GetOfficer();
     }
     
     protected override void AssignInfo(GameObject o, NewEntry n)
@@ -73,7 +73,7 @@ public class DayViewManager : IDayView {
 
     protected override void DisplayInfo()
     {
-        if (info == null || info.guides.Count() == 0)
+        if (info == null || info.Guides.Count() == 0)
         {
             for (int i = 0; i < setTime.Length - 1; i++)
             {
@@ -81,25 +81,25 @@ public class DayViewManager : IDayView {
             }
         }
         else {
-            if (info.guides.Count() < setTime.Length - 1) {
+            if (info.Guides.Count() < setTime.Length - 1) {
                 FillEmptySlots();
             }
         }
         base.DisplayInfo();
-        if (info.events.Count > 0)
+        if (info.Events.Count > 0)
         {
             AlarmIndicatorPanel.SetActive(true);
             flagAlrm = true;
         }
     }
 
-    public void SetOfficerOnDuty()
-    {
-        dataManager.RequestWriteOfficer(_tag, headers[1].text);
-    }
-
     public void OnClickWeeklyButton()
     {
         calendarController.RequestView(CalendarViewController.State.WEEKLY, assignedDate);
+    }
+
+    public void SetOfficerOnDuty()
+    {
+        dataManager.RequestWriteOfficer(_tag, headers[1].text);
     }
 }

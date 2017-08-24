@@ -89,7 +89,7 @@ public class DataManager : MonoBehaviour
         if (!entries.TryGetValue(id, out day_info))
             day_info = new DAY();
 
-        day_info.officer = officer;
+        day_info.SetOfficer(officer);
 
         entries[id] = day_info;
         reader.Write(filename, id, officer);
@@ -102,9 +102,9 @@ public class DataManager : MonoBehaviour
         if (entries.TryGetValue(e.Date, out day_info))
         {
             if (e.tag == Strings.NewEntry)
-                day_info.guides.Remove(e as NewEntry);
+                day_info.Guides.Remove(e as NewEntry);
             else if (e.tag == Strings.Event)
-                day_info.events.Remove(e as Alarm);
+                day_info.Events.Remove(e as Alarm);
 
             entries[e.Date] = day_info;
         }

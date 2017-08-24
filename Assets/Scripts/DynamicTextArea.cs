@@ -41,7 +41,7 @@ public class DynamicTextArea : MonoBehaviour {
         }
         if(i == 0)
         {
-            compactText = "Nothing";
+            compactText = "Ουδεμία για αυτό το τρίμηνο";
         }
         Debug.Log(compactText);
         return compactText;

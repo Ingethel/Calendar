@@ -50,7 +50,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:2">
+    <NewEntry id="_guide:2">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -103,7 +103,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:5">
+    <NewEntry id="_guide:5">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -156,7 +156,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:8">
+    <NewEntry id="_guide:8">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -172,59 +172,6 @@
       </Notes>
     </NewEntry>
     <Event id="_event:2">
-      <Notes>test</Notes>
-      <RepeatDays>0</RepeatDays>
-      <RepeatMonths>0</RepeatMonths>
-      <RepeatYears>0</RepeatYears>
-    </Event>
-  </Day>
-  <Day id="_4.8.2017">
-    <NewEntry id="_guide:9">
-      <StartTime>9:00</StartTime>
-      <EndTime>10:00</EndTime>
-      <NameOfTeam>anasto</NameOfTeam>
-      <NumberOfPeople>50</NumberOfPeople>
-      <PersonInCharge>
-      </PersonInCharge>
-      <Telephone>
-      </Telephone>
-      <ConfirmationDate>
-      </ConfirmationDate>
-      <Guide>tzanis</Guide>
-      <Notes>
-      </Notes>
-    </NewEntry>
-    <NewEntry id="_guide:10">
-      <StartTime>10:00</StartTime>
-      <EndTime>11:00</EndTime>
-      <NameOfTeam>anasto</NameOfTeam>
-      <NumberOfPeople>50</NumberOfPeople>
-      <PersonInCharge>
-      </PersonInCharge>
-      <Telephone>
-      </Telephone>
-      <ConfirmationDate>
-      </ConfirmationDate>
-      <Guide>tzanis</Guide>
-      <Notes>
-      </Notes>
-    </NewEntry>
-	<NewEntry id="_guide:11">
-      <StartTime>11:00</StartTime>
-      <EndTime>12:00</EndTime>
-      <NameOfTeam>anasto</NameOfTeam>
-      <NumberOfPeople>50</NumberOfPeople>
-      <PersonInCharge>
-      </PersonInCharge>
-      <Telephone>
-      </Telephone>
-      <ConfirmationDate>
-      </ConfirmationDate>
-      <Guide>tzanis</Guide>
-      <Notes>
-      </Notes>
-    </NewEntry>
-    <Event id="_event:3">
       <Notes>test</Notes>
       <RepeatDays>0</RepeatDays>
       <RepeatMonths>0</RepeatMonths>
@@ -262,7 +209,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:14">
+    <NewEntry id="_guide:14">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -315,7 +262,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:17">
+    <NewEntry id="_guide:17">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -368,7 +315,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:20">
+    <NewEntry id="_guide:20">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -421,7 +368,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:23">
+    <NewEntry id="_guide:23">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -474,7 +421,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:26">
+    <NewEntry id="_guide:26">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -527,7 +474,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:29">
+    <NewEntry id="_guide:29">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -580,7 +527,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:32">
+    <NewEntry id="_guide:32">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -633,7 +580,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:35">
+    <NewEntry id="_guide:35">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -686,7 +633,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:38">
+    <NewEntry id="_guide:38">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -739,7 +686,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:41">
+    <NewEntry id="_guide:41">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -792,7 +739,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:44">
+    <NewEntry id="_guide:44">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -845,7 +792,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:47">
+    <NewEntry id="_guide:47">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -898,7 +845,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:50">
+    <NewEntry id="_guide:50">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -951,7 +898,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:53">
+    <NewEntry id="_guide:53">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -1004,7 +951,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:56">
+    <NewEntry id="_guide:56">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -1057,7 +1004,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:59">
+    <NewEntry id="_guide:59">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -1110,7 +1057,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:62">
+    <NewEntry id="_guide:62">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -1163,7 +1110,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:65">
+    <NewEntry id="_guide:65">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -1216,7 +1163,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:68">
+    <NewEntry id="_guide:68">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -1269,7 +1216,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:71">
+    <NewEntry id="_guide:71">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -1322,7 +1269,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:74">
+    <NewEntry id="_guide:74">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -1375,7 +1322,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:77">
+    <NewEntry id="_guide:77">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -1428,7 +1375,7 @@
       <Notes>
       </Notes>
     </NewEntry>
-	<NewEntry id="_guide:80">
+    <NewEntry id="_guide:80">
       <StartTime>11:00</StartTime>
       <EndTime>12:00</EndTime>
       <NameOfTeam>anasto</NameOfTeam>
@@ -1444,6 +1391,60 @@
       </Notes>
     </NewEntry>
     <Event id="_event:25">
+      <Notes>test</Notes>
+      <RepeatDays>0</RepeatDays>
+      <RepeatMonths>0</RepeatMonths>
+      <RepeatYears>0</RepeatYears>
+    </Event>
+  </Day>
+  <Day id="_3.8.2017" officer="myself" />
+  <Day id="_4.8.2017" officer="myself">
+    <NewEntry id="_guide:9">
+      <StartTime>9:00</StartTime>
+      <EndTime>10:00</EndTime>
+      <NameOfTeam>anasto</NameOfTeam>
+      <NumberOfPeople>50</NumberOfPeople>
+      <PersonInCharge>
+      </PersonInCharge>
+      <Telephone>
+      </Telephone>
+      <ConfirmationDate>
+      </ConfirmationDate>
+      <Guide>tzanis</Guide>
+      <Notes>
+      </Notes>
+    </NewEntry>
+    <NewEntry id="_guide:10">
+      <StartTime>10:00</StartTime>
+      <EndTime>11:00</EndTime>
+      <NameOfTeam>anasto</NameOfTeam>
+      <NumberOfPeople>50</NumberOfPeople>
+      <PersonInCharge>
+      </PersonInCharge>
+      <Telephone>
+      </Telephone>
+      <ConfirmationDate>
+      </ConfirmationDate>
+      <Guide>tzanis</Guide>
+      <Notes>
+      </Notes>
+    </NewEntry>
+    <NewEntry id="_guide:11">
+      <StartTime>11:00</StartTime>
+      <EndTime>12:00</EndTime>
+      <NameOfTeam>anasto</NameOfTeam>
+      <NumberOfPeople>50</NumberOfPeople>
+      <PersonInCharge>
+      </PersonInCharge>
+      <Telephone>
+      </Telephone>
+      <ConfirmationDate>
+      </ConfirmationDate>
+      <Guide>tzanis</Guide>
+      <Notes>
+      </Notes>
+    </NewEntry>
+    <Event id="_event:3">
       <Notes>test</Notes>
       <RepeatDays>0</RepeatDays>
       <RepeatMonths>0</RepeatMonths>

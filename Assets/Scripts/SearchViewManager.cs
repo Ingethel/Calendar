@@ -18,10 +18,10 @@ public class SearchViewManager : IViewManager {
 
     public void SetView(DAY day, string result)
     {
+        Refresh();
         searchTerm = result;
         info = day;
         SetHeader();
         DisplayInfo();
     }
-
 }

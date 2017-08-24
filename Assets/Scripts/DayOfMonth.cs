@@ -38,12 +38,12 @@ public class DayOfMonth : IDayView{
         }
         else
         {
-            if (info.guides.Count() < setTime.Length - 1)
+            if (info.Guides.Count() < setTime.Length - 1)
                 FillEmptySlots();
             
             base.DisplayInfo();
         }
-        if (info.events.Count > 0)
+        if (info.Events.Count > 0)
         {
             AlarmIndicatorPanel.SetActive(true);
             flagAlrm = true;

@@ -236,16 +236,16 @@ public class TimeConversions
 
 public class DAY
 {
-    public NewEntryList guides;
-    public List<Alarm> events;
-    public string officer;
+    public NewEntryList Guides { private set; get; }
+    public List<Alarm> Events { private set; get; }
+    public List<string> Officers { private set; get; }
     public string id;
 
     public DAY()
     {
-        guides = new NewEntryList();
-        events = new List<Alarm>();
-        officer = "";
+        Guides = new NewEntryList();
+        Events = new List<Alarm>();
+        Officers = new List<String>() { "" };
         id = "";
     }
 
@@ -254,13 +254,28 @@ public class DAY
         if(!n.filler)
             if(n.id == "")
                 n.id = "_guide:" + DataManager.GenerateNewIdFor("Guide");
-        guides.Add(n);
+        Guides.Add(n);
     }
 
     public void AddEvent(Alarm n)
     {
         if(n.id == "")
             n.id = "_event:" + DataManager.GenerateNewIdFor("Event");
-        events.Add(n);
+        Events.Add(n);
+    }
+
+    public void SetOfficer(string s)
+    {
+        Officers[0] = s;
+    }
+
+    public string GetOfficer()
+    {
+        return Officers[0];
+    }
+
+    public void AddOfficer(string s)
+    {
+        Officers.Add(s);
     }
 }

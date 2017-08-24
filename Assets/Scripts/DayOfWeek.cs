@@ -34,7 +34,7 @@ public class DayOfWeek : IDayView
         base.OnSetView();
         RequestData();
         DisplayInfo();
-        AF.text = info.officer;
+        AF.text = info.GetOfficer();
     }
 
     protected override void DisplayInfo()
@@ -43,7 +43,7 @@ public class DayOfWeek : IDayView
         { 
             base.DisplayInfo();
         }
-        if (info.events.Count > 0)
+        if (info.Events.Count > 0)
         {
             AlarmIndicatorPanel.SetActive(true);
             flagAlrm = true;

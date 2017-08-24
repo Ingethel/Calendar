@@ -33,7 +33,7 @@ public class IDayView : IViewManager
     public void OnClickAlarmIndicator()
     {
         ExtrasViewController extras = FindObjectOfType<ExtrasViewController>();
-        extras.RequestAlarmPreview(info.events);
+        extras.RequestAlarmPreview(info.Events);
     }
 
     protected override void SetTag()
@@ -55,7 +55,7 @@ public class IDayView : IViewManager
             info = res.info;
         }
 
-        if (!isMonday && assignedDate.Month < gManager.currentDate.Month - 1 && info.guides.Count() == 0)
+        if (!isMonday && assignedDate.Month < gManager.currentDate.Month - 1 && info.Guides.Count() == 0)
             if(!calendarController.LegacyButton.activeSelf)
                 calendarController.LegacyButton.SetActive(true);
         
@@ -67,7 +67,7 @@ public class IDayView : IViewManager
             Alarm reportAlarm = new Alarm();
             reportAlarm.attributes[0] = gManager.language.ReportAlarmNotes;
             reportAlarm.report = true;
-            info.events.Insert(0, reportAlarm);
+            info.Events.Insert(0, reportAlarm);
         }
     }
 
