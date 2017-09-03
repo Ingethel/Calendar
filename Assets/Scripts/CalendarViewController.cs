@@ -16,7 +16,9 @@ public class CalendarViewController : ViewController
         REPORT,
         ILLEGAL
     };
-    
+
+    public GameObject header;
+
     public static Calendar calendar = CultureInfo.InvariantCulture.Calendar;
     private DateTime lastGivenDate;
     bool printflag;
@@ -118,6 +120,13 @@ public class CalendarViewController : ViewController
 
     public void RequestView(State e)
     {
+        if (e == State.REPORT)
+            header.SetActive(false);
+        else
+        {
+            if (!header.activeSelf)
+                header.SetActive(true);
+        }
         ChangeView((int)e);
         RefreshView();
     }

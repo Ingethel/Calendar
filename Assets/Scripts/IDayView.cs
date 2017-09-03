@@ -23,6 +23,7 @@ public class IDayView : IViewManager
         base.Refresh();
         AlarmIndicatorPanel.SetActive(false);
         flagAlrm = false;
+        calendarController.LegacyButton.SetActive(false);
     }
 
     protected override void OnSetView()

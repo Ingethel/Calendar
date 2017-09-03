@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour {
         if (PlayerPrefs.GetInt("OldDataThreshold") == 0)
             PlayerPrefs.SetInt("OldDataThreshold", 2);
     }
-    
+
     void Start()
     {
         Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
@@ -48,10 +48,11 @@ public class GameManager : MonoBehaviour {
         if(currentDate.Month == 1 && currentDate.Day == 1 && PlayerPrefs.GetString("LastIdReset") != TimeConversions.DateTimeToString(currentDate))
             ResetIDs();
 
-        if (currentDate.Day == 1)
+        if (PlayerPrefs.GetInt("LastBackUp") != currentDate.Month)
         {
+            PlayerPrefs.SetInt("LastBackUp", currentDate.Month);
             RearrangeData();
-            ThreadReader.BackUp(ALL_DATA, DESKTOP, true);
+            ThreadReader.BackUp(ALL_DATA, DESKTOP + "/CalendarDataBackUp", true);
         }
     }
 
@@ -64,7 +65,7 @@ public class GameManager : MonoBehaviour {
                 if (currentDate.Month - folderMonth >= PlayerPrefs.GetInt("OldDataThreshold"))
                 {
                     ThreadReader.BackUp(dir, LEGACY_FOLDER + dir.Substring(DATA_FOLDER.Length), false);
-                    Directory.Delete(dir);
+                    Directory.Delete(dir, true);
                 }
         }
     }
@@ -145,6 +146,11 @@ public class GameManager : MonoBehaviour {
                 int spacing = 0;
                 if(int.TryParse(s[2], out spacing))
                     PlayerPrefs.SetInt("TimeThreshold", spacing);
+                break;
+            case "LEGACY_THRESHOLD":
+                int time = 0;
+                if (int.TryParse(s[2], out time))
+                    PlayerPrefs.SetInt("OldDataThreshold", time);
                 break;
             case "EXIT":
                 ExitApplication();
