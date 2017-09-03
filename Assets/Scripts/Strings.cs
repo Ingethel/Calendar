@@ -133,7 +133,7 @@ public class Greek : Language
         OfficerOnDuty = "ΑΦ: ";
         NavalOfficer = "   Ύπαρχος";
         ChiefOfMuseum = "   Τμηματάρχης Μουσείου";
-        WeeklyGuideSchedule = "Εβδομαδιαίο Πρόγραμμα Ξεωαγήσεων Θ/Κ Αβέρωφ";
+        WeeklyGuideSchedule = "Εβδομαδιαίο Πρόγραμμα Ξεναγήσεων Θ/Κ Αβέρωφ";
         WeeklyButton = "Προβολή Εβδομαδιαίου Προγράμματος";
         NewAlarm = "Εισαγωγή Υπενθύμισης";
         AlarmPreview = "Υπενθύμιση";
