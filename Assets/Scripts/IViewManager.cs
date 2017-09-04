@@ -14,7 +14,7 @@ public class IViewManager : Panel
     public GameObject guideList;
 
     protected string[] weekTimes = { "09:00", "10:30", "12:00", "13:30" };
-    protected string[] weekendTimes = { "10:30", "12:00", "13:30", "15:00", "17:30" };
+    protected string[] weekendTimes = { "10:30", "12:00", "13:30", "15:00", "16:30" };
     protected string[] setTime;
 
     protected int fillerSlots;
