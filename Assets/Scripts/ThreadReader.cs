@@ -240,7 +240,7 @@ public class ThreadReader
                             foreach(XmlElement day in days)
                             {
                                 string officer = day.GetAttribute("officer");
-                                if (officer.Contains(searchTerm))
+                                if (officer.ToLower().Contains(searchTerm))
                                 {
                                     NewEntry n = new NewEntry();
                                     n.SetDate(GetElementID(day));

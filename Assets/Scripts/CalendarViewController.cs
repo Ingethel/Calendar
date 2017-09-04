@@ -96,7 +96,7 @@ public class CalendarViewController : ViewController
             reportAlarm.report = true;
             eventsThisWeek.Insert(0, reportAlarm);
         }
-
+        // display events
         if (eventsThisWeek.Count > 0)
         {
             ExtrasViewController extras = FindObjectOfType<ExtrasViewController>();

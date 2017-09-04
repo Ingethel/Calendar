@@ -138,6 +138,7 @@ public class NewEntryList
 
     public NewEntryList()
     {
+        list = new List<NewEntry>();
         comparer = new NewEntryComparer();
     }
 
