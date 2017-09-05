@@ -36,18 +36,39 @@ public class CalendarViewController : ViewController
         printflag = false;
         gManager.PrintMode += PrintMode;
         gManager.OnLanguageChange += SetLanguage;
-
+        gManager.OnReloadScene += SaveState;
+        
         data.RequestReadMonth(calendar.AddMonths(DateTime.Now, -1));
         data.RequestReadMonth(DateTime.Now);
         data.RequestReadMonth(calendar.AddMonths(DateTime.Now, 1));
         data.RequestReadMonth(calendar.AddMonths(DateTime.Now, 2));
 
-        StartCoroutine(RequestTodaysView());
+        if (PlayerPrefs.GetInt("LoadLastState") == 0)
+            StartCoroutine(RequestTodaysView());
+        else
+        {
+            Invoke("LoadSavedState", 0.5f);
+        }
+    }
+
+    public void SaveState()
+    {
+        PlayerPrefs.SetInt("SavedState", currentViewIndex);
+        PlayerPrefs.SetInt("SavedYear", lastGivenDate.Year);
+        PlayerPrefs.SetInt("SavedMonth", lastGivenDate.Month);
+        PlayerPrefs.SetInt("SavedDay", lastGivenDate.Day);
+    }
+
+    public void LoadSavedState()
+    {
+        lastGivenDate = new DateTime(PlayerPrefs.GetInt("SavedYear"), PlayerPrefs.GetInt("SavedMonth"), PlayerPrefs.GetInt("SavedDay"));
+        data.RequestReadMonth(lastGivenDate);
+        RequestView((State)PlayerPrefs.GetInt("SavedState"));
+        PlayerPrefs.SetInt("LoadLastState", 0);
     }
 
     public void ChangeDay(int i)
     {
-
         switch (currentViewIndex)
         {
             case (int)State.DAILY:

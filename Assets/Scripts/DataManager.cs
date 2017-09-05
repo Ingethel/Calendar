@@ -34,9 +34,9 @@ public class DataManager : MonoBehaviour
 
     private string DateToPath(DateTime date) {
         if(date.Year * 12 + date.Month >= DateTime.Now.Year * 12 + DateTime.Now.Month-1)
-            return Application.dataPath + @"/../Calendar Data/Data/" + date.Year.ToString() + "/" + date.Month.ToString() + "/" + Strings.file;
+            return Application.dataPath + @"/Calendar Data/Data/" + date.Year.ToString() + "/" + date.Month.ToString() + "/" + Strings.file;
         else
-            return Application.dataPath + @"/../Calendar Data/Legacy/" + date.Year.ToString() + "/" + date.Month.ToString() + "/" + Strings.file;
+            return Application.dataPath + @"/Calendar Data/Legacy/" + date.Year.ToString() + "/" + date.Month.ToString() + "/" + Strings.file;
     }
 
     private string TagToPath(string s)
@@ -46,9 +46,9 @@ public class DataManager : MonoBehaviour
         int.TryParse(split[1], out month);
         int.TryParse(split[2], out year);
         if (year * 12 + month >= DateTime.Now.Year * 12 + DateTime.Now.Month - 1)
-            return Application.dataPath + @"/../Calendar Data/Data/" + split[2] + "/" + split[1] + "/" + Strings.file;
+            return Application.dataPath + @"/Calendar Data/Data/" + split[2] + "/" + split[1] + "/" + Strings.file;
         else
-            return Application.dataPath + @"/../Calendar Data/Legacy/" + split[2] + "/" + split[1] + "/" + Strings.file;
+            return Application.dataPath + @"/Calendar Data/Legacy/" + split[2] + "/" + split[1] + "/" + Strings.file;
     }
 
     public void RequestReadMonth(DateTime date)
@@ -81,6 +81,7 @@ public class DataManager : MonoBehaviour
 
         entries[e.Date] = day_info;
         reader.Write(filename, e);
+        manager.ReloadScene();
     }
 
     public void RequestWriteOfficer(string id, string officer)
@@ -94,6 +95,7 @@ public class DataManager : MonoBehaviour
 
         entries[id] = day_info;
         reader.Write(filename, id, officer);
+        manager.ReloadScene();
     }
 
     public void RequestDelete<T>(T e) where T : Item
@@ -110,6 +112,7 @@ public class DataManager : MonoBehaviour
             entries[e.Date] = day_info;
         }
         reader.DeleteItem(filename, e);
+        manager.ReloadScene();
     }
 
     public SearchResult TryGetEntries(string id, bool searchFileData)

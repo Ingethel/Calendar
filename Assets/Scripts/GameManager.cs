@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
 
     public event Action PrintMode;
     public event Action OnLanguageChange;
+    public event Action OnReloadScene;
 
     public Language language;
 
@@ -24,9 +25,9 @@ public class GameManager : MonoBehaviour {
     void Awake()
     {
         currentDate = DateTime.Now;
-        ALL_DATA = Application.dataPath + @"/../Calendar Data";
-        DATA_FOLDER = Application.dataPath + @"/../Calendar Data/Data";
-        LEGACY_FOLDER = Application.dataPath + @"/../Calendar Data/Legacy";
+        ALL_DATA = Application.dataPath + @"/Calendar Data";
+        DATA_FOLDER = Application.dataPath + @"/Calendar Data/Data";
+        LEGACY_FOLDER = Application.dataPath + @"/Calendar Data/Legacy";
         DESKTOP = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
 
         if (PlayerPrefs.GetString("LastIdReset") == "")
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour {
 
         if (PlayerPrefs.GetInt("OldDataThreshold") == 0)
             PlayerPrefs.SetInt("OldDataThreshold", 2);
+        
     }
 
     void Start()
@@ -54,6 +56,15 @@ public class GameManager : MonoBehaviour {
             RearrangeData();
             ThreadReader.BackUp(ALL_DATA, DESKTOP + "/CalendarDataBackUp", true);
         }
+    }
+
+    public void ReloadScene()
+    {
+        if (OnReloadScene != null)
+            OnReloadScene();
+
+        PlayerPrefs.SetInt("LoadLastState", 1);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
     void RearrangeData()
@@ -187,7 +198,7 @@ public class GameManager : MonoBehaviour {
                     for (int i = 3; i < s.Length; i++)
                         path = path + " " + s[i];
                     ThreadReader.BackUp(path, ALL_DATA, false);
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+                    ReloadScene();
                 }
                 break;
             case "REPORT":
