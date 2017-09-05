@@ -254,14 +254,14 @@ public class DAY
     {
         if(!n.filler)
             if(n.id == "")
-                n.id = "_guide:" + DataManager.GenerateNewIdFor("Guide");
+                n.id = "_guide." + DataManager.GenerateNewIdFor("Guide");
         Guides.Add(n);
     }
 
     public void AddEvent(Alarm n)
     {
         if(n.id == "")
-            n.id = "_event:" + DataManager.GenerateNewIdFor("Event");
+            n.id = "_event." + DataManager.GenerateNewIdFor("Event");
         Events.Add(n);
     }
 

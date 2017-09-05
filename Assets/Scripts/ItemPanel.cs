@@ -78,7 +78,7 @@ public class ItemPanel<T> : Panel where T : Item {
 
     protected virtual void SaveInfo()
     {
-        if (item != null && !item.filler)
+        if (!item.filler)
             dataManager.RequestDelete(item);
     }
 

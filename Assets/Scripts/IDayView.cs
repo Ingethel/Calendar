@@ -56,11 +56,12 @@ public class IDayView : IViewManager
             info = res.info;
         }
 
-        if (!isMonday && assignedDate.Month < gManager.currentDate.Month - 1 && info.Guides.Count() == 0)
+        if (!isMonday 
+            && (assignedDate.Year <= gManager.currentDate.Year && assignedDate.Month < gManager.currentDate.Month - 1)
+            && info.Guides.Count() == 0)
             if(!calendarController.LegacyButton.activeSelf)
                 calendarController.LegacyButton.SetActive(true);
         
-
         if (assignedDate.Month >= gManager.currentDate.Month && 
             assignedDate.Month % 3 == 0 && 
             TimeConversions.IntInRange(assignedDate.Day, 20, 31))

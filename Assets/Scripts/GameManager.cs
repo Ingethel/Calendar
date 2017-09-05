@@ -24,9 +24,9 @@ public class GameManager : MonoBehaviour {
     void Awake()
     {
         currentDate = DateTime.Now;
-        ALL_DATA = Application.dataPath + @"/Calendar Data";
-        DATA_FOLDER = Application.dataPath + @"/Calendar Data/Data";
-        LEGACY_FOLDER = Application.dataPath + @"/Calendar Data/Legacy";
+        ALL_DATA = Application.dataPath + @"/../Calendar Data";
+        DATA_FOLDER = Application.dataPath + @"/../Calendar Data/Data";
+        LEGACY_FOLDER = Application.dataPath + @"/../Calendar Data/Legacy";
         DESKTOP = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
 
         if (PlayerPrefs.GetString("LastIdReset") == "")

@@ -34,9 +34,9 @@ public class DataManager : MonoBehaviour
 
     private string DateToPath(DateTime date) {
         if(date.Month >= DateTime.Now.Month-1)
-            return Application.dataPath + @"/Calendar Data/Data/" + date.Year.ToString() + "/" + date.Month.ToString() + "/" + Strings.file;
+            return Application.dataPath + @"/../Calendar Data/Data/" + date.Year.ToString() + "/" + date.Month.ToString() + "/" + Strings.file;
         else
-            return Application.dataPath + @"/Calendar Data/Legacy/" + date.Year.ToString() + "/" + date.Month.ToString() + "/" + Strings.file;
+            return Application.dataPath + @"/../Calendar Data/Legacy/" + date.Year.ToString() + "/" + date.Month.ToString() + "/" + Strings.file;
     }
 
     private string TagToPath(string s)
@@ -45,9 +45,9 @@ public class DataManager : MonoBehaviour
         int month;
         int.TryParse(split[1], out month);
         if (month >= DateTime.Now.Month - 1)
-            return Application.dataPath + @"/Calendar Data/Data/" + split[2] + "/" + split[1] + "/" + Strings.file;
+            return Application.dataPath + @"/../Calendar Data/Data/" + split[2] + "/" + split[1] + "/" + Strings.file;
         else
-            return Application.dataPath + @"/Calendar Data/Legacy/" + split[2] + "/" + split[1] + "/" + Strings.file;
+            return Application.dataPath + @"/../Calendar Data/Legacy/" + split[2] + "/" + split[1] + "/" + Strings.file;
     }
 
     public void RequestReadMonth(DateTime date)
