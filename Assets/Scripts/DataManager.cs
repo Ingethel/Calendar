@@ -33,7 +33,7 @@ public class DataManager : MonoBehaviour
     }
 
     private string DateToPath(DateTime date) {
-        if(date.Month >= DateTime.Now.Month-1)
+        if(date.Year * 12 + date.Month >= DateTime.Now.Year * 12 + DateTime.Now.Month-1)
             return Application.dataPath + @"/../Calendar Data/Data/" + date.Year.ToString() + "/" + date.Month.ToString() + "/" + Strings.file;
         else
             return Application.dataPath + @"/../Calendar Data/Legacy/" + date.Year.ToString() + "/" + date.Month.ToString() + "/" + Strings.file;
@@ -42,9 +42,10 @@ public class DataManager : MonoBehaviour
     private string TagToPath(string s)
     {
         string[] split = s.Split('.');
-        int month;
+        int month, year;
         int.TryParse(split[1], out month);
-        if (month >= DateTime.Now.Month - 1)
+        int.TryParse(split[2], out year);
+        if (year * 12 + month >= DateTime.Now.Year * 12 + DateTime.Now.Month - 1)
             return Application.dataPath + @"/../Calendar Data/Data/" + split[2] + "/" + split[1] + "/" + Strings.file;
         else
             return Application.dataPath + @"/../Calendar Data/Legacy/" + split[2] + "/" + split[1] + "/" + Strings.file;

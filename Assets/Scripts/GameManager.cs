@@ -61,12 +61,19 @@ public class GameManager : MonoBehaviour {
         foreach (string dir in Directory.GetDirectories(DATA_FOLDER, "*", SearchOption.AllDirectories))
         {
             int folderMonth = 0;
-            if (int.TryParse(dir.Substring(dir.LastIndexOf('\\') + 1), out folderMonth))
-                if (currentDate.Month - folderMonth >= PlayerPrefs.GetInt("OldDataThreshold"))
+            int folderYear = 0;
+            if (int.TryParse(dir.Substring(dir.LastIndexOf('\\') - 5, 4), out folderYear))
+            {
+                if (int.TryParse(dir.Substring(dir.LastIndexOf('\\') + 1), out folderMonth))
                 {
-                    ThreadReader.BackUp(dir, LEGACY_FOLDER + dir.Substring(DATA_FOLDER.Length), false);
-                    Directory.Delete(dir, true);
+                    folderMonth = folderYear * 12 + folderMonth;
+                    if (currentDate.Year * 12 + currentDate.Month - folderMonth >= PlayerPrefs.GetInt("OldDataThreshold"))
+                    {
+                        ThreadReader.BackUp(dir, LEGACY_FOLDER + dir.Substring(DATA_FOLDER.Length), false);
+                        Directory.Delete(dir, true);
+                    }
                 }
+            }
         }
     }
 
@@ -169,6 +176,9 @@ public class GameManager : MonoBehaviour {
                 else if (s.Length == 2)
                     ThreadReader.BackUp(ALL_DATA, DESKTOP + "/CalendarDataBackUp", true);
 
+                break;
+            case "REARRANGE":
+                RearrangeData();
                 break;
             case "IMPORT":
                 if (s.Length > 2)
