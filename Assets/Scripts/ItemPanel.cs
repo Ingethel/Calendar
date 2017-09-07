@@ -6,6 +6,7 @@ public class ItemPanel<T> : Panel where T : Item {
 
     
     public T item = null;
+    protected bool dublicate = false;
     public InputFieldObject[] fields;
     public Text title;
     protected EventSystem system;
@@ -78,7 +79,7 @@ public class ItemPanel<T> : Panel where T : Item {
 
     protected virtual void SaveInfo()
     {
-        if (!item.filler)
+        if (!item.filler && !dublicate)
             dataManager.RequestDelete(item);
     }
 
@@ -114,6 +115,13 @@ public class ItemPanel<T> : Panel where T : Item {
         editButtons.SetActive(!flag);
 
         DisplayInfo();
+    }
+
+    public void Dublicate()
+    {
+        dublicate = true;
+        Save();
+        dublicate = false;
     }
 
     protected string TryGetText(InputField a)

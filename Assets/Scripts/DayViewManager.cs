@@ -81,9 +81,7 @@ public class DayViewManager : IDayView {
             }
         }
         else {
-            if (info.Guides.Count() < setTime.Length - 1) {
                 FillEmptySlots();
-            }
         }
         base.DisplayInfo();
         if (info.Events.Count > 0)

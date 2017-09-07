@@ -38,13 +38,13 @@ public class GameManager : MonoBehaviour {
 
         if (PlayerPrefs.GetInt("OldDataThreshold") == 0)
             PlayerPrefs.SetInt("OldDataThreshold", 2);
-        
+
     }
 
     void Start()
     {
-        Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
-        headerObj.SetActive(true);
+        Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, PlayerPrefs.GetInt("FullScreen") == 1);
+        headerObj.SetActive(PlayerPrefs.GetInt("FullScreen") == 1);
         SetLanguage(PlayerPrefs.GetInt("Language"));
 
         if(currentDate.Month == 1 && currentDate.Day == 1 && PlayerPrefs.GetString("LastIdReset") != TimeConversions.DateTimeToString(currentDate))
@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour {
             OnReloadScene();
 
         PlayerPrefs.SetInt("LoadLastState", 1);
+        PlayerPrefs.SetInt("FullScreen", Screen.fullScreen ? 1 : 0);
+        
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
@@ -210,6 +212,14 @@ public class GameManager : MonoBehaviour {
                 ExtrasViewController extras = FindObjectOfType<ExtrasViewController>();
                 if (extras)
                     extras.RequestView(ExtrasViewController.State.HELP);
+                break;
+            case "LANGUAGE":
+                if(s.Length > 2)
+                {
+                    int i = 0;
+                    int.TryParse(s[2], out i);
+                    SetLanguage(i);
+                }
                 break;
             default:
                 break;

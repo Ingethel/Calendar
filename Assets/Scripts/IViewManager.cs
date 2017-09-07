@@ -80,56 +80,26 @@ public class IViewManager : Panel
             {
                 if (info.Guides.TryGet(i, out n1))
                 {
-
                     if (n1.GetStartTime() - maxTime >= threshold)
-                    {
                         AddFiller(TimeConversions.IntTimeToString(maxTime, 60), n1.attributes[0]);
-                    }
-
+                    
                     if (n1.GetStartTime() < minTime) minTime = n1.GetStartTime();
                     if (n1.GetEndTime() > maxTime) maxTime = n1.GetEndTime();
                 }
             }
 
-            if(minTime - TimeConversions.StringTimeToInt(setTime[0], 60) >= threshold)
-                AddFiller(setTime[0], TimeConversions.IntTimeToString(minTime, 60));
-/*            for (int k = 1; k < setTime.Length - 1; k++)
+            for (int k = 1; k < setTime.Length - 1; k++)
             {
-                int timeDif = Math.Abs(minTime - TimeConversions.StringTimeToInt(setTime[k], 60));
-                if (timeDif < threshold)
-                {
-                    int y = 0;
-                    while (y < k - 1)
-                    {
-                        AddFiller(setTime[y], setTime[y + 1]);
-                        y++;
-                    }
-                    {
-                    if(minTime - TimeConversions.StringTimeToInt(setTime[y], 60) >= threshold)
-                        AddFiller(setTime[y], TimeConversions.IntTimeToString(minTime, 60));
-                    }
-                    break;
-                    }
-            }*/
-            if(TimeConversions.StringTimeToInt(setTime[setTime.Length-1], 60) - maxTime >= threshold)
-                AddFiller(TimeConversions.IntTimeToString(maxTime, 60), setTime[setTime.Length - 1]);
-/*            for (int k = setTime.Length - 2; k > 0; k--)
+                if (TimeConversions.StringTimeToInt(setTime[k], 60) <= minTime)
+                    AddFiller(setTime[k - 1], setTime[k]);
+                else break;
+            }
+            for (int k = setTime.Length - 2; k > 0; k--)
             {
-                int timeDif = Math.Abs(TimeConversions.StringTimeToInt(setTime[k], 60) - maxTime);
-                if (timeDif < threshold)
-                {
-                    int y = k + 1;
-                    if(TimeConversions.StringTimeToInt(setTime[y], 60) - maxTime >= threshold)
-                        AddFiller(TimeConversions.IntTimeToString(maxTime, 60), setTime[y]);
-                    while(y < setTime.Length - 1)
-                    {
-                        AddFiller(setTime[y], setTime[y + 1]);
-                        y++;
-                    }
-                    break;
-                    }
-                }
-             */
+                if (TimeConversions.StringTimeToInt(setTime[k], 60) >= maxTime)
+                    AddFiller(setTime[k], setTime[k + 1]);
+                else break;
+            }
         }
     }
 

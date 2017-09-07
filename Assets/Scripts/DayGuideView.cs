@@ -6,7 +6,16 @@
         base.Allocate(n);
         SetTime(n.attributes[0] + " - " + n.attributes[1]);
         if (!n.filler)
-            SetDetails(n.attributes[2] + ", #" + n.attributes[3] + ", " + n.attributes[7]);
+        {
+            string s = "";
+            if (n.attributes[2] != "")
+                s += n.attributes[2];
+            if (n.attributes[3] != "")
+                s += ", #" + n.attributes[3];
+            if (n.attributes[7] != "")
+                s += ", " + n.attributes[7];
+            SetDetails(s);
+        }
     }
     
     public override void OnClick()

@@ -6,7 +6,12 @@ public class SearchViewManager : IViewManager {
     
     protected override void SetHeader()
     {
-        header.text = "Search Result for: " + searchTerm;
+        header.text = gManager.language.SearchResult + searchTerm;
+    }
+
+    public override void SetLanguage()
+    {
+        SetHeader();
     }
 
     protected override void AssignInfo(GameObject o, NewEntry n)
