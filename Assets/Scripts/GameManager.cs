@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
     public event Action PrintMode;
     public event Action OnLanguageChange;
     public event Action OnReloadScene;
+    public event Action OnUpdateWeekTimes;
 
     public Language language;
 
@@ -147,6 +148,16 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetString("LastIdReset", TimeConversions.DateTimeToString(currentDate));
     }
 
+    void UpdateTimetable(string id, string value)
+    {
+        PlayerPrefs.SetString(id, value);
+        if (OnUpdateWeekTimes != null)
+            OnUpdateWeekTimes();
+        CalendarViewController viewController = FindObjectOfType<CalendarViewController>();
+        if (viewController)
+            viewController.RefreshView();
+    }
+
     public void Command(string[] s)
     {
         switch (s[1])
@@ -219,6 +230,30 @@ public class GameManager : MonoBehaviour {
                     int i = 0;
                     int.TryParse(s[2], out i);
                     SetLanguage(i);
+                }
+                break;
+            case "WT":
+                if (s.Length > 2)
+                    UpdateTimetable("WeekTimes", s[2]);
+                break;
+            case "WET":
+                if (s.Length > 2)
+                    UpdateTimetable("WeekendTimes", s[2]);
+                break;
+            case "TP":
+                if (s.Length > 2)
+                {
+                    float f = 0;
+                    float.TryParse(s[2], out f);
+                    PlayerPrefs.SetFloat("TicketPrice", f);
+                }
+                break;
+            case "RTP":
+                if (s.Length > 2)
+                {
+                    float f = 0;
+                    float.TryParse(s[2], out f);
+                    PlayerPrefs.SetFloat("ReducedTicketPrice", f);
                 }
                 break;
             default:

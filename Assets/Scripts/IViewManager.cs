@@ -13,8 +13,8 @@ public class IViewManager : Panel
     public GameObject guideView;
     public GameObject guideList;
 
-    protected string[] weekTimes = { "09:00", "10:30", "12:00", "13:30" };
-    protected string[] weekendTimes = { "10:30", "12:00", "13:30", "15:00", "16:30" };
+    protected string[] weekTimes;// = { "09:00", "10:30", "12:00", "13:30" };
+    protected string[] weekendTimes;// = { "10:30", "12:00", "13:30", "15:00", "16:30" };
     protected string[] setTime;
 
     protected int fillerSlots;
@@ -22,6 +22,11 @@ public class IViewManager : Panel
     protected override void Awake()
     {
         base.Awake();
+
+        weekTimes = PlayerPrefs.GetString("WeekTimes", "09:00,10:30,12:00,13:30").Split(',');
+        weekendTimes = PlayerPrefs.GetString("WeekendTimes", "10:30,12:00,13:30,15:00,16:30").Split(',');
+
+        gManager.OnUpdateWeekTimes += UpdateTimetable;
         info = new DAY();
     }
 
@@ -105,6 +110,17 @@ public class IViewManager : Panel
 
     protected virtual void AssignInfo(GameObject o, NewEntry n) {}
 
+    public void UpdateTimetable()
+    {
+        weekTimes = PlayerPrefs.GetString("WeekTimes", "09:00,10:30,12:00,13:30").Split(',');
+        weekendTimes = PlayerPrefs.GetString("WeekendTimes", "10:30,12:00,13:30,15:00,16:30").Split(',');
+
+        if (assignedDate.DayOfWeek == System.DayOfWeek.Saturday || assignedDate.DayOfWeek == System.DayOfWeek.Sunday)
+            setTime = weekendTimes;
+        else
+            setTime = weekTimes;
+    }
+    
     public override void Refresh()
     {
         fillerSlots = 0;
@@ -113,11 +129,7 @@ public class IViewManager : Panel
             foreach (Transform t in guideList.transform)
                 Destroy(t.gameObject);
         _tag = "";
-
-        if (assignedDate.DayOfWeek == System.DayOfWeek.Saturday || assignedDate.DayOfWeek == System.DayOfWeek.Sunday)
-            setTime = weekendTimes;
-        else
-            setTime = weekTimes;
+        UpdateTimetable();
     }
 
     public void SetView(DateTime date) {

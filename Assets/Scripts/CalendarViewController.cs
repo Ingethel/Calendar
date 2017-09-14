@@ -38,11 +38,6 @@ public class CalendarViewController : ViewController
         gManager.OnLanguageChange += SetLanguage;
         gManager.OnReloadScene += SaveState;
         
-        data.RequestReadMonth(calendar.AddMonths(DateTime.Now, -1));
-        data.RequestReadMonth(DateTime.Now);
-        data.RequestReadMonth(calendar.AddMonths(DateTime.Now, 1));
-        data.RequestReadMonth(calendar.AddMonths(DateTime.Now, 2));
-
         if (PlayerPrefs.GetInt("LoadLastState") == 0)
             StartCoroutine(RequestTodaysView());
         else
@@ -89,6 +84,11 @@ public class CalendarViewController : ViewController
     
     IEnumerator RequestTodaysView()
     {
+        data.RequestReadMonth(calendar.AddMonths(DateTime.Now, -1));
+        data.RequestReadMonth(DateTime.Now);
+        data.RequestReadMonth(calendar.AddMonths(DateTime.Now, 1));
+        data.RequestReadMonth(calendar.AddMonths(DateTime.Now, 2));
+
         // today's view
         yield return 0;
         DateTime currentDate = DateTime.Now;

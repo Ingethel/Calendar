@@ -12,6 +12,9 @@ public class NewEntryPanelHandler : ItemPanel<NewEntry> {
 
         slotExpander.SetActive(false);
         slotPanel.SetActive(false);
+
+        if (newEntryButtons.activeSelf)
+            OnDateReady();
     }
     
     public override void SetLanguage()
@@ -121,5 +124,11 @@ public class NewEntryPanelHandler : ItemPanel<NewEntry> {
         fields[5].inputs[1].text = start[1];
         fields[5].inputs[2].text = end[0];
         fields[5].inputs[3].text = end[1];
+    }
+
+    public override void EditEntry()
+    {
+        base.EditEntry();
+        OnDateReady();
     }
 }

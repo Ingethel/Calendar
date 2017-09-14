@@ -49,7 +49,7 @@ public class IDayView : IViewManager
         if (searchLegacy)
             res = dataManager.TryGetEntries(_tag, true);
         else
-            res = dataManager.TryGetEntries(_tag, assignedDate.Year * 12 + assignedDate.Month > gManager.currentDate.Year * 12 + gManager.currentDate.Month + 2);
+            res = dataManager.TryGetEntries(_tag, assignedDate.Year * 12 + assignedDate.Month >= gManager.currentDate.Year * 12 + gManager.currentDate.Month - 1);
 
         if (res.value)
         {
