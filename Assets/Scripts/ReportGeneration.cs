@@ -2,11 +2,17 @@
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
+#if UNITY_EDITOR 
+using UnityEditor;
+#endif
 
 public class ReportGeneration : MonoBehaviour {
     static Document doc;
-
-    static string combineStr = Path.Combine(Application.dataPath + "/Plugins", "Arial.ttf");
+#if UNITY_EDITOR
+    static string combineStr = Path.Combine(Application.dataPath + "/StreamingAssets", "Arial.ttf");
+#else
+    static string combineStr = Path.Combine(Application.streamingAssetsPath, "Arial.ttf");
+#endif
     static BaseFont bf = BaseFont.CreateFont(combineStr, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 
     static iTextSharp.text.Font titleFont = new iTextSharp.text.Font(bf, 16f, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
