@@ -33,10 +33,7 @@ public class GameManager : MonoBehaviour {
 
         if (PlayerPrefs.GetString("LastIdReset") == "")
             ResetIDs();
-
-        if (PlayerPrefs.GetInt("TimeThreshold") == 0)
-            PlayerPrefs.SetInt("TimeThreshold", 45);
-
+        
         if (PlayerPrefs.GetInt("OldDataThreshold") == 0)
             PlayerPrefs.SetInt("OldDataThreshold", 2);
 

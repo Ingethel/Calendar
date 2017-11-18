@@ -8,7 +8,7 @@ public class ViewController : MonoBehaviour {
     protected Panel panel;
     protected GameObject currentView;
     protected int currentViewIndex;
-    
+    public bool InFront { protected set; get; }
     protected GameManager gManager;
 
     protected bool lockedAccess;
@@ -58,7 +58,10 @@ public class ViewController : MonoBehaviour {
         {
             GraphicRaycaster r = currentView.GetComponent<GraphicRaycaster>();
             if (r)
+            {
                 r.enabled = flag;
+                InFront = flag;
+            }
         }
     }
 

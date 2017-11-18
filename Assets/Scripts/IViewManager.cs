@@ -13,8 +13,8 @@ public class IViewManager : Panel
     public GameObject guideView;
     public GameObject guideList;
 
-    protected string[] weekTimes;// = { "09:00", "10:30", "12:00", "13:30" };
-    protected string[] weekendTimes;// = { "10:30", "12:00", "13:30", "15:00", "16:30" };
+    protected string[] weekTimes;
+    protected string[] weekendTimes;
     protected string[] setTime;
 
     protected int fillerSlots;
@@ -72,7 +72,7 @@ public class IViewManager : Panel
 
     protected void FillEmptySlots()
     {
-        int threshold = PlayerPrefs.GetInt("TimeThreshold");
+        int threshold = PlayerPrefs.GetInt("TimeThreshold", 45);
         int minTime = 100000, maxTime = 0;
 
         NewEntry n1;
@@ -92,18 +92,30 @@ public class IViewManager : Panel
                     if (n1.GetEndTime() > maxTime) maxTime = n1.GetEndTime();
                 }
             }
-
-            for (int k = 1; k < setTime.Length - 1; k++)
+            int k = 0;
+            for (k = 1; k < setTime.Length - 1; k++)
             {
                 if (TimeConversions.StringTimeToInt(setTime[k], 60) <= minTime)
                     AddFiller(setTime[k - 1], setTime[k]);
                 else break;
             }
-            for (int k = setTime.Length - 2; k > 0; k--)
+            if(k == 1)
+            {
+                k--;
+                if (minTime - TimeConversions.StringTimeToInt(setTime[k], 60) >= threshold)
+                    AddFiller(setTime[k], TimeConversions.IntTimeToString(minTime, 60));
+            }
+            for (k = setTime.Length - 2; k > 0; k--)
             {
                 if (TimeConversions.StringTimeToInt(setTime[k], 60) >= maxTime)
                     AddFiller(setTime[k], setTime[k + 1]);
                 else break;
+            }
+            if (k == setTime.Length - 2)
+            {
+                k++;
+                if (TimeConversions.StringTimeToInt(setTime[k], 60) - maxTime >= threshold)
+                    AddFiller(TimeConversions.IntTimeToString(maxTime, 60), setTime[k]);
             }
         }
     }

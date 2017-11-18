@@ -46,6 +46,20 @@ public class CalendarViewController : ViewController
         }
     }
 
+    void Update()
+    {
+        if (InFront)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+                if(currentViewIndex != (int)State.MONTHLY) RequestView(State.MONTHLY);
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+                ChangeDay(-1);
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+                ChangeDay(1);
+        }
+    }
+    
+
     public void SaveState()
     {
         PlayerPrefs.SetInt("SavedState", currentViewIndex);
@@ -107,13 +121,16 @@ public class CalendarViewController : ViewController
             if (search.value)
                 if (search.info.Events.Count > 0)
                     eventsThisWeek.AddRange(search.info.Events);
+                
         }
+        eventsThisWeek.RemoveAll(x => x.report);
+
         yield return 0;
         // check for semester report
         if (currentDate.Month % 3 == 0 && TimeConversions.IntInRange(currentDate.Day, 20, 31))
         {
             Alarm reportAlarm = new Alarm();
-            reportAlarm.attributes[0] = "Prepare Semester Report";
+            reportAlarm.attributes[0] = gManager.language.ReportAlarmNotes;
             reportAlarm.report = true;
             eventsThisWeek.Insert(0, reportAlarm);
         }

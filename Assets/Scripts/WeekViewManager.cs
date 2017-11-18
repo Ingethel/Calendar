@@ -12,12 +12,12 @@ public class WeekViewManager : IViewManager
         days = GetComponentsInChildren<DayOfWeek>();
         signPanel.SetActive(false);
     }
-
+    
     void Start()
     {
         gManager.PrintMode += PrintMode;
     }
-
+    
     public void PrintMode()
     {
         signPanel.SetActive(!signPanel.activeSelf);

@@ -69,7 +69,7 @@ public class IDayView : IViewManager
             Alarm reportAlarm = new Alarm();
             reportAlarm.attributes[0] = gManager.language.ReportAlarmNotes;
             reportAlarm.report = true;
-            info.Events.Insert(0, reportAlarm);
+            info.AddEvent(reportAlarm);
         }
     }
 

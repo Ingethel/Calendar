@@ -257,12 +257,21 @@ public class DAY
                 n.id = "_guide." + DataManager.GenerateNewIdFor("Guide");
         Guides.Add(n);
     }
-
+    
     public void AddEvent(Alarm n)
     {
-        if(n.id == "")
+        if (n.report)
+            foreach (Alarm a in Events)
+                if (a.report)
+                    return;
+
+        if (n.report)
+            Events.Insert(0, n);
+        else if (n.id == "")
+        {
             n.id = "_event." + DataManager.GenerateNewIdFor("Event");
-        Events.Add(n);
+            Events.Add(n);
+        }
     }
 
     public void SetOfficer(string s)
