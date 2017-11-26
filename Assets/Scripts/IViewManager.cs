@@ -72,7 +72,7 @@ public class IViewManager : Panel
 
     protected void FillEmptySlots()
     {
-        int threshold = PlayerPrefs.GetInt("TimeThreshold", 45);
+        int threshold = PlayerPrefs.GetInt("MinimumTourTime", 45);
         int minTime = 100000, maxTime = 0;
 
         NewEntry n1;

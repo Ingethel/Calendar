@@ -121,6 +121,11 @@ public class GameManager : MonoBehaviour {
         StartCoroutine(PrintProcess());
     }
 
+    public void Options()
+    {
+
+    }
+
     IEnumerator PrintProcess()
     {
         bool headerFlag = headerObj.activeSelf;
@@ -170,10 +175,10 @@ public class GameManager : MonoBehaviour {
                 if(s.Length > 2)
                 GetComponent<DataManager>().SearchLegacy(s[2]);
                 break;
-            case "TIME_THRESHOLD":
+            case "MinimumTourTime":
                 int spacing = 0;
                 if(int.TryParse(s[2], out spacing))
-                    PlayerPrefs.SetInt("TimeThreshold", spacing);
+                    PlayerPrefs.SetInt("MinimumTourTime", spacing);
                 break;
             case "LEGACY_THRESHOLD":
                 int time = 0;
@@ -229,15 +234,15 @@ public class GameManager : MonoBehaviour {
                     SetLanguage(i);
                 }
                 break;
-            case "WT":
+            case "WeekTimes":
                 if (s.Length > 2)
                     UpdateTimetable("WeekTimes", s[2]);
                 break;
-            case "WET":
+            case "WeekendTimes":
                 if (s.Length > 2)
                     UpdateTimetable("WeekendTimes", s[2]);
                 break;
-            case "TP":
+            case "TicketPrice":
                 if (s.Length > 2)
                 {
                     float f = 0;
@@ -245,7 +250,7 @@ public class GameManager : MonoBehaviour {
                     PlayerPrefs.SetFloat("TicketPrice", f);
                 }
                 break;
-            case "RTP":
+            case "ReducedTicketPrice":
                 if (s.Length > 2)
                 {
                     float f = 0;
@@ -253,6 +258,7 @@ public class GameManager : MonoBehaviour {
                     PlayerPrefs.SetFloat("ReducedTicketPrice", f);
                 }
                 break;
+            case "OPTIONS":
             default:
                 break;
         }
