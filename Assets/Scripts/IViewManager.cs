@@ -124,8 +124,8 @@ public class IViewManager : Panel
 
     public void UpdateTimetable()
     {
-        weekTimes = PlayerPrefs.GetString("WeekTimes", "09:00,10:30,12:00,13:30").Split(',');
-        weekendTimes = PlayerPrefs.GetString("WeekendTimes", "10:30,12:00,13:30,15:00,16:30").Split(',');
+        weekTimes = PlayerPrefs.GetString("WeekTimes").Split(',');
+        weekendTimes = PlayerPrefs.GetString("WeekendTimes").Split(',');
 
         if (assignedDate.DayOfWeek == System.DayOfWeek.Saturday || assignedDate.DayOfWeek == System.DayOfWeek.Sunday)
             setTime = weekendTimes;

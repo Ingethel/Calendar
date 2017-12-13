@@ -14,6 +14,7 @@ public class CalendarViewController : ViewController
         DAILY,
         SEARCH,
         REPORT,
+        OPTIONS,
         ILLEGAL
     };
 
@@ -159,7 +160,9 @@ public class CalendarViewController : ViewController
     public void RequestView(State e)
     {
         if (e >= State.REPORT)
+        {
             header.SetActive(false);
+        }
         else
         {
             if (!header.activeSelf)

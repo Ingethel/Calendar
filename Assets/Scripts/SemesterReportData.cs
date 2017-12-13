@@ -52,7 +52,7 @@ public class SemesterReportData : MonoBehaviour {
         ComposeData();
         if (gManager)
         {
-            ReportGeneration.CreatePDF(gManager.DESKTOP, data);
+            ReportGeneration.CreatePDF(gManager.EXPORT_PATH, data);
         }
         CalendarViewController viewController = FindObjectOfType<CalendarViewController>();
         viewController.RequestView(CalendarViewController.State.MONTHLY);

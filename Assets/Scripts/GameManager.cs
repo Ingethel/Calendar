@@ -7,10 +7,10 @@ using UnityEditor;
 #endif
 
 public class GameManager : MonoBehaviour {
-
+    
     public GameObject headerObj;
     [HideInInspector]
-    public string DATA_FOLDER, LEGACY_FOLDER, ALL_DATA;
+    public string DATA_FOLDER, LEGACY_FOLDER, DATA_PATH, EXPORT_PATH, IMPORT_PATH;
     [HideInInspector]
     public string DESKTOP;
 
@@ -26,17 +26,9 @@ public class GameManager : MonoBehaviour {
     void Awake()
     {
         currentDate = DateTime.Now;
-        ALL_DATA = Application.dataPath + @"/Calendar Data";
-        DATA_FOLDER = Application.dataPath + @"/Calendar Data/Data";
-        LEGACY_FOLDER = Application.dataPath + @"/Calendar Data/Legacy";
-        DESKTOP = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
-
-        if (PlayerPrefs.GetString("LastIdReset") == "")
-            ResetIDs();
-        
-        if (PlayerPrefs.GetInt("OldDataThreshold") == 0)
-            PlayerPrefs.SetInt("OldDataThreshold", 2);
-
+        InitialStartUp();
+        DATA_FOLDER = DATA_PATH + "/Data";
+        LEGACY_FOLDER = DATA_PATH + "/Legacy";
     }
 
     void Start()
@@ -52,7 +44,30 @@ public class GameManager : MonoBehaviour {
         {
             PlayerPrefs.SetInt("LastBackUp", currentDate.Month);
             RearrangeData();
-            ThreadReader.BackUp(ALL_DATA, DESKTOP + "/CalendarDataBackUp", true);
+            ThreadReader.BackUp(DATA_PATH, EXPORT_PATH + "/CalendarDataBackUp", true);
+        }
+    }
+
+    void InitialStartUp()
+    {
+        // check if first startup - initialise required variables
+        if (PlayerPrefs.GetInt("Start") == 0)
+        {
+            DATA_PATH = Application.dataPath + @"/Calendar Data";
+            PlayerPrefs.SetString("DataPath", DATA_PATH);
+            EXPORT_PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
+            PlayerPrefs.SetString("ExportPath", EXPORT_PATH);
+            IMPORT_PATH = "";
+            PlayerPrefs.SetString("ImportPath", IMPORT_PATH);
+            
+            ResetIDs();
+            PlayerPrefs.SetInt("OldDataThreshold", 2);
+
+            PlayerPrefs.SetString("WeekTimes", "09:00,10:30,12:00,13:30");
+            PlayerPrefs.SetString("WeekendTimes", "10:30,12:00,13:30,15:00,16:30");
+
+            PlayerPrefs.SetFloat("TicketPrice", 3);
+            PlayerPrefs.SetFloat("ReducedTicketPrice", 1.5f);
         }
     }
 
@@ -123,7 +138,9 @@ public class GameManager : MonoBehaviour {
 
     public void Options()
     {
-
+        CalendarViewController viewController = FindObjectOfType<CalendarViewController>();
+        if (viewController)
+            viewController.RequestView(CalendarViewController.State.OPTIONS);
     }
 
     IEnumerator PrintProcess()
@@ -134,7 +151,7 @@ public class GameManager : MonoBehaviour {
         if (headerFlag)
             headerObj.SetActive(false);
         yield return new WaitForSeconds(1);
-        Application.CaptureScreenshot(DESKTOP + "/Calendar.png");
+        Application.CaptureScreenshot(EXPORT_PATH + "/Calendar.png");
         yield return 0;
         if (PrintMode != null)
             PrintMode();
@@ -195,12 +212,12 @@ public class GameManager : MonoBehaviour {
                 if (s.Length == 3)
                 {
                     if (s[2] == "DATA")
-                        ThreadReader.BackUp(DATA_FOLDER, DESKTOP + "/CalendarDataBackUp/Data", true);
+                        ThreadReader.BackUp(DATA_FOLDER, EXPORT_PATH + "/CalendarDataBackUp/Data", true);
                     else if (s[2] == "LEGACY")
-                        ThreadReader.BackUp(LEGACY_FOLDER, DESKTOP + "/CalendarDataBackUp/Legacy", true);
+                        ThreadReader.BackUp(LEGACY_FOLDER, EXPORT_PATH + "/CalendarDataBackUp/Legacy", true);
                 }
                 else if (s.Length == 2)
-                    ThreadReader.BackUp(ALL_DATA, DESKTOP + "/CalendarDataBackUp", true);
+                    ThreadReader.BackUp(DATA_PATH, EXPORT_PATH + "/CalendarDataBackUp", true);
 
                 break;
             case "REARRANGE":
@@ -212,9 +229,12 @@ public class GameManager : MonoBehaviour {
                     string path = s[2];
                     for (int i = 3; i < s.Length; i++)
                         path = path + " " + s[i];
-                    ThreadReader.BackUp(path, ALL_DATA, false);
-                    ReloadScene();
+                    ThreadReader.BackUp(path, DATA_PATH, false);
                 }
+                else {
+                    ThreadReader.BackUp(IMPORT_PATH, DATA_PATH, false);
+                }
+                ReloadScene();
                 break;
             case "REPORT":
                 CalendarViewController viewController = FindObjectOfType<CalendarViewController>();
@@ -259,6 +279,29 @@ public class GameManager : MonoBehaviour {
                 }
                 break;
             case "OPTIONS":
+                Options();
+                break;
+            case "DataPath":
+                if (s.Length > 2)
+                {
+                    PlayerPrefs.SetString("DataPath", s[2]);
+                    DATA_PATH = s[2];
+                }
+                break;
+            case "ExportPath":
+                if (s.Length > 2)
+                {
+                    PlayerPrefs.SetString("ExportPath", s[2]);
+                    EXPORT_PATH = s[2];
+                }
+                break;
+            case "ImportPath":
+                if (s.Length > 2)
+                {
+                    PlayerPrefs.SetString("ImportPath", s[2]);
+                    EXPORT_PATH = s[2];
+                }
+                break;
             default:
                 break;
         }
