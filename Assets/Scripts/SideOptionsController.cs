@@ -8,14 +8,14 @@
     };
 
     ExtrasViewController optionsController;
-    CalendarViewController calendarController;
-    public UnityEngine.UI.Dropdown specialSnowflake;
+    //CalendarViewController calendarController;
+    //public UnityEngine.UI.Dropdown specialSnowflake;
 
     protected override void Start()
     {
         base.Start();
         optionsController = FindObjectOfType<ExtrasViewController>();
-        calendarController = FindObjectOfType<CalendarViewController>();
+        //calendarController = FindObjectOfType<CalendarViewController>();
         OpenCompact();
         gManager.PrintMode += PrintMode;
     }
@@ -40,12 +40,12 @@
         optionsController.RequestView(ExtrasViewController.State.VIEWMODE);
     }
 
-    public void ViewChanged(int i)
+ /*   public void ViewChanged(int i)
     {
         optionsController.RequestView(ExtrasViewController.State.ILLEGAL);
         calendarController.RequestView((CalendarViewController.State)specialSnowflake.value);
     }
-    
+   */ 
     public void CloseCurrentView()
     {
         optionsController.RequestView(ExtrasViewController.State.ILLEGAL);

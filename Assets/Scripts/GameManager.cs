@@ -53,9 +53,10 @@ public class GameManager : MonoBehaviour {
         // check if first startup - initialise required variables
         if (PlayerPrefs.GetInt("Start") == 0)
         {
+            PlayerPrefs.SetInt("Start", 1);
             DATA_PATH = Application.dataPath + @"/Calendar Data";
             PlayerPrefs.SetString("DataPath", DATA_PATH);
-            EXPORT_PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
+            EXPORT_PATH = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             PlayerPrefs.SetString("ExportPath", EXPORT_PATH);
             IMPORT_PATH = "";
             PlayerPrefs.SetString("ImportPath", IMPORT_PATH);
@@ -63,11 +64,13 @@ public class GameManager : MonoBehaviour {
             ResetIDs();
             PlayerPrefs.SetInt("OldDataThreshold", 2);
 
-            PlayerPrefs.SetString("WeekTimes", "09:00,10:30,12:00,13:30");
-            PlayerPrefs.SetString("WeekendTimes", "10:30,12:00,13:30,15:00,16:30");
-
             PlayerPrefs.SetFloat("TicketPrice", 3);
             PlayerPrefs.SetFloat("ReducedTicketPrice", 1.5f);
+
+            PlayerPrefs.SetInt("MinimumTourTime", 40);
+
+            PlayerPrefs.SetString("WeekTimes", "09:00,10:30,12:00,13:30");
+            PlayerPrefs.SetString("WeekendTimes", "10:30,12:00,13:30,15:00,16:30");
         }
     }
 
@@ -232,7 +235,8 @@ public class GameManager : MonoBehaviour {
                     ThreadReader.BackUp(path, DATA_PATH, false);
                 }
                 else {
-                    ThreadReader.BackUp(IMPORT_PATH, DATA_PATH, false);
+                    if(IMPORT_PATH != "")
+                        ThreadReader.BackUp(IMPORT_PATH, DATA_PATH, false);
                 }
                 ReloadScene();
                 break;
@@ -299,7 +303,7 @@ public class GameManager : MonoBehaviour {
                 if (s.Length > 2)
                 {
                     PlayerPrefs.SetString("ImportPath", s[2]);
-                    EXPORT_PATH = s[2];
+                    IMPORT_PATH = s[2];
                 }
                 break;
             default:
