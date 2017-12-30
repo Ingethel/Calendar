@@ -5,13 +5,13 @@ using UnityEngine;
 public class DataManager : MonoBehaviour
 {
     private Dictionary<string, DAY> entries;
-    ThreadReader reader;
+    DataReader reader;
     GameManager manager;
 
     void Awake()
     {
         entries = new Dictionary<string, DAY>();
-        reader = new ThreadReader();
+        reader = new DataReader();
     }
     
     void Start()
@@ -34,9 +34,9 @@ public class DataManager : MonoBehaviour
 
     private string DateToPath(DateTime date) {
         if(date.Year * 12 + date.Month >= DateTime.Now.Year * 12 + DateTime.Now.Month-1)
-            return Application.dataPath + @"/Calendar Data/Data/" + date.Year.ToString() + "/" + date.Month.ToString() + "/" + Strings.file;
+            return Application.dataPath + @"/Calendar Data/Data/" + date.Year.ToString() + "/" + date.Month.ToString() + "/" + DataStrings.file;
         else
-            return Application.dataPath + @"/Calendar Data/Legacy/" + date.Year.ToString() + "/" + date.Month.ToString() + "/" + Strings.file;
+            return Application.dataPath + @"/Calendar Data/Legacy/" + date.Year.ToString() + "/" + date.Month.ToString() + "/" + DataStrings.file;
     }
 
     private string TagToPath(string s)
@@ -46,9 +46,9 @@ public class DataManager : MonoBehaviour
         int.TryParse(split[1], out month);
         int.TryParse(split[2], out year);
         if (year * 12 + month >= DateTime.Now.Year * 12 + DateTime.Now.Month - 1)
-            return Application.dataPath + @"/Calendar Data/Data/" + split[2] + "/" + split[1] + "/" + Strings.file;
+            return Application.dataPath + @"/Calendar Data/Data/" + split[2] + "/" + split[1] + "/" + DataStrings.file;
         else
-            return Application.dataPath + @"/Calendar Data/Legacy/" + split[2] + "/" + split[1] + "/" + Strings.file;
+            return Application.dataPath + @"/Calendar Data/Legacy/" + split[2] + "/" + split[1] + "/" + DataStrings.file;
     }
 
     public void RequestReadMonth(DateTime date)
@@ -74,9 +74,9 @@ public class DataManager : MonoBehaviour
         if (!entries.TryGetValue(e.Date, out day_info))
             day_info = new DAY();
 
-        if(e.tag == Strings.NewEntry)
+        if(e.tag == DataStrings.NewEntry)
             day_info.AddGuide(e as NewEntry);
-        else if (e.tag == Strings.Event)
+        else if (e.tag == DataStrings.Event)
             day_info.AddEvent(e as Alarm);
 
         entries[e.Date] = day_info;
@@ -104,9 +104,9 @@ public class DataManager : MonoBehaviour
         DAY day_info;
         if (entries.TryGetValue(e.Date, out day_info))
         {
-            if (e.tag == Strings.NewEntry)
+            if (e.tag == DataStrings.NewEntry)
                 day_info.Guides.Remove(e as NewEntry);
-            else if (e.tag == Strings.Event)
+            else if (e.tag == DataStrings.Event)
                 day_info.Events.Remove(e as Alarm);
 
             entries[e.Date] = day_info;

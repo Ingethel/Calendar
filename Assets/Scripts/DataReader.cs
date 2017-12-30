@@ -3,11 +3,7 @@ using System.Xml;
 using System.IO;
 using System.Linq;
 
-public class ThreadReader
-/* : ThreadJob  
- * After dummy testing, there is no need for threading. 
- * Can visit it again later after testing on the field.
- */
+public class DataReader
 {
 
     XmlDocument doc;
@@ -45,7 +41,7 @@ public class ThreadReader
             id = GetElementID(day)
         };
         {
-            XmlNodeList entries = day.GetElementsByTagName(Strings.NewEntry);
+            XmlNodeList entries = day.GetElementsByTagName(DataStrings.NewEntry);
             foreach (XmlElement entry in entries)
             {
                 NewEntry newGuide = new NewEntry();
@@ -58,7 +54,7 @@ public class ThreadReader
             }
         }
         {
-            XmlNodeList entries = day.GetElementsByTagName(Strings.Event);
+            XmlNodeList entries = day.GetElementsByTagName(DataStrings.Event);
             foreach (XmlElement entry in entries)
             {
                 Alarm alarm = new Alarm();
@@ -96,7 +92,7 @@ public class ThreadReader
         {
             doc = new XmlDocument();
             doc.Load(filename);
-            XmlNodeList entries = doc.GetElementsByTagName(Strings.Day);
+            XmlNodeList entries = doc.GetElementsByTagName(DataStrings.Day);
             foreach(XmlElement day in entries)
             {
                 string id = GetElementID(day);
@@ -120,7 +116,7 @@ public class ThreadReader
             XmlTextWriter writer = new XmlTextWriter(filePath, null);
             writer.Formatting = Formatting.Indented;
             writer.WriteStartDocument();
-            writer.WriteDocType("Entries", null, null, Strings.doctype);
+            writer.WriteDocType("Entries", null, null, DataStrings.doctype);
             writer.WriteStartElement("Entries");
             writer.WriteEndElement();
             writer.WriteEndDocument();
@@ -140,7 +136,7 @@ public class ThreadReader
         XmlElement day = GetElementById(id);
         if (day == null)
         {
-            day = doc.CreateElement(Strings.Day);
+            day = doc.CreateElement(DataStrings.Day);
             day.SetAttribute("id", "_" + id);
 
         }
@@ -160,7 +156,7 @@ public class ThreadReader
         XmlElement day = GetElementById(item.Date);
         if (day == null)
         {
-            day = doc.CreateElement(Strings.Day);
+            day = doc.CreateElement(DataStrings.Day);
             day.SetAttribute("id", "_" + item.Date);
 
             XmlElement root = doc.DocumentElement;
@@ -236,7 +232,7 @@ public class ThreadReader
                         {
                             doc = new XmlDocument();
                             doc.Load(file);
-                            XmlNodeList days = doc.GetElementsByTagName(Strings.Day);
+                            XmlNodeList days = doc.GetElementsByTagName(DataStrings.Day);
                             foreach(XmlElement day in days)
                             {
                                 string officer = day.GetAttribute("officer");
@@ -250,8 +246,8 @@ public class ThreadReader
                                     result.AddGuide(n);
                                 }
 
-                                XmlNodeList teams = day.GetElementsByTagName(Strings.NameOfTeam);
-                                XmlNodeList guides = day.GetElementsByTagName(Strings.Guide);
+                                XmlNodeList teams = day.GetElementsByTagName(DataStrings.NameOfTeam);
+                                XmlNodeList guides = day.GetElementsByTagName(DataStrings.Guide);
 
                                 foreach (XmlElement entry in teams)
                                 {

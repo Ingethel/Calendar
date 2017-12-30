@@ -13,8 +13,6 @@ public class IViewManager : Panel
     public GameObject guideView;
     public GameObject guideList;
 
-    protected string[] weekTimes;
-    protected string[] weekendTimes;
     protected string[] setTime;
 
     protected int fillerSlots;
@@ -22,10 +20,7 @@ public class IViewManager : Panel
     protected override void Awake()
     {
         base.Awake();
-
-        weekTimes = PlayerPrefs.GetString("WeekTimes", "09:00,10:30,12:00,13:30").Split(',');
-        weekendTimes = PlayerPrefs.GetString("WeekendTimes", "10:30,12:00,13:30,15:00,16:30").Split(',');
-
+        
         gManager.OnUpdateWeekTimes += UpdateTimetable;
         info = new DAY();
     }
@@ -72,7 +67,7 @@ public class IViewManager : Panel
 
     protected void FillEmptySlots()
     {
-        int threshold = PlayerPrefs.GetInt("MinimumTourTime", 45);
+        int threshold = (int)SettingsManager.Read_i("MinimumTourTime");
         int minTime = 100000, maxTime = 0;
 
         NewEntry n1;
@@ -124,13 +119,7 @@ public class IViewManager : Panel
 
     public void UpdateTimetable()
     {
-        weekTimes = PlayerPrefs.GetString("WeekTimes").Split(',');
-        weekendTimes = PlayerPrefs.GetString("WeekendTimes").Split(',');
-
-        if (assignedDate.DayOfWeek == System.DayOfWeek.Saturday || assignedDate.DayOfWeek == System.DayOfWeek.Sunday)
-            setTime = weekendTimes;
-        else
-            setTime = weekTimes;
+        setTime = SettingsManager.Read(assignedDate.DayOfWeek.ToString()).Split(',');
     }
     
     public override void Refresh()

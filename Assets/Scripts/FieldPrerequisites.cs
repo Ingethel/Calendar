@@ -18,9 +18,9 @@ public class FieldPrerequisites : MonoBehaviour {
         if (i == 1)
             price = 1;
         else if (i == 2)
-            price = PlayerPrefs.GetFloat("ReducedTicketPrice", 1.5f);
+            price = SettingsManager.Read_i("ReducedTicketPrice");
         else if (i == 3)
-            price = PlayerPrefs.GetFloat("TicketPrice", 3);
+            price = SettingsManager.Read_i("TicketPrice");
 
         float sum = 0f;
         foreach(InputField field in fields)

@@ -30,16 +30,16 @@ public class NewEntry : Item
 
     public NewEntry()
     {
-        tag = Strings.NewEntry;
-        labels = new string[]{ Strings.StartTime, Strings.EndTime, Strings.NameOfTeam, Strings.NumberOfPeople, Strings.PersonInCharge, Strings.Telephone, Strings.ConfirmationDate, Strings.Guide, Strings.Notes, Strings.Colour };
+        tag = DataStrings.NewEntry;
+        labels = new string[]{ DataStrings.StartTime, DataStrings.EndTime, DataStrings.NameOfTeam, DataStrings.NumberOfPeople, DataStrings.PersonInCharge, DataStrings.Telephone, DataStrings.ConfirmationDate, DataStrings.Guide, DataStrings.Notes, DataStrings.Colour };
         attributes = new string[] { "", "", "", "", "", "", "", "", "", "255.255.255" };
         filler = true;
     }
 
     public NewEntry(string[] list, string d)
     {
-        tag = Strings.NewEntry;
-        labels = new string[] { Strings.StartTime, Strings.EndTime, Strings.NameOfTeam, Strings.NumberOfPeople, Strings.PersonInCharge, Strings.Telephone, Strings.ConfirmationDate, Strings.Guide, Strings.Notes, Strings.Colour };
+        tag = DataStrings.NewEntry;
+        labels = new string[] { DataStrings.StartTime, DataStrings.EndTime, DataStrings.NameOfTeam, DataStrings.NumberOfPeople, DataStrings.PersonInCharge, DataStrings.Telephone, DataStrings.ConfirmationDate, DataStrings.Guide, DataStrings.Notes, DataStrings.Colour };
         attributes = list;
         SetDate(d);
         filler = false;
@@ -67,17 +67,17 @@ public class Alarm : Item
     public bool report = false;
     public Alarm()
     {
-        tag = Strings.Event;
-        labels = new string[] { Strings.Notes/*, Strings.R_Days, Strings.R_Months, Strings.R_Years*/};
+        tag = DataStrings.Event;
+        labels = new string[] { DataStrings.Notes/*, Strings.R_Days, Strings.R_Months, Strings.R_Years*/};
         attributes = new string[] { ""/*, "", "", ""*/ };
         filler = true;
     }
 
     public Alarm(string d, string n)
     {
-        tag = Strings.Event;
+        tag = DataStrings.Event;
         SetDate(d);
-        labels = new string[] { Strings.Notes/*, Strings.R_Days, Strings.R_Months, Strings.R_Years*/ };
+        labels = new string[] { DataStrings.Notes/*, Strings.R_Days, Strings.R_Months, Strings.R_Years*/ };
         attributes = new string[] { n/*, "0", "0", "0"*/ };
         filler = false;
     }

@@ -15,20 +15,8 @@ public class SettingsField : MonoBehaviour {
             gmanager = FindObjectOfType<GameManager>();
         if (!field)
             field = GetComponent<InputField>();
-
-        switch (valueType)
-        {
-            case ValueType.INT:
-                field.text = PlayerPrefs.GetInt(id).ToString();
-                break;
-            case ValueType.FLOAT:
-                field.text = PlayerPrefs.GetFloat(id).ToString();
-                break;
-            case ValueType.STRING:
-            default:
-                field.text = PlayerPrefs.GetString(id);
-                break;
-        }
+        
+        field.text = SettingsManager.Read(id); 
     }
 
     public void OnEndEdit()

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE Settings[
+<!ELEMENT Settings (Option*)>
+  <!ELEMENT Option (#PCDATA)>
+  <!ATTLIST Option id ID #REQUIRED>
+]>
+<Settings>
+  <Option id="FullScreen">0</Option>
+  <Option id="Language">0</Option>
+  <Option id="LastIdReset">0</Option>
+  <Option id="LastBackUp">12</Option>
+  <Option id="OldDataThreshold">2</Option>
+  <Option id="DataPath">0</Option>
+  <Option id="ExportPath">0</Option>
+  <Option id="ImportPath">0</Option>
+  <Option id="TicketPrice">3</Option>
+  <Option id="ReducedTicketPrice">1.5</Option>
+  <Option id="Monday">0</Option>
+  <Option id="Tuesday">09:00,10:30,12:00,13:30</Option>
+  <Option id="Wednesday">09:00,10:30,12:00,13:30</Option>
+  <Option id="Thursday">09:00,10:30,12:00,13:30</Option>
+  <Option id="Friday">09:00,10:30,12:00,13:30</Option>
+  <Option id="Saturday">10:30,12:00,13:30,15:00,16:30</Option>
+  <Option id="Sunday">10:30,12:00,13:30,15:00,16:30</Option>
+  <Option id="MinimumTourTime">40</Option>
+</Settings>

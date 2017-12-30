@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour {
     public event Action OnUpdateWeekTimes;
 
     public Language language;
-
+    
     public DateTime currentDate;
 
     void Awake()
@@ -33,18 +33,18 @@ public class GameManager : MonoBehaviour {
 
     void Start()
     {
-        Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, PlayerPrefs.GetInt("FullScreen") == 1);
-        headerObj.SetActive(PlayerPrefs.GetInt("FullScreen") == 1);
-        SetLanguage(PlayerPrefs.GetInt("Language"));
+        Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, SettingsManager.Read_i("FullScreen") == 1);
+        headerObj.SetActive(SettingsManager.Read_i("FullScreen") == 1);
+        SetLanguage((int)SettingsManager.Read_i("Language"));
 
-        if(currentDate.Month == 1 && currentDate.Day == 1 && PlayerPrefs.GetString("LastIdReset") != TimeConversions.DateTimeToString(currentDate))
+        if(currentDate.Month == 1 && currentDate.Day == 1 && SettingsManager.Read("LastIdReset") != TimeConversions.DateTimeToString(currentDate))
             ResetIDs();
 
-        if (PlayerPrefs.GetInt("LastBackUp") != currentDate.Month)
+        if (SettingsManager.Read_i("LastBackUp") != currentDate.Month)
         {
-            PlayerPrefs.SetInt("LastBackUp", currentDate.Month);
+            SettingsManager.Write("LastBackUp", currentDate.Month);
             RearrangeData();
-            ThreadReader.BackUp(DATA_PATH, EXPORT_PATH + "/CalendarDataBackUp", true);
+            DataReader.BackUp(DATA_PATH, EXPORT_PATH + "/CalendarDataBackUp", true);
         }
     }
 
@@ -55,22 +55,13 @@ public class GameManager : MonoBehaviour {
         {
             PlayerPrefs.SetInt("Start", 1);
             DATA_PATH = Application.dataPath + @"/Calendar Data";
-            PlayerPrefs.SetString("DataPath", DATA_PATH);
+            SettingsManager.Write("DataPath", DATA_PATH);
             EXPORT_PATH = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            PlayerPrefs.SetString("ExportPath", EXPORT_PATH);
+            SettingsManager.Write("ExportPath", EXPORT_PATH);
             IMPORT_PATH = "";
-            PlayerPrefs.SetString("ImportPath", IMPORT_PATH);
-            
+            SettingsManager.Write("ImportPath", IMPORT_PATH);
+
             ResetIDs();
-            PlayerPrefs.SetInt("OldDataThreshold", 2);
-
-            PlayerPrefs.SetFloat("TicketPrice", 3);
-            PlayerPrefs.SetFloat("ReducedTicketPrice", 1.5f);
-
-            PlayerPrefs.SetInt("MinimumTourTime", 40);
-
-            PlayerPrefs.SetString("WeekTimes", "09:00,10:30,12:00,13:30");
-            PlayerPrefs.SetString("WeekendTimes", "10:30,12:00,13:30,15:00,16:30");
         }
     }
 
@@ -80,7 +71,6 @@ public class GameManager : MonoBehaviour {
             OnReloadScene();
 
         PlayerPrefs.SetInt("LoadLastState", 1);
-        PlayerPrefs.SetInt("FullScreen", Screen.fullScreen ? 1 : 0);
         
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
@@ -96,9 +86,9 @@ public class GameManager : MonoBehaviour {
                 if (int.TryParse(dir.Substring(dir.LastIndexOf('\\') + 1), out folderMonth))
                 {
                     folderMonth = folderYear * 12 + folderMonth;
-                    if (currentDate.Year * 12 + currentDate.Month - folderMonth >= PlayerPrefs.GetInt("OldDataThreshold"))
+                    if (currentDate.Year * 12 + currentDate.Month - folderMonth >= SettingsManager.Read_i("OldDataThreshold"))
                     {
-                        ThreadReader.BackUp(dir, LEGACY_FOLDER + dir.Substring(DATA_FOLDER.Length), false);
+                        DataReader.BackUp(dir, LEGACY_FOLDER + dir.Substring(DATA_FOLDER.Length), false);
                         Directory.Delete(dir, true);
                     }
                 }
@@ -112,8 +102,8 @@ public class GameManager : MonoBehaviour {
             language = new English();
         else if (value == 1)
             language = new Greek();
-        PlayerPrefs.SetInt("Language", value);
-
+        SettingsManager.Write("Language", value);
+        
         if (OnLanguageChange != null)
             OnLanguageChange();
         headerObj.GetComponentInChildren<UnityEngine.UI.Text>().text = language.Title;
@@ -131,6 +121,7 @@ public class GameManager : MonoBehaviour {
     public void SetFullScreen(bool b)
     {
         Screen.fullScreen = b;
+        SettingsManager.Write("FullScreen", b ? 1 : 0);
         headerObj.SetActive(b);
     }
 
@@ -167,12 +158,12 @@ public class GameManager : MonoBehaviour {
     {
         PlayerPrefs.SetInt("Guide", 0);
         PlayerPrefs.SetInt("Event", 0);
-        PlayerPrefs.SetString("LastIdReset", TimeConversions.DateTimeToString(currentDate));
+        SettingsManager.Write("LastIdReset", TimeConversions.DateTimeToString(currentDate));
     }
 
     void UpdateTimetable(string id, string value)
     {
-        PlayerPrefs.SetString(id, value);
+        SettingsManager.Write(id, value);
         if (OnUpdateWeekTimes != null)
             OnUpdateWeekTimes();
         CalendarViewController viewController = FindObjectOfType<CalendarViewController>();
@@ -198,12 +189,12 @@ public class GameManager : MonoBehaviour {
             case "MinimumTourTime":
                 int spacing = 0;
                 if(int.TryParse(s[2], out spacing))
-                    PlayerPrefs.SetInt("MinimumTourTime", spacing);
+                    SettingsManager.Write("MinimumTourTime", spacing);
                 break;
             case "LEGACY_THRESHOLD":
                 int time = 0;
                 if (int.TryParse(s[2], out time))
-                    PlayerPrefs.SetInt("OldDataThreshold", time);
+                    SettingsManager.Write("OldDataThreshold", time);
                 break;
             case "EXIT":
                 ExitApplication();
@@ -215,12 +206,12 @@ public class GameManager : MonoBehaviour {
                 if (s.Length == 3)
                 {
                     if (s[2] == "DATA")
-                        ThreadReader.BackUp(DATA_FOLDER, EXPORT_PATH + "/CalendarDataBackUp/Data", true);
+                        DataReader.BackUp(DATA_FOLDER, EXPORT_PATH + "/CalendarDataBackUp/Data", true);
                     else if (s[2] == "LEGACY")
-                        ThreadReader.BackUp(LEGACY_FOLDER, EXPORT_PATH + "/CalendarDataBackUp/Legacy", true);
+                        DataReader.BackUp(LEGACY_FOLDER, EXPORT_PATH + "/CalendarDataBackUp/Legacy", true);
                 }
                 else if (s.Length == 2)
-                    ThreadReader.BackUp(DATA_PATH, EXPORT_PATH + "/CalendarDataBackUp", true);
+                    DataReader.BackUp(DATA_PATH, EXPORT_PATH + "/CalendarDataBackUp", true);
 
                 break;
             case "REARRANGE":
@@ -232,11 +223,11 @@ public class GameManager : MonoBehaviour {
                     string path = s[2];
                     for (int i = 3; i < s.Length; i++)
                         path = path + " " + s[i];
-                    ThreadReader.BackUp(path, DATA_PATH, false);
+                    DataReader.BackUp(path, DATA_PATH, false);
                 }
                 else {
                     if(IMPORT_PATH != "")
-                        ThreadReader.BackUp(IMPORT_PATH, DATA_PATH, false);
+                        DataReader.BackUp(IMPORT_PATH, DATA_PATH, false);
                 }
                 ReloadScene();
                 break;
@@ -271,7 +262,7 @@ public class GameManager : MonoBehaviour {
                 {
                     float f = 0;
                     float.TryParse(s[2], out f);
-                    PlayerPrefs.SetFloat("TicketPrice", f);
+                    SettingsManager.Write("TicketPrice", f);
                 }
                 break;
             case "ReducedTicketPrice":
@@ -279,7 +270,7 @@ public class GameManager : MonoBehaviour {
                 {
                     float f = 0;
                     float.TryParse(s[2], out f);
-                    PlayerPrefs.SetFloat("ReducedTicketPrice", f);
+                    SettingsManager.Write("ReducedTicketPrice", f);
                 }
                 break;
             case "OPTIONS":
@@ -288,21 +279,21 @@ public class GameManager : MonoBehaviour {
             case "DataPath":
                 if (s.Length > 2)
                 {
-                    PlayerPrefs.SetString("DataPath", s[2]);
+                    SettingsManager.Write("DataPath", s[2]);
                     DATA_PATH = s[2];
                 }
                 break;
             case "ExportPath":
                 if (s.Length > 2)
                 {
-                    PlayerPrefs.SetString("ExportPath", s[2]);
+                    SettingsManager.Write("ExportPath", s[2]);
                     EXPORT_PATH = s[2];
                 }
                 break;
             case "ImportPath":
                 if (s.Length > 2)
                 {
-                    PlayerPrefs.SetString("ImportPath", s[2]);
+                    SettingsManager.Write("ImportPath", s[2]);
                     IMPORT_PATH = s[2];
                 }
                 break;

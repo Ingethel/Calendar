@@ -1,37 +1,65 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Xml;
+using System.IO;
+using System.Linq;
+using UnityEngine;
 
-public class SettingsManager : Panel {
+public static class SettingsManager{
 
-    public GameObject advanced;
-    public GameObject button;
-    public Sprite expand, collapse;
+    static XmlDocument doc;
     
-    public override void Open()
+    public static string Read(string id)
     {
-        base.Open();
-        Init();
+        if (doc == null)
+            doc = new XmlDocument();
+        doc.Load(Path.Combine(Application.streamingAssetsPath, "Settings.xml"));
+        XmlElement entry = doc.GetElementById(id);
+        return entry.InnerText;
     }
 
-    void Init()
+    public static float Read_i(string id)
     {
-        SettingsField[] settings = GetComponentsInChildren<SettingsField>();
-        foreach (SettingsField s in settings)
-            s.OnStart();
-        advanced.SetActive(false);
+        if (doc == null)
+            doc = new XmlDocument();
+        doc.Load(Path.Combine(Application.streamingAssetsPath, "Settings.xml"));
+        XmlElement entry = doc.GetElementById(id);
+        float i = 0;
+        float.TryParse(entry.InnerText, out i);
+        return i;
     }
 
-    public void ShowAdvanced()
+    public static void Write(string id, string data)
     {
-        advanced.SetActive(!advanced.activeSelf);
-        if (advanced.activeSelf)
-            button.GetComponent<UnityEngine.UI.Image>().sprite = collapse;
-        else
-            button.GetComponent<UnityEngine.UI.Image>().sprite = expand;
+        if (doc == null)
+            doc = new XmlDocument();
+        doc.Load(Path.Combine(Application.streamingAssetsPath, "Settings.xml"));
+        XmlElement entry = doc.GetElementById(id);
+        entry.InnerText = data;
+        doc.Save(Path.Combine(Application.streamingAssetsPath, "Settings.xml"));
+    }
+
+    public static void Write(string id, float data)
+    {
+        if (doc == null)
+            doc = new XmlDocument();
+        doc.Load(Path.Combine(Application.streamingAssetsPath, "Settings.xml"));
+        XmlElement entry = doc.GetElementById(id);
+        entry.InnerText = data.ToString();
+        doc.Save(Path.Combine(Application.streamingAssetsPath, "Settings.xml"));
     }
     
-    public void ButtonCommand(string s)
+}
+
+public class ColorGroup
+{
+    Color colour;
+    string name;
+    string id;
+
+    public ColorGroup(Color c, string s)
     {
-        gManager.Command(new string[] { "", s });
+        colour = c;
+        name = s;
     }
 
 }

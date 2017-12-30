@@ -147,7 +147,7 @@ public class Greek : Language
     }
 }
 
-public class Strings{
+public class DataStrings{
 
     public static string Entries = "Entries";
     public static string NewEntry = "NewEntry";
