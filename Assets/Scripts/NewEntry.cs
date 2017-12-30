@@ -27,19 +27,19 @@ public class Item
 [Serializable]
 public class NewEntry : Item
 {
-    
+
     public NewEntry()
     {
         tag = Strings.NewEntry;
-        labels = new string[]{ Strings.StartTime, Strings.EndTime, Strings.NameOfTeam, Strings.NumberOfPeople, Strings.PersonInCharge, Strings.Telephone, Strings.ConfirmationDate, Strings.Guide, Strings.Notes };
-        attributes = new string[] { "", "", "", "", "", "", "", "", "" };
+        labels = new string[]{ Strings.StartTime, Strings.EndTime, Strings.NameOfTeam, Strings.NumberOfPeople, Strings.PersonInCharge, Strings.Telephone, Strings.ConfirmationDate, Strings.Guide, Strings.Notes, Strings.Colour };
+        attributes = new string[] { "", "", "", "", "", "", "", "", "", "255.255.255" };
         filler = true;
     }
 
     public NewEntry(string[] list, string d)
     {
         tag = Strings.NewEntry;
-        labels = new string[] { Strings.StartTime, Strings.EndTime, Strings.NameOfTeam, Strings.NumberOfPeople, Strings.PersonInCharge, Strings.Telephone, Strings.ConfirmationDate, Strings.Guide, Strings.Notes };
+        labels = new string[] { Strings.StartTime, Strings.EndTime, Strings.NameOfTeam, Strings.NumberOfPeople, Strings.PersonInCharge, Strings.Telephone, Strings.ConfirmationDate, Strings.Guide, Strings.Notes, Strings.Colour };
         attributes = list;
         SetDate(d);
         filler = false;
@@ -53,6 +53,11 @@ public class NewEntry : Item
     public int GetEndTime()
     {
         return TimeConversions.StringTimeToInt(attributes[1], 60);
+    }
+
+    public int[] GetColor()
+    {
+        return TimeConversions.SplitString(attributes[attributes.Length - 1], '.');
     }
 }
 
@@ -208,9 +213,9 @@ public class TimeConversions
         return hours + ":" + minutes;
     }
 
-    private static int[] SplitTime(string s)
+    public static int[] SplitString(string s, char c)
     {
-        string[] time_s = s.Split(':');
+        string[] time_s = s.Split(c);
         int[] time_int = new int[time_s.Length];
         for (int i = 0; i < time_s.Length; i++)
             int.TryParse(time_s[i], out time_int[i]);
@@ -219,7 +224,7 @@ public class TimeConversions
 
     public static int StringTimeToInt(string s, int mod)
     {
-        int[] c_time = SplitTime(s);
+        int[] c_time = SplitString(s, ':');
         int time_i = c_time[0] * mod + c_time[1];
         return time_i;
     }

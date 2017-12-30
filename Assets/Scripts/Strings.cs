@@ -163,7 +163,7 @@ public class Strings{
     public static string Notes = "Notes";
     public static string Day = "Day";
     public static string file = "Guides.xml";
-
+    public static string Colour = "Colour";
     public static string Event = "Event";
     public static string R_Days = "RepeatDays";
     public static string R_Months = "RepeatMonths";
@@ -172,7 +172,7 @@ public class Strings{
     public static string doctype = 
         "<!ELEMENT Entries (Day*)>" + Environment.NewLine + 
         "<!ELEMENT Day (NewEntry*, Event*)>" + Environment.NewLine + 
-        "<!ELEMENT NewEntry (StartTime, EndTime, NameOfTeam, NumberOfPeople, PersonInCharge, Telephone, ConfirmationDate, Guide, Notes)>" + Environment.NewLine + 
+        "<!ELEMENT NewEntry (StartTime, EndTime, NameOfTeam, NumberOfPeople, PersonInCharge, Telephone, ConfirmationDate, Guide, Notes, Colour)>" + Environment.NewLine + 
         "<!ELEMENT Event (Notes, RepeatDays, RepeatMonths, RepeatYears)>" + Environment.NewLine +
         "<!ELEMENT StartTime (#PCDATA)>" + Environment.NewLine +
         "<!ELEMENT EndTime (#PCDATA)>" + Environment.NewLine +
@@ -183,6 +183,7 @@ public class Strings{
         "<!ELEMENT ConfirmationDate (#PCDATA)>" + Environment.NewLine +
         "<!ELEMENT Guide (#PCDATA)>" + Environment.NewLine +
         "<!ELEMENT Notes (#PCDATA)>" + Environment.NewLine +
+        "<!ELEMENT Colour (#PCDATA)>" + Environment.NewLine +
         "<!ELEMENT RepeatDays (#PCDATA)>" + Environment.NewLine +
         "<!ELEMENT RepeatMonths (#PCDATA)>" + Environment.NewLine +
         "<!ELEMENT RepeatYears (#PCDATA)>" + Environment.NewLine +
