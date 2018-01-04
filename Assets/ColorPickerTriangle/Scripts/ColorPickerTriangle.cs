@@ -88,7 +88,7 @@ public class ColorPickerTriangle : MonoBehaviour {
         if (MyPlane.Raycast(ray, out rayDistance))
         {
             Vector3 p = ray.GetPoint(rayDistance);
-            if (Vector3.Distance(p, transform.position) > MainRadius)
+            if (Vector3.Distance(p, transform.position) > MainRadius * transform.localScale[0])
                 return false;
             CurLocalPos = transform.worldToLocalMatrix.MultiplyPoint(p);
             return true;

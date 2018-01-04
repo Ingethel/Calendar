@@ -1,42 +1,28 @@
 <?xml version="1.0"?>
-<!DOCTYPE Entries[<!ELEMENT Entries (Day*)>
-<!ELEMENT Day (NewEntry*, Event*)>
-<!ELEMENT NewEntry (StartTime, EndTime, NameOfTeam, NumberOfPeople, PersonInCharge, Telephone, ConfirmationDate, Guide, Notes)>
-<!ELEMENT Event (Notes, RepeatDays, RepeatMonths, RepeatYears)>
-<!ELEMENT StartTime (#PCDATA)>
-<!ELEMENT EndTime (#PCDATA)>
-<!ELEMENT NameOfTeam (#PCDATA)>
-<!ELEMENT NumberOfPeople (#PCDATA)>
-<!ELEMENT PersonInCharge (#PCDATA)>
-<!ELEMENT Telephone (#PCDATA)>
-<!ELEMENT ConfirmationDate (#PCDATA)>
-<!ELEMENT Guide (#PCDATA)>
-<!ELEMENT Notes (#PCDATA)>
-<!ELEMENT RepeatDays (#PCDATA)>
-<!ELEMENT RepeatMonths (#PCDATA)>
-<!ELEMENT RepeatYears (#PCDATA)>
+<!DOCTYPE Entries[
+<!ELEMENT Entries (Day*)>
+<!ELEMENT Day (Event*, Alarm*)>
+<!ELEMENT Event (Attribute*)>
+<!ELEMENT Alarm (Attribute*)>
+<!ELEMENT Attribute (#PCDATA)>
 <!ATTLIST Day id ID #REQUIRED>
 <!ATTLIST Day officer CDATA #IMPLIED>
-<!ATTLIST NewEntry id ID #REQUIRED>
-<!ATTLIST Event id ID #REQUIRED>]>
+<!ATTLIST Event id ID #REQUIRED>
+<!ATTLIST Alarm id ID #REQUIRED>
+<!ATTLIST Attribute class CDATA #REQUIRED>
+]>
 <Entries>
   <Day id="_19.12.2017">
-    <NewEntry id="_guide.0">
-      <StartTime>10:30</StartTime>
-      <EndTime>11:00</EndTime>
-      <NameOfTeam>sdfsdf</NameOfTeam>
-      <NumberOfPeople>
-      </NumberOfPeople>
-      <PersonInCharge>
-      </PersonInCharge>
-      <Telephone>
-      </Telephone>
-      <ConfirmationDate>
-      </ConfirmationDate>
-      <Guide>
-      </Guide>
-      <Notes>
-      </Notes>
-    </NewEntry>
+    <Event id="_guide.0">
+      <Attribute class ="StartTime">10:30</Attribute>
+      <Attribute class ="EndTime">11:00</Attribute>
+      <Attribute class ="NameOfTeam">sdfsdf</Attribute>
+      <Attribute class ="NumberOfPeople"></Attribute>
+      <Attribute class ="PersonInCharge"></Attribute>
+      <Attribute class ="Telephone"></Attribute>
+      <Attribute class ="ConfirmationDate"></Attribute>
+      <Attribute class ="Guide"></Attribute>
+      <Attribute class ="Notes"></Attribute>
+    </Event>
   </Day>
 </Entries>

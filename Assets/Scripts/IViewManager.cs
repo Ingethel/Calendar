@@ -43,10 +43,10 @@ public class IViewManager : Panel
     protected virtual void DisplayInfo()
     {
         if(info != null)
-            for (int i = 0; i < info.Guides.Count(); i++)
+            for (int i = 0; i < info.Events.Count(); i++)
             {
-                NewEntry n;
-                if (info.Guides.TryGet(i, out n)){
+                Event n;
+                if (info.Events.TryGet(i, out n)){
                     GameObject o = Instantiate(guideView);
                     o.transform.SetParent(guideList.transform);
                     o.transform.localScale = Vector3.one;
@@ -57,7 +57,7 @@ public class IViewManager : Panel
 
     protected void AddFiller(string startTime, string endTime)
     {
-        NewEntry n = new NewEntry();
+        Event n = new Event();
         n.attributes[0] = startTime;
         n.attributes[1] = endTime;
         n.SetDate(assignedDate.Day.ToString() + "." + assignedDate.Month.ToString() + "." + assignedDate.Year.ToString());
@@ -70,15 +70,15 @@ public class IViewManager : Panel
         int threshold = (int)SettingsManager.Read_i("MinimumTourTime");
         int minTime = 100000, maxTime = 0;
 
-        NewEntry n1;
-        if (info.Guides.TryGet(0, out n1))
+        Event n1;
+        if (info.Events.TryGet(0, out n1))
         {
             if (n1.GetStartTime() < minTime) minTime = n1.GetStartTime();
             if (n1.GetEndTime() > maxTime) maxTime = n1.GetEndTime();
 
-            for (int i = 1; i < info.Guides.Count(); i++)
+            for (int i = 1; i < info.Events.Count(); i++)
             {
-                if (info.Guides.TryGet(i, out n1))
+                if (info.Events.TryGet(i, out n1))
                 {
                     if (n1.GetStartTime() - maxTime >= threshold)
                         AddFiller(TimeConversions.IntTimeToString(maxTime, 60), n1.attributes[0]);
@@ -115,7 +115,7 @@ public class IViewManager : Panel
         }
     }
 
-    protected virtual void AssignInfo(GameObject o, NewEntry n) {}
+    protected virtual void AssignInfo(GameObject o, Event n) {}
 
     public void UpdateTimetable()
     {

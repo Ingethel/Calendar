@@ -1,5 +1,5 @@
-﻿public class SearchViewItem : IItemListView<NewEntry> {
-    public override void Allocate(NewEntry n)
+﻿public class SearchViewItem : IItemListView<Event> {
+    public override void Allocate(Event n)
     {
         base.Allocate(n);
         if (item.filler)

@@ -120,8 +120,8 @@ public class CalendarViewController : ViewController
             temp = currentDate.AddDays(i);
             SearchResult search = data.TryGetEntries(temp.Day.ToString() + "." + temp.Month.ToString() + "." + temp.Year.ToString(), false);
             if (search.value)
-                if (search.info.Events.Count > 0)
-                    eventsThisWeek.AddRange(search.info.Events);
+                if (search.info.Alarms.Count > 0)
+                    eventsThisWeek.AddRange(search.info.Alarms);
                 
         }
         eventsThisWeek.RemoveAll(x => x.report);

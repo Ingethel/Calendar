@@ -1,7 +1,7 @@
-﻿public class DayGuideView : IItemListView<NewEntry>
+﻿public class DayGuideView : IItemListView<Event>
 {
     
-    public override void Allocate(NewEntry n)
+    public override void Allocate(Event n)
     {
         base.Allocate(n);
         SetTime(n.attributes[0] + " - " + n.attributes[1]);

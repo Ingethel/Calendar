@@ -9,10 +9,10 @@ public class DayViewManager : IDayView {
 
     public string[] GetEmptySlots() {
         List<string>  EmptySlots = new List<string>();
-        for (int i = 0; i < info.Guides.Count(); i++)
+        for (int i = 0; i < info.Events.Count(); i++)
         {
-            NewEntry n;
-            info.Guides.TryGet(i, out n);
+            Event n;
+            info.Events.TryGet(i, out n);
             if (n.filler)
             {
                 EmptySlots.Add(n.attributes[0] + "-" + n.attributes[1]);
@@ -54,7 +54,7 @@ public class DayViewManager : IDayView {
     {
         base.OnSetView();
         RequestData();
-        if (isMonday) {
+        if (isClosed) {
             weeklyButton.SetActive(true);
         }
         else
@@ -64,7 +64,7 @@ public class DayViewManager : IDayView {
         headers[1].GetComponentInParent<InputField>().text = info.GetOfficer();
     }
     
-    protected override void AssignInfo(GameObject o, NewEntry n)
+    protected override void AssignInfo(GameObject o, Event n)
     {
         DayGuideView o_view = o.GetComponent<DayGuideView>();
         if (o_view != null)
@@ -73,7 +73,7 @@ public class DayViewManager : IDayView {
 
     protected override void DisplayInfo()
     {
-        if (info == null || info.Guides.Count() == 0)
+        if (info == null || info.Events.Count() == 0)
         {
             for (int i = 0; i < setTime.Length - 1; i++)
             {
@@ -84,7 +84,7 @@ public class DayViewManager : IDayView {
                 FillEmptySlots();
         }
         base.DisplayInfo();
-        if (info.Events.Count > 0)
+        if (info.Alarms.Count > 0)
         {
             AlarmIndicatorPanel.SetActive(true);
             flagAlrm = true;

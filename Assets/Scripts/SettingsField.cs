@@ -2,10 +2,8 @@
 using UnityEngine.UI;
 
 public class SettingsField : MonoBehaviour {
-
-    public enum ValueType { INT, FLOAT, STRING };
+    
     public string id;
-    public ValueType valueType;
     InputField field;    
     GameManager gmanager;
 

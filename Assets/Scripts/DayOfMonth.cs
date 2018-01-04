@@ -30,7 +30,7 @@ public class DayOfMonth : IDayView{
     {
         DateIndicatorPanel.SetActive(true);
         selectable.interactable = true;
-        if (isMonday)
+        if (isClosed)
         {
             Image img = GetComponent<Image>();
             if (img)
@@ -38,12 +38,12 @@ public class DayOfMonth : IDayView{
         }
         else
         {
-            if (info.Guides.Count() < setTime.Length - 1)
+            if (info.Events.Count() < setTime.Length - 1)
                 FillEmptySlots();
             
             base.DisplayInfo();
         }
-        if (info.Events.Count > 0)
+        if (info.Alarms.Count > 0)
         {
             AlarmIndicatorPanel.SetActive(true);
             flagAlrm = true;
@@ -52,20 +52,20 @@ public class DayOfMonth : IDayView{
 
     protected override void OnSetView() {
         base.OnSetView();
-        if (!isMonday)
+        if (!isClosed)
             RequestData();
         DisplayInfo();
     }
     
     public override void RequestView()
     {
-        if (isMonday)
+        if (isClosed)
             calendarController.RequestView(CalendarViewController.State.WEEKLY, assignedDate);
         else
             calendarController.RequestView(CalendarViewController.State.DAILY, assignedDate);
     }
     
-    protected override void AssignInfo(GameObject o, NewEntry n)
+    protected override void AssignInfo(GameObject o, Event n)
     {
         if (!n.filler) {
             Image img = o.GetComponent<Image>();

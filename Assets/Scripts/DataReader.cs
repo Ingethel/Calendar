@@ -25,7 +25,7 @@ public class DataReader
         {
             for (int i = 0; i < item.attributes.Length; i++)
             {
-                if (element.Name == item.labels[i])
+                if (element.GetAttribute("class") == item.labels[i])
                 {
                     item.attributes[i] = element.InnerText;
                     break;
@@ -41,10 +41,10 @@ public class DataReader
             id = GetElementID(day)
         };
         {
-            XmlNodeList entries = day.GetElementsByTagName(DataStrings.NewEntry);
+            XmlNodeList entries = day.GetElementsByTagName(DataStrings.Event);
             foreach (XmlElement entry in entries)
             {
-                NewEntry newGuide = new NewEntry();
+                Event newGuide = new Event();
                 XmlNodeList entryInfo = entry.ChildNodes;
                 newGuide = ReadItem(entryInfo, newGuide);
                 newGuide.filler = false;
@@ -54,7 +54,7 @@ public class DataReader
             }
         }
         {
-            XmlNodeList entries = day.GetElementsByTagName(DataStrings.Event);
+            XmlNodeList entries = day.GetElementsByTagName(DataStrings.Alarm);
             foreach (XmlElement entry in entries)
             {
                 Alarm alarm = new Alarm();
@@ -238,7 +238,7 @@ public class DataReader
                                 string officer = day.GetAttribute("officer");
                                 if (officer.ToLower().Contains(searchTerm))
                                 {
-                                    NewEntry n = new NewEntry();
+                                    Event n = new Event();
                                     n.SetDate(GetElementID(day));
                                     n.attributes[8] = officer;
                                     n.attributes[0] = "00:00";
@@ -254,7 +254,7 @@ public class DataReader
                                     if (entry.InnerText.ToLower().Contains(searchTerm))
                                     {
                                         XmlNodeList entryInfo = entry.ParentNode.ChildNodes;
-                                        NewEntry guide = new NewEntry();
+                                        Event guide = new Event();
                                         guide = ReadItem(entryInfo, guide);
                                         guide.filler = false;
                                         guide.SetDate(GetElementID(day));
@@ -268,7 +268,7 @@ public class DataReader
                                     if (entry.InnerText.ToLower().Contains(searchTerm))
                                     {
                                         XmlNodeList entryInfo = entry.ParentNode.ChildNodes;
-                                        NewEntry guide = new NewEntry();
+                                        Event guide = new Event();
                                         guide = ReadItem(entryInfo, guide);
                                         guide.filler = false;
                                         guide.SetDate(GetElementID(day));

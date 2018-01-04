@@ -1,26 +1,33 @@
 <?xml version="1.0"?>
 <!DOCTYPE Settings[
-<!ELEMENT Settings (Option*)>
+<!ELEMENT Settings (Option*, Timetable*, ColorGroup*)>
   <!ELEMENT Option (#PCDATA)>
+  <!ELEMENT Timetable (#PCDATA)>  
+  <!ELEMENT ColorGroup (#PCDATA)>  
   <!ATTLIST Option id ID #REQUIRED>
+  <!ATTLIST Timetable id ID #REQUIRED>
+  <!ATTLIST ColorGroup id ID #REQUIRED>
 ]>
 <Settings>
   <Option id="FullScreen">0</Option>
   <Option id="Language">0</Option>
-  <Option id="LastIdReset">0</Option>
-  <Option id="LastBackUp">12</Option>
+  <Option id="LastIdReset">1.1.2018</Option>
+  <Option id="LastBackUp">1</Option>
   <Option id="OldDataThreshold">2</Option>
   <Option id="DataPath">0</Option>
   <Option id="ExportPath">0</Option>
   <Option id="ImportPath">0</Option>
   <Option id="TicketPrice">3</Option>
   <Option id="ReducedTicketPrice">1.5</Option>
-  <Option id="Monday">0</Option>
-  <Option id="Tuesday">09:00,10:30,12:00,13:30</Option>
-  <Option id="Wednesday">09:00,10:30,12:00,13:30</Option>
-  <Option id="Thursday">09:00,10:30,12:00,13:30</Option>
-  <Option id="Friday">09:00,10:30,12:00,13:30</Option>
-  <Option id="Saturday">10:30,12:00,13:30,15:00,16:30</Option>
-  <Option id="Sunday">10:30,12:00,13:30,15:00,16:30</Option>
   <Option id="MinimumTourTime">40</Option>
+  <Timetable id="Monday">0</Timetable>
+  <Timetable id="Tuesday">09:00,10:30,12:00,13:30</Timetable>
+  <Timetable id="Wednesday">09:00,10:30,12:00,13:30</Timetable>
+  <Timetable id="Thursday">09:00,10:30,12:00,13:30</Timetable>
+  <Timetable id="Friday">09:00,10:30,12:00,13:30</Timetable>
+  <Timetable id="Saturday">10:30,12:00,13:30,15:00,16:30</Timetable>
+  <Timetable id="Sunday">10:30,12:00,13:30,15:00,16:30</Timetable>
+  <ColorGroup id="_colorGroup.7">normal 0.2323276 0.4925334 0.5661765</ColorGroup>
+  <ColorGroup id="_colorGroup.16">abnormal 0.7377626 0.4335509 0.320424</ColorGroup>
+  <ColorGroup id="_colorGroup.17">funky 0.7377626 0.320424 0.6503072</ColorGroup>
 </Settings>

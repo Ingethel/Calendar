@@ -22,23 +22,25 @@ public class Item
         int.TryParse(temp[1], out month);
         int.TryParse(temp[2], out year);
     }
+    
 }
 
 [Serializable]
-public class NewEntry : Item
+public class Event : Item
 {
+    ColorGroup color;
 
-    public NewEntry()
+    public Event()
     {
-        tag = DataStrings.NewEntry;
+        tag = DataStrings.Event;
         labels = new string[]{ DataStrings.StartTime, DataStrings.EndTime, DataStrings.NameOfTeam, DataStrings.NumberOfPeople, DataStrings.PersonInCharge, DataStrings.Telephone, DataStrings.ConfirmationDate, DataStrings.Guide, DataStrings.Notes, DataStrings.Colour };
         attributes = new string[] { "", "", "", "", "", "", "", "", "", "255.255.255" };
         filler = true;
     }
 
-    public NewEntry(string[] list, string d)
+    public Event(string[] list, string d)
     {
-        tag = DataStrings.NewEntry;
+        tag = DataStrings.Event;
         labels = new string[] { DataStrings.StartTime, DataStrings.EndTime, DataStrings.NameOfTeam, DataStrings.NumberOfPeople, DataStrings.PersonInCharge, DataStrings.Telephone, DataStrings.ConfirmationDate, DataStrings.Guide, DataStrings.Notes, DataStrings.Colour };
         attributes = list;
         SetDate(d);
@@ -67,51 +69,28 @@ public class Alarm : Item
     public bool report = false;
     public Alarm()
     {
-        tag = DataStrings.Event;
-        labels = new string[] { DataStrings.Notes/*, Strings.R_Days, Strings.R_Months, Strings.R_Years*/};
-        attributes = new string[] { ""/*, "", "", ""*/ };
+        tag = DataStrings.Alarm;
+        labels = new string[] { DataStrings.Notes };
+        attributes = new string[] { "" };
         filler = true;
     }
 
     public Alarm(string d, string n)
     {
-        tag = DataStrings.Event;
+        tag = DataStrings.Alarm;
         SetDate(d);
-        labels = new string[] { DataStrings.Notes/*, Strings.R_Days, Strings.R_Months, Strings.R_Years*/ };
-        attributes = new string[] { n/*, "0", "0", "0"*/ };
+        labels = new string[] { DataStrings.Notes };
+        attributes = new string[] { n };
         filler = false;
     }
-    
-    /*
-    public Alarm(string d, string n, int repeat, int by)
-    {
-        tag = Strings.Event;
-        SetDate(d);
-        labels = new string[] { Strings.Notes, Strings.R_Days, Strings.R_Months, Strings.R_Years };
-        attributes = new string[] { n, "0", "0", "0" };
-        switch (by)
-        {
-            case 0:
-                attributes[1] = repeat.ToString();
-                break;
-            case 1:
-                attributes[2] = repeat.ToString();
-                break;
-            case 2:
-                attributes[3] = repeat.ToString();
-                break;
-            default:
-                break;
-        }
-    }
-    */
+
 }
 
 
-public class NewEntryComparer : IComparer<NewEntry>
+public class NewEntryComparer : IComparer<Event>
 {
     
-    public int Compare(NewEntry x, NewEntry y)
+    public int Compare(Event x, Event y)
     {
         int time_x = x.GetStartTime();
         int time_y = y.GetStartTime();
@@ -138,24 +117,24 @@ public class NewEntryComparer : IComparer<NewEntry>
 
 public class NewEntryList
 {
-    private List<NewEntry> list; 
+    private List<Event> list; 
     private NewEntryComparer comparer;
 
     public NewEntryList()
     {
-        list = new List<NewEntry>();
+        list = new List<Event>();
         comparer = new NewEntryComparer();
     }
 
-    public void Remove(NewEntry e)
+    public void Remove(Event e)
     {
         list.Remove(e);
     }
 
-    public void Add(NewEntry e)
+    public void Add(Event e)
     {
         if (list == null || list.Count == 0)
-            list = new List<NewEntry> { e };
+            list = new List<Event> { e };
         else
         {
             int index = list.BinarySearch(e, comparer);
@@ -180,7 +159,7 @@ public class NewEntryList
             return 0;
     }
     
-    public bool TryGet(int i, out NewEntry n)
+    public bool TryGet(int i, out Event n)
     {
         if(i < list.Count)
         {
@@ -225,8 +204,12 @@ public class TimeConversions
     public static int StringTimeToInt(string s, int mod)
     {
         int[] c_time = SplitString(s, ':');
-        int time_i = c_time[0] * mod + c_time[1];
-        return time_i;
+        if(c_time.Length == 2)
+        {
+            int time_i = c_time[0] * mod + c_time[1];
+            return time_i;
+        }
+        else return 0;
     }
 
     public static bool IntInRange(int i, int min, int max)
@@ -242,40 +225,40 @@ public class TimeConversions
 
 public class DAY
 {
-    public NewEntryList Guides { private set; get; }
-    public List<Alarm> Events { private set; get; }
+    public NewEntryList Events { private set; get; }
+    public List<Alarm> Alarms { private set; get; }
     public List<string> Officers { private set; get; }
     public string id;
 
     public DAY()
     {
-        Guides = new NewEntryList();
-        Events = new List<Alarm>();
+        Events = new NewEntryList();
+        Alarms = new List<Alarm>();
         Officers = new List<String>() { "" };
         id = "";
     }
 
-    public void AddGuide(NewEntry n)
+    public void AddGuide(Event n)
     {
         if(!n.filler)
             if(n.id == "")
                 n.id = "_guide." + DataManager.GenerateNewIdFor("Guide");
-        Guides.Add(n);
+        Events.Add(n);
     }
     
     public void AddEvent(Alarm n)
     {
         if (n.report)
-            foreach (Alarm a in Events)
+            foreach (Alarm a in Alarms)
                 if (a.report)
                     return;
 
         if (n.report)
-            Events.Insert(0, n);
+            Alarms.Insert(0, n);
         else if (n.id == "")
         {
-            n.id = "_event." + DataManager.GenerateNewIdFor("Event");
-            Events.Add(n);
+            n.id = "_alarm." + DataManager.GenerateNewIdFor("Event");
+            Alarms.Add(n);
         }
     }
 

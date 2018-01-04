@@ -150,7 +150,7 @@ public class Greek : Language
 public class DataStrings{
 
     public static string Entries = "Entries";
-    public static string NewEntry = "NewEntry";
+    public static string Event = "Event";
     public static string Officer = "Officer";
     public static string StartTime = "StartTime";
     public static string EndTime = "EndTime";
@@ -164,31 +164,21 @@ public class DataStrings{
     public static string Day = "Day";
     public static string file = "Guides.xml";
     public static string Colour = "Colour";
-    public static string Event = "Event";
+    public static string Alarm = "Alarm";
     public static string R_Days = "RepeatDays";
     public static string R_Months = "RepeatMonths";
     public static string R_Years = "RepeatYears";
-    
-    public static string doctype = 
-        "<!ELEMENT Entries (Day*)>" + Environment.NewLine + 
-        "<!ELEMENT Day (NewEntry*, Event*)>" + Environment.NewLine + 
-        "<!ELEMENT NewEntry (StartTime, EndTime, NameOfTeam, NumberOfPeople, PersonInCharge, Telephone, ConfirmationDate, Guide, Notes, Colour)>" + Environment.NewLine + 
-        "<!ELEMENT Event (Notes, RepeatDays, RepeatMonths, RepeatYears)>" + Environment.NewLine +
-        "<!ELEMENT StartTime (#PCDATA)>" + Environment.NewLine +
-        "<!ELEMENT EndTime (#PCDATA)>" + Environment.NewLine +
-        "<!ELEMENT NameOfTeam (#PCDATA)>" + Environment.NewLine +
-        "<!ELEMENT NumberOfPeople (#PCDATA)>" + Environment.NewLine +
-        "<!ELEMENT PersonInCharge (#PCDATA)>" + Environment.NewLine +
-        "<!ELEMENT Telephone (#PCDATA)>" + Environment.NewLine +
-        "<!ELEMENT ConfirmationDate (#PCDATA)>" + Environment.NewLine +
-        "<!ELEMENT Guide (#PCDATA)>" + Environment.NewLine +
-        "<!ELEMENT Notes (#PCDATA)>" + Environment.NewLine +
-        "<!ELEMENT Colour (#PCDATA)>" + Environment.NewLine +
-        "<!ELEMENT RepeatDays (#PCDATA)>" + Environment.NewLine +
-        "<!ELEMENT RepeatMonths (#PCDATA)>" + Environment.NewLine +
-        "<!ELEMENT RepeatYears (#PCDATA)>" + Environment.NewLine +
+
+    public static string doctype =
+        "<!ELEMENT Entries(Day*)>" + Environment.NewLine +
+        "<!ELEMENT Day(Event*, Alarm*)>" + Environment.NewLine +
+        "<!ELEMENT Event(Attribute*)>" + Environment.NewLine +
+        "<!ELEMENT Alarm(Attribute*)>" + Environment.NewLine +
+        "<!ELEMENT Attribute(#PCDATA)>" + Environment.NewLine +
         "<!ATTLIST Day id ID #REQUIRED>" + Environment.NewLine +
         "<!ATTLIST Day officer CDATA #IMPLIED>" + Environment.NewLine +
-        "<!ATTLIST NewEntry id ID #REQUIRED>" + Environment.NewLine +
-        "<!ATTLIST Event id ID #REQUIRED>";
+        "<!ATTLIST Event id ID #REQUIRED>" + Environment.NewLine +
+        "<!ATTLIST Alarm id ID #REQUIRED>" + Environment.NewLine +
+        "<!ATTLIST Attribute class CDATA #REQUIRED>" + Environment.NewLine;
+       
 }

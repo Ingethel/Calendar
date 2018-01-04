@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-public class NewEntryPanelHandler : ItemPanel<NewEntry> {
+public class NewEntryPanelHandler : ItemPanel<Event> {
 
     public GameObject slotExpander;
     public GameObject slotPanel;
     public Sprite expand, collapse;
     
-    public override void PreviewEntry(NewEntry n)
+    public override void PreviewEntry(Event n)
     {
         base.PreviewEntry(n);
 
@@ -76,7 +76,7 @@ public class NewEntryPanelHandler : ItemPanel<NewEntry> {
         string[] inputs = { fields[5].inputs[0].text + ":" + fields[5].inputs[1].text, fields[5].inputs[2].text + ":" + fields[5].inputs[3].text,
                 TryGetText(fields[0].inputs[0]), TryGetText(fields[1].inputs[0]), TryGetText(fields[2].inputs[0]), TryGetText(fields[3].inputs[0]),
                 TryGetText(fields[6].inputs[0]), TryGetText(fields[7].inputs[0]), TryGetText(fields[8].inputs[0])};
-        item = new NewEntry(inputs, fields[4].inputs[0].text + "." + fields[4].inputs[1].text + "." + fields[4].inputs[2].text);
+        item = new Event(inputs, fields[4].inputs[0].text + "." + fields[4].inputs[1].text + "." + fields[4].inputs[2].text);
     }
 
     protected override void setTitle()

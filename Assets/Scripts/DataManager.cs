@@ -74,9 +74,9 @@ public class DataManager : MonoBehaviour
         if (!entries.TryGetValue(e.Date, out day_info))
             day_info = new DAY();
 
-        if(e.tag == DataStrings.NewEntry)
-            day_info.AddGuide(e as NewEntry);
-        else if (e.tag == DataStrings.Event)
+        if(e.tag == DataStrings.Event)
+            day_info.AddGuide(e as Event);
+        else if (e.tag == DataStrings.Alarm)
             day_info.AddEvent(e as Alarm);
 
         entries[e.Date] = day_info;
@@ -104,10 +104,10 @@ public class DataManager : MonoBehaviour
         DAY day_info;
         if (entries.TryGetValue(e.Date, out day_info))
         {
-            if (e.tag == DataStrings.NewEntry)
-                day_info.Guides.Remove(e as NewEntry);
-            else if (e.tag == DataStrings.Event)
-                day_info.Events.Remove(e as Alarm);
+            if (e.tag == DataStrings.Event)
+                day_info.Events.Remove(e as Event);
+            else if (e.tag == DataStrings.Alarm)
+                day_info.Alarms.Remove(e as Alarm);
 
             entries[e.Date] = day_info;
         }

@@ -39,11 +39,11 @@ public class DayOfWeek : IDayView
 
     protected override void DisplayInfo()
     {
-        if (!isMonday)
+        if (!isClosed)
         { 
             base.DisplayInfo();
         }
-        if (info.Events.Count > 0)
+        if (info.Alarms.Count > 0)
         {
             AlarmIndicatorPanel.SetActive(true);
             flagAlrm = true;
@@ -55,9 +55,9 @@ public class DayOfWeek : IDayView
         SetHeader();
     }
     
-    protected override void AssignInfo(GameObject o, NewEntry n)
+    protected override void AssignInfo(GameObject o, Event n)
     {
-        IItemListView<NewEntry> o_view = o.GetComponent<IItemListView<NewEntry>>();
+        IItemListView<Event> o_view = o.GetComponent<IItemListView<Event>>();
         if (o_view != null)
             o_view.Allocate(n);
     } 

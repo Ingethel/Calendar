@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE Entries[<!ELEMENT Entries (Day*)>
+<!ELEMENT Day (NewEntry*, Event*)>
+<!ELEMENT NewEntry (StartTime, EndTime, NameOfTeam, NumberOfPeople, PersonInCharge, Telephone, ConfirmationDate, Guide, Notes, Colour)>
+<!ELEMENT Event (Notes, RepeatDays, RepeatMonths, RepeatYears)>
+<!ELEMENT StartTime (#PCDATA)>
+<!ELEMENT EndTime (#PCDATA)>
+<!ELEMENT NameOfTeam (#PCDATA)>
+<!ELEMENT NumberOfPeople (#PCDATA)>
+<!ELEMENT PersonInCharge (#PCDATA)>
+<!ELEMENT Telephone (#PCDATA)>
+<!ELEMENT ConfirmationDate (#PCDATA)>
+<!ELEMENT Guide (#PCDATA)>
+<!ELEMENT Notes (#PCDATA)>
+<!ELEMENT Colour (#PCDATA)>
+<!ELEMENT RepeatDays (#PCDATA)>
+<!ELEMENT RepeatMonths (#PCDATA)>
+<!ELEMENT RepeatYears (#PCDATA)>
+<!ATTLIST Day id ID #REQUIRED>
+<!ATTLIST Day officer CDATA #IMPLIED>
+<!ATTLIST NewEntry id ID #REQUIRED>
+<!ATTLIST Event id ID #REQUIRED>]>
+<Entries>
+  <Day id="_2.1.2018">
+    <NewEntry id="_guide.0">
+      <StartTime>09:00</StartTime>
+      <EndTime>10:30</EndTime>
+      <NameOfTeam>sadfsd</NameOfTeam>
+      <NumberOfPeople>
+      </NumberOfPeople>
+      <PersonInCharge>
+      </PersonInCharge>
+      <Telephone>
+      </Telephone>
+      <ConfirmationDate>
+      </ConfirmationDate>
+      <Guide>
+      </Guide>
+      <Notes>
+      </Notes>
+    </NewEntry>
+  </Day>
+</Entries>

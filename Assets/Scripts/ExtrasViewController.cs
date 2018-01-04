@@ -60,7 +60,7 @@ public class ExtrasViewController : ViewController {
             calendarController.SetAsBackground(true);
 
         if (s == State.NEWENTRY)
-            RequestEntryPreview(new NewEntry(), s);
+            RequestEntryPreview(new Event(), s);
         else if (s == State.ALARM)
             RequestEntryPreview(new Alarm(), s);
         else

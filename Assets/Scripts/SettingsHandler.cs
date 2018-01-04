@@ -17,14 +17,17 @@ public class SettingsHandler : Panel {
         SettingsField[] settings = GetComponentsInChildren<SettingsField>();
         foreach (SettingsField s in settings)
             s.OnStart();
-        advanced.SetActive(false);
+        FindObjectOfType<ColourGroupHandler>().RefreshColorGroups();
+        advanced.SetActive(false);        
     }
 
     public void ShowAdvanced()
     {
         advanced.SetActive(!advanced.activeSelf);
         if (advanced.activeSelf)
+        {
             button.GetComponent<UnityEngine.UI.Image>().sprite = collapse;
+        }
         else
             button.GetComponent<UnityEngine.UI.Image>().sprite = expand;
     }
@@ -33,5 +36,7 @@ public class SettingsHandler : Panel {
     {
         gManager.Command(new string[] { "", s });
     }
+
+
 
 }

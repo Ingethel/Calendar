@@ -3,7 +3,7 @@
 public class IDayView : IViewManager
 {
     public GameObject AlarmIndicatorPanel;
-    protected bool isMonday;
+    protected bool isClosed;
     protected bool flagAlrm;
     protected bool searchLegacy;
 
@@ -28,13 +28,13 @@ public class IDayView : IViewManager
 
     protected override void OnSetView()
     {
-        isMonday = assignedDate.DayOfWeek == System.DayOfWeek.Monday;
+        isClosed = SettingsManager.GetTimetable(assignedDate.DayOfWeek.ToString()) == "0";
     }
 
     public void OnClickAlarmIndicator()
     {
         ExtrasViewController extras = FindObjectOfType<ExtrasViewController>();
-        extras.RequestAlarmPreview(info.Events);
+        extras.RequestAlarmPreview(info.Alarms);
     }
 
     protected override void SetTag()
@@ -56,9 +56,9 @@ public class IDayView : IViewManager
             info = res.info;
         }
 
-        if (!isMonday 
+        if (!isClosed 
             && (assignedDate.Year <= gManager.currentDate.Year && assignedDate.Month < gManager.currentDate.Month - 1)
-            && info.Guides.Count() == 0)
+            && info.Events.Count() == 0)
             if(!calendarController.LegacyButton.activeSelf)
                 calendarController.LegacyButton.SetActive(true);
         
