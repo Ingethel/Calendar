@@ -33,14 +33,14 @@ public class GameManager : MonoBehaviour {
 
     void Start()
     {
-        Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, SettingsManager.Read_i("FullScreen") == 1);
-        headerObj.SetActive(SettingsManager.Read_i("FullScreen") == 1);
-        SetLanguage((int)SettingsManager.Read_i("Language"));
+        Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, SettingsManager.ReadFloat("FullScreen") == 1);
+        headerObj.SetActive(SettingsManager.ReadFloat("FullScreen") == 1);
+        SetLanguage((int)SettingsManager.ReadFloat("Language"));
 
         if(currentDate.Month == 1 && currentDate.Day == 1 && SettingsManager.Read("LastIdReset") != TimeConversions.DateTimeToString(currentDate))
             ResetIDs();
 
-        if (SettingsManager.Read_i("LastBackUp") != currentDate.Month)
+        if (SettingsManager.ReadFloat("LastBackUp") != currentDate.Month)
         {
             SettingsManager.Write("LastBackUp", currentDate.Month);
             RearrangeData();
@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour {
                 if (int.TryParse(dir.Substring(dir.LastIndexOf('\\') + 1), out folderMonth))
                 {
                     folderMonth = folderYear * 12 + folderMonth;
-                    if (currentDate.Year * 12 + currentDate.Month - folderMonth >= SettingsManager.Read_i("OldDataThreshold"))
+                    if (currentDate.Year * 12 + currentDate.Month - folderMonth >= SettingsManager.ReadFloat("OldDataThreshold"))
                     {
                         DataReader.BackUp(dir, LEGACY_FOLDER + dir.Substring(DATA_FOLDER.Length), false);
                         Directory.Delete(dir, true);

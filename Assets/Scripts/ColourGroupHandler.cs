@@ -14,8 +14,7 @@ public class ColourGroupHandler : MonoBehaviour
 
     void Start()
     {
-        cP = colorPicker.GetComponent<ColorPickerTriangle>();
-        colorPicker.transform.LookAt(Camera.main.transform);
+        cP = colorPicker.GetComponentInChildren<ColorPickerTriangle>();
         colorPicker.SetActive(false);
     }
 

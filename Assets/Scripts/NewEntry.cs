@@ -59,8 +59,9 @@ public class Event : Item
 
     public int[] GetColor()
     {
-        return TimeConversions.SplitString(attributes[attributes.Length - 1], '.');
+        return new int[] { 0 };
     }
+    
 }
 
 [Serializable]

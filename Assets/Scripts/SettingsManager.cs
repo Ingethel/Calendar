@@ -24,7 +24,7 @@ public static class SettingsManager{
         return entry.InnerText;
     }
 
-    public static float Read_i(string id)
+    public static float ReadFloat(string id)
     {
         LoadDoc();
         XmlElement entry = doc.GetElementById(id);
@@ -56,13 +56,13 @@ public static class SettingsManager{
         colorGroups = new List<ColorGroup>();
         foreach (XmlElement element in list)
         {
-            string[] parts = element.InnerText.Split(' ');
-            if (parts.Length >= 4)
+            string[] parts = element.InnerText.Split(',');
+            if (parts.Length == 3)
             {
                 float r = 0, g = 0, b = 0;
-                float.TryParse(parts[parts.Length - 1], out b);
-                float.TryParse(parts[parts.Length - 2], out g);
-                float.TryParse(parts[parts.Length - 3], out r);
+                float.TryParse(parts[0], out r);
+                float.TryParse(parts[1], out g);
+                float.TryParse(parts[2], out b);
                 colorGroups.Add(new ColorGroup(new Color(r, g, b), parts[0], element.GetAttribute("id")));
             }
         }
@@ -75,13 +75,23 @@ public static class SettingsManager{
         return colorGroups.ToArray();
     }
 
+    public static ColorGroup GetColourGroup(string name)
+    {
+        if (colorGroups == null)
+            ReadColourGroups();
+        if (colorGroups.Count == 0)
+            CreateColorGroup(new Color(0, 39, 255), "default");
+        return colorGroups.Where(x => x.Name == "name").DefaultIfEmpty(colorGroups[0]).First();
+    }
+
     public static ColorGroup CreateColorGroup(Color c, string s)
     {
         ColorGroup cG = new ColorGroup(c, s);
         LoadDoc();
         XmlElement xmlCG = doc.CreateElement("ColorGroup");
         xmlCG.SetAttribute("id", cG.Id);
-        xmlCG.InnerText = cG.Name + " " + cG.Colour.r.ToString() + " " + cG.Colour.g.ToString() + " " + cG.Colour.b.ToString();
+        xmlCG.SetAttribute("name", cG.Name);
+        xmlCG.InnerText = cG.Colour.r.ToString() + "," + cG.Colour.g.ToString() + "," + cG.Colour.b.ToString();
         XmlElement root = doc.DocumentElement;
         root.AppendChild(xmlCG);
         doc.Save(Path.Combine(Application.streamingAssetsPath, "Settings.xml"));
@@ -126,7 +136,7 @@ public class ColorGroup
         Colour = c;
         Name = s;
         int _id = PlayerPrefs.GetInt("colorGroupId") + 1;
-        Id = "_colorGroup." + _id.ToString();
+        Id = "ColorGroup." + _id.ToString();
         PlayerPrefs.SetInt("colorGroupId", _id);
     }
 
@@ -137,4 +147,12 @@ public class ColorGroup
         Id = id;
     }
 
+}
+
+public class DataGroup
+{
+    public enum DataType { EVENT, ALARM };
+    public DataType type;
+    public string name;
+    public string[] attributes;
 }

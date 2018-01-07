@@ -36,7 +36,5 @@ public class SettingsHandler : Panel {
     {
         gManager.Command(new string[] { "", s });
     }
-
-
-
+    
 }

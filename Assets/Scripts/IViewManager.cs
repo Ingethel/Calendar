@@ -67,7 +67,7 @@ public class IViewManager : Panel
 
     protected void FillEmptySlots()
     {
-        int threshold = (int)SettingsManager.Read_i("MinimumTourTime");
+        int threshold = (int)SettingsManager.ReadFloat("MinimumTourTime");
         int minTime = 100000, maxTime = 0;
 
         Event n1;
