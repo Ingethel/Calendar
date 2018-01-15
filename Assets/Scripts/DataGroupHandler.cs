@@ -11,29 +11,38 @@ public class DataGroupHandler : MonoBehaviour {
 
     public GameObject groupItem;
     public GameObject groupList;
-    public GameObject extraPanel;
-
-    public UnityEngine.UI.Text label;
-    public UnityEngine.UI.Text attributes;
-
-    int value;
     
-    void Start () {
-        extraPanel.SetActive(false);
-	}
-	
-	public void ExtraPanel()
+    public UnityEngine.UI.InputField[] attributes;
+    
+    private void Spawn(int value)
     {
-        extraPanel.SetActive(extraPanel.activeSelf);
+        string name;
+        string attList;
+
+        string[] parts = attributes[value].text.Split(':');
+        if (parts.Length >= 1)
+        {
+            name = parts[0];
+        }
+        else
+            name = "default";
+
+        if (parts.Length >= 2)
+        {
+            attList = datagroupattributes[value] + "," + parts[1];
+        }
+        else
+            attList = datagroupattributes[value];
+
     }
 
-    public void ChangeDataGroup(int i)
+    public void SpawnEvent()
     {
-        value = i;
+        Spawn(0);
     }
 
-    public void Spawn()
+    public void SpawnAlarm()
     {
-
+        Spawn(1);
     }
 }

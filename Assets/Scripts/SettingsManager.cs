@@ -63,7 +63,7 @@ public static class SettingsManager{
                 float.TryParse(parts[0], out r);
                 float.TryParse(parts[1], out g);
                 float.TryParse(parts[2], out b);
-                colorGroups.Add(new ColorGroup(new Color(r, g, b), parts[0], element.GetAttribute("id")));
+                colorGroups.Add(new ColorGroup(new Color(r, g, b), element.GetAttribute("name"), element.GetAttribute("id")));
             }
         }
     }
@@ -106,6 +106,11 @@ public static class SettingsManager{
         doc.DocumentElement.RemoveChild(entry);
         doc.Save(Path.Combine(Application.streamingAssetsPath, "Settings.xml"));
         colorGroups.Remove(cG);
+    }
+
+    public static void ReadDataGroups()
+    {
+
     }
 
     private static void ReadTimetable()
@@ -153,6 +158,35 @@ public class DataGroup
 {
     public enum DataType { EVENT, ALARM };
     public DataType type;
-    public string name;
-    public string[] attributes;
+    public string Name { private set; get; }
+    public string Id { private set; get; }
+    public string Attributes { private set; get; }
+
+    protected DataGroup(string name, string attributeList, int value)
+    {
+        int _id = PlayerPrefs.GetInt("dataGroupId") + 1;
+        PlayerPrefs.SetInt("dataGroupId", _id);
+        if(value == 0)
+        {
+            type = DataType.EVENT;
+            Id = "EventGroup." + _id.ToString();
+        }
+        else if(value == 1)
+        {
+            type = DataType.ALARM;
+            Id = "AlarmGroup." + _id.ToString();
+        }
+        Name = name;
+        Attributes = attributeList;
+    }
+
+    public static DataGroup CreateEventData(string name, string attributeList)
+    {
+        return new DataGroup(name, attributeList, 0);
+    }
+
+    public static DataGroup CreateAlarmData(string name, string attributeList)
+    {
+        return new DataGroup(name, attributeList, 1);
+    }
 }
