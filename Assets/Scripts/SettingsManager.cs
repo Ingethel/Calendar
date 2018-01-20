@@ -9,6 +9,7 @@ public static class SettingsManager{
     static XmlDocument doc;
     static Dictionary<string, string> timetable;
     static List<ColorGroup> colorGroups;
+    static List<List<DataGroup>> dataGroups;
 
     private static void LoadDoc()
     {
@@ -108,9 +109,61 @@ public static class SettingsManager{
         colorGroups.Remove(cG);
     }
 
+    private static List<DataGroup> ReadDataGroup(int i)
+    {
+        List<DataGroup> temp = new List<DataGroup>();
+        LoadDoc();
+        XmlNodeList list = doc.GetElementsByTagName(DataGroup.Groups[i]);
+        foreach (XmlElement element in list)
+        {
+            temp.Add(new DataGroup(element.GetAttribute("name"), element.InnerText, i));
+        }
+        return temp;
+    }
+
     public static void ReadDataGroups()
     {
+        dataGroups = new List<List<DataGroup>>();
+        for (int i = 0; i < DataGroup.Groups.Length; i++)
+            dataGroups.Add(ReadDataGroup(i));
+    }
 
+    public static List<List<DataGroup>> GetDataGroups()
+    {
+        if (dataGroups == null)
+            ReadDataGroups();
+        return dataGroups;
+    }
+
+    public static List<DataGroup> GetDataGroup(int i)
+    {
+        if (dataGroups == null)
+            ReadDataGroups();
+        return dataGroups[i];
+    }
+
+    public static DataGroup CreateDataGroup(string name, string attributeList, int value)
+    {
+        DataGroup dG = new DataGroup(name, attributeList, value);
+        LoadDoc();
+        XmlElement xmlDG = doc.CreateElement(DataGroup.Groups[value]);
+        xmlDG.SetAttribute("id", dG.Id);
+        xmlDG.SetAttribute("name", dG.Name);
+        xmlDG.InnerText = dG.Attributes;
+        XmlElement root = doc.DocumentElement;
+        root.AppendChild(xmlDG);
+        doc.Save(Path.Combine(Application.streamingAssetsPath, "Settings.xml"));
+        dataGroups[value].Add(dG);
+        return dG;
+    }
+
+    public static void DeleteDataGroup(DataGroup dG)
+    {
+        LoadDoc();
+        XmlElement entry = doc.GetElementById(dG.Id);
+        doc.DocumentElement.RemoveChild(entry);
+        doc.Save(Path.Combine(Application.streamingAssetsPath, "Settings.xml"));
+        dataGroups[dG.type].Remove(dG);
     }
 
     private static void ReadTimetable()
@@ -156,37 +209,20 @@ public class ColorGroup
 
 public class DataGroup
 {
-    public enum DataType { EVENT, ALARM };
-    public DataType type;
+    public enum DataGroups { EVENT, ALARM };
+    public static string[] Groups = new string[] { "EventGroup", "AlarmGroup" };
+    public int type;
     public string Name { private set; get; }
     public string Id { private set; get; }
     public string Attributes { private set; get; }
 
-    protected DataGroup(string name, string attributeList, int value)
+    public DataGroup(string name, string attributeList, int value)
     {
         int _id = PlayerPrefs.GetInt("dataGroupId") + 1;
         PlayerPrefs.SetInt("dataGroupId", _id);
-        if(value == 0)
-        {
-            type = DataType.EVENT;
-            Id = "EventGroup." + _id.ToString();
-        }
-        else if(value == 1)
-        {
-            type = DataType.ALARM;
-            Id = "AlarmGroup." + _id.ToString();
-        }
+        Id = Groups[value] + "." + _id.ToString();
         Name = name;
         Attributes = attributeList;
     }
 
-    public static DataGroup CreateEventData(string name, string attributeList)
-    {
-        return new DataGroup(name, attributeList, 0);
-    }
-
-    public static DataGroup CreateAlarmData(string name, string attributeList)
-    {
-        return new DataGroup(name, attributeList, 1);
-    }
 }

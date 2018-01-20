@@ -52,7 +52,8 @@ public class CalendarViewController : ViewController
         if (InFront)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
-                if(currentViewIndex != (int)State.MONTHLY) RequestView(State.MONTHLY);
+                if(currentViewIndex != (int)State.MONTHLY)
+                    RequestView(State.MONTHLY);
             if (Input.GetKeyDown(KeyCode.LeftArrow))
                 ChangeDay(-1);
             if (Input.GetKeyDown(KeyCode.RightArrow))

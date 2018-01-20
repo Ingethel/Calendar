@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ColourGroupHandler : MonoBehaviour
 {
 
-    public GameObject colorGroupItem;
-    public GameObject colorGroupList;
+    public GameObject groupItem;
+    public GameObject groupList;
     public GameObject colorPicker;
     ColorPickerTriangle cP;
     public UnityEngine.UI.Image image;
@@ -14,6 +12,7 @@ public class ColourGroupHandler : MonoBehaviour
 
     void Start()
     {
+        FindObjectOfType<SettingsHandler>().InitialiseEvents += RefreshColorGroups;
         cP = colorPicker.GetComponentInChildren<ColorPickerTriangle>();
         colorPicker.SetActive(false);
     }
@@ -26,8 +25,8 @@ public class ColourGroupHandler : MonoBehaviour
 
     private void Spawn(ColorGroup cg)
     {
-        GameObject o = Instantiate(colorGroupItem);
-        o.transform.SetParent(colorGroupList.transform);
+        GameObject o = Instantiate(groupItem);
+        o.transform.SetParent(groupList.transform);
         o.transform.localScale = Vector3.one;
         o.GetComponent<ColourGroupElement>().Assign(cg);
     }
@@ -39,6 +38,9 @@ public class ColourGroupHandler : MonoBehaviour
 
     public void RefreshColorGroups()
     {
+        if (groupList != null)
+            foreach (Transform t in groupList.transform)
+                Destroy(t.gameObject);
         ColorGroup[] cGs = SettingsManager.GetColorGroups();
         foreach(ColorGroup cg in cGs)
             Spawn(cg);

@@ -7,6 +7,11 @@ public class SettingsField : MonoBehaviour {
     InputField field;    
     GameManager gmanager;
 
+    void Start()
+    {
+        FindObjectOfType<SettingsHandler>().InitialiseEvents += OnStart;
+    }
+
     public void OnStart()
     {
         if (!gmanager)

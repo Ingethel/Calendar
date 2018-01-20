@@ -1,11 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class SettingsHandler : Panel {
 
     public GameObject advanced;
     public GameObject button;
     public Sprite expand, collapse;
-    
+
+    public event Action InitialiseEvents;
+
     public override void Open()
     {
         base.Open();
@@ -14,10 +17,8 @@ public class SettingsHandler : Panel {
 
     void Init()
     {
-        SettingsField[] settings = GetComponentsInChildren<SettingsField>();
-        foreach (SettingsField s in settings)
-            s.OnStart();
-        FindObjectOfType<ColourGroupHandler>().RefreshColorGroups();
+        if (InitialiseEvents != null)
+            InitialiseEvents();
         advanced.SetActive(false);        
     }
 

@@ -1,20 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class DataGroupHandler : MonoBehaviour {
 
-    private enum Group { EVENT, ALARM };
-
-    private string[] datagroup = new string[] { "EventGroup", "AlarmGroup" };
     private string[] datagroupattributes = new string[]{ "Date,Colour Group,Start Time,End Time", "Date" };
 
     public GameObject groupItem;
     public GameObject groupList;
     
     public UnityEngine.UI.InputField[] attributes;
-    
-    private void Spawn(int value)
+
+    void Start()
+    {
+        FindObjectOfType<SettingsHandler>().InitialiseEvents += RefreshDataGroups;
+    }
+
+    public void AddDataGroup(int value)
     {
         string name;
         string attList;
@@ -33,16 +34,25 @@ public class DataGroupHandler : MonoBehaviour {
         }
         else
             attList = datagroupattributes[value];
-
+        Spawn(SettingsManager.CreateDataGroup(name, attList, value));
+    }
+    
+    public void Spawn(DataGroup dG)
+    {
+        GameObject o = Instantiate(groupItem);
+        o.transform.SetParent(groupList.transform);
+        o.transform.localScale = Vector3.one;
+        o.GetComponent<DataGroupElement>().Assign(dG);
     }
 
-    public void SpawnEvent()
+    public void RefreshDataGroups()
     {
-        Spawn(0);
-    }
-
-    public void SpawnAlarm()
-    {
-        Spawn(1);
+        if (groupList != null)
+            foreach (Transform t in groupList.transform)
+                Destroy(t.gameObject);
+        List<List<DataGroup>> list = SettingsManager.GetDataGroups();
+        foreach (List<DataGroup> group in list)
+            foreach (DataGroup element in group)
+                Spawn(element);
     }
 }

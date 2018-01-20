@@ -9,6 +9,7 @@
   <!ATTLIST Option id ID #REQUIRED>
   <!ATTLIST Timetable id ID #REQUIRED>
   <!ATTLIST ColorGroup id ID #REQUIRED>
+  <!ATTLIST ColorGroup name CDATA #REQUIRED>
   <!ATTLIST EventGroup id ID #REQUIRED>
   <!ATTLIST EventGroup name CDATA #REQUIRED>
   <!ATTLIST AlarmGroup id ID #REQUIRED>
@@ -36,6 +37,5 @@
   <Timetable id="Sunday">10:30,12:00,13:30,15:00,16:30</Timetable>
   <ColorGroup id="ColorGroup.7" name="normal">0.2323276,0.4925334,0.5661765</ColorGroup>
   <ColorGroup id="ColorGroup.16" name="abnormal">0.7377626,0.4335509,0.320424</ColorGroup>
-  <ColorGroup id="ColorGroup.17" name="funky">0.7377626,0.320424,0.6503072</ColorGroup>
-  <EventGroup id="EventGroup.0" name=""></EventGroup>
+  <EventGroup id="EventGroup.4" name="Default">Date,Colour Group,Start Time,End Time,Name of Team</EventGroup>
 </Settings>
