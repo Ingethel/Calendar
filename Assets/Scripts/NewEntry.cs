@@ -3,8 +3,8 @@ using System;
 
 public class Item
 {
-    public string[] labels;
     public string[] attributes;
+    public DataGroup dataGroupID;
     public string Date {
         get; protected set;
     }
@@ -23,6 +23,16 @@ public class Item
         int.TryParse(temp[2], out year);
     }
     
+    public override string ToString()
+    {
+        string value = "";
+        if(attributes != null && attributes.Length > 0)
+        {
+            foreach (string att in attributes)
+                value += att + " ";
+        }
+        return value;
+    }
 }
 
 [Serializable]
@@ -30,38 +40,45 @@ public class Event : Item
 {
     ColorGroup color;
 
+    string startTime, endTime;
+
     public Event()
     {
+        dataGroupID = SettingsManager.GetDataGroupID(DataGroup.DataGroups.EVENT, "default");
+        color = SettingsManager.GetColourGroup("default");
         tag = DataStrings.Event;
-        labels = new string[]{ DataStrings.StartTime, DataStrings.EndTime, DataStrings.NameOfTeam, DataStrings.NumberOfPeople, DataStrings.PersonInCharge, DataStrings.Telephone, DataStrings.ConfirmationDate, DataStrings.Guide, DataStrings.Notes, DataStrings.Colour };
-        attributes = new string[] { "", "", "", "", "", "", "", "", "", "255.255.255" };
         filler = true;
     }
 
-    public Event(string[] list, string d)
+    public Event(string day, DataGroup dG, ColorGroup cG, string[] attList)
     {
+        SetDate(day);
+        dataGroupID = dG;
+        color = cG;
         tag = DataStrings.Event;
-        labels = new string[] { DataStrings.StartTime, DataStrings.EndTime, DataStrings.NameOfTeam, DataStrings.NumberOfPeople, DataStrings.PersonInCharge, DataStrings.Telephone, DataStrings.ConfirmationDate, DataStrings.Guide, DataStrings.Notes, DataStrings.Colour };
-        attributes = list;
-        SetDate(d);
+        attributes = attList;
         filler = false;
+    }
+
+    public Event(string day, string details)
+    {
+
     }
 
     public int GetStartTime()
     {
-        return TimeConversions.StringTimeToInt(attributes[0], 60);
+        return TimeConversions.StringTimeToInt(startTime, 60);
     }
 
     public int GetEndTime()
     {
-        return TimeConversions.StringTimeToInt(attributes[1], 60);
+        return TimeConversions.StringTimeToInt(endTime, 60);
     }
 
-    public int[] GetColor()
+    public string ToXMLText()
     {
-        return new int[] { 0 };
+        return color.Name + "," + startTime + "," + endTime + "," + ToString();
     }
-    
 }
 
 [Serializable]
@@ -71,7 +88,6 @@ public class Alarm : Item
     public Alarm()
     {
         tag = DataStrings.Alarm;
-        labels = new string[] { DataStrings.Notes };
         attributes = new string[] { "" };
         filler = true;
     }
@@ -80,7 +96,6 @@ public class Alarm : Item
     {
         tag = DataStrings.Alarm;
         SetDate(d);
-        labels = new string[] { DataStrings.Notes };
         attributes = new string[] { n };
         filler = false;
     }
@@ -235,7 +250,7 @@ public class DAY
     {
         Events = new NewEntryList();
         Alarms = new List<Alarm>();
-        Officers = new List<String>() { "" };
+        Officers = new List<string>() { "" };
         id = "";
     }
 

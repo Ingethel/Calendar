@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class ItemPanel<T> : Panel where T : Item {
 
-    
     public T item = null;
     protected bool dublicate = false;
     public InputFieldObject[] fields;
@@ -16,6 +16,10 @@ public class ItemPanel<T> : Panel where T : Item {
 
     public DateValidator dateValidator;
     public TimeValidator timeValidator;
+
+    public List<string> attributes;
+    public GameObject attributeList;
+    public GameObject attributeElement;
 
     protected virtual void Start()
     {
@@ -130,4 +134,22 @@ public class ItemPanel<T> : Panel where T : Item {
             return "";
         return a.text;
     }
+
+    public void GetAttributes()
+    {
+        if (attributeList != null)
+            foreach (Transform t in attributeList.transform)
+                Destroy(t.gameObject);
+        for(int i = 0; i < attributes.Count; i++)
+            SpawnAttribute(attributes[i], item.attributes[i]);
+    }
+
+    public void SpawnAttribute(string label, string value)
+    {
+        GameObject o = Instantiate(attributeElement);
+        o.transform.SetParent(attributeList.transform);
+        o.transform.localScale = Vector3.one;
+        o.GetComponent<AttributeElement>().Assign(label, value);
+    }
+
 }

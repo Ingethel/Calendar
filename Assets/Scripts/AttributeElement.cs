@@ -8,4 +8,5 @@ public class AttributeElement : MonoBehaviour {
         label.text = l;
         value.text = v;
     }
+
 }

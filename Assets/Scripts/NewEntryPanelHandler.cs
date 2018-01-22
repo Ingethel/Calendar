@@ -6,6 +6,8 @@ public class NewEntryPanelHandler : ItemPanel<Event> {
     public GameObject slotPanel;
     public Sprite expand, collapse;
     
+
+
     public override void PreviewEntry(Event n)
     {
         base.PreviewEntry(n);
@@ -20,15 +22,9 @@ public class NewEntryPanelHandler : ItemPanel<Event> {
     public override void SetLanguage()
     {
         setTitle();
-        fields[0].label.text = gManager.language.NameOfTeam;
-        fields[1].label.text = gManager.language.NumberOfPeople;
-        fields[2].label.text = gManager.language.PersonInCharge;
-        fields[3].label.text = gManager.language.Telephone;
-        fields[4].label.text = gManager.language.Date;
-        fields[5].label.text = gManager.language.Time;
-        fields[6].label.text = gManager.language.DateOfConfirmation;
-        fields[7].label.text = gManager.language.Guide;
-        fields[8].label.text = gManager.language.Notes;
+
+        fields[0].label.text = gManager.language.Date;
+        fields[1].label.text = gManager.language.Time;
     }
 
     protected override void CalendarRequestOnSave()
