@@ -165,20 +165,17 @@ public class DataStrings{
     public static string file = "Guides.xml";
     public static string Colour = "Colour";
     public static string Alarm = "Alarm";
-    public static string R_Days = "RepeatDays";
-    public static string R_Months = "RepeatMonths";
-    public static string R_Years = "RepeatYears";
-
+    
     public static string doctype =
         "<!ELEMENT Entries(Day*)>" + Environment.NewLine +
         "<!ELEMENT Day(Event*, Alarm*)>" + Environment.NewLine +
-        "<!ELEMENT Event(Attribute*)>" + Environment.NewLine +
-        "<!ELEMENT Alarm(Attribute*)>" + Environment.NewLine +
-        "<!ELEMENT Attribute(#PCDATA)>" + Environment.NewLine +
+        "<!ELEMENT Event(#PCDATA)>" + Environment.NewLine +
+        "<!ELEMENT Alarm(#PCDATA)>" + Environment.NewLine +
         "<!ATTLIST Day id ID #REQUIRED>" + Environment.NewLine +
         "<!ATTLIST Day officer CDATA #IMPLIED>" + Environment.NewLine +
         "<!ATTLIST Event id ID #REQUIRED>" + Environment.NewLine +
+        "<!ATTLIST Event dataGroup CDATA #REQUIRED>" + Environment.NewLine +
         "<!ATTLIST Alarm id ID #REQUIRED>" + Environment.NewLine +
-        "<!ATTLIST Attribute class CDATA #REQUIRED>" + Environment.NewLine;
-       
+        "<!ATTLIST Alarm dataGroup CDATA #REQUIRED>" + Environment.NewLine;
+
 }

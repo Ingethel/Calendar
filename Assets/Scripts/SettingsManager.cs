@@ -116,7 +116,7 @@ public static class SettingsManager{
         XmlNodeList list = doc.GetElementsByTagName(DataGroup.Groups[i]);
         foreach (XmlElement element in list)
         {
-            temp.Add(new DataGroup(element.GetAttribute("name"), element.InnerText, i));
+            temp.Add(new DataGroup(element.GetAttribute("name"), element.InnerText, element.GetAttribute("id"), i));
         }
         return temp;
     }
@@ -147,7 +147,7 @@ public static class SettingsManager{
         if (dataGroups == null)
             ReadDataGroups();
         if (dataGroups[(int)group].Count == 0)
-            CreateDataGroup("default", "Start Time, End Time, Date, Colour Group", (int)group);
+            CreateDataGroup("default", "Date, Colour Group, Start Time, End Time", (int)group);
         return dataGroups[(int)group].Where(x => x.Name == name).DefaultIfEmpty(dataGroups[(int)group][0]).First();
     }
 
@@ -234,4 +234,10 @@ public class DataGroup
         Attributes = attributeList;
     }
 
+    public DataGroup(string name, string attributeList, string id, int value)
+    {
+        Id = id;
+        Name = name;
+        Attributes = attributeList;
+    }
 }

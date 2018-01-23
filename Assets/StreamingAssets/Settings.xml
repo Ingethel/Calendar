@@ -37,5 +37,5 @@
   <Timetable id="Sunday">10:30,12:00,13:30,15:00,16:30</Timetable>
   <ColorGroup id="ColorGroup.7" name="normal">0.2323276,0.4925334,0.5661765</ColorGroup>
   <ColorGroup id="ColorGroup.16" name="abnormal">0.7377626,0.4335509,0.320424</ColorGroup>
-  <EventGroup id="EventGroup.4" name="Default">Date,Colour Group,Start Time,End Time,Name of Team</EventGroup>
+  <EventGroup id="EventGroup.7" name="Example">Date,Colour Group,Start Time,End Time, Name of Team,Number of People</EventGroup>
 </Settings>

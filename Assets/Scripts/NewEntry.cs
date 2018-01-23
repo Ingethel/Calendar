@@ -3,8 +3,8 @@ using System;
 
 public class Item
 {
-    public string[] attributes;
-    public DataGroup dataGroupID;
+    public List<string> attributes;
+    public string dataGroupID;
     public string Date {
         get; protected set;
     }
@@ -26,37 +26,48 @@ public class Item
     public override string ToString()
     {
         string value = "";
-        if(attributes != null && attributes.Length > 0)
+        if(attributes != null && attributes.Count > 0)
         {
             foreach (string att in attributes)
                 value += att + " ";
         }
         return value;
     }
+
+    public virtual void XMLToObject(string text)
+    {
+
+    }
+
+    public virtual string ObjectToXML()
+    {
+        return "";
+    }
 }
 
-[Serializable]
 public class Event : Item
 {
-    ColorGroup color;
+    public string color;
 
-    string startTime, endTime;
+    public string startTime, endTime;
 
     public Event()
     {
-        dataGroupID = SettingsManager.GetDataGroupID(DataGroup.DataGroups.EVENT, "default");
-        color = SettingsManager.GetColourGroup("default");
+        dataGroupID = SettingsManager.GetDataGroup((int)DataGroup.DataGroups.EVENT)[0].Name;
+        color = SettingsManager.GetColourGroup("default").Name;
         tag = DataStrings.Event;
         filler = true;
     }
 
-    public Event(string day, DataGroup dG, ColorGroup cG, string[] attList)
+    public Event(string day, string dGName, string cGName, List<string> attList)
     {
         SetDate(day);
-        dataGroupID = dG;
-        color = cG;
+        dataGroupID = dGName;
+        color = cGName;
         tag = DataStrings.Event;
-        attributes = attList;
+        startTime = attList[0];
+        endTime = attList[1];
+        attributes = attList.GetRange(2, attList.Count-2);
         filler = false;
     }
 
@@ -77,18 +88,16 @@ public class Event : Item
 
     public string ToXMLText()
     {
-        return color.Name + "," + startTime + "," + endTime + "," + ToString();
+        return color + "," + startTime + "," + endTime + "," + ToString();
     }
 }
 
-[Serializable]
 public class Alarm : Item
 {
     public bool report = false;
     public Alarm()
     {
         tag = DataStrings.Alarm;
-        attributes = new string[] { "" };
         filler = true;
     }
 
@@ -96,12 +105,10 @@ public class Alarm : Item
     {
         tag = DataStrings.Alarm;
         SetDate(d);
-        attributes = new string[] { n };
         filler = false;
     }
 
 }
-
 
 public class NewEntryComparer : IComparer<Event>
 {

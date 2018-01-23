@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class NewEntryPanelHandler : ItemPanel<Event> {
 
     public GameObject slotExpander;
     public GameObject slotPanel;
     public Sprite expand, collapse;
-    
 
+    public GameObject colorGroupObj;
+    public ColorGroup color;
 
     public override void PreviewEntry(Event n)
     {
@@ -42,37 +44,52 @@ public class NewEntryPanelHandler : ItemPanel<Event> {
     protected override void DisplayInfo()
     {
         setTitle();
-        string[] split = item.attributes[0].Split(':');
+        if (item.filler)
+        {
+            string temp = SettingsManager.GetDataGroup((int)DataGroup.DataGroups.EVENT)[0].Attributes;
+            string[] tempArr = temp.Split(',');
+            attributeLabels = new List<string>();
+            for (int i = 4; i < tempArr.Length; i++)
+            {
+                attributeLabels.Add(tempArr[i]);
+            }
+            GetAttributes();
+            return;
+        }
+        // display date
+        fields[0].inputs[0].text = item.day != 0 ? item.day.ToString() : "";
+        fields[0].inputs[1].text = item.month != 0 ? item.month.ToString() : "";
+        fields[0].inputs[2].text = item.year != 0 ? item.year.ToString() : "";
+
+        // display time
+        string[] split = item.startTime.Split(':');
         if(split.Length == 2)
         {
-            fields[5].inputs[0].text = split[0];
-            fields[5].inputs[1].text = split[1];
+            fields[1].inputs[0].text = split[0];
+            fields[1].inputs[1].text = split[1];
         }
-        split = item.attributes[1].Split(':');
+        split = item.endTime.Split(':');
         if (split.Length == 2)
         {
-            fields[5].inputs[2].text = split[0];
-            fields[5].inputs[3].text = split[1];
+            fields[1].inputs[2].text = split[0];
+            fields[1].inputs[3].text = split[1];
         }
-        fields[4].inputs[0].text = item.day != 0 ? item.day.ToString() : "";
-        fields[4].inputs[1].text = item.month != 0 ? item.month.ToString() : "";
-        fields[4].inputs[2].text = item.year != 0 ? item.year.ToString() : "";
-        fields[0].inputs[0].text = item.attributes[2];
-        fields[1].inputs[0].text = item.attributes[3];
-        fields[2].inputs[0].text = item.attributes[4];
-        fields[3].inputs[0].text = item.attributes[5];
-        fields[6].inputs[0].text = item.attributes[6];
-        fields[7].inputs[0].text = item.attributes[7];
-        fields[8].inputs[0].text = item.attributes[8];
     }
 
     protected override void SaveInfo()
     {
         base.SaveInfo();
-        string[] inputs = { fields[5].inputs[0].text + ":" + fields[5].inputs[1].text, fields[5].inputs[2].text + ":" + fields[5].inputs[3].text,
-                TryGetText(fields[0].inputs[0]), TryGetText(fields[1].inputs[0]), TryGetText(fields[2].inputs[0]), TryGetText(fields[3].inputs[0]),
-                TryGetText(fields[6].inputs[0]), TryGetText(fields[7].inputs[0]), TryGetText(fields[8].inputs[0])};
-        item = new Event(inputs, fields[4].inputs[0].text + "." + fields[4].inputs[1].text + "." + fields[4].inputs[2].text);
+        List<string> atts = new List<string>();
+        AttributeElement[] elements = GetComponentsInChildren<AttributeElement>();
+        foreach (AttributeElement element in elements)
+            atts.Add(element.value.text);
+        atts.Insert(0, fields[1].inputs[0].text + ":" + fields[1].inputs[1].text);
+        atts.Insert(0, fields[1].inputs[2].text + ":" + fields[1].inputs[3].text);
+        item = new Event(
+            fields[0].inputs[0].text + "." + fields[0].inputs[1].text + "." + fields[0].inputs[2].text,
+            dataGroup.Name,
+            color.Name, 
+            atts);
     }
 
     protected override void setTitle()
@@ -116,10 +133,10 @@ public class NewEntryPanelHandler : ItemPanel<Event> {
         string[] times = time.Split('-');
         string[] start = times[0].Split(':');
         string[] end = times[1].Split(':');
-        fields[5].inputs[0].text = start[0];
-        fields[5].inputs[1].text = start[1];
-        fields[5].inputs[2].text = end[0];
-        fields[5].inputs[3].text = end[1];
+        fields[1].inputs[0].text = start[0];
+        fields[1].inputs[1].text = start[1];
+        fields[1].inputs[2].text = end[0];
+        fields[1].inputs[3].text = end[1];
     }
 
     public override void EditEntry()

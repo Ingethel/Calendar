@@ -17,9 +17,12 @@ public class ItemPanel<T> : Panel where T : Item {
     public DateValidator dateValidator;
     public TimeValidator timeValidator;
 
-    public List<string> attributes;
+    public List<string> attributeLabels;
     public GameObject attributeList;
     public GameObject attributeElement;
+
+    public GameObject dataGroupObj;
+    public DataGroup dataGroup;
 
     protected virtual void Start()
     {
@@ -87,7 +90,7 @@ public class ItemPanel<T> : Panel where T : Item {
             dataManager.RequestDelete(item);
     }
 
-    protected virtual void DisplayInfo() { }
+    protected virtual void DisplayInfo(){}
 
     public virtual void EditEntry()
     {
@@ -140,8 +143,11 @@ public class ItemPanel<T> : Panel where T : Item {
         if (attributeList != null)
             foreach (Transform t in attributeList.transform)
                 Destroy(t.gameObject);
-        for(int i = 0; i < attributes.Count; i++)
-            SpawnAttribute(attributes[i], item.attributes[i]);
+        for(int i = 0; i < attributeLabels.Count; i++)
+            if(item.filler)
+                SpawnAttribute(attributeLabels[i], "");
+            else
+                SpawnAttribute(attributeLabels[i], item.attributes[i]);
     }
 
     public void SpawnAttribute(string label, string value)

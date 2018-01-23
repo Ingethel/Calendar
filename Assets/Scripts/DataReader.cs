@@ -19,19 +19,13 @@ public class DataReader
         return doc.GetElementById("_" + id);
     }
 
-    private T ReadItem<T>(XmlNodeList list, T item) where T : Item
+    private T ReadItem<T>(XmlElement element, T item) where T : Item
     {
-        foreach (XmlElement element in list)
-        {
-            for (int i = 0; i < item.attributes.Length; i++)
-            {
-                if (element.GetAttribute("class") == item.labels[i])
-                {
-                    item.attributes[i] = element.InnerText;
-                    break;
-                }
-            }
-        }
+        item.dataGroupID = element.GetAttribute("dataGroup");
+        item.XMLToObject(element.InnerText);
+        item.filler = false;
+        item.id = GetElementID(element);
+        
         return item;
     }
 
@@ -45,11 +39,8 @@ public class DataReader
             foreach (XmlElement entry in entries)
             {
                 Event newGuide = new Event();
-                XmlNodeList entryInfo = entry.ChildNodes;
-                newGuide = ReadItem(entryInfo, newGuide);
-                newGuide.filler = false;
+                newGuide = ReadItem(entry, newGuide);
                 newGuide.SetDate(dayInfo.id);
-                newGuide.id = GetElementID(entry);
                 dayInfo.AddGuide(newGuide);
             }
         }
@@ -58,11 +49,8 @@ public class DataReader
             foreach (XmlElement entry in entries)
             {
                 Alarm alarm = new Alarm();
-                XmlNodeList entryInfo = entry.ChildNodes;
-                alarm = ReadItem(entryInfo, alarm);
-                alarm.filler = false;
+                alarm = ReadItem(entry, alarm);
                 alarm.SetDate(dayInfo.id);
-                alarm.id = GetElementID(entry);
                 dayInfo.AddEvent(alarm);
             }
         }
@@ -185,13 +173,8 @@ public class DataReader
                 NE = doc.CreateElement(item.tag);
                 NE.SetAttribute("id", item.id);
             }
-
-            for (int i = 0; i < item.attributes.Length; i++)
-            {
-                XmlElement e = doc.CreateElement(item.labels[i]);
-                e.InnerText = item.attributes[i];
-                NE.AppendChild(e);
-            }
+            NE.SetAttribute("dataGroup", item.dataGroupID);
+            NE.InnerText = item.ObjectToXML();
             day.AppendChild(NE);
         }
         doc.Save(filename);
@@ -245,7 +228,7 @@ public class DataReader
                                     n.attributes[1] = "00:00";
                                     result.AddGuide(n);
                                 }
-
+                                /*
                                 XmlNodeList teams = day.GetElementsByTagName(DataStrings.NameOfTeam);
                                 XmlNodeList guides = day.GetElementsByTagName(DataStrings.Guide);
 
@@ -275,7 +258,7 @@ public class DataReader
                                         guide.id = GetElementID(entry.ParentNode as XmlElement);
                                         result.AddGuide(guide);
                                     }
-                                }
+                                }*/
                             }
                         }
                 }
@@ -284,7 +267,7 @@ public class DataReader
 
         return result;
     }
-
+    
     public static void BackUp(string source, string destination, bool cleanDestination)
     {
         if (cleanDestination && Directory.Exists(destination))
