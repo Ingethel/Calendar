@@ -6,10 +6,10 @@ public class ExtrasViewController : ViewController {
     public enum State
     {
         NEWENTRY,
+        ALARMPREVIEW,
         SEARCH,
         ALARM,
         VIEWMODE,
-        ALARMPREVIEW,
         HELP,
         ILLEGAL
     };
@@ -48,7 +48,7 @@ public class ExtrasViewController : ViewController {
 
     public override void NotifyIllegal()
     {
-        currentViewIndex = (int)State.ILLEGAL;
+        CurrentViewIndex = (int)State.ILLEGAL;
         calendarController.SetAsBackground(false);
     }
 

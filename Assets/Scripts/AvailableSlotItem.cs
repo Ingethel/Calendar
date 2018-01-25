@@ -3,19 +3,20 @@ using UnityEngine.UI;
 
 public class AvailableSlotItem : MonoBehaviour {
 
-    NewEntryPanelHandler handler;
-    Text s;
+    protected NewEntryPanelHandler handler;
+    protected Text text;
 
-    void Start()
+    protected virtual void Start()
     {
         handler = FindObjectOfType<NewEntryPanelHandler>();
-        s = GetComponentInChildren<Text>();
     }
 
-    public void OnClick()
+    public virtual void OnClick(){}
+
+    public virtual void Assign(string s)
     {
-        handler.SetTime(s.text);
-        handler.OnClickSlotExpander();
+        text = GetComponentInChildren<Text>();
+        text.text = s;
     }
 
 }

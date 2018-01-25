@@ -58,8 +58,8 @@ public class IViewManager : Panel
     protected void AddFiller(string startTime, string endTime)
     {
         Event n = new Event();
-        n.attributes[0] = startTime;
-        n.attributes[1] = endTime;
+        n.startTime = startTime;
+        n.endTime = endTime;
         n.SetDate(assignedDate.Day.ToString() + "." + assignedDate.Month.ToString() + "." + assignedDate.Year.ToString());
         n.filler = true;
         info.AddGuide(n);

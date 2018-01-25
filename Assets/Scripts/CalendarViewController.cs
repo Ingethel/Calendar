@@ -52,7 +52,7 @@ public class CalendarViewController : ViewController
         if (InFront)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
-                if(currentViewIndex != (int)State.MONTHLY)
+                if(CurrentViewIndex != (int)State.MONTHLY)
                     RequestView(State.MONTHLY);
             if (Input.GetKeyDown(KeyCode.LeftArrow))
                 ChangeDay(-1);
@@ -64,7 +64,7 @@ public class CalendarViewController : ViewController
 
     public void SaveState()
     {
-        PlayerPrefs.SetInt("SavedState", currentViewIndex);
+        PlayerPrefs.SetInt("SavedState", CurrentViewIndex);
         PlayerPrefs.SetInt("SavedYear", lastGivenDate.Year);
         PlayerPrefs.SetInt("SavedMonth", lastGivenDate.Month);
         PlayerPrefs.SetInt("SavedDay", lastGivenDate.Day);
@@ -80,7 +80,7 @@ public class CalendarViewController : ViewController
 
     public void ChangeDay(int i)
     {
-        switch (currentViewIndex)
+        switch (CurrentViewIndex)
         {
             case (int)State.DAILY:
                 lastGivenDate = (calendar.AddDays(lastGivenDate, i));

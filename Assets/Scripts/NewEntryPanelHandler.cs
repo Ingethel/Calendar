@@ -44,6 +44,29 @@ public class NewEntryPanelHandler : ItemPanel<Event> {
     protected override void DisplayInfo()
     {
         setTitle();
+        
+        // display date
+        fields[0].inputs[0].text = item.day != 0 ? item.day.ToString() : "";
+        fields[0].inputs[1].text = item.month != 0 ? item.month.ToString() : "";
+        fields[0].inputs[2].text = item.year != 0 ? item.year.ToString() : "";
+
+        // display time
+        if (item.startTime != null)
+        {
+            string[] split = item.startTime.Split(':');
+            if (split.Length == 2)
+            {
+                fields[1].inputs[0].text = split[0];
+                fields[1].inputs[1].text = split[1];
+            }
+            split = item.endTime.Split(':');
+            if (split.Length == 2)
+            {
+                fields[1].inputs[2].text = split[0];
+                fields[1].inputs[3].text = split[1];
+            }
+        }
+        
         if (item.filler)
         {
             string temp = SettingsManager.GetDataGroup((int)DataGroup.DataGroups.EVENT)[0].Attributes;
@@ -54,25 +77,6 @@ public class NewEntryPanelHandler : ItemPanel<Event> {
                 attributeLabels.Add(tempArr[i]);
             }
             GetAttributes();
-            return;
-        }
-        // display date
-        fields[0].inputs[0].text = item.day != 0 ? item.day.ToString() : "";
-        fields[0].inputs[1].text = item.month != 0 ? item.month.ToString() : "";
-        fields[0].inputs[2].text = item.year != 0 ? item.year.ToString() : "";
-
-        // display time
-        string[] split = item.startTime.Split(':');
-        if(split.Length == 2)
-        {
-            fields[1].inputs[0].text = split[0];
-            fields[1].inputs[1].text = split[1];
-        }
-        split = item.endTime.Split(':');
-        if (split.Length == 2)
-        {
-            fields[1].inputs[2].text = split[0];
-            fields[1].inputs[3].text = split[1];
         }
     }
 
@@ -102,13 +106,13 @@ public class NewEntryPanelHandler : ItemPanel<Event> {
         if (!slotPanel.activeSelf)
         {
             slotPanel.SetActive(true);
-            slotPanel.GetComponent<AvailableSlotsPanelHandler>().SetData(new string[] { fields[4].inputs[0].text, fields[4].inputs[1].text, fields[4].inputs[2].text });
+            slotPanel.GetComponent<AvailableTimeSlots>().SetData();
             slotExpander.GetComponent<UnityEngine.UI.Image>().sprite = collapse;
         }
         else
         {
             slotExpander.GetComponent<UnityEngine.UI.Image>().sprite = expand;
-            slotPanel.GetComponent<AvailableSlotsPanelHandler>().Clear();
+            slotPanel.GetComponent<AvailableTimeSlots>().Clear();
             slotPanel.SetActive(false);
         }
     }
@@ -117,7 +121,7 @@ public class NewEntryPanelHandler : ItemPanel<Event> {
     {
         if (slotPanel.activeSelf)
         {
-            slotPanel.GetComponent<AvailableSlotsPanelHandler>().Clear();
+            slotPanel.GetComponent<AvailableTimeSlots>().Clear();
             slotPanel.SetActive(false);
         }
 
@@ -144,4 +148,5 @@ public class NewEntryPanelHandler : ItemPanel<Event> {
         base.EditEntry();
         OnDateReady();
     }
+    
 }

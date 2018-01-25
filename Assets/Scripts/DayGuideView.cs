@@ -4,17 +4,10 @@
     public override void Allocate(Event n)
     {
         base.Allocate(n);
-        SetTime(n.attributes[0] + " - " + n.attributes[1]);
+        SetTime(n.startTime + " - " + n.endTime);
         if (!n.filler)
         {
-            string s = "";
-            if (n.attributes[2] != "")
-                s += n.attributes[2];
-            if (n.attributes[3] != "")
-                s += ", #" + n.attributes[3];
-            if (n.attributes[7] != "")
-                s += ", " + n.attributes[7];
-            SetDetails(s);
+            SetDetails(n.ToString());
         }
     }
     

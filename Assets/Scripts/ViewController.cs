@@ -7,7 +7,7 @@ public class ViewController : MonoBehaviour {
     protected IViewManager viewManager;
     protected Panel panel;
     protected GameObject currentView;
-    protected int currentViewIndex;
+    public int CurrentViewIndex { protected set; get; }
     public bool InFront { protected set; get; }
     protected GameManager gManager;
 
@@ -19,7 +19,7 @@ public class ViewController : MonoBehaviour {
     }
 
 	protected virtual void Start () {
-        currentViewIndex = -1;
+        CurrentViewIndex = -1;
         foreach (GameObject o in viewModes)
             o.SetActive(false);
         gManager = FindObjectOfType<GameManager>();
@@ -47,7 +47,7 @@ public class ViewController : MonoBehaviour {
                 currentView.SetActive(true);
         }
 
-        currentViewIndex = i;
+        CurrentViewIndex = i;
     }
 
     public virtual void CloseView(){}
