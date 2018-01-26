@@ -1,16 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿public class DataGroupItem : AvailableSlotItem
+{
 
-public class DataGroupItem : MonoBehaviour {
+    public override void OnClick()
+    {
+        FindObjectOfType<AvailableDataGroups>().onSet(text.text);
+    }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

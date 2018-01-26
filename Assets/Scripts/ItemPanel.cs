@@ -15,14 +15,12 @@ public class ItemPanel<T> : Panel where T : Item {
     public GameObject editButtons, newEntryButtons;
 
     public DateValidator dateValidator;
-    public TimeValidator timeValidator;
-
+    
     public List<string> attributeLabels;
     public GameObject attributeList;
     public GameObject attributeElement;
 
-    public GameObject dataGroupObj;
-    public DataGroup dataGroup;
+    public IAvailableSlotHandler eventGroup;
 
     protected virtual void Start()
     {
@@ -136,6 +134,19 @@ public class ItemPanel<T> : Panel where T : Item {
         if (a.text == null)
             return "";
         return a.text;
+    }
+
+    public void ResetAttibutes(DataGroup dG)
+    {
+        eventGroup.onSet(dG.Name);
+        string temp = dG.Attributes;
+        string[] tempArr = temp.Split(',');
+        attributeLabels = new List<string>();
+        for (int i = 4; i < tempArr.Length; i++)
+        {
+            attributeLabels.Add(tempArr[i]);
+        }
+        GetAttributes();
     }
 
     public void GetAttributes()

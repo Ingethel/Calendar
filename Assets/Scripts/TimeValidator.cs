@@ -30,4 +30,50 @@ public class TimeValidator : Validator {
         return false;
     }
 
+    public void SetTime(string time)
+    {
+        string[] times = time.Split('-');
+        if(times.Length == 2)
+        {
+            SetStartTime(times[0]);
+            SetEndTime(times[1]);
+        }
+    }
+
+    public void SetStartTime(string time)
+    {
+        if(time != null)
+        {
+            string[] temp = time.Split(':');
+            if(temp.Length == 2)
+            {
+                SH.text = temp[0];
+                SM.text = temp[1];
+            }
+        }
+    }
+
+    public void SetEndTime(string time)
+    {
+        if (time != null)
+        {
+            string[] temp = time.Split(':');
+            if (temp.Length == 2)
+            {
+                EH.text = temp[0];
+                EM.text = temp[1];
+            }
+        }
+    }
+    
+    public string GetStartTime()
+    {
+        return SH.text + ":" + SM.text;
+    }
+
+    public string GetEndTime()
+    {
+        return EH.text + ":" + EM.text;
+    }
+
 }

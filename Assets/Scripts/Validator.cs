@@ -3,13 +3,12 @@ using UnityEngine.UI;
 
 public abstract class Validator : MonoBehaviour {
 
-    Image errorImg;
+    public Image errorImg;
     Color cError = new Color(1, 0, 0, 0.4f);
     Color cNorm = new Color(1, 0, 0, 0);
 
     protected void Awake()
     {
-        errorImg = GetComponent<Image>();
         Refresh();
     }
     

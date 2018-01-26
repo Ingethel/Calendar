@@ -82,7 +82,10 @@ public static class SettingsManager{
             ReadColourGroups();
         if (colorGroups.Count == 0)
             CreateColorGroup(new Color(0, 39, 255), "default");
-        return colorGroups.Where(x => x.Name == name).DefaultIfEmpty(colorGroups[0]).First();
+        if (name == "")
+            return colorGroups[0];
+        else
+            return colorGroups.Where(x => x.Name == name).DefaultIfEmpty(colorGroups[0]).First();
     }
 
     public static ColorGroup CreateColorGroup(Color c, string s)
@@ -148,7 +151,10 @@ public static class SettingsManager{
             ReadDataGroups();
         if (dataGroups[(int)group].Count == 0)
             CreateDataGroup("default", "Date, Colour Group, Start Time, End Time", (int)group);
-        return dataGroups[(int)group].Where(x => x.Name == name).DefaultIfEmpty(dataGroups[(int)group][0]).First();
+        if (name == "")
+            return dataGroups[(int)group][0];
+        else
+            return dataGroups[(int)group].Where(x => x.Name == name).DefaultIfEmpty(dataGroups[(int)group][0]).First();
     }
 
     public static DataGroup CreateDataGroup(string name, string attributeList, int value)

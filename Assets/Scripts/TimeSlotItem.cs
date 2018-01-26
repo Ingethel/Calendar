@@ -3,8 +3,7 @@
 
     public override void OnClick()
     {
-        handler.SetTime(text.text);
-        handler.OnClickSlotExpander();
+        FindObjectOfType<AvailableTimeSlots>().onSet(text.text);
     }
 
 }

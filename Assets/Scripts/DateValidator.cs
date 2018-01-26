@@ -20,4 +20,17 @@ public class DateValidator : Validator {
         ShowError();
         return false;
     }
+
+    public void SetDate(int[] date)
+    {
+        Day.text = date[0] != 0 ? date[0].ToString() : "";
+        Month.text = date[1] != 0 ? date[1].ToString() : "";
+        Year.text = date[2] != 0 ? date[2].ToString() : "";
+    }
+
+    public string GetDate()
+    {
+        return Day.text + "." + Month.text + "." + Year.text;
+    }
+
 }

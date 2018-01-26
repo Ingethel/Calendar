@@ -1,24 +1,14 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public class NewEntryPanelHandler : ItemPanel<Event> {
 
-    public GameObject slotExpander;
-    public GameObject slotPanel;
-    public Sprite expand, collapse;
-
-    public GameObject colorGroupObj;
-    public ColorGroup color;
+    public IAvailableSlotHandler timeGroup, colorGroup;
+    public TimeValidator timeValidator;
 
     public override void PreviewEntry(Event n)
     {
         base.PreviewEntry(n);
-
-        slotExpander.SetActive(false);
-        slotPanel.SetActive(false);
-
-        if (newEntryButtons.activeSelf)
-            OnDateReady();
+        OnValidDate();
     }
     
     public override void SetLanguage()
@@ -44,40 +34,22 @@ public class NewEntryPanelHandler : ItemPanel<Event> {
     protected override void DisplayInfo()
     {
         setTitle();
-        
-        // display date
-        fields[0].inputs[0].text = item.day != 0 ? item.day.ToString() : "";
-        fields[0].inputs[1].text = item.month != 0 ? item.month.ToString() : "";
-        fields[0].inputs[2].text = item.year != 0 ? item.year.ToString() : "";
 
-        // display time
-        if (item.startTime != null)
-        {
-            string[] split = item.startTime.Split(':');
-            if (split.Length == 2)
-            {
-                fields[1].inputs[0].text = split[0];
-                fields[1].inputs[1].text = split[1];
-            }
-            split = item.endTime.Split(':');
-            if (split.Length == 2)
-            {
-                fields[1].inputs[2].text = split[0];
-                fields[1].inputs[3].text = split[1];
-            }
-        }
+        dateValidator.SetDate(new int[] { item.day, item.month, item.year });
         
+        timeValidator.SetStartTime(item.startTime);
+        timeValidator.SetEndTime(item.endTime);
+
+        DataGroup dG;
         if (item.filler)
         {
-            string temp = SettingsManager.GetDataGroup((int)DataGroup.DataGroups.EVENT)[0].Attributes;
-            string[] tempArr = temp.Split(',');
-            attributeLabels = new List<string>();
-            for (int i = 4; i < tempArr.Length; i++)
-            {
-                attributeLabels.Add(tempArr[i]);
-            }
-            GetAttributes();
+            dG = SettingsManager.GetDataGroup((int)DataGroup.DataGroups.EVENT)[0];
         }
+        else
+        {
+            dG = SettingsManager.GetDataGroupID(DataGroup.DataGroups.EVENT, item.dataGroupID);
+        }
+        ResetAttibutes(dG);
     }
 
     protected override void SaveInfo()
@@ -87,13 +59,13 @@ public class NewEntryPanelHandler : ItemPanel<Event> {
         AttributeElement[] elements = GetComponentsInChildren<AttributeElement>();
         foreach (AttributeElement element in elements)
             atts.Add(element.value.text);
-        atts.Insert(0, fields[1].inputs[0].text + ":" + fields[1].inputs[1].text);
-        atts.Insert(0, fields[1].inputs[2].text + ":" + fields[1].inputs[3].text);
-        item = new Event(
-            fields[0].inputs[0].text + "." + fields[0].inputs[1].text + "." + fields[0].inputs[2].text,
-            dataGroup.Name,
-            color.Name, 
-            atts);
+        atts.Insert(0, timeValidator.GetStartTime());
+        atts.Insert(0, timeValidator.GetEndTime());
+        //item = new Event(
+        //    dateValidator.GetDate(),
+        //    dataGroup.Name,
+        //    color.Name, 
+        //    atts);
     }
 
     protected override void setTitle()
@@ -101,52 +73,15 @@ public class NewEntryPanelHandler : ItemPanel<Event> {
         title.text = flag ? gManager.language.NewEntry : gManager.language.NewEntryPreview;
     }
     
-    public void OnClickSlotExpander()
-    {
-        if (!slotPanel.activeSelf)
-        {
-            slotPanel.SetActive(true);
-            slotPanel.GetComponent<AvailableTimeSlots>().SetData();
-            slotExpander.GetComponent<UnityEngine.UI.Image>().sprite = collapse;
-        }
-        else
-        {
-            slotExpander.GetComponent<UnityEngine.UI.Image>().sprite = expand;
-            slotPanel.GetComponent<AvailableTimeSlots>().Clear();
-            slotPanel.SetActive(false);
-        }
-    }
-    
-    public void OnDateReady()
-    {
-        if (slotPanel.activeSelf)
-        {
-            slotPanel.GetComponent<AvailableTimeSlots>().Clear();
-            slotPanel.SetActive(false);
-        }
-
-        if (dateValidator.Validate())
-        {
-            slotExpander.SetActive(true);
-            slotExpander.GetComponent<UnityEngine.UI.Image>().sprite = expand;
-        }
-    }
-
-    public void SetTime(string time)
-    {
-        string[] times = time.Split('-');
-        string[] start = times[0].Split(':');
-        string[] end = times[1].Split(':');
-        fields[1].inputs[0].text = start[0];
-        fields[1].inputs[1].text = start[1];
-        fields[1].inputs[2].text = end[0];
-        fields[1].inputs[3].text = end[1];
-    }
-
     public override void EditEntry()
     {
         base.EditEntry();
-        OnDateReady();
+        OnValidDate();
     }
     
+    public void OnValidDate()
+    {
+        timeGroup.SetActive(dateValidator.Validate());
+    }
+
 }
