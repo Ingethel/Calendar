@@ -39,17 +39,10 @@ public class NewEntryPanelHandler : ItemPanel<Event> {
         
         timeValidator.SetStartTime(item.startTime);
         timeValidator.SetEndTime(item.endTime);
-
-        DataGroup dG;
-        if (item.filler)
-        {
-            dG = SettingsManager.GetDataGroup((int)DataGroup.DataGroups.EVENT)[0];
-        }
-        else
-        {
-            dG = SettingsManager.GetDataGroupID(DataGroup.DataGroups.EVENT, item.dataGroupID);
-        }
-        ResetAttibutes(dG);
+        
+        colorGroup.onSet(item.color);
+        eventGroup.onSet(item.dataGroupID);
+        ResetAttibutes();
     }
 
     protected override void SaveInfo()

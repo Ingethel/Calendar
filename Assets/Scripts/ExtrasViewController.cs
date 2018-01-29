@@ -6,10 +6,10 @@ public class ExtrasViewController : ViewController {
     public enum State
     {
         NEWENTRY,
-        ALARMPREVIEW,
-        SEARCH,
         ALARM,
+        ALARMPREVIEW,
         VIEWMODE,
+        SEARCH,
         HELP,
         ILLEGAL
     };
@@ -22,13 +22,7 @@ public class ExtrasViewController : ViewController {
         calendarController = FindObjectOfType<CalendarViewController>();
         gManager.PrintMode += CloseView;
     }
-/*
-    void Update()
-    {
-        if(currentView != null)
-            HideIfClickedOutside();
-    }
-    */
+
     private void HideIfClickedOutside()
     {
         if (Input.GetMouseButton(0) && currentView.activeSelf &&

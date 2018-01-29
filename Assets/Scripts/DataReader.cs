@@ -152,7 +152,7 @@ public class DataReader
         }
         if (!item.filler)
         {
-            XmlNodeList NList = day.GetElementsByTagName(item.tag);
+            XmlNodeList NList = day.GetElementsByTagName(item.Type.ToString());
             XmlElement NE = null;
             bool exists = false;
             if (NList != null)
@@ -170,7 +170,7 @@ public class DataReader
             }
             if (!exists)
             {
-                NE = doc.CreateElement(item.tag);
+                NE = doc.CreateElement(item.Type.ToString());
                 NE.SetAttribute("id", item.id);
             }
             NE.SetAttribute("dataGroup", item.dataGroupID);

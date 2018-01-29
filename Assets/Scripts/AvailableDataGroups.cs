@@ -15,15 +15,9 @@ public class AvailableDataGroups : IAvailableSlotHandler
 
     public override void onSet(string s)
     {
-        if (s == "")
-        {
-            DataGroup temp = SettingsManager.GetDataGroupID((DataGroup.DataGroups)FindObjectOfType<ExtrasViewController>().CurrentViewIndex, "");
-            GetComponent<UnityEngine.UI.Text>().text = temp.Name;
-        }
-        else
-        {
-            GetComponent<UnityEngine.UI.Text>().text = s;
-        }
+        DataGroup temp;
+        temp = SettingsManager.GetDataGroupID((DataGroup.DataGroups)FindObjectOfType<ExtrasViewController>().CurrentViewIndex, s);
+        GetComponent<UnityEngine.UI.Text>().text = temp.Name;
         base.onSet(s);
     }
 

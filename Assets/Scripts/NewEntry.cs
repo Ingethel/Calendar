@@ -5,13 +5,13 @@ public class Item
 {
     public List<string> attributes;
     public string dataGroupID;
+    public DataGroup.DataGroups Type { protected set; get; }
     public string Date {
         get; protected set;
     }
     public string id = "";
     public bool filler = false;
-    public string tag;
-
+    
     public int day, month, year;
 
     public void SetDate(string s)
@@ -43,6 +43,7 @@ public class Item
     {
         return "";
     }
+    
 }
 
 public class Event : Item
@@ -53,18 +54,18 @@ public class Event : Item
 
     public Event()
     {
-        dataGroupID = SettingsManager.GetDataGroup((int)DataGroup.DataGroups.EVENT)[0].Name;
-        color = SettingsManager.GetColourGroup("default").Name;
-        tag = DataStrings.Event;
+        Type = DataGroup.DataGroups.EVENT;
+        dataGroupID = SettingsManager.GetDataGroup((int)Type)[0].Name;
+        color = SettingsManager.GetColorGroups()[0].Name;
         filler = true;
     }
 
     public Event(string day, string dGName, string cGName, List<string> attList)
     {
+        Type = DataGroup.DataGroups.EVENT;
         SetDate(day);
         dataGroupID = dGName;
         color = cGName;
-        tag = DataStrings.Event;
         startTime = attList[0];
         endTime = attList[1];
         attributes = attList.GetRange(2, attList.Count-2);
@@ -90,20 +91,22 @@ public class Event : Item
     {
         return color + "," + startTime + "," + endTime + "," + ToString();
     }
+    
 }
 
 public class Alarm : Item
 {
     public bool report = false;
+
     public Alarm()
     {
-        tag = DataStrings.Alarm;
+        Type = DataGroup.DataGroups.ALARM;
         filler = true;
     }
 
     public Alarm(string d, string n)
     {
-        tag = DataStrings.Alarm;
+        Type = DataGroup.DataGroups.ALARM;
         SetDate(d);
         filler = false;
     }

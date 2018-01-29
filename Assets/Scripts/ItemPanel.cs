@@ -25,6 +25,7 @@ public class ItemPanel<T> : Panel where T : Item {
     protected virtual void Start()
     {
         system = EventSystem.current;
+        eventGroup.OnValueChange += ResetAttibutes;
     }
 
     protected virtual void Update()
@@ -136,9 +137,9 @@ public class ItemPanel<T> : Panel where T : Item {
         return a.text;
     }
 
-    public void ResetAttibutes(DataGroup dG)
+    public void ResetAttibutes()
     {
-        eventGroup.onSet(dG.Name);
+        DataGroup dG = SettingsManager.GetDataGroupID(item.Type, eventGroup.GetValue());
         string temp = dG.Attributes;
         string[] tempArr = temp.Split(',');
         attributeLabels = new List<string>();

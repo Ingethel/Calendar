@@ -1,17 +1,9 @@
 ﻿public class AlarmPanelHandler : ItemPanel<Alarm> {
-
-//    public Dropdown Modifier;
-//    private int RepeatFreqModifier;
-
+    
     public override void SetLanguage()
     {
         setTitle();
         fields[0].label.text = gManager.language.Date;
-        fields[1].label.text = gManager.language.RepeatEvery;
-        fields[2].label.text = gManager.language.Notes;
-        /*Modifier.options[0].text = gManager.language.Days;
-        Modifier.options[1].text = gManager.language.Weeks;
-        Modifier.options[2].text = gManager.language.Months;*/
     }
 
     protected override void CalendarRequestOnSave()
@@ -39,11 +31,7 @@
     protected override void SaveInfo()
     {
         base.SaveInfo();
-
-        /*      int temp;
-                if (int.TryParse(fields[1].inputs[0].text, out temp))
-                    item = new Alarm(fields[0].inputs[0].text + "." + fields[0].inputs[1].text + "." + fields[0].inputs[2].text, fields[2].inputs[0].text, temp, RepeatFreqModifier);
-                else*/
+        
         item = new Alarm(fields[0].inputs[0].text + "." + fields[0].inputs[1].text + "." + fields[0].inputs[2].text, fields[2].inputs[0].text);
     }
 
@@ -51,9 +39,5 @@
     {
         title.text = flag ? gManager.language.NewAlarm : gManager.language.AlarmPreview;
     }
-    /*
-public void ChangeModifier(int i)
-{
-    RepeatFreqModifier = i;
-}*/
+
 }

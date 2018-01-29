@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class IItemListView<T> : MonoBehaviour where T : Item
 {
 
-    public UnityEngine.UI.Text Date, Time, Details;
+    public Text Date, Time, Details;
     protected T item;
 
     public virtual void Allocate(T n)
@@ -13,18 +14,19 @@ public class IItemListView<T> : MonoBehaviour where T : Item
     
     public virtual void OnClick() {}
 
-    protected void SetTime(string s)
+    protected virtual void SetTime(string s)
     {
         Time.text = s;
     }
 
-    protected void SetDetails(string s)
+    protected virtual void SetDetails(string s)
     {
         Details.text = s;
     }
 
-    protected void SetDate(string s)
+    protected virtual void SetDate(string s)
     {
         Date.text = s;
     }
+
 }

@@ -15,4 +15,11 @@
     {
         FindObjectOfType<ExtrasViewController>().RequestEntryPreview(item, ExtrasViewController.State.NEWENTRY);
     }
+
+    protected override void SetDetails(string s)
+    {
+        base.SetDetails(s);
+        Details.color = SettingsManager.GetColourGroup(item.color).Colour;
+    }
+
 }

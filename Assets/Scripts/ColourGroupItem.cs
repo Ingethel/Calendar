@@ -1,16 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿public class ColourGroupItem : AvailableSlotItem
+{
+    public UnityEngine.UI.Image image;
 
-public class ColourGroupItem : MonoBehaviour {
+    public override void OnClick()
+    {
+        FindObjectOfType<AvailableColourGroups>().onSet(text.text);
+    }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public override void Assign(string s)
+    {
+        ColorGroup temp = SettingsManager.GetColourGroup(s);
+        base.Assign(temp.Name);
+        image.color = temp.Colour;
+    }
 }

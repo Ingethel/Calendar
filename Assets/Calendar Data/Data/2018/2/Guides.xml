@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE Entries[<!ELEMENT Entries (Day*)>
+<!ELEMENT Day (Event*, Alarm*)>
+<!ELEMENT Event (#PCDATA)>
+<!ELEMENT Alarm (#PCDATA)>
+<!ATTLIST Day id ID #REQUIRED>
+<!ATTLIST Day officer CDATA #IMPLIED>
+<!ATTLIST Event id ID #REQUIRED>
+<!ATTLIST Event dataGroup CDATA #REQUIRED>
+<!ATTLIST Alarm id ID #REQUIRED>
+<!ATTLIST Alarm dataGroup CDATA #REQUIRED>
+]>
+<Entries>
+  <Day id="_2.2.2018" />
+</Entries>

@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
+using System;
 
 public class IAvailableSlotHandler : MonoBehaviour {
 
     public GameObject slotItem;
     public GameObject slotContainer;
     protected int slotterTranslation;
-    
+
+    public event Action OnValueChange;
+
     protected void Start()
     {
         slotContainer.SetActive(false);
@@ -39,6 +42,8 @@ public class IAvailableSlotHandler : MonoBehaviour {
 
     public virtual void onSet(string s)
     {
+        if (OnValueChange != null)
+            OnValueChange();
         Clear();
     }
 

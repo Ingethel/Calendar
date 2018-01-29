@@ -70,7 +70,7 @@ public class DayOfMonth : IDayView{
         if (!n.filler) {
             Image img = o.GetComponent<Image>();
             if (img)
-                img.color = filled;
+                img.color = SettingsManager.GetColourGroup(n.color).Colour;
         }
     }
 

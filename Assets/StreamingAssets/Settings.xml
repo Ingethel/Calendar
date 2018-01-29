@@ -35,7 +35,10 @@
   <Timetable id="Friday">09:00,10:30,12:00,13:30</Timetable>
   <Timetable id="Saturday">10:30,12:00,13:30,15:00,16:30</Timetable>
   <Timetable id="Sunday">10:30,12:00,13:30,15:00,16:30</Timetable>
-  <ColorGroup id="ColorGroup.7" name="normal">0.2323276,0.4925334,0.5661765</ColorGroup>
-  <ColorGroup id="ColorGroup.16" name="abnormal">0.7377626,0.4335509,0.320424</ColorGroup>
-  <EventGroup id="EventGroup.7" name="Example">Date,Colour Group,Start Time,End Time, Name of Team,Number of People</EventGroup>
+  <ColorGroup id="ColorGroup.1" name="Default">0.04985456,0.1246912,0.8804799</ColorGroup>
+  <ColorGroup id="ColorGroup.2" name="Military">0.6886989,0.7747356,0.06048392</ColorGroup>
+  <ColorGroup id="ColorGroup.3" name="Political">0.9414735,0.9795902,0.04585973</ColorGroup>
+  <EventGroup id="EventGroup.18" name="Default">Date,Colour Group,Start Time,End Time, Name of Team, Number of People, Person in Charge, Telephone, Date of Confirmation, Guide, Notes</EventGroup>
+  <AlarmGroup id="AlarmGroup.19" name="Default">Date, Notes</AlarmGroup>
+  <EventGroup id="EventGroup.20" name="Example">Date,Colour Group,Start Time,End Time, Att1, Att2</EventGroup>
 </Settings>
