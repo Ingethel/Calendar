@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine.UI;
 
 public class NewEntryPanelHandler : ItemPanel<Event> {
 
     public IAvailableSlotHandler timeGroup, colorGroup;
     public TimeValidator timeValidator;
+    public Text timeLabel;
 
+    protected override int attributeIntent
+    { get{ return 4; } }
+    
     public override void PreviewEntry(Event n)
     {
         base.PreviewEntry(n);
@@ -13,10 +17,8 @@ public class NewEntryPanelHandler : ItemPanel<Event> {
     
     public override void SetLanguage()
     {
-        setTitle();
-
-        fields[0].label.text = gManager.language.Date;
-        fields[1].label.text = gManager.language.Time;
+        base.SetLanguage();
+        timeLabel.text = gManager.language.Time;
     }
 
     protected override void CalendarRequestOnSave()
@@ -33,32 +35,18 @@ public class NewEntryPanelHandler : ItemPanel<Event> {
     
     protected override void DisplayInfo()
     {
-        setTitle();
-
-        dateValidator.SetDate(new int[] { item.day, item.month, item.year });
-        
+        base.DisplayInfo();
         timeValidator.SetStartTime(item.startTime);
         timeValidator.SetEndTime(item.endTime);
-        
         colorGroup.onSet(item.color);
-        eventGroup.onSet(item.dataGroupID);
-        ResetAttibutes();
     }
 
     protected override void SaveInfo()
     {
         base.SaveInfo();
-        List<string> atts = new List<string>();
-        AttributeElement[] elements = GetComponentsInChildren<AttributeElement>();
-        foreach (AttributeElement element in elements)
-            atts.Add(element.value.text);
-        atts.Insert(0, timeValidator.GetStartTime());
-        atts.Insert(0, timeValidator.GetEndTime());
-        //item = new Event(
-        //    dateValidator.GetDate(),
-        //    dataGroup.Name,
-        //    color.Name, 
-        //    atts);
+        attributeValues.Insert(0, timeValidator.GetEndTime());
+        attributeValues.Insert(0, timeValidator.GetStartTime());
+        item = new Event(dateValidator.GetDate(), eventGroup.GetValue(), colorGroup.GetValue(), attributeValues);
     }
 
     protected override void setTitle()

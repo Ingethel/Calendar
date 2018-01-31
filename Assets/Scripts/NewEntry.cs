@@ -3,8 +3,8 @@ using System;
 
 public class Item
 {
-    public List<string> attributes;
-    public string dataGroupID;
+    public string[] attributes;
+    public string dataGroupID = "";
     public DataGroup.DataGroups Type { protected set; get; }
     public string Date {
         get; protected set;
@@ -26,35 +26,36 @@ public class Item
     public override string ToString()
     {
         string value = "";
-        if(attributes != null && attributes.Count > 0)
+        if(attributes != null && attributes.Length > 0)
         {
-            foreach (string att in attributes)
-                value += att + " ";
+            value = attributes[0];
+            for (int i = 1; i < attributes.Length; i++)
+                value += "," + attributes[i];
         }
         return value;
     }
 
     public virtual void XMLToObject(string text)
     {
-
+        attributes = text.Split(',');
     }
 
     public virtual string ObjectToXML()
     {
-        return "";
+        return ToString();
     }
     
 }
 
 public class Event : Item
 {
-    public string color;
+    public string color = "";
 
-    public string startTime, endTime;
+    public string startTime = "", endTime = "";
 
     public Event()
     {
-        Type = DataGroup.DataGroups.EVENT;
+        Type = DataGroup.DataGroups.Event;
         dataGroupID = SettingsManager.GetDataGroup((int)Type)[0].Name;
         color = SettingsManager.GetColorGroups()[0].Name;
         filler = true;
@@ -62,19 +63,23 @@ public class Event : Item
 
     public Event(string day, string dGName, string cGName, List<string> attList)
     {
-        Type = DataGroup.DataGroups.EVENT;
+        Type = DataGroup.DataGroups.Event;
         SetDate(day);
         dataGroupID = dGName;
         color = cGName;
         startTime = attList[0];
         endTime = attList[1];
-        attributes = attList.GetRange(2, attList.Count-2);
+        attributes = attList.GetRange(2, attList.Count-2).ToArray();
         filler = false;
     }
 
-    public Event(string day, string details)
+    public Event(string day, string dGName, string details)
     {
-
+        Type = DataGroup.DataGroups.Event;
+        SetDate(day);
+        dataGroupID = dGName;
+        XMLToObject(details);
+        filler = false;
     }
 
     public int GetStartTime()
@@ -87,11 +92,25 @@ public class Event : Item
         return TimeConversions.StringTimeToInt(endTime, 60);
     }
 
-    public string ToXMLText()
+    public override string ObjectToXML()
     {
         return color + "," + startTime + "," + endTime + "," + ToString();
     }
-    
+
+    public override void XMLToObject(string text)
+    {
+        string[] temp = text.Split(',');
+        color = temp[0];
+        startTime = temp[1];
+        endTime = temp[2];
+        int size = temp.Length - 3;
+        attributes = new string[size];
+        for(int i = 0; i < attributes.Length; i++)
+        {
+            attributes[i] = temp[i + 3];
+        }
+    }
+
 }
 
 public class Alarm : Item
@@ -100,17 +119,28 @@ public class Alarm : Item
 
     public Alarm()
     {
-        Type = DataGroup.DataGroups.ALARM;
+        Type = DataGroup.DataGroups.Alarm;
+        dataGroupID = SettingsManager.GetDataGroup((int)Type)[0].Name;
         filler = true;
     }
 
-    public Alarm(string d, string n)
+    public Alarm(string d, string dGName, string details)
     {
-        Type = DataGroup.DataGroups.ALARM;
+        Type = DataGroup.DataGroups.Alarm;
+        dataGroupID = dGName;
         SetDate(d);
+        XMLToObject(details);
         filler = false;
     }
 
+    public Alarm(string d, string dGName, List<string> attList)
+    {
+        Type = DataGroup.DataGroups.Alarm;
+        dataGroupID = dGName;
+        SetDate(d);
+        attributes = attList.ToArray();
+    }
+    
 }
 
 public class NewEntryComparer : IComparer<Event>

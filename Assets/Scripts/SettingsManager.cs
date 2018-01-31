@@ -150,7 +150,7 @@ public static class SettingsManager{
         if (dataGroups == null)
             ReadDataGroups();
         if (dataGroups[(int)group].Count == 0)
-            CreateDataGroup("default", "Date, Colour Group, Start Time, End Time", (int)group);
+            CreateDataGroup("default", "Notes", (int)group);
         if (name == "")
             return dataGroups[(int)group][0];
         else
@@ -224,7 +224,7 @@ public class ColorGroup
 
 public class DataGroup
 {
-    public enum DataGroups { EVENT, ALARM };
+    public enum DataGroups { Event, Alarm };
     public static string[] Groups = new string[] { "EventGroup", "AlarmGroup" };
     public int type;
     public string Name { private set; get; }
@@ -238,6 +238,7 @@ public class DataGroup
         Id = Groups[value] + "." + _id.ToString();
         Name = name;
         Attributes = attributeList;
+        type = value;
     }
 
     public DataGroup(string name, string attributeList, string id, int value)
@@ -245,5 +246,7 @@ public class DataGroup
         Id = id;
         Name = name;
         Attributes = attributeList;
+        type = value;
     }
+
 }

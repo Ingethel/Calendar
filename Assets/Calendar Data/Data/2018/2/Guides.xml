@@ -11,5 +11,7 @@
 <!ATTLIST Alarm dataGroup CDATA #REQUIRED>
 ]>
 <Entries>
-  <Day id="_2.2.2018" />
+  <Day id="_2.2.2018">
+    <Event id="_guide.0" dataGroup="Default">Default,09:00,10:30,Test,50,Me,,,,</Event>
+  </Day>
 </Entries>

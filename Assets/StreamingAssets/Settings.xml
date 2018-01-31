@@ -39,6 +39,5 @@
   <ColorGroup id="ColorGroup.2" name="Military">0.6886989,0.7747356,0.06048392</ColorGroup>
   <ColorGroup id="ColorGroup.3" name="Political">0.9414735,0.9795902,0.04585973</ColorGroup>
   <EventGroup id="EventGroup.18" name="Default">Date,Colour Group,Start Time,End Time, Name of Team, Number of People, Person in Charge, Telephone, Date of Confirmation, Guide, Notes</EventGroup>
-  <AlarmGroup id="AlarmGroup.19" name="Default">Date, Notes</AlarmGroup>
-  <EventGroup id="EventGroup.20" name="Example">Date,Colour Group,Start Time,End Time, Att1, Att2</EventGroup>
+  <AlarmGroup id="AlarmGroup.22" name="AlarmDefault">Date, Notes</AlarmGroup>
 </Settings>

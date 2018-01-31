@@ -32,5 +32,8 @@ public class DateValidator : Validator {
     {
         return Day.text + "." + Month.text + "." + Year.text;
     }
-
+    public int[] GetDate_int()
+    {
+        return new int[] { day, month, year };
+    }
 }

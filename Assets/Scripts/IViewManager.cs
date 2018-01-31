@@ -81,7 +81,7 @@ public class IViewManager : Panel
                 if (info.Events.TryGet(i, out n1))
                 {
                     if (n1.GetStartTime() - maxTime >= threshold)
-                        AddFiller(TimeConversions.IntTimeToString(maxTime, 60), n1.attributes[0]);
+                        AddFiller(TimeConversions.IntTimeToString(maxTime, 60), n1.startTime);
                     
                     if (n1.GetStartTime() < minTime) minTime = n1.GetStartTime();
                     if (n1.GetEndTime() > maxTime) maxTime = n1.GetEndTime();

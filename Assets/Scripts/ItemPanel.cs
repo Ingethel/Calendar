@@ -7,7 +7,7 @@ public class ItemPanel<T> : Panel where T : Item {
 
     public T item = null;
     protected bool dublicate = false;
-    public InputFieldObject[] fields;
+    public Text dateLabel;
     public Text title;
     protected EventSystem system;
     protected bool flag = false;
@@ -15,12 +15,17 @@ public class ItemPanel<T> : Panel where T : Item {
     public GameObject editButtons, newEntryButtons;
 
     public DateValidator dateValidator;
-    
-    public List<string> attributeLabels;
+
+    protected List<string> attributeLabels;
+    protected List<string> attributeValues;
+
     public GameObject attributeList;
     public GameObject attributeElement;
 
     public IAvailableSlotHandler eventGroup;
+
+    protected virtual int attributeIntent {
+        get { return 0; } }
 
     protected virtual void Start()
     {
@@ -53,6 +58,12 @@ public class ItemPanel<T> : Panel where T : Item {
         }
     }
 
+    public override void SetLanguage()
+    {
+        setTitle();
+        dateLabel.text = gManager.language.Date;
+    }
+
     public override void Close()
     {
         item = null;
@@ -80,23 +91,33 @@ public class ItemPanel<T> : Panel where T : Item {
         calendarController.RefreshView();
         Close();
     }
-    
+
     protected virtual void CalendarRequestOnSave() { }
 
     protected virtual void SaveInfo()
     {
         if (!item.filler && !dublicate)
             dataManager.RequestDelete(item);
+
+        AttributeElement[] elements = GetComponentsInChildren<AttributeElement>();
+        if (attributeValues != null)
+            attributeValues.Clear();
+        else
+            attributeValues = new List<string>();
+        foreach (AttributeElement element in elements)
+            attributeValues.Add(element.value.text);
     }
 
-    protected virtual void DisplayInfo(){}
+    protected virtual void DisplayInfo()
+    {
+        setTitle();
+        dateValidator.SetDate(new int[] { item.day, item.month, item.year });
+        eventGroup.onSet(item.dataGroupID);
+        ResetAttibutes();
+    }
 
     public virtual void EditEntry()
     {
-        foreach (InputFieldObject fieldObj in fields)
-            foreach (InputField field in fieldObj.inputs)
-                field.interactable = true;
-
         setTitle();
 
         editButtons.SetActive(false);
@@ -113,10 +134,6 @@ public class ItemPanel<T> : Panel where T : Item {
         item = n;
         flag = n.filler;
 
-        foreach (InputFieldObject fieldObj in fields)
-            foreach (InputField field in fieldObj.inputs)
-                field.interactable = flag;
-        
         newEntryButtons.SetActive(flag);
         editButtons.SetActive(!flag);
 
@@ -143,7 +160,7 @@ public class ItemPanel<T> : Panel where T : Item {
         string temp = dG.Attributes;
         string[] tempArr = temp.Split(',');
         attributeLabels = new List<string>();
-        for (int i = 4; i < tempArr.Length; i++)
+        for (int i = attributeIntent; i < tempArr.Length; i++)
         {
             attributeLabels.Add(tempArr[i]);
         }
@@ -155,8 +172,8 @@ public class ItemPanel<T> : Panel where T : Item {
         if (attributeList != null)
             foreach (Transform t in attributeList.transform)
                 Destroy(t.gameObject);
-        for(int i = 0; i < attributeLabels.Count; i++)
-            if(item.filler)
+        for (int i = 0; i < attributeLabels.Count; i++)
+            if (item.filler || i >= item.attributes.Length)
                 SpawnAttribute(attributeLabels[i], "");
             else
                 SpawnAttribute(attributeLabels[i], item.attributes[i]);
