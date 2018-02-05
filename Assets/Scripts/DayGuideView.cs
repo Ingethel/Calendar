@@ -19,7 +19,7 @@
     protected override void SetDetails(string s)
     {
         base.SetDetails(s);
-        Details.color = SettingsManager.GetColourGroup(item.color).Colour;
+//        Details.color = SettingsManager.GetColourGroup(item.color).Colour;
     }
 
 }

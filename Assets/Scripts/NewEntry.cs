@@ -139,8 +139,9 @@ public class Alarm : Item
         dataGroupID = dGName;
         SetDate(d);
         attributes = attList.ToArray();
+        filler = false;
     }
-    
+
 }
 
 public class NewEntryComparer : IComparer<Event>
@@ -283,14 +284,16 @@ public class DAY
 {
     public NewEntryList Events { private set; get; }
     public List<Alarm> Alarms { private set; get; }
-    public List<string> Officers { private set; get; }
+    public string Officers { private set; get; }
+    public string TourGuides { private set; get; }
     public string id;
 
     public DAY()
     {
         Events = new NewEntryList();
         Alarms = new List<Alarm>();
-        Officers = new List<string>() { "" };
+        Officers = "";
+        TourGuides = "";
         id = "";
     }
 
@@ -320,16 +323,22 @@ public class DAY
 
     public void SetOfficer(string s)
     {
-        Officers[0] = s;
+        Officers = s;
     }
 
     public string GetOfficer()
     {
-        return Officers[0];
+        return Officers;
     }
 
-    public void AddOfficer(string s)
+    public void SetTourGuides(string s)
     {
-        Officers.Add(s);
+        TourGuides = s;
     }
+
+    public string GetTourGuides()
+    {
+        return TourGuides;
+    }
+
 }

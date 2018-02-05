@@ -55,7 +55,8 @@ public class DataReader
             }
         }
         dayInfo.SetOfficer(day.GetAttribute("officer"));
-        
+        dayInfo.SetTourGuides(day.GetAttribute("guides"));
+		
         return dayInfo;
     }
 
@@ -114,7 +115,7 @@ public class DataReader
         return filePath;
     }
     
-    public void Write(string filePath, string id, string officer)
+    public void WriteAttribute(string filePath, string id, string atttribute, string value)
     {
         string filename = InitialiseDoc(filePath);
 
@@ -128,7 +129,7 @@ public class DataReader
             day.SetAttribute("id", "_" + id);
 
         }
-        day.SetAttribute("officer", officer);
+        day.SetAttribute(atttribute, value);
         XmlElement root = doc.DocumentElement;
         root.AppendChild(day);
         doc.Save(filename);

@@ -5,12 +5,14 @@ public class WeekViewManager : IViewManager
 {
     DayOfWeek[] days;
     public GameObject signPanel;
+    public GameObject titlePanel;
 
     protected override void Awake()
     {
         base.Awake();
         days = GetComponentsInChildren<DayOfWeek>();
         signPanel.SetActive(false);
+        titlePanel.SetActive(false);
     }
     
     void Start()
@@ -21,14 +23,13 @@ public class WeekViewManager : IViewManager
     public void PrintMode()
     {
         signPanel.SetActive(!signPanel.activeSelf);
+        titlePanel.SetActive(!signPanel.activeSelf);
         Text[] signs = signPanel.GetComponentsInChildren<Text>();
         signs[0].text = gManager.language.ChiefOfMuseum;
         signs[1].text = gManager.language.NavalOfficer;
-        bool flag = signPanel.activeSelf;
-        if (flag)
-            header.text = gManager.language.WeeklyGuideSchedule;
-        else
-            SetHeader();
+        Text titleValue = titlePanel.GetComponentInChildren<Text>();
+        titleValue.text = gManager.language.WeeklyGuideSchedule;
+        header.enabled = !header.enabled;
     }
     
     protected override void SetHeader()

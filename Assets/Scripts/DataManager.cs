@@ -94,7 +94,21 @@ public class DataManager : MonoBehaviour
         day_info.SetOfficer(officer);
 
         entries[id] = day_info;
-        reader.Write(filename, id, officer);
+        reader.WriteAttribute(filename, id, "officer", officer);
+        manager.ReloadScene();
+    }
+
+    public void RequestWriteGuides(string id, string value)
+    {
+        string filename = TagToPath(id);
+        DAY day_info;
+        if (!entries.TryGetValue(id, out day_info))
+            day_info = new DAY();
+
+        day_info.SetTourGuides(value);
+
+        entries[id] = day_info;
+        reader.WriteAttribute(filename, id, "guides", value);
         manager.ReloadScene();
     }
 

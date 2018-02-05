@@ -4,7 +4,8 @@ using UnityEngine.UI;
 public class DayOfWeek : IDayView
 {
     public Text AF;
-    
+	public Text Guides;
+
     protected override void Start()
     {
         base.Start();
@@ -15,6 +16,7 @@ public class DayOfWeek : IDayView
     {
         base.Refresh();
         AF.text = "";
+		Guides.text = "";
     }
     
     public override void RequestView()
@@ -35,14 +37,27 @@ public class DayOfWeek : IDayView
         RequestData();
         DisplayInfo();
         AF.text = info.GetOfficer();
+        Guides.text = info.GetTourGuides();
     }
 
     protected override void DisplayInfo()
     {
-        if (!isClosed)
-        { 
-            base.DisplayInfo();
-        }
+        if (info != null)
+            for (int i = 0; i < info.Events.Count(); i++)
+            {
+                Event n;
+                if (info.Events.TryGet(i, out n))
+                {
+                    if (!n.filler)
+                    {
+                        GameObject o = Instantiate(guideView);
+                        o.transform.SetParent(guideList.transform);
+                        o.transform.localScale = Vector3.one;
+                        AssignInfo(o, n);
+                    }
+                }
+            }
+
         if (info.Alarms.Count > 0)
         {
             AlarmIndicatorPanel.SetActive(true);
@@ -60,5 +75,6 @@ public class DayOfWeek : IDayView
         IItemListView<Event> o_view = o.GetComponent<IItemListView<Event>>();
         if (o_view != null)
             o_view.Allocate(n);
-    } 
+    }
+
 }

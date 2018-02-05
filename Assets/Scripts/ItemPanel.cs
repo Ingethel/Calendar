@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class ItemPanel<T> : Panel where T : Item {
-
+    
     public T item = null;
     protected bool dublicate = false;
     public Text dateLabel;

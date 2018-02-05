@@ -12,6 +12,10 @@
 ]>
 <Entries>
   <Day id="_2.2.2018">
-    <Event id="_guide.0" dataGroup="Default">Default,09:00,10:30,Test,50,Me,,,,</Event>
+  </Day>
+  <Day id="_6.2.2018" guides="asd, asdas, asdas" />
+  <Day id="_22.2.2018">
+  </Day>
+  <Day id="_23.2.2018">
   </Day>
 </Entries>

@@ -5,7 +5,6 @@ public class DayOfMonth : IDayView{
 
     public GameObject DateIndicatorPanel;
     Selectable selectable;
-    public Color filled;
     
     public override void Refresh()
     {

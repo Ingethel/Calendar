@@ -14,6 +14,7 @@ public abstract class Language
     public string NewEntryPreview { protected set; get; }
     public string SearchResult { protected set; get; }
     public string OfficerOnDuty { protected set; get; }
+    public string TourGuies { protected set; get; }
     public string NavalOfficer { protected set; get; }
     public string ChiefOfMuseum { protected set; get; }
     public string WeeklyGuideSchedule { protected set; get; }
@@ -60,6 +61,7 @@ public class English : Language
         NewEntryPreview = "Event";
         SearchResult = "Search Result for: ";
         OfficerOnDuty = "Officer on Duty: ";
+        TourGuies = "Tour Guides: ";
         NavalOfficer = "   Naval Officer";
         ChiefOfMuseum = "   Chief of Museum Department";
         WeeklyGuideSchedule = "Weekly Guide Scedule Battleship Averof";
@@ -90,6 +92,7 @@ public class Greek : Language
         NewEntryPreview = "Ξενάγηση";
         SearchResult = "Αποτέλεσμα Αναζήτησης: ";
         OfficerOnDuty = "ΑΦ: ";
+        TourGuies = "Ξεναγοί: ";
         NavalOfficer = "   Ύπαρχος";
         ChiefOfMuseum = "   Τμηματάρχης Μουσείου";
         WeeklyGuideSchedule = "Εβδομαδιαίο Πρόγραμμα Ξεναγήσεων Θ/Κ Αβέρωφ";
@@ -119,6 +122,7 @@ public class DataStrings{
         "<!ELEMENT Alarm (#PCDATA)>" + Environment.NewLine +
         "<!ATTLIST Day id ID #REQUIRED>" + Environment.NewLine +
         "<!ATTLIST Day officer CDATA #IMPLIED>" + Environment.NewLine +
+        "<!ATTLIST Day guides CDATA #IMPLIED>" + Environment.NewLine +
         "<!ATTLIST Event id ID #REQUIRED>" + Environment.NewLine +
         "<!ATTLIST Event dataGroup CDATA #REQUIRED>" + Environment.NewLine +
         "<!ATTLIST Alarm id ID #REQUIRED>" + Environment.NewLine +

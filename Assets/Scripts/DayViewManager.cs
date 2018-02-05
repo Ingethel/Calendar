@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class DayViewManager : IDayView {
 
     public Text[] headers;
+	public InputField[] headerValues;
+
     public GameObject weeklyButton;
 
     public string[] GetEmptySlots() {
@@ -38,13 +40,14 @@ public class DayViewManager : IDayView {
         base.Refresh();
         weeklyButton.GetComponentInChildren<Text>().text = gManager.language.WeeklyButton;
         weeklyButton.SetActive(false);
-
-        headers[1].GetComponentInParent<InputField>().text = "";
+        headerValues[0].text = "";
+        headerValues[1].text = "";
     }
 
     public override void SetLanguage()
     {
         headers[0].text = gManager.language.OfficerOnDuty;
+        headers[1].text = gManager.language.TourGuies;
         headers[2].text = gManager.language.Time;
         headers[3].text = gManager.language.Details;
         SetHeader();
@@ -61,7 +64,8 @@ public class DayViewManager : IDayView {
         {
             DisplayInfo();
         }
-        headers[1].GetComponentInParent<InputField>().text = info.GetOfficer();
+        headerValues[0].text = info.GetOfficer();
+        headerValues[1].text = info.GetTourGuides();
     }
     
     protected override void AssignInfo(GameObject o, Event n)
@@ -96,8 +100,14 @@ public class DayViewManager : IDayView {
         calendarController.RequestView(CalendarViewController.State.WEEKLY, assignedDate);
     }
 
-    public void SetOfficerOnDuty()
+    public void WriteAF()
     {
-        dataManager.RequestWriteOfficer(_tag, headers[1].text);
+        dataManager.RequestWriteOfficer(_tag, headerValues[0].text);
     }
+
+    public void WriteGuides()
+    {
+        dataManager.RequestWriteGuides(_tag, headerValues[1].text);
+    }
+
 }
