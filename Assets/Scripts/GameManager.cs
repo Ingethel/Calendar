@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour {
     void InitialStartUp()
     {
         // check if first startup - initialise required variables
-        if (PlayerPrefs.GetInt("Start") == 0)
+        if (PlayerPrefs.GetInt("Start") == 0 || true)
         {
             PlayerPrefs.SetInt("Start", 1);
             DATA_PATH = Application.dataPath + @"/Calendar Data";
@@ -62,6 +62,12 @@ public class GameManager : MonoBehaviour {
             SettingsManager.Write("ImportPath", IMPORT_PATH);
 
             ResetIDs();
+        }
+        else
+        {
+            DATA_PATH = SettingsManager.Read("DataPath");
+            EXPORT_PATH = SettingsManager.Read("ExportPath");
+            IMPORT_PATH = SettingsManager.Read("ImportPath");
         }
     }
 

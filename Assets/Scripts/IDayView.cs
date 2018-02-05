@@ -67,7 +67,7 @@ public class IDayView : IViewManager
             TimeConversions.IntInRange(assignedDate.Day, 20, 31))
         {
             Alarm reportAlarm = new Alarm();
-            reportAlarm.attributes[0] = gManager.language.ReportAlarmNotes;
+            reportAlarm.XMLToObject(gManager.language.ReportAlarmNotes);
             reportAlarm.report = true;
             info.AddEvent(reportAlarm);
         }
