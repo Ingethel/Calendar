@@ -79,11 +79,4 @@ public class MonthViewManager : IViewManager {
         }
     }
 
-    public override void RequestLegacyData()
-    {
-        dataManager.RequestReadMonth(assignedDate);
-        foreach (WeekOfMonth week in weeks)
-            foreach (DayOfMonth day in week.days)
-                day.RequestLegacyData();
-    }
 }

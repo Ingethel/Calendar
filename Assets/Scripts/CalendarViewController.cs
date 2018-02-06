@@ -26,16 +26,12 @@ public class CalendarViewController : ViewController
 
     public GameObject background;
     DataManager data;
-
-    public GameObject LegacyButton;
     
     protected override void Start()
     {
         base.Start();
-        LegacyButton.SetActive(false);
         data = FindObjectOfType<DataManager>();
         printflag = false;
-        gManager.PrintMode += PrintMode;
         gManager.OnLanguageChange += SetLanguage;
         gManager.OnReloadScene += SaveState;
         
@@ -73,7 +69,6 @@ public class CalendarViewController : ViewController
     public void LoadSavedState()
     {
         lastGivenDate = new DateTime(PlayerPrefs.GetInt("SavedYear"), PlayerPrefs.GetInt("SavedMonth"), PlayerPrefs.GetInt("SavedDay"));
-        data.RequestReadMonth(lastGivenDate);
         RequestView((State)PlayerPrefs.GetInt("SavedState"));
         PlayerPrefs.SetInt("LoadLastState", 0);
     }
@@ -100,11 +95,6 @@ public class CalendarViewController : ViewController
     
     IEnumerator RequestTodaysView()
     {
-        data.RequestReadMonth(calendar.AddMonths(DateTime.Now, -1));
-        data.RequestReadMonth(DateTime.Now);
-        data.RequestReadMonth(calendar.AddMonths(DateTime.Now, 1));
-        data.RequestReadMonth(calendar.AddMonths(DateTime.Now, 2));
-
         // today's view
         yield return 0;
         DateTime currentDate = DateTime.Now;
@@ -112,14 +102,14 @@ public class CalendarViewController : ViewController
             RequestView(State.WEEKLY, currentDate);
         else
             RequestView(State.MONTHLY, currentDate);
-        // get upcoming events
+        // get upcoming alarms
         yield return 0;
         List<Alarm> eventsThisWeek = new List<Alarm>();
         DateTime temp;
         for(int i = 0; i < 6; i++)
         {
             temp = currentDate.AddDays(i);
-            SearchResult search = data.TryGetEntries(temp.Day.ToString() + "." + temp.Month.ToString() + "." + temp.Year.ToString(), false);
+            SearchResult search = data.TryGetEntries(temp.Day.ToString() + "." + temp.Month.ToString() + "." + temp.Year.ToString());
             if (search.value)
                 if (search.info.Alarms.Count > 0)
                     eventsThisWeek.AddRange(search.info.Alarms);
@@ -183,7 +173,6 @@ public class CalendarViewController : ViewController
     
     public override void SetLanguage()
     {
-        LegacyButton.GetComponentInChildren<UnityEngine.UI.Text>().text = gManager.language.LegacyButton;
         if(viewManager)
             viewManager.SetLanguage();
     }
@@ -202,13 +191,6 @@ public class CalendarViewController : ViewController
 
         printflag = !printflag;
         lockedAccess = printflag;
-    }
-
-    public void OnClickLegacyRequest()
-    {
-        if (viewManager)
-            viewManager.RequestLegacyData();
-        LegacyButton.SetActive(false);
     }
 
     public string[] RequestEmptySlots(DateTime date)

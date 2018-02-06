@@ -13,8 +13,7 @@ public class GameManager : MonoBehaviour {
     public string DATA_FOLDER, LEGACY_FOLDER, DATA_PATH, EXPORT_PATH, IMPORT_PATH;
     [HideInInspector]
     public string DESKTOP;
-
-    public event Action PrintMode;
+    
     public event Action OnLanguageChange;
     public event Action OnReloadScene;
     public event Action OnUpdateWeekTimes;
@@ -130,36 +129,14 @@ public class GameManager : MonoBehaviour {
         SettingsManager.Write("FullScreen", b ? 1 : 0);
         headerObj.SetActive(b);
     }
-
-    public void Print()
-    {
-        StartCoroutine(PrintProcess());
-    }
-
+    
     public void Options()
     {
         CalendarViewController viewController = FindObjectOfType<CalendarViewController>();
         if (viewController)
             viewController.RequestView(CalendarViewController.State.OPTIONS);
     }
-
-    IEnumerator PrintProcess()
-    {
-        bool headerFlag = headerObj.activeSelf;
-        if (PrintMode != null)
-            PrintMode();
-        if (headerFlag)
-            headerObj.SetActive(false);
-        yield return new WaitForSeconds(1);
-        Application.CaptureScreenshot(EXPORT_PATH + "/Calendar.png");
-        yield return 0;
-        if (PrintMode != null)
-            PrintMode();
-        if (headerFlag)
-            headerObj.SetActive(true);
-        yield return 0;
-    }
-
+    
     void ResetIDs()
     {
         PlayerPrefs.SetInt("Guide", 0);
@@ -255,13 +232,15 @@ public class GameManager : MonoBehaviour {
                     SetLanguage(i);
                 }
                 break;
-            case "WeekTimes":
+            case "Monday":
+            case "Tuesday":
+            case "Wednesday":
+            case "Thursday":
+            case "Friday":
+            case "Saturday":
+            case "Sunday":
                 if (s.Length > 2)
-                    UpdateTimetable("WeekTimes", s[2]);
-                break;
-            case "WeekendTimes":
-                if (s.Length > 2)
-                    UpdateTimetable("WeekendTimes", s[2]);
+                    UpdateTimetable(s[1], s[2]);
                 break;
             case "TicketPrice":
                 if (s.Length > 2)

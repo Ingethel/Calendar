@@ -8,16 +8,12 @@
     };
 
     ExtrasViewController optionsController;
-    //CalendarViewController calendarController;
-    //public UnityEngine.UI.Dropdown specialSnowflake;
 
     protected override void Start()
     {
         base.Start();
         optionsController = FindObjectOfType<ExtrasViewController>();
-        //calendarController = FindObjectOfType<CalendarViewController>();
         OpenCompact();
-        gManager.PrintMode += PrintMode;
     }
 
     public void AlarmPressed()

@@ -20,7 +20,6 @@ public class ExtrasViewController : ViewController {
     {
         base.Start();
         calendarController = FindObjectOfType<CalendarViewController>();
-        gManager.PrintMode += CloseView;
     }
 
     private void HideIfClickedOutside()

@@ -140,9 +140,7 @@ public class IViewManager : Panel
         SetHeader();
         OnSetView();
     }
-
-    public virtual void RequestLegacyData(){}
-
+    
     public virtual void GenerateReport(){}
 
 }

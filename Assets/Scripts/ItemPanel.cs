@@ -29,7 +29,7 @@ public class ItemPanel<T> : Panel where T : Item {
     protected virtual int attributeIntent {
         get { return 0; } }
 
-    protected virtual void Start()
+    protected override void Start()
     {
         system = EventSystem.current;
         eventGroup.OnValueChange += ResetAttibutes;

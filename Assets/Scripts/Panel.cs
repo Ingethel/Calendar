@@ -17,6 +17,8 @@ public class Panel : MonoBehaviour
         gManager = FindObjectOfType<GameManager>();
     }
 
+    protected virtual void Start() { }
+
     public virtual void Open()
     {
         gameObject.SetActive(true);

@@ -29,10 +29,10 @@
   <Option id="ReducedTicketPrice">1.5</Option>
   <Option id="MinimumTourTime">40</Option>
   <Timetable id="Monday">0</Timetable>
-  <Timetable id="Tuesday">09:00,10:30,12:00,13:30</Timetable>
-  <Timetable id="Wednesday">09:00,10:30,12:00,13:30</Timetable>
-  <Timetable id="Thursday">09:00,10:30,12:00,13:30</Timetable>
-  <Timetable id="Friday">09:00,10:30,12:00,13:30</Timetable>
+  <Timetable id="Tuesday">09:00,09:45,10:30,11:15,12:00,12:45,13:30</Timetable>
+  <Timetable id="Wednesday">09:00,09:45,10:30,11:15,12:00,12:45,13:30</Timetable>
+  <Timetable id="Thursday">09:00,09:45,10:30,11:15,12:00,12:45,13:30</Timetable>
+  <Timetable id="Friday">09:00,09:45,10:30,11:15,12:00,12:45,13:30</Timetable>
   <Timetable id="Saturday">10:30,12:00,13:30,15:00,16:30</Timetable>
   <Timetable id="Sunday">10:30,12:00,13:30,15:00,16:30</Timetable>
   <ColorGroup id="ColorGroup.1" name="Default">0.04985456,0.1246912,0.8804799</ColorGroup>

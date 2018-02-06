@@ -72,10 +72,5 @@ public class DayOfMonth : IDayView{
                 img.color = SettingsManager.GetColourGroup(n.color).Colour;
         }
     }
-
-    public override void RequestLegacyData()
-    {
-        if(DateIndicatorPanel.activeSelf)
-            base.RequestLegacyData();
-    }
+    
 }

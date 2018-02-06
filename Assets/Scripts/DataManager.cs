@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    private Dictionary<string, DAY> entries;
     DataReader reader;
     GameManager manager;
 
     void Awake()
     {
-        entries = new Dictionary<string, DAY>();
         reader = new DataReader();
     }
     
@@ -25,13 +23,7 @@ public class DataManager : MonoBehaviour
         PlayerPrefs.SetInt(s, id + 1);
         return id;
     }
-
-    private void Append(Dictionary<string, DAY> temp)
-    {
-        foreach(string s in temp.Keys)
-            entries[s] = temp[s];
-    }
-
+    
     private string DateToPath(DateTime date) {
         if(date.Year * 12 + date.Month >= DateTime.Now.Year * 12 + DateTime.Now.Month-1)
             return Application.dataPath + @"/Calendar Data/Data/" + date.Year.ToString() + "/" + date.Month.ToString() + "/" + DataStrings.file;
@@ -50,98 +42,46 @@ public class DataManager : MonoBehaviour
         else
             return Application.dataPath + @"/Calendar Data/Legacy/" + split[2] + "/" + split[1] + "/" + DataStrings.file;
     }
-
-    public void RequestReadMonth(DateTime date)
-    {
-        string filepath = DateToPath(date);
-        Append(reader.Read(filepath));
-    }
     
-    public void RequestReadDay(string id)
+    public DAY RequestReadDay(string id)
     {
         string filepath = TagToPath(id);
         DAY list = reader.Read(filepath, id);
         if(list != null)
-            entries[id] = list;
+            return list;
         else
-            entries[id] = new DAY();
+            return new DAY();
     }
     
     public void RequestWrite<T>(T e) where T : Item
     {
         string filename = TagToPath(e.Date);
-        DAY day_info;
-        if (!entries.TryGetValue(e.Date, out day_info))
-            day_info = new DAY();
-
+        
         if(e.Type == DataGroup.DataGroups.Event)
-            day_info.AddEvent(e as Event);
+            e.id = "_event." + GenerateNewIdFor("Event");
         else if (e.Type == DataGroup.DataGroups.Alarm)
-            day_info.AddAlarm(e as Alarm);
-
-        entries[e.Date] = day_info;
+            e.id = "_alarm." + GenerateNewIdFor("Alarms");
+        
         reader.Write(filename, e);
-        manager.ReloadScene();
     }
 
-    public void RequestWriteOfficer(string id, string officer)
+    public void RequestWriteAttribute(string id, string att, string val)
     {
         string filename = TagToPath(id);
-        DAY day_info;
-        if (!entries.TryGetValue(id, out day_info))
-            day_info = new DAY();
-
-        day_info.SetOfficer(officer);
-
-        entries[id] = day_info;
-        reader.WriteAttribute(filename, id, "officer", officer);
-        manager.ReloadScene();
+        reader.WriteAttribute(filename, id, att, val);
     }
-
-    public void RequestWriteGuides(string id, string value)
-    {
-        string filename = TagToPath(id);
-        DAY day_info;
-        if (!entries.TryGetValue(id, out day_info))
-            day_info = new DAY();
-
-        day_info.SetTourGuides(value);
-
-        entries[id] = day_info;
-        reader.WriteAttribute(filename, id, "guides", value);
-        manager.ReloadScene();
-    }
-
+    
     public void RequestDelete<T>(T e) where T : Item
     {
         string filename = TagToPath(e.Date);
-        DAY day_info;
-        if (entries.TryGetValue(e.Date, out day_info))
-        {
-            if (e.Type == DataGroup.DataGroups.Event)
-                day_info.Events.Remove(e as Event);
-            else if (e.Type == DataGroup.DataGroups.Alarm)
-                day_info.Alarms.Remove(e as Alarm);
-
-            entries[e.Date] = day_info;
-        }
         reader.DeleteItem(filename, e);
-        manager.ReloadScene();
     }
 
-    public SearchResult TryGetEntries(string id, bool searchFileData)
+    public SearchResult TryGetEntries(string id)
     {
         SearchResult res = new SearchResult();
-        DAY day_info;
-        res.value = entries.TryGetValue(id, out day_info);
-        if (!res.value && searchFileData)
-        {
-            RequestReadDay(id);
-            res.value = entries.TryGetValue(id, out day_info);
-        }
-        if (res.value)
-            res.info = day_info;
-
+        res.info = RequestReadDay(id);
+        res.value = res.info != null;
         return res;
     }
     

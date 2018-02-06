@@ -104,12 +104,12 @@ public class DayViewManager : IDayView {
 
     public void WriteAF()
     {
-        dataManager.RequestWriteOfficer(_tag, headerValues[0].text);
+        dataManager.RequestWriteAttribute(_tag, "officer", headerValues[0].text);
     }
 
     public void WriteGuides()
     {
-        dataManager.RequestWriteGuides(_tag, headerValues[1].text);
+        dataManager.RequestWriteAttribute(_tag, "guides", headerValues[1].text);
     }
 
     public override void GenerateReport()

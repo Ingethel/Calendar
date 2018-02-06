@@ -23,7 +23,6 @@ public abstract class Language
     public string NewAlarm { protected set; get; }
     public string AlarmPreview { protected set; get; }
     public string ReportAlarmNotes { protected set; get; }
-    public string LegacyButton { protected set; get; }
     public string Help { protected set; get; }
 
     protected string[] MonthLabels;
@@ -71,7 +70,6 @@ public class English : Language
         NewAlarm = "Add New Alarm";
         AlarmPreview = "Alarm";
         ReportAlarmNotes = "Prepare Semester Report";
-        LegacyButton = "Associated data is marked as old." + Environment.NewLine + Environment.NewLine + "Click to retrieve it.";
         Help = "For any enquiry please refer to the manual or contact me at stavros_anast@hotmail.com";
     }
 }
@@ -103,7 +101,6 @@ public class Greek : Language
         NewAlarm = "Εισαγωγή Υπενθύμισης";
         AlarmPreview = "Υπενθύμιση";
         ReportAlarmNotes = "Υπενθύμιση Τριμηνιαίας Αναφοράς";
-        LegacyButton = "Τα σχετικά δεδομένα είναι παλαιά." + Environment.NewLine + Environment.NewLine + "Πατήστε για να ανακτηθούν.";
         Help = "Εάν εχετε ερωτήσεις παρακαλώ αναφερθείτε στο εγχειρίδιο, αλλιώς επικοινωνήστε στο stavros_anast@hotmail.com";
     }
 }

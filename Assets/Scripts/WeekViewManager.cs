@@ -1,39 +1,16 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using iTextSharp.text;
+﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
 
 public class WeekViewManager : IViewManager
 {
     DayOfWeek[] days;
-    public GameObject signPanel;
-    public GameObject titlePanel;
-
+    
     protected override void Awake()
     {
         base.Awake();
         days = GetComponentsInChildren<DayOfWeek>();
-        signPanel.SetActive(false);
-        titlePanel.SetActive(false);
     }
-    
-    void Start()
-    {
-        gManager.PrintMode += PrintMode;
-    }
-    
-    public void PrintMode()
-    {
-        signPanel.SetActive(!signPanel.activeSelf);
-        titlePanel.SetActive(!signPanel.activeSelf);
-        Text[] signs = signPanel.GetComponentsInChildren<Text>();
-        signs[0].text = gManager.language.ChiefOfMuseum;
-        signs[1].text = gManager.language.NavalOfficer;
-        Text titleValue = titlePanel.GetComponentInChildren<Text>();
-        titleValue.text = gManager.language.WeeklyGuideSchedule;
-        header.enabled = !header.enabled;
-    }
-    
+        
     protected override void SetHeader()
     {
         header.text = gManager.language.GetMonth(assignedDate.Month - 1) + " " + assignedDate.Year.ToString();
@@ -50,13 +27,7 @@ public class WeekViewManager : IViewManager
     {
         SetHeader();
     }
-
-    public override void RequestLegacyData()
-    {
-        for (int i = 0; i < 7; i++)
-            days[i].RequestLegacyData();
-    }
-
+    
     public override void GenerateReport()
     {
         ReportGeneration.CreatePDF(SettingsManager.Read("ExportPath") + "/WeeklyReport.pdf", true);
@@ -69,7 +40,7 @@ public class WeekViewManager : IViewManager
             {
                 WidthPercentage = 100,
             };
-            table.SetWidths(new float[] { 1, 1, 3, 1, 1 });
+            table.SetWidths(new float[] { .7f, .7f, 3, .9f, .9f });
             table.AddCell(ReportGeneration.AddCell(gManager.language.Date, 1, Element.ALIGN_CENTER, ReportGeneration.boldFont));
             table.AddCell(ReportGeneration.AddCell(gManager.language.Time, 1, Element.ALIGN_CENTER, ReportGeneration.boldFont));
             table.AddCell(ReportGeneration.AddCell(gManager.language.Details, 1, Element.ALIGN_CENTER, ReportGeneration.boldFont));
@@ -90,8 +61,8 @@ public class WeekViewManager : IViewManager
                     }
                     if (i == 0)
                     {
-                        table.AddCell(ReportGeneration.AddCell(day.Guides.text, 1, list.Count(), Element.ALIGN_CENTER, ReportGeneration.boldFont));
-                        table.AddCell(ReportGeneration.AddCell(day.AF.text, 1, list.Count(), Element.ALIGN_CENTER, ReportGeneration.boldFont));
+                        table.AddCell(ReportGeneration.AddCell(day.Guides.text, 1, list.Count(), Element.ALIGN_CENTER, ReportGeneration.normalFont));
+                        table.AddCell(ReportGeneration.AddCell(day.AF.text, 1, list.Count(), Element.ALIGN_CENTER, ReportGeneration.normalFont));
                     }
                 }
                 if(list == null || list.Count() == 0)
@@ -99,8 +70,8 @@ public class WeekViewManager : IViewManager
                     table.AddCell(ReportGeneration.AddCell(day.header.text, 1, Element.ALIGN_CENTER, ReportGeneration.boldFont));
                     table.AddCell(ReportGeneration.AddCell("", 1, Element.ALIGN_CENTER, ReportGeneration.normalFont));
                     table.AddCell(ReportGeneration.AddCell("", 1, Element.ALIGN_CENTER, ReportGeneration.normalFont));
-                    table.AddCell(ReportGeneration.AddCell(day.Guides.text, 1, Element.ALIGN_CENTER, ReportGeneration.boldFont));
-                    table.AddCell(ReportGeneration.AddCell(day.AF.text, 1, Element.ALIGN_CENTER, ReportGeneration.boldFont));
+                    table.AddCell(ReportGeneration.AddCell(day.Guides.text, 1, Element.ALIGN_CENTER, ReportGeneration.normalFont));
+                    table.AddCell(ReportGeneration.AddCell(day.AF.text, 1, Element.ALIGN_CENTER, ReportGeneration.normalFont));
                 }
             }
             ReportGeneration.AddElement(table);
