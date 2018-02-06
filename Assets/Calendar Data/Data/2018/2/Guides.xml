@@ -1,21 +1,88 @@
 <?xml version="1.0"?>
-<!DOCTYPE Entries[<!ELEMENT Entries (Day*)>
+<!DOCTYPE Entries[
+<!ELEMENT Entries (Day*)>
 <!ELEMENT Day (Event*, Alarm*)>
 <!ELEMENT Event (#PCDATA)>
 <!ELEMENT Alarm (#PCDATA)>
 <!ATTLIST Day id ID #REQUIRED>
 <!ATTLIST Day officer CDATA #IMPLIED>
+<!ATTLIST Day guides CDATA #IMPLIED>
 <!ATTLIST Event id ID #REQUIRED>
 <!ATTLIST Event dataGroup CDATA #REQUIRED>
 <!ATTLIST Alarm id ID #REQUIRED>
-<!ATTLIST Alarm dataGroup CDATA #REQUIRED>
-]>
+<!ATTLIST Alarm dataGroup CDATA #REQUIRED>]>
 <Entries>
-  <Day id="_2.2.2018">
+  <Day id="_28.2.2018">
+    <Event id="_guide.508" dataGroup="Default">Default,10:30,11:15,εκπαιδευτηρια συνχρονη παιδεια,40,Αγγελουση,2107651522,28/9/2017</Event>
   </Day>
-  <Day id="_6.2.2018" guides="asd, asdas, asdas" />
+  <Day id="_14.2.2018">
+    <Event id="_guide.501" dataGroup="Default">Default,09:15,09:45,Δημοτικό Διαπολιτισμικής Εκπαίδευσης Π. Φαλήρου,30,Πολυζοπούλου Μαρία,6938814540,25/9/2017</Event>
+    <Event id="_guide.684" dataGroup="Default">Default,10:30,11:15,2o Γυμνάσιο Παλλήνης,40,Λιάπη Μαρία,2106042042,18/01/2018</Event>
+    <Event id="_guide.685" dataGroup="Default">Default,11:15,12:00,2o Γυμνάσιο Παλλήνης,40,Λιάπη Μαρία,2106042042,18/01/2018</Event>
+    <Event id="_guide.745" dataGroup="Default">Default,12:00,12:45,2ΛΥΚΕΙΟ ΑΛΙΜΟΥ,40</Event>
+    <Event id="_guide.746" dataGroup="Default">Default,12:45,13:30,2ΛΥΚΕΙΟ ΑΛΙΜΟΥ,40</Event>
+  </Day>
+  <Day id="_20.2.2018">
+    <Event id="_guide.505" dataGroup="Default">Default,10:30,11:15,8 γυμν γλυφαδας,35,Ιθαρη Ελενη,2109642690</Event>
+    <Event id="_guide.506" dataGroup="Default">Default,11:15,12:00,8 γυμν γλυφαδας,35,Ιθαρη Ελενη,2109642690</Event>
+  </Day>
+  <Day id="_1.2.2018">
+  </Day>
+  <Day id="_27.2.2018">
+    <Event id="_guide.650" dataGroup="Default">Default,09:45,10:30,2ο Γυμνάσιο Κιλκίς,45,Ντίνου Κώστας,2341022682</Event>
+    <Event id="_guide.651" dataGroup="Default">Default,09:00,09:45,2ο Γυμνάσιο Κιλκίς,45,Ντίνου Κώστας,2341022682</Event>
+  </Day>
+  <Day id="_15.2.2018">
+    <Event id="_guide.502" dataGroup="Default">Default,10:30,11:15,9ο Δημοτικο Ανω Λιοσίων,40,Νικολάου Σωκράτης,2102474132,8/10/2017</Event>
+    <Event id="_guide.640" dataGroup="Default">Default,09:45,10:30,Δημ σχολ βραχατιου,35,Βουργουπουλου σπυρ,741055234,12/01/2018</Event>
+  </Day>
+  <Day id="_21.2.2018">
+    <Event id="_guide.658" dataGroup="Default">Default,12:45,13:30,Γελ Αβδιρων Ξάνθησ,23,Μητροτάσιος,6974097693</Event>
+    <Event id="_guide.722" dataGroup="Default">Default,09:45,10:30,1ο Γυμνάσιο Μεταμόρφωσης,45,Μανιατέα Αριστέα,6936981131,24/01/2018</Event>
+    <Event id="_guide.723" dataGroup="Default">Default,10:30,11:15,1ο Γυμνάσιο Μεταμόρφωσης,45,Μανιατέα Αριστέα,6936981131,24/01/2018</Event>
+    <Event id="_guide.724" dataGroup="Default">Default,11:15,12:00,1ο Γυμνάσιο Μεταμόρφωσης,50,Μανιατέα Αριστέα,6936981131,24/01/2018</Event>
+    <Event id="_guide.725" dataGroup="Default">Default,12:00,12:45,1ο Γυμνάσιο Μεταμόρφωσης,50,Μανιατέα Αριστέα,6936981131,24/01/2018</Event>
+  </Day>
+  <Day id="_17.2.2018">
+    <Event id="_guide.639" dataGroup="Default">Default,15:00,16:30,7οΔημοτικό Κω,20,Κουτσούτη,2242027672</Event>
+    <Event id="_guide.706" dataGroup="Default">Default,11:00,11:45,ΕΦΕΔΡΟΙ ΑΞΙΩΜΑΤΙΚΟΙ ΕΛΛΑΔΟΣ,40</Event>
+    <Event id="_guide.707" dataGroup="Default">Default,11:45,12:30,ΕΦΕΔΡΟΙ ΑΞΙΩΜΑΤΙΚΟΙ ΕΛΛΑΔΟΣ,40</Event>
+  </Day>
+  <Day id="_16.2.2018">
+    <Event id="_guide.679" dataGroup="Default">Default,09:45,10:30,Δημ  Βραχατιου κορινθοσ,50,Βουργουπουλου Σπυριδουλα,741055234,18/01/18</Event>
+  </Day>
   <Day id="_22.2.2018">
+    <Event id="_guide.622" dataGroup="Default">Default,09:45,10:30,Σταυρόπουλος Tours ναύπλιο,25,Παπαδάκης,6974892139,,Γαλλοι Μαθητές</Event>
+    <Event id="_guide.634" dataGroup="Default">Default,10:30,11:15,Early Learning Νηπειαγωγείο,13,Κωνσταντινίδου Λουσίντα,2109618763 6978550193,12/01/2018</Event>
+    <Event id="_guide.726" dataGroup="Default">Default,11:15,12:00,1ο Γυμνάσιο Μεταμόρφωσης,50,Μανιατέα Αριστέα,6936981131,24/01/2018</Event>
+    <Event id="_guide.727" dataGroup="Default">Default,12:00,12:45,1ο Γυμνάσιο Μεταμόρφωσης,50,Μανιατέα Αριστέα,6936981131,24/01/2018</Event>
   </Day>
-  <Day id="_23.2.2018">
+  <Day id="_25.2.2018">
+    <Event id="_guide.691" dataGroup="Default">Default,12:00,13:30,Σύλλογος Μιασθενων Ελλάδος,25,Ψημένου Μαρίνα,6974081982,18/01/2018,ΑΜΕΑ</Event>
+  </Day>
+  <Day id="_8.2.2018" guides="Δεληγιάννης, Χάνας, Μαλακτός, Μάγκουρας">
+    <Event id="_guide.23" dataGroup="Default">Default,09:00,09:45,4ο Γυμνάσιο Αχαρνών,40,Λιώνη Άννα,2102316718/697774867,12/01/2018</Event>
+    <Event id="_guide.24" dataGroup="Default">Default,10:30,11:30,2ο Γυμνάσιο Αμαρουσιου,40,Φλουρέντζου Γεωργία,6974105540 / 2108027933,23/9/2017</Event>
+    <Event id="_guide.25" dataGroup="Default">Default,11:30,12:30,2ο Γυμνάσιο Αμαρουσιου,40,Φλουρέντζου Γεωργία,6974105540 / 2108027933,23/9/2017</Event>
+  </Day>
+  <Day id="_11.2.2018" guides="Δεληγιάννης, Χάνας, Μαλακτός, Μάγκουρας">
+  </Day>
+  <Day id="_6.2.2018" guides="Σιδηράς, Γεωργούσης, Λέντζος">
+  </Day>
+  <Day id="_5.2.2018" guides="Δεληγιάννης, Χάνας, Αθηναίος, Μαλακτός" />
+  <Day id="_7.2.2018" guides="Τζανής, Γραμμένος, Βλαντής, Αδαμόπουλος">
+    <Event id="_guide.28" dataGroup="Default">Default,10:30,11:15,21ο Δημοτικό Σχολείο Αθηνών,45,Χριστοδουλος,2108652643,2/10/2017</Event>
+  </Day>
+  <Day id="_9.2.2018" guides="Σιδηράς, Γεωργούσης, Λέντζος">
+    <Event id="_guide.26" dataGroup="Default">Default,10:30,11:15,2ο Γυμνάσιο Βριλισίων,46,Γιαννοπουλου Μαρια,6944353698/2108042788,,Ντοκιμαντερ - Κυβερνητης</Event>
+    <Event id="_guide.27" dataGroup="Default">Default,11:15,12:00,2ο Γυμνάσιο Βριλισίων,46,Γιαννοπουλου Μαρια,6944353698/2108042788,,Ντοκιμαντερ - Κυβερνητης</Event>
+    <Event id="_guide.842" dataGroup="Default">Default,12:00,12:45,1ο Γυμνάσιο Καλαμπάκας,55,ΠΑΠΠΑΣ ΒΑΣΙΛΕΙΟΣ,6973839960</Event>
+  </Day>
+  <Day id="_10.2.2018" guides="Τζανής, Γραμμένος, Βλαντής, Αδαμόπουλος">
+  </Day>
+  <Day id="_13.2.2018" guides="">
+    <Event id="_guide.499" dataGroup="Default">Default,09:00,09:45,13 Δημ Πειραια,50,Γολεματη,2104252304</Event>
+    <Event id="_guide.500" dataGroup="Default">Default,10:30,11:15,Δημ σχ Αγιου Βασιλειου Κορινθιας,45,Βλαχακη,6977093469,28/9/2017</Event>
+    <Event id="_guide.616" dataGroup="Default">Default,11:15,12:00,Γυμνάσιο Μαγούλας,60,Πέρρος,6974143300</Event>
   </Day>
 </Entries>
