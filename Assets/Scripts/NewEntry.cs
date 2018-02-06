@@ -297,7 +297,7 @@ public class DAY
         id = "";
     }
 
-    public void AddGuide(Event n)
+    public void AddEvent(Event n)
     {
         if(!n.filler)
             if(n.id == "")
@@ -305,7 +305,7 @@ public class DAY
         Events.Add(n);
     }
     
-    public void AddEvent(Alarm n)
+    public void AddAlarm(Alarm n)
     {
         if (n.report)
             foreach (Alarm a in Alarms)
@@ -340,5 +340,5 @@ public class DAY
     {
         return TourGuides;
     }
-
+    
 }

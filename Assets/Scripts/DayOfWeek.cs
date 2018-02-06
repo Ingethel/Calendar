@@ -77,4 +77,9 @@ public class DayOfWeek : IDayView
             o_view.Allocate(n);
     }
 
+    public NewEntryList GetEvents()
+    {
+        return info.Events;
+    }
+
 }

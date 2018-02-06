@@ -75,9 +75,9 @@ public class DataManager : MonoBehaviour
             day_info = new DAY();
 
         if(e.Type == DataGroup.DataGroups.Event)
-            day_info.AddGuide(e as Event);
+            day_info.AddEvent(e as Event);
         else if (e.Type == DataGroup.DataGroups.Alarm)
-            day_info.AddEvent(e as Alarm);
+            day_info.AddAlarm(e as Alarm);
 
         entries[e.Date] = day_info;
         reader.Write(filename, e);

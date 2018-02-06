@@ -24,6 +24,8 @@ public class ItemPanel<T> : Panel where T : Item {
 
     public IAvailableSlotHandler eventGroup;
 
+    public Button[] buttons;
+
     protected virtual int attributeIntent {
         get { return 0; } }
 
@@ -122,6 +124,8 @@ public class ItemPanel<T> : Panel where T : Item {
 
         editButtons.SetActive(false);
         newEntryButtons.SetActive(true);
+        foreach (Button b in buttons)
+            b.interactable = true;
     }
 
     protected virtual void setTitle()
@@ -136,6 +140,8 @@ public class ItemPanel<T> : Panel where T : Item {
 
         newEntryButtons.SetActive(flag);
         editButtons.SetActive(!flag);
+        foreach (Button b in buttons)
+            b.interactable = flag;
 
         DisplayInfo();
     }

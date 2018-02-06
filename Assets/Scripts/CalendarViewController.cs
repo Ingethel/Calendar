@@ -224,4 +224,11 @@ public class CalendarViewController : ViewController
         else
             return new string[] { };
     }
+
+    public void GenerateReport()
+    {
+        if (viewManager)
+            viewManager.GenerateReport();
+    }
+    
 }

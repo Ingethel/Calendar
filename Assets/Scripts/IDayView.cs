@@ -69,7 +69,7 @@ public class IDayView : IViewManager
             Alarm reportAlarm = new Alarm();
             reportAlarm.XMLToObject(gManager.language.ReportAlarmNotes);
             reportAlarm.report = true;
-            info.AddEvent(reportAlarm);
+            info.AddAlarm(reportAlarm);
         }
     }
 
@@ -79,4 +79,5 @@ public class IDayView : IViewManager
         SetView(assignedDate);
         searchLegacy = false;
     }
+    
 }

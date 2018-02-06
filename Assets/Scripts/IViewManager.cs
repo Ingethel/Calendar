@@ -62,7 +62,7 @@ public class IViewManager : Panel
         n.endTime = endTime;
         n.SetDate(assignedDate.Day.ToString() + "." + assignedDate.Month.ToString() + "." + assignedDate.Year.ToString());
         n.filler = true;
-        info.AddGuide(n);
+        info.AddEvent(n);
     }
 
     protected void FillEmptySlots()
@@ -142,4 +142,7 @@ public class IViewManager : Panel
     }
 
     public virtual void RequestLegacyData(){}
+
+    public virtual void GenerateReport(){}
+
 }

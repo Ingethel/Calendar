@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Linq;
-
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 

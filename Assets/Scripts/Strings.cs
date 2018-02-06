@@ -18,6 +18,7 @@ public abstract class Language
     public string NavalOfficer { protected set; get; }
     public string ChiefOfMuseum { protected set; get; }
     public string WeeklyGuideSchedule { protected set; get; }
+    public string DailyGuideSchedule { protected set; get; }
     public string WeeklyButton { protected set; get; }
     public string NewAlarm { protected set; get; }
     public string AlarmPreview { protected set; get; }
@@ -60,11 +61,12 @@ public class English : Language
         NewEntry = "Add New Event";
         NewEntryPreview = "Event";
         SearchResult = "Search Result for: ";
-        OfficerOnDuty = "Officer on Duty: ";
-        TourGuies = "Tour Guides: ";
+        OfficerOnDuty = "Officer on Duty";
+        TourGuies = "Tour Guides";
         NavalOfficer = "   Naval Officer";
         ChiefOfMuseum = "   Chief of Museum Department";
-        WeeklyGuideSchedule = "Weekly Guide Scedule Battleship Averof";
+        WeeklyGuideSchedule = "Weekly Guide Scedule Battleship <<G. Averof>>";
+        DailyGuideSchedule = "Daily Guide Scedule Battleship <<G. Averof>>";
         WeeklyButton = "Show Weekly Schedule";
         NewAlarm = "Add New Alarm";
         AlarmPreview = "Alarm";
@@ -91,11 +93,12 @@ public class Greek : Language
         NewEntry = "Εισαγωγή Ξενάγησης";
         NewEntryPreview = "Ξενάγηση";
         SearchResult = "Αποτέλεσμα Αναζήτησης: ";
-        OfficerOnDuty = "ΑΦ: ";
-        TourGuies = "Ξεναγοί: ";
+        OfficerOnDuty = "ΑΦ";
+        TourGuies = "Ξεναγοί";
         NavalOfficer = "   Ύπαρχος";
         ChiefOfMuseum = "   Τμηματάρχης Μουσείου";
-        WeeklyGuideSchedule = "Εβδομαδιαίο Πρόγραμμα Ξεναγήσεων Θ/Κ Αβέρωφ";
+        WeeklyGuideSchedule = "ΕΒΔΟΜΑΔΙΑΙΟ ΠΡΟΓΡΑΜΜΑ ΞΕΝΑΓΗΣΕΩΝ Θ/Κ «Γ. ΑΒΕΡΩΦ»";
+        DailyGuideSchedule = "ΗΜΕΡΗΣΙΟ ΠΡΟΓΡΑΜΜΑ ΞΕΝΑΓΗΣΕΩΝ Θ/Κ «Γ. ΑΒΕΡΩΦ»";
         WeeklyButton = "Προβολή Εβδομαδιαίου Προγράμματος";
         NewAlarm = "Εισαγωγή Υπενθύμισης";
         AlarmPreview = "Υπενθύμιση";

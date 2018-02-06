@@ -41,7 +41,7 @@ public class DataReader
                 Event newGuide = new Event();
                 newGuide = ReadItem(entry, newGuide);
                 newGuide.SetDate(dayInfo.id);
-                dayInfo.AddGuide(newGuide);
+                dayInfo.AddEvent(newGuide);
             }
         }
         {
@@ -51,7 +51,7 @@ public class DataReader
                 Alarm alarm = new Alarm();
                 alarm = ReadItem(entry, alarm);
                 alarm.SetDate(dayInfo.id);
-                dayInfo.AddEvent(alarm);
+                dayInfo.AddAlarm(alarm);
             }
         }
         dayInfo.SetOfficer(day.GetAttribute("officer"));
@@ -227,7 +227,7 @@ public class DataReader
                                     n.attributes[8] = officer;
                                     n.attributes[0] = "00:00";
                                     n.attributes[1] = "00:00";
-                                    result.AddGuide(n);
+                                    result.AddEvent(n);
                                 }
                                 /*
                                 XmlNodeList teams = day.GetElementsByTagName(DataStrings.NameOfTeam);
