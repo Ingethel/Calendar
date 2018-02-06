@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE Entries[
+<!ELEMENT Entries (Day*)>
+<!ELEMENT Day (Event*, Alarm*)>
+<!ELEMENT Event (#PCDATA)>
+<!ELEMENT Alarm (#PCDATA)>
+<!ATTLIST Day id ID #REQUIRED>
+<!ATTLIST Day officer CDATA #IMPLIED>
+<!ATTLIST Day guides CDATA #IMPLIED>
+<!ATTLIST Event id ID #REQUIRED>
+<!ATTLIST Event dataGroup CDATA #REQUIRED>
+<!ATTLIST Alarm id ID #REQUIRED>
+<!ATTLIST Alarm dataGroup CDATA #REQUIRED>]>
+<Entries>
+  <Day id="_5.6.2018">
+    <Event id="_guide.558" dataGroup="Default">Default,10:30,11:15,2ο δημοτικο δραπετσώνας,35,Μανδελας/ Χρυσάνθη,2104614305</Event>
+  </Day>
+  <Day id="_1.6.2018">
+    <Event id="_guide.556" dataGroup="Default">Default,10:30,11:15,Δημ γυμν Βαρης,30,κατεριανακη,2108955154</Event>
+    <Event id="_guide.557" dataGroup="Default">Default,11:15,12:00,Δημ γυμν Βαρης,30,κατεριανακη,2108955154</Event>
+  </Day>
+  <Day id="_12.6.2018">
+    <Event id="_guide.646" dataGroup="Default">Default,09:00,09:45,1οΔημ Ευόσμου,35,Κορωνίδου Αλεξάνδρα,6942200575</Event>
+    <Event id="_guide.647" dataGroup="Default">Default,09:45,10:30,1οΔημ Ευόσμου,35,Κορωνίδου Αλεξάνδρα,6942200575</Event>
+  </Day>
+  <Day id="_08.6.2018">
+    <Event id="_guide.652" dataGroup="Default">Default,09:45,10:30,1ο Δημοτικό Σχολείο Νέας Ιωνίας,30,Ασημόπουλος Γεώργιος,2102799029,23/9/2017</Event>
+  </Day>
+  <Day id="_8.6.2018">
+    <Event id="_guide.654" dataGroup="Default">Default,09:45,10:30,1ο Δημ νεασ ιωνιας,25,Τσουβαλάς,2102799029 / 6976799250</Event>
+  </Day>
+  <Day id="_9.6.2018">
+    <Event id="_guide.709" dataGroup="Default">Default,10:30,12:00,6Θεσιο Δημοτικό Σερρών,50,Ριζόπουλος Νικόλαος,6946007011</Event>
+  </Day>
+</Entries>

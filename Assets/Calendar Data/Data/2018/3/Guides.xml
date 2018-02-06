@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<!DOCTYPE Entries[
+<!ELEMENT Entries (Day*)>
+<!ELEMENT Day (Event*, Alarm*)>
+<!ELEMENT Event (#PCDATA)>
+<!ELEMENT Alarm (#PCDATA)>
+<!ATTLIST Day id ID #REQUIRED>
+<!ATTLIST Day officer CDATA #IMPLIED>
+<!ATTLIST Day guides CDATA #IMPLIED>
+<!ATTLIST Event id ID #REQUIRED>
+<!ATTLIST Event dataGroup CDATA #REQUIRED>
+<!ATTLIST Alarm id ID #REQUIRED>
+<!ATTLIST Alarm dataGroup CDATA #REQUIRED>]>
+<Entries>
+  <Day id="_6.3.2018">
+    <Event id="_guide.513" dataGroup="Default">Default,9:45,10:30,Δημοτικό Σχολείο Δροσιάς,35,Βασιλούδης Κωνσταντίνος,6976807407,25/9/2017</Event>
+    <Event id="_guide.514" dataGroup="Default">Default,10:30,11:15,5ο Γυμνάσιο Χαιδαρίου,40,Δούση Ελένη,6936850461,28/11/2017</Event>
+  </Day>
+  <Day id="_13.3.2018">
+    <Event id="_guide.519" dataGroup="Default">Default,10:30,11:15,Εκπεδευτήρεια Νέα Παιδεία,40,Αρβανίτη Σταματία,6956086867,6/9/2017</Event>
+    <Event id="_guide.521" dataGroup="Default">Default,09:00,09:45,8ο δημ αθηνων,30,Κιρικοσ θωμασ,6973246988</Event>
+    <Event id="_guide.668" dataGroup="Default">Default,09:30,10:15,εκπαιδευτηρια ν ζαγοριανακου,50,Ζαχοσ δανιηλ,6932713513</Event>
+    <Event id="_guide.764" dataGroup="Default">Default,11:15,12:00,1 Γυμ. Πεύκης,50,Κορνιοτάκη Βιολέτα,6974709637</Event>
+    <Event id="_guide.765" dataGroup="Default">Default,12:00,12:45,1 Γυμ. Πεύκης,50,Κορνιοτάκη Βιολέτα,6974709637</Event>
+  </Day>
+  <Day id="_8.3.2018">
+    <Event id="_guide.517" dataGroup="Default">Default,10:30,11:15,6 Δημ Σχ Περάματος,50,Βλασακούδη παναγιώτα,2104413699,5/9/2017</Event>
+    <Event id="_guide.615" dataGroup="Default">Default,09:15,10:00,Ελληνικη Παιδεια λυκειο,45,Λαμπιδακη,2102850044</Event>
+    <Event id="_guide.753" dataGroup="Default">Default,11:15,12:00,β τοσειτσιο αρσακειο εκαλησ,30,τσοτσορου ελενη,210-6218250</Event>
+    <Event id="_guide.812" dataGroup="Default">Default,12:00,12:45,18Γυμ Αθηνών,50,Κοψιά,2102111255</Event>
+    <Event id="_guide.813" dataGroup="Default">Default,12:45,13:30,18Γυμ Αθηνών,50,Κοψιά,2102111255</Event>
+  </Day>
+  <Day id="_22.3.2018">
+    <Event id="_guide.747" dataGroup="Default">Default,10:30,11:15,Γυμνάσιο Μαραθώνα,50,Σταυρακαντωνάκης Νικόλαος,2294066221 / 6997331959,27/9/2017</Event>
+    <Event id="_guide.748" dataGroup="Default">Default,11:15,12:00,Γυμνάσιο Μαραθώνα,50,Σταυρακαντωνάκης Νικόλαος,2294066221 / 6997331959,27/9/2017</Event>
+  </Day>
+  <Day id="_16.3.2018">
+    <Event id="_guide.529" dataGroup="Default">Default,09:00,09:45,4ο Δημοτικό Σχολείο Ηλιούπολης,40,Παπακώστα Μαργαρίτα,2109919528,8/10/2017</Event>
+    <Event id="_guide.530" dataGroup="Default">Default,09:45,10:30,4ο Δημοτικό Σχολείο Ηλιούπολης,40,Παπακώστα Μαργαρίτα,2109919528,8/10/2017</Event>
+    <Event id="_guide.531" dataGroup="Default">Default,10:30,11:15,6ο Δημοτικό Σχολείο Κερατσινίου,38,Κλινάκης Χρίστος,2104328468 - 6944840714</Event>
+    <Event id="_guide.632" dataGroup="Default">Default,11:15,12:00,λύκειο διδυμοτειχο,60,Κύρογλου Δέσποινα,2553023043,12/01/2018</Event>
+    <Event id="_guide.635" dataGroup="Default">Default,12:00,13:30,Δημοτικο Λουτρων Λεσβου,29,Χιωτελλη Εριφιλη,6974465041,12/01/2018</Event>
+  </Day>
+  <Day id="_14.3.2018">
+    <Event id="_guide.522" dataGroup="Default">Default,09:00,09:45,5ο Δημοτικό Πετρούπολης,45,Πίκουλα Παναγιώτα,6945481825,28/9/2017</Event>
+    <Event id="_guide.524" dataGroup="Default">Default,10:30,11:15,2ο Γυμν. Νεας Ιωνιας,60 Ατομα,Φραγκογιάννη Εφη,6942593610,7/9/2017</Event>
+    <Event id="_guide.526" dataGroup="Default">Default,11:15,12:00,2ο Γυμν. Νεας Ιωνιας,60 Ατομα,Φραγκογιάννη Εφη,6942593610,7/9/2017</Event>
+    <Event id="_guide.780" dataGroup="Default">Default,11:45,12:30,3ο Δημοτικό Σχ. Καματερού,40,Σεργάκης Ευάγγελος,2105055771,29/01/2018</Event>
+  </Day>
+  <Day id="_7.3.2018">
+    <Event id="_guide.515" dataGroup="Default">Default,09:00,09:45,10 dhmotiko peristeriou,55,kakabas xrhstos,6977293661</Event>
+    <Event id="_guide.516" dataGroup="Default">Default,10:30,11:15,1ο Δημοτικό Σχολείο Σκάλας Ωρωπού και Νέων Παλατιών,55,Νικολέτα Ζαχαράτου,2295032232,18/9/2017</Event>
+    <Event id="_guide.667" dataGroup="Default">Default,09:30,10:15,εκπαιδευτηρια ν.ζαγοριανακου,50</Event>
+    <Event id="_guide.671" dataGroup="Default">Default,11:15,12:00,Ελληνογαλλικη ουσιλων,40,μουστακα ουρσαλια,6977692969 / 2108028888</Event>
+    <Event id="_guide.672" dataGroup="Default">Default,12:00,12:45,Ελληνογαλλικη ουσιλων,40,μουστακα ουρσαλια,6977692969 / 2108028888</Event>
+  </Day>
+  <Day id="_27.3.2018">
+    <Event id="_guide.534" dataGroup="Default">Default,09:00,09:45,23ο Δημοτικό Κερατσινίου,40,Δρούσος Αντώνης,2104002415 - 6975761137,,antdrossos@gmail.com</Event>
+    <Event id="_guide.535" dataGroup="Default">Default,10:30,11:15,1ο Δημοτικό Καλαμάτας,45,Καμαρινόπουλος Σπύρος,6974394173,8/10/2017</Event>
+    <Event id="_guide.783" dataGroup="Default">Default,09:45,10:30,27o likio athimwm,60,δεληγιαννη παναγιωτα,2105139109 / 6976160304,30/1/2018</Event>
+    <Event id="_guide.784" dataGroup="Default">Default,11:15,12:00,27ο αθηνασ,,,30/1/2018</Event>
+    <Event id="_guide.785" dataGroup="Default">Default,12:00,12:45,27ο αθηνασ,,,30/1/2018</Event>
+    <Event id="_guide.786" dataGroup="Default">Default,12:45,13:30,27ο αθηνασ,,,30/1/2018</Event>
+  </Day>
+  <Day id="_15.3.2018">
+    <Event id="_guide.409" dataGroup="Default">Default,09:30,10:30,6 Γυμνασιο νεου Ηρακλειου,65,Νεοφητος,6974785622,2/10/2017</Event>
+    <Event id="_guide.527" dataGroup="Default">Default,10:30,11:15,Δημοτικό Σχολείο Σολομού Κορινθίας,45,Ανδριανέσης Λεωνίδας,2741031372,25/9/2017</Event>
+    <Event id="_guide.704" dataGroup="Default">Default,12:45,13:30,Γυμνάσιο Βάρδας Ηλείας,60,Αθανασοπούλου Αλεξάνδρα,6937153882 / 2623071595</Event>
+    <Event id="_guide.719" dataGroup="Default">Default,11:15,12:00,Εκπαιδευτήρια Δουκά Γυμνάσιο,45,Παππά Κατερίνα,6945173074,24/01/2018</Event>
+    <Event id="_guide.720" dataGroup="Default">Default,12:00,12:45,Εκπαιδευτήρια Δουκά Γυμνάσιο,45,Παππά Κατερίνα,6945173074,24/01/2018</Event>
+  </Day>
+  <Day id="_25.3.2018">
+    <Event id="_event.1" dataGroup="Special">Default,10:30,16:30,ΑΡΓΙΑ</Event>
+  </Day>
+  <Day id="_18.3.2018">
+    <Event id="_guide.358" dataGroup="Default">Default,10:30,12:00,Ιδιωτικό Νηπιαγωγείο: Το Σπιτάκι Της Σοκολάτας,60,Δούκα Αθηνά,2105570784,25/9/2017</Event>
+    <Event id="_guide.359" dataGroup="Default">Default,12:00,13:30,Ιδιωτικό Νηπιαγωγείο: Το Σπιτάκι Της Σοκολάτας,60,Δούκα Αθηνά,2105570784,25/9/2017</Event>
+  </Day>
+  <Day id="_29.3.2018">
+    <Event id="_guide.619" dataGroup="Default">Default,10:00,10:45,5ο Γυμνάσιο Περιστερίου,40,Σταματοπούλου,2105742550</Event>
+    <Event id="_guide.620" dataGroup="Default">Default,10:45,11:30,5ο Γυμνάσιο Περιστερίου,40,Σταματοπούλου,2105742550</Event>
+    <Event id="_guide.636" dataGroup="Default">Default,12:45,13:30,Δημ Καλλιθέας Πιερίας,47,Λαφατζή Ολυμπία,6973636898,12/01/2018</Event>
+    <Event id="_guide.680" dataGroup="Default">Default,11:30,12:15,3ο Δημ. Βύρωνα,50,Μεγρένη Αναστασία,6972849490,18/01/2018</Event>
+  </Day>
+  <Day id="_2.3.2018">
+    <Event id="_guide.511" dataGroup="Default">Default,10:30,11:15,4ο Νηπιαγωγείο Μοσχάτου,32,Μυλωνάκη Δέσποινα,2109408528,23/9/2017</Event>
+    <Event id="_guide.512" dataGroup="Default">Default,11:15,12:00,4ο Νηπιαγωγείο Μοσχάτου,32,Μυλωνάκη Δέσποινα,2109408528,23/9/2017</Event>
+    <Event id="_guide.681" dataGroup="Default">Default,09:45,10:30,40 Λύκειο Αθηνών,55,Καρούζου,2102114144 / 6976118970</Event>
+  </Day>
+  <Day id="_21.3.2018">
+    <Event id="_guide.533" dataGroup="Default">Default,10:30,11:15,6 Δημ Βρυλισιων,44,Σαρρη,6973570137</Event>
+    <Event id="_guide.718" dataGroup="Default">Default,09:45,10:30,1ΓΕλ Πεύκης,50,Παπαδοπούλου Κυριακή,6979334997 / 2108020251,24/01/2018</Event>
+    <Event id="_guide.793" dataGroup="Default">Default,11:15,12:00,3γυμνάσιο Βριλλισίων,40,Καλαθά,2108103398,31/01/2018</Event>
+    <Event id="_guide.794" dataGroup="Default">Default,12:00,12:45,3γυμνάσιο Βριλλισίων,35,Καλαθά,2108103398,31/01/2018</Event>
+  </Day>
+  <Day id="_20.3.2018">
+    <Event id="_guide.532" dataGroup="Default">Default,12:00,12:45,Δημ Εμπονα Ροδος,30,Δεληζιώτη Ελενα,22460041211/697302376</Event>
+    <Event id="_guide.617" dataGroup="Default">Default,09:00,09:45,8ο Δημοτικο Σχολείο Αμαρουσίου,50,Κοκκινομιλιώτης Γεώργιος,6974893573,25/9/2017</Event>
+    <Event id="_guide.618" dataGroup="Default">Default,09:45,10:30,8ο Δημοτικο Σχολείο Αμαρουσίου,50,Κοκκινομιλιώτης Γεώργιος,6974893573,25/9/2017</Event>
+  </Day>
+  <Day id="_1.3.2018">
+    <Event id="_guide.509" dataGroup="Default">Default,10:30,11:15,5ο Δημοτικό Ελευσίνας,45,Παπανικολάου Αθανασία,6937438025</Event>
+    <Event id="_guide.774" dataGroup="Default">Default,09:00,09:45,4ο γυμνασιο αγ.αναργυρων,50,σειντης θεοδωροσ,2102319556-6936840049,29/01/2018</Event>
+    <Event id="_guide.775" dataGroup="Default">Default,09:45,10:30,4ο γυμνασιο αγ.αναργυρων,50,σειντης θεοδωροσ,2102319556-6936840049,29/01/2018</Event>
+    <Event id="_guide.776" dataGroup="Default">Default,11:15,12:00,4ο γυμνασιο αγ.αναργυρων,50,σειντης θεοδωροσ,2102319556-6936840049,29/01/2018</Event>
+    <Event id="_guide.777" dataGroup="Default">Default,12:00,12:45,4ο γυμνασιο αγ.αναργυρων,50,σειντης θεοδωροσ,2102319556-6936840049,29/01/2018</Event>
+    <Event id="_guide.799" dataGroup="Default">Default,12:45,13:30,Δημ. Αντιμάχειας Κώ,60,Αναγνωστόπουλος Αλκης,6977055092</Event>
+  </Day>
+  <Day id="_28.3.2018">
+    <Event id="_guide.465" dataGroup="Default">Default,09:30,10:30,6ο Δημοτικό Μεγάρων,35,Λαγούρη Αναστασία,6946958645</Event>
+    <Event id="_guide.538" dataGroup="Default">Default,11:15,12:00,4ο Ημερήσιο Γυμνάσιο Ασπροπύργου,30,ατζηδημητρίου Δημήτριος,2105598015,8/10/2017</Event>
+    <Event id="_guide.539" dataGroup="Default">Default,10:30,11:15.4ο Ημερήσιο Γυμνάσιο Ασπροπύργου,30,ατζηδημητρίου Δημήτριος,2105598015,8/10/2017</Event>
+    <Event id="_guide.782" dataGroup="Default">Default,12:00,12:45,δημοτικο σχολειο παστιδασ,60,φυσικα παρασκευη,6947939210,29/01/2018</Event>
+  </Day>
+  <Day id="_31.3.2018">
+    <Event id="_guide.494" dataGroup="Default">Default,12:45,13:30,Δημ σχολειο καλλιθεασ πιεριασ,45,Λαχατζη Ολυμπια,6973636898</Event>
+    <Event id="_guide.701" dataGroup="Default">Default,13:30,14:15,Μουσικό Σχολείο Καρδίτσας,50,Κουφογιάννης Ευθύμιος,6936646807,19/01/2018</Event>
+  </Day>
+  <Day id="_3.3.2018">
+    <Event id="_guide.641" dataGroup="Default">Default,10:30,12:00,7o δημ Ευόσμου,75,Κορωνιός,6942211550</Event>
+  </Day>
+  <Day id="_17.3.2018">
+    <Event id="_guide.660" dataGroup="Default">Default,13:30,15:00,πυροβολικο</Event>
+    <Event id="_guide.796" dataGroup="Default">Default,10:30,12:00,1ο Γυμνάσιο Λάρισσας,38,Κολοκοτρώνη Ευθαλία,2410620720</Event>
+  </Day>
+  <Day id="_9.3.2018" officer="">
+    <Event id="_guide.518" dataGroup="Default">Default,10:30,11:15,5 Δημοτικό Σχολείο Βύρωνα,50,Βακόλας Ευάγγελος,6977228268,21/9/2017</Event>
+    <Event id="_guide.728" dataGroup="Default">Default,09:00,09:45,1Γυμνάσιο Νικαίας,70,Αντωνιάδου Νίκη,2104922385,24/01/2018</Event>
+    <Event id="_guide.729" dataGroup="Default">Default,09:45,10:30,1Γυμνάσιο Νικαίας,70,Αντωνιάδου Νίκη,2104922385,24/01/2018</Event>
+    <Event id="_guide.781" dataGroup="Default">Default,11:15,12:00,14Δημ Καλαμάτας,50,Ξυρογιάννη Μαρία,6958464367 / 2721024888,29/01/2018,ΙΣΩΣ ΑΡΓΗΣΟΥΝ 15ΛΕΠΤΑ</Event>
+  </Day>
+  <Day id="_10.3.2018">
+    <Event id="_guide.797" dataGroup="Default">Default,10:30,12:00,Σχολή Αξιωματικών Νοσυλευτικής,45,Επισμηναγός Μιχοπούλου,2107675603</Event>
+  </Day>
+  <Day id="_11.3.2018">
+    <Event id="_guide.807" dataGroup="Default">Default,10:30,11:15,Συλλογος παλιαων προσκοπων βυρωνα,20,Πιτσουλάκης Αντώνιος,6944329601</Event>
+  </Day>
+  <Day id="_4.3.2018">
+    <Event id="_guide.846" dataGroup="Default">Default,12:00,13:30,3ο Δημοτικό Σχολείο Μαρμάρων,80,Ζώης Προκόπης,6948884667</Event>
+  </Day>
+</Entries>

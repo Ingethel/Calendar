@@ -206,6 +206,7 @@ public class ColorGroup
 
     public ColorGroup(Color c, string s)
     {
+        c.a = .7f;
         Colour = c;
         Name = s;
         int _id = PlayerPrefs.GetInt("colorGroupId") + 1;
@@ -215,6 +216,7 @@ public class ColorGroup
 
     public ColorGroup(Color c, string s, string id)
     {
+        c.a = .7f;
         Colour = c;
         Name = s;
         Id = id;

@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!DOCTYPE Entries[
+<!ELEMENT Entries (Day*)>
+<!ELEMENT Day (Event*, Alarm*)>
+<!ELEMENT Event (#PCDATA)>
+<!ELEMENT Alarm (#PCDATA)>
+<!ATTLIST Day id ID #REQUIRED>
+<!ATTLIST Day officer CDATA #IMPLIED>
+<!ATTLIST Day guides CDATA #IMPLIED>
+<!ATTLIST Event id ID #REQUIRED>
+<!ATTLIST Event dataGroup CDATA #REQUIRED>
+<!ATTLIST Alarm id ID #REQUIRED>
+<!ATTLIST Alarm dataGroup CDATA #REQUIRED>]>
+<Entries>
+  <Day id="_23.5.2018">
+    <Event id="_guide.560" dataGroup="Default">Default,09:00,09:45,33 Πειραιά,36,θεοδωρος θεοδωριδης,6976672603,16/10/2017</Event>
+    <Event id="_guide.561" dataGroup="Default">Default,10:30,11:15,3ο Δημοτικό Σχολείο Νέου Ηρακλείου,40,Μαρυγιάννης Ιωάννης,6944860661,8/9/2017</Event>
+  </Day>
+  <Day id="_2.5.2018">
+    <Event id="_guide.431" dataGroup="Default">Default,09:00,9:45,3 γυμν Αγια Παρασκευη,45,Προβονα,6979242516/2106081930</Event>
+    <Event id="_guide.432" dataGroup="Default">Default,09:45,10:30,3 γυμν Αγια Παρασκευη,45,Προβονα,6979242516/2106081930</Event>
+    <Event id="_guide.575" dataGroup="Default">Default,10:30,11:15,Σχολη Καναση,19,Στέλλα Φραγκούλη,2107774835,5/9/2017</Event>
+  </Day>
+  <Day id="_16.5.2018">
+    <Event id="_guide.750" dataGroup="Default">Default,09:45,10:30,1ο Δημοτικό Βύρωνα,55,Κοντοπάνου Πηνελόππη,6946985841,2/10/2017</Event>
+    <Event id="_guide.751" dataGroup="Default">Default,10:30,11:15,4ο Δημοτικό Χαλανδρίου,42,Γκρέκας Λάμπρος,6932688720,5/9/2017</Event>
+    <Event id="_guide.752" dataGroup="Default">Default,11:15,12:00,1Δημ Δάφνης,30,Σταυροπούλου Σωτηρία,2109703540 / 6980699759</Event>
+  </Day>
+  <Day id="_26.5.2018">
+  </Day>
+  <Day id="_15.5.2018">
+    <Event id="_guide.749" dataGroup="Default">Default,09:15,10:00,9ο Δημοτικό Σχολείο Βύρωνα,50,Σκαρλάτου Ελένη,2107665040,25/9/2017</Event>
+    <Event id="_guide.808" dataGroup="Default">Default,10:30,11:15,43,Πουρνάρα Παναγιώτα,2102013555</Event>
+  </Day>
+  <Day id="_8.5.2018">
+    <Event id="_guide.581" dataGroup="Default">Default,10:30,11:15,2ο Δημοτικό Αγίας Βαρβάρας,50,Ραγκούση Σταυρούλα,2105613623,7/9/2017</Event>
+    <Event id="_guide.582" dataGroup="Default">Default,09:15,09:45,16 Δημ Χαλανδριου,30,Καραμεσαλη,6977259377</Event>
+    <Event id="_guide.754" dataGroup="Default">Default,09:45,10:30,Δημοτικό Σχολείο Σαρωνίδας,33,ΓΚΑΝΤΟΥΝΑ ΖΩΗ,6975722526</Event>
+    <Event id="_guide.778" dataGroup="Default">Default,12:00,12:45, 3ο δημοτικο κατερινης,70,τακοσ χρηστος,6945751231,29/01/2018</Event>
+  </Day>
+  <Day id="_10.5.2018">
+    <Event id="_guide.579" dataGroup="Default">Default,10:30,11:15,3ο Δημοτικό Γλυκών Νερών,40,Αντώνης Παπακωνσταντινίδης,2106659830/ 6948254323,23/9/2017</Event>
+  </Day>
+  <Day id="_9.5.2018">
+    <Event id="_guide.576" dataGroup="Default">Default,09:00,09:45,15ο Δημοτικό Σχολείο Ηλιούπολης,35,Μαυροειδάκος Γεώργιος,6972729951,8/9/2017</Event>
+    <Event id="_guide.577" dataGroup="Default">Default,10:30,11:15,5ο Δημοτικό Σχολείο Καλλιθέας,30,Σούντρη Κατερίνα,2109567892,18/9/2017</Event>
+    <Event id="_guide.656" dataGroup="Default">Default,11:15,12:00,Ιδιωτικο Εκπαιδευτηρια αντωνοπουλου,45,Ιγγλεζάκης Βασίλης,6947775174</Event>
+    <Event id="_guide.657" dataGroup="Default">Default,12:00,12:45,Ιδιωτικο Εκπαιδευτηρια αντωνοπουλου,45,Ιγγλεζάκης Βασίλης,6947775174</Event>
+    <Event id="_guide.805" dataGroup="Default">Default,09:45,10:30,16 Δημ Αθηνών,62,Σταματοπούλου Εφη, 6977827226</Event>
+    <Event id="_guide.806" dataGroup="Default">Default,09:45,10:30,16 Δημ Αθηνών,62,Σταματοπούλου Εφη,6977827226</Event>
+  </Day>
+  <Day id="_17.5.2018">
+    <Event id="_guide.83" dataGroup="Default">Default,09:00,10:30,7ο Δημοτικο Χαλανδριου,40,Μαγγανά Ιοάννα,2106714477</Event>
+    <Event id="_guide.86" dataGroup="Default">Default,10:30,12:00,7ο Δημοτικο Χαλανδριου,40,Μαγγανά Ιοάννα,2106714477</Event>
+    <Event id="_guide.686" dataGroup="Default">Default,11:15,12:00,Εκπαιδευτηρια Θεμιστοκλης,40,Νικολακακησ Ευτιχ,2104629066,18/01/2018</Event>
+  </Day>
+  <Day id="_24.5.2018">
+    <Event id="_guide.562" dataGroup="Default">Default,09:00,09:45,8ο Δημοτικό Χαιδαριου,44,Βασιλείος Χονδρογιάννης,2105324488,7/9/2017</Event>
+    <Event id="_guide.563" dataGroup="Default">Default,10:30,11:15,1ο Δημοτικό Σχολείο Ραφήνας,43,Λαζάρου Κατερίνα,2294024700,23/9/2017</Event>
+  </Day>
+  <Day id="_3.5.2018">
+    <Event id="_guide.571" dataGroup="Default">Default,09:00,09:45,13 Δημ Σχ Κορυδαλου,33,Σωλομου μαριανθη,6980583867</Event>
+    <Event id="_guide.572" dataGroup="Default">Default,09:45,10:30,13 Δημ Σχ Κορυδαλου,33,Σωλομου μαριανθη,6980583867</Event>
+    <Event id="_guide.573" dataGroup="Default">Default,10:30,11:15,9 dhm sx glyfadas,50,,2108946001</Event>
+    <Event id="_guide.574" dataGroup="Default">Default,12:00,12:45,7 δημ Θηβας,50,Κεσαγιαννη,6974126752,28/9/2017</Event>
+  </Day>
+  <Day id="_30.5.2018">
+    <Event id="_guide.551" dataGroup="Default">Default,09:00,09:45,4ο Δημοτικό Σχολείο Ηλιούπολης,50,Παπακώστα Μαργαρίτα,2109919528,8/10/2017</Event>
+    <Event id="_guide.552" dataGroup="Default">Default,10:30,11:15,2ο Δημοτικό Καλιθέας,40,Σπυριδούλα Κώστα,2109565130,2/10/2017</Event>
+  </Day>
+  <Day id="_18.5.2018">
+    <Event id="_guide.231" dataGroup="Default">Default,09:00,13:30,ΑΡΓΙΑ</Event>
+  </Day>
+  <Day id="_22.5.2018">
+    <Event id="_guide.345" dataGroup="Default">Default,09:15,10:30,10ο Δημοτικό Ηλιούπολης,30,Χριστοδουλοπούλου,2109700139,23/9/2017</Event>
+    <Event id="_guide.559" dataGroup="Default">Default,10:30,11:15,8ο Δημοτικό Σχολείο Ιλίου,40,Κολοβού Αργυρώ,6972352177,15/9/2017</Event>
+  </Day>
+  <Day id="_31.5.2018">
+    <Event id="_guide.553" dataGroup="Default">Default,09:00,09:45,3ο δημοτικο σχολειο χαλκιδας,35,Αναστασίου Χριστίνα, Κατσουράκης Κωνσταντίνος,6944153083</Event>
+    <Event id="_guide.554" dataGroup="Default">Default,10:30,11:15,24o Δημοτικό Σχολείο Ιλίου,50,Κύτρου Καλλιόπη,2102614372,28/9/2017</Event>
+  </Day>
+  <Day id="_4.5.2018">
+    <Event id="_guide.545" dataGroup="Default">Default,09:45,10:30,Δημοτικό Σχολείο Κιτσίου,35,Κατσαρού Μαρίνα,6977952554</Event>
+    <Event id="_guide.546" dataGroup="Default">Default,10:30,11:15,1ο δημοτικο σχολειο βασιλικου ευοιας,45,δουκασ παναγιωτης,6973347908</Event>
+    <Event id="_guide.761" dataGroup="Default">Default,09:00,09:45,93ο δημοτικο σχολειο,56,λαμπρου,6972475596</Event>
+  </Day>
+  <Day id="_29.5.2018">
+    <Event id="_guide.547" dataGroup="Default">Default,09:00,09:45,103 Δημ Σχ αθηνων,50,Μαθιουδσκη,2109013142,2/10/2017</Event>
+    <Event id="_guide.549" dataGroup="Default">Default,10:30,11:15,Δημοτικό Σχολείο Αγίας Μαρίνας Νέας Μάκρης,32,Ραϊου Δήμητρα,2294091028,25/9/2017</Event>
+    <Event id="_guide.550" dataGroup="Default">Default,11:15,12:00,Δημοτικό Σχολείο Αγίας Μαρίνας Νέας Μάκρης,32,Ραϊου Δήμητρα,2294091028,25/9/2017</Event>
+  </Day>
+  <Day id="_11.5.2018">
+    <Event id="_guide.361" dataGroup="Default">Default,09:15,10:30,20ο Δημοτικό Σχολείο Ηλιούπολης,55,Τασούλα Κωνσταντίνα,2109942199,25/9/2017</Event>
+    <Event id="_guide.580" dataGroup="Default">Default,10:30,11:15,1ο δημοτικο σχολειο γλυκων νερων,50,μαχος γιαννης,6977275225,2/10/2017</Event>
+  </Day>
+  <Day id="_25.5.2018">
+    <Event id="_guide.565" dataGroup="Default">Default,10:30,11:15,2 δημ Σχ Πεύκης,30,Ζιαννη Ζωη,6972020303</Event>
+    <Event id="_guide.566" dataGroup="Default">Default,11:15,12:00,2 δημ Σχ Πεύκης,30,Ζιαννη Ζωη,6972020303</Event>
+    <Event id="_guide.568" dataGroup="Default">Default,09:15,09:45,2 δημ Σχ Πεύκης,30,Ζιαννη Ζωη,6972020303</Event>
+    <Event id="_guide.569" dataGroup="Default">Default,09:45,10:30,2 δημ Σχ Πεύκης,30,Ζιαννη Ζωη,6972020303</Event>
+  </Day>
+  <Day id="_6.5.2018">
+    <Event id="_guide.693" dataGroup="Default">Default,10:30,12:00,1ο Δημοτικό Μουρικίου,50,Τσαγκάρης Γεώργιος,6945431340,18/01/2018</Event>
+    <Event id="_guide.795" dataGroup="Default">Default,12:00,13:30,3ο ΔΗΜΟΤΙΚΟ ΣΧΟΛΕΙΟ ΚΟΥΦΑΛΙΩΝ,45,ΚΑΡΑΛΙΑΤΟΥ ΔΗΜΗΤΡΑ,6977715790</Event>
+  </Day>
+  <Day id="_27.5.2018">
+    <Event id="_guide.810" dataGroup="Default">Default,12:00,13:30,6o Δημ Αλεξανδρούπολης,70,Ολυμπία Μαργαρίτη,6948826244</Event>
+  </Day>
+</Entries>
