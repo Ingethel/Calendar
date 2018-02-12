@@ -219,47 +219,32 @@ public class DataReader
                             XmlNodeList days = doc.GetElementsByTagName(DataStrings.Day);
                             foreach(XmlElement day in days)
                             {
-                                string officer = day.GetAttribute("officer");
-                                if (officer.ToLower().Contains(searchTerm))
+                                string[] temp = { "officer", "guides" };
+                                foreach(string s in temp)
                                 {
-                                    Event n = new Event();
-                                    n.SetDate(GetElementID(day));
-                                    n.attributes[8] = officer;
-                                    n.attributes[0] = "00:00";
-                                    n.attributes[1] = "00:00";
-                                    result.AddEvent(n);
+                                    string value = day.GetAttribute(s);
+                                    if (value.ToLower().Contains(searchTerm))
+                                    {
+                                        Event n = new Event();
+                                        n.SetDate(GetElementID(day));
+                                        result.AddEvent(n);
+                                    }
                                 }
-                                /*
-                                XmlNodeList teams = day.GetElementsByTagName(DataStrings.NameOfTeam);
-                                XmlNodeList guides = day.GetElementsByTagName(DataStrings.Guide);
+                                
+                                XmlNodeList teams = day.GetElementsByTagName(DataStrings.Event);
 
                                 foreach (XmlElement entry in teams)
                                 {
                                     if (entry.InnerText.ToLower().Contains(searchTerm))
                                     {
-                                        XmlNodeList entryInfo = entry.ParentNode.ChildNodes;
                                         Event guide = new Event();
-                                        guide = ReadItem(entryInfo, guide);
+                                        guide = ReadItem(entry, guide);
                                         guide.filler = false;
                                         guide.SetDate(GetElementID(day));
-                                        guide.id = GetElementID(entry.ParentNode as XmlElement);
-                                        result.AddGuide(guide);
+                                        guide.id = GetElementID(entry);
+                                        result.AddEvent(guide);
                                     }
                                 }
-
-                                foreach (XmlElement entry in guides)
-                                {
-                                    if (entry.InnerText.ToLower().Contains(searchTerm))
-                                    {
-                                        XmlNodeList entryInfo = entry.ParentNode.ChildNodes;
-                                        Event guide = new Event();
-                                        guide = ReadItem(entryInfo, guide);
-                                        guide.filler = false;
-                                        guide.SetDate(GetElementID(day));
-                                        guide.id = GetElementID(entry.ParentNode as XmlElement);
-                                        result.AddGuide(guide);
-                                    }
-                                }*/
                             }
                         }
                 }

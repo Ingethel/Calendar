@@ -114,7 +114,7 @@ public class DayViewManager : IDayView {
 
     public override void GenerateReport()
     {
-        ReportGeneration.CreatePDF(SettingsManager.Read("ExportPath") + "/DailyReport.pdf", true);
+        ReportGeneration.CreatePDF(SettingsManager.Read("ExportPath") + "/DailyReport" + assignedDate.ToString().Replace('/','_').Replace('\\','_').Replace(':','_') + ".pdf", true);
         ReportGeneration.OpenDoc();
 
         ReportGeneration.AddTitle(gManager.language.DailyGuideSchedule);

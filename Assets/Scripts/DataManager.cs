@@ -17,13 +17,6 @@ public class DataManager : MonoBehaviour
         manager = FindObjectOfType<GameManager>();
     }
 
-    public static int GenerateNewIdFor(string s)
-    {
-        int id = PlayerPrefs.GetInt(s);
-        PlayerPrefs.SetInt(s, id + 1);
-        return id;
-    }
-    
     private string DateToPath(DateTime date) {
         if(date.Year * 12 + date.Month >= DateTime.Now.Year * 12 + DateTime.Now.Month-1)
             return Application.dataPath + @"/Calendar Data/Data/" + date.Year.ToString() + "/" + date.Month.ToString() + "/" + DataStrings.file;
@@ -56,12 +49,7 @@ public class DataManager : MonoBehaviour
     public void RequestWrite<T>(T e) where T : Item
     {
         string filename = TagToPath(e.Date);
-        
-        if(e.Type == DataGroup.DataGroups.Event)
-            e.id = "_event." + GenerateNewIdFor("Event");
-        else if (e.Type == DataGroup.DataGroups.Alarm)
-            e.id = "_alarm." + GenerateNewIdFor("Alarms");
-        
+        e.id = SettingsManager.GenerateNewId();
         reader.Write(filename, e);
     }
 

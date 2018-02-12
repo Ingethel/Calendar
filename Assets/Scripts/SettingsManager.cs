@@ -196,6 +196,15 @@ public static class SettingsManager{
             ReadTimetable();
         return timetable[day];
     }
+
+    public static string GenerateNewId()
+    {
+        int id = (int)ReadFloat("IDCounter");
+        id += 1;
+        Write("IDCounter", id);
+        return "_entryNo." + id.ToString();
+    }
+
 }
 
 public class ColorGroup
@@ -209,9 +218,7 @@ public class ColorGroup
         c.a = .7f;
         Colour = c;
         Name = s;
-        int _id = PlayerPrefs.GetInt("colorGroupId") + 1;
-        Id = "ColorGroup." + _id.ToString();
-        PlayerPrefs.SetInt("colorGroupId", _id);
+        Id = SettingsManager.GenerateNewId();
     }
 
     public ColorGroup(Color c, string s, string id)
@@ -235,9 +242,7 @@ public class DataGroup
 
     public DataGroup(string name, string attributeList, int value)
     {
-        int _id = PlayerPrefs.GetInt("dataGroupId") + 1;
-        PlayerPrefs.SetInt("dataGroupId", _id);
-        Id = Groups[value] + "." + _id.ToString();
+        Id = SettingsManager.GenerateNewId();
         Name = name;
         Attributes = attributeList;
         type = value;

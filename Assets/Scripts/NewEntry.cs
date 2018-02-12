@@ -30,7 +30,8 @@ public class Item
         {
             value = attributes[0];
             for (int i = 1; i < attributes.Length; i++)
-                value += "," + attributes[i];
+                if(attributes[i] != "")
+                    value += ", " + attributes[i];
         }
         return value;
     }
@@ -42,7 +43,14 @@ public class Item
 
     public virtual string ObjectToXML()
     {
-        return ToString();
+        string value = "";
+        if (attributes != null && attributes.Length > 0)
+        {
+            value = attributes[0];
+            for (int i = 1; i < attributes.Length; i++)
+                value += "," + attributes[i];
+        }
+        return value;
     }
     
 }
@@ -94,7 +102,7 @@ public class Event : Item
 
     public override string ObjectToXML()
     {
-        return color + "," + startTime + "," + endTime + "," + ToString();
+        return color + "," + startTime + "," + endTime + "," + base.ObjectToXML();
     }
 
     public override void XMLToObject(string text)
@@ -301,7 +309,7 @@ public class DAY
     {
         if(!n.filler)
             if(n.id == "")
-                n.id = "_guide." + DataManager.GenerateNewIdFor("Guide");
+                n.id = SettingsManager.GenerateNewId();
         Events.Add(n);
     }
     
@@ -316,7 +324,7 @@ public class DAY
             Alarms.Insert(0, n);
         else if (n.id == "")
         {
-            n.id = "_alarm." + DataManager.GenerateNewIdFor("Event");
+            n.id = SettingsManager.GenerateNewId();
             Alarms.Add(n);
         }
     }

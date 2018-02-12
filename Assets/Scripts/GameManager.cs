@@ -35,11 +35,8 @@ public class GameManager : MonoBehaviour {
         Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, SettingsManager.ReadFloat("FullScreen") == 1);
         headerObj.SetActive(SettingsManager.ReadFloat("FullScreen") == 1);
         SetLanguage((int)SettingsManager.ReadFloat("Language"));
-
-        if(currentDate.Month == 1 && currentDate.Day == 1 && SettingsManager.Read("LastIdReset") != TimeConversions.DateTimeToString(currentDate))
-            ResetIDs();
-
-        if (SettingsManager.ReadFloat("LastBackUp") != currentDate.Month)
+        
+        if ((int)SettingsManager.ReadFloat("LastBackUp") != currentDate.Month)
         {
             SettingsManager.Write("LastBackUp", currentDate.Month);
             RearrangeData();
@@ -50,7 +47,7 @@ public class GameManager : MonoBehaviour {
     void InitialStartUp()
     {
         // check if first startup - initialise required variables
-        if (PlayerPrefs.GetInt("Start") == 0 || true)
+        if (PlayerPrefs.GetInt("Start") == 0)
         {
             PlayerPrefs.SetInt("Start", 1);
             DATA_PATH = Application.dataPath + @"/Calendar Data";
@@ -59,8 +56,6 @@ public class GameManager : MonoBehaviour {
             SettingsManager.Write("ExportPath", EXPORT_PATH);
             IMPORT_PATH = "";
             SettingsManager.Write("ImportPath", IMPORT_PATH);
-
-            ResetIDs();
         }
         else
         {
@@ -137,13 +132,6 @@ public class GameManager : MonoBehaviour {
             viewController.RequestView(CalendarViewController.State.OPTIONS);
     }
     
-    void ResetIDs()
-    {
-        PlayerPrefs.SetInt("Guide", 0);
-        PlayerPrefs.SetInt("Event", 0);
-        SettingsManager.Write("LastIdReset", TimeConversions.DateTimeToString(currentDate));
-    }
-
     void UpdateTimetable(string id, string value)
     {
         SettingsManager.Write(id, value);
@@ -181,9 +169,6 @@ public class GameManager : MonoBehaviour {
                 break;
             case "EXIT":
                 ExitApplication();
-                break;
-            case "RESET_IDS":
-                ResetIDs();
                 break;
             case "BACKUP":
                 if (s.Length == 3)

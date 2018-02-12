@@ -18,8 +18,8 @@
 <Settings>
   <Option id="FullScreen">0</Option>
   <Option id="Language">1</Option>
-  <Option id="LastIdReset">6.2.2018</Option>
   <Option id="LastBackUp">2</Option>
+  <Option id="IDCounter">1000</Option>
   <Option id="OldDataThreshold">2</Option>
   <Option id="DataPath">C:/Users/Stavros Mobile/Documents/GitHub/Calendar/Assets/Calendar Data</Option>
   <Option id="ExportPath">C:\Users\Stavros Mobile\Desktop</Option>
@@ -35,12 +35,12 @@
   <Timetable id="Friday">09:00,09:45,10:30,11:15,12:00,12:45,13:30</Timetable>
   <Timetable id="Saturday">10:30,12:00,13:30,15:00,16:30</Timetable>
   <Timetable id="Sunday">10:30,12:00,13:30,15:00,16:30</Timetable>
-  <ColorGroup id="ColorGroup.01" name="Default">0.04985456,0.1246912,0.8804799</ColorGroup>
-  <ColorGroup id="ColorGroup.02" name="Military">0.6886989,0.7747356,0.06048392</ColorGroup>
-  <ColorGroup id="ColorGroup.03" name="Political">0.9414735,0.9795902,0.04585973</ColorGroup>
+  <ColorGroup id="ColorGroup.1" name="Default">0.04985456,0.1246912,0.8804799</ColorGroup>
+  <ColorGroup id="ColorGroup.2" name="Military">0.6886989,0.7747356,0.06048392</ColorGroup>
+  <ColorGroup id="ColorGroup.3" name="Political">0.9414735,0.9795902,0.04585973</ColorGroup>
   <ColorGroup id="ColorGroup.4" name="Closed">1,0,0</ColorGroup>
   <ColorGroup id="ColorGroup.5" name="Free Entrance">0,1,0</ColorGroup>
-  <EventGroup id="EventGroup.01" name="Default">Date,Colour Group,Start Time,End Time, Name of Team, Number of People, Person in Charge, Telephone, Date of Confirmation, Notes</EventGroup>
-  <EventGroup id="EventGroup.23" name="Special">Date,Colour Group,Start Time,End Time, Note</EventGroup>
-  <AlarmGroup id="AlarmGroup.01" name="AlarmDefault">Date, Notes</AlarmGroup>
+  <EventGroup id="EventGroup.1" name="Default">Date,Colour Group,Start Time,End Time, Name of Team, Number of People, Person in Charge, Telephone, Date of Confirmation, Notes</EventGroup>
+  <EventGroup id="EventGroup.2" name="Special">Date,Colour Group,Start Time,End Time, Note</EventGroup>
+  <AlarmGroup id="AlarmGroup.1" name="AlarmDefault">Date, Notes</AlarmGroup>
 </Settings>

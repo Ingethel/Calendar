@@ -30,7 +30,7 @@ public class WeekViewManager : IViewManager
     
     public override void GenerateReport()
     {
-        ReportGeneration.CreatePDF(SettingsManager.Read("ExportPath") + "/WeeklyReport.pdf", true);
+        ReportGeneration.CreatePDF(SettingsManager.Read("ExportPath") + "/WeeklyReport" + assignedDate.ToString().Replace('/', '_').Replace('\\', '_').Replace(':', '_') + ".pdf", true);
         ReportGeneration.OpenDoc();
 
         ReportGeneration.AddTitle(gManager.language.WeeklyGuideSchedule);
@@ -75,7 +75,7 @@ public class WeekViewManager : IViewManager
                 }
             }
             ReportGeneration.AddElement(table);
-            ReportGeneration.AddEmptyLines(3);
+            ReportGeneration.AddEmptyLines(1);
             ReportGeneration.AddElement(new Paragraph(gManager.language.ChiefOfMuseum + "                                                      " + gManager.language.NavalOfficer, ReportGeneration.titleFont));
         }
         ReportGeneration.CloseDoc();
