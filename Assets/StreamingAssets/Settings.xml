@@ -18,8 +18,8 @@
 <Settings>
   <Option id="FullScreen">0</Option>
   <Option id="Language">1</Option>
-  <Option id="LastBackUp">2</Option>
-  <Option id="IDCounter">1000</Option>
+  <Option id="LastBackUp">3</Option>
+  <Option id="IDCounter">1002</Option>
   <Option id="OldDataThreshold">2</Option>
   <Option id="DataPath">C:/Users/Stavros Mobile/Documents/GitHub/Calendar/Assets/Calendar Data</Option>
   <Option id="ExportPath">C:\Users\Stavros Mobile\Desktop</Option>

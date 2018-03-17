@@ -70,7 +70,7 @@
     <Event id="_guide.720" dataGroup="Default">Default,12:00,12:45,Εκπαιδευτήρια Δουκά Γυμνάσιο,45,Παππά Κατερίνα,6945173074,24/01/2018</Event>
   </Day>
   <Day id="_25.3.2018">
-    <Event id="_event.1" dataGroup="Special">Default,10:30,16:30,ΑΡΓΙΑ</Event>
+    <Event id="_entryNo.1001" dataGroup="Special">Closed,10:30,16:30,ΑΡΓΙΑ</Event>
   </Day>
   <Day id="_18.3.2018">
     <Event id="_guide.358" dataGroup="Default">Default,10:30,12:00,Ιδιωτικό Νηπιαγωγείο: Το Σπιτάκι Της Σοκολάτας,60,Δούκα Αθηνά,2105570784,25/9/2017</Event>
@@ -137,5 +137,8 @@
   </Day>
   <Day id="_4.3.2018">
     <Event id="_guide.846" dataGroup="Default">Default,12:00,13:30,3ο Δημοτικό Σχολείο Μαρμάρων,80,Ζώης Προκόπης,6948884667</Event>
+  </Day>
+  <Day id="_12.3.2018">
+    <Event id="_entryNo.1002" dataGroup="Default">Default,09:00,10:00,Erasmus,50,,,,</Event>
   </Day>
 </Entries>

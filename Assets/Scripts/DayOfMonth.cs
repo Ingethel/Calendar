@@ -29,7 +29,7 @@ public class DayOfMonth : IDayView{
     {
         DateIndicatorPanel.SetActive(true);
         selectable.interactable = true;
-        if (isClosed)
+        if (isClosed && info.Events.Count() == 0)
         {
             Image img = GetComponent<Image>();
             if (img)
@@ -51,8 +51,7 @@ public class DayOfMonth : IDayView{
 
     protected override void OnSetView() {
         base.OnSetView();
-        if (!isClosed)
-            RequestData();
+        RequestData();
         DisplayInfo();
     }
     

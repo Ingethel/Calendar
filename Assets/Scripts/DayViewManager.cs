@@ -59,7 +59,7 @@ public class DayViewManager : IDayView {
     {
         base.OnSetView();
         RequestData();
-        if (isClosed) {
+        if (isClosed && info.Events.Count() == 0) {
             weeklyButton.SetActive(true);
         }
         else
@@ -87,6 +87,7 @@ public class DayViewManager : IDayView {
             }
         }
         else {
+            if(!isClosed)
                 FillEmptySlots();
         }
         base.DisplayInfo();
