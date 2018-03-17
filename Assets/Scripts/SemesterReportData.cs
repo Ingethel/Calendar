@@ -61,6 +61,7 @@ public class SemesterReportData : MonoBehaviour {
 
     private void ComposeReport()
     {
+        ComposeData();
         // title
         ReportGeneration.AddTitle("Τριμηνιαία αναφορά στοιχείων απολογισμού δραστηριοτήτων Θωρηκτού «Γ. ΑΒΕΡΩΦ»");
         ReportGeneration.AddEmptyLines(2);
@@ -71,14 +72,19 @@ public class SemesterReportData : MonoBehaviour {
         ReportGeneration.AddElement(VisitorReportTable());
 
         // rest
+        ReportGeneration.AddEmptyLines(1);
         ReportGeneration.AddNumberedIntent("ΑΙΜΟΔΟΣΙΕΣ ΠΡΟΣΩΠΙΚΟΥ");
         ReportGeneration.AddElement(new Paragraph(data[33], ReportGeneration.normalFont));
+        ReportGeneration.AddEmptyLines(1);
         ReportGeneration.AddNumberedIntent("ΣΥΜΜΕΤΟΧΗ ΑΝΤΙΠΡΟΣΩΠΕΙΩΝ ΣΕ ΤΟΠΙΚΕΣ ΕΚΔΗΛΩΣΕΙΣ");
         ReportGeneration.AddElement(new Paragraph(data[34], ReportGeneration.normalFont));
+        ReportGeneration.AddEmptyLines(1);
         ReportGeneration.AddNumberedIntent("ΔΙΑΘΕΣΗ ΘΩΡΗΚΤΟΥ «Γ.ΑΒΕΡΩΦ» ΓΙΑ ΚΟΙΝΩΝΙΚΕΣ ΕΚΔΗΛΩΣΕΙΣ");
         ReportGeneration.AddElement(new Paragraph(data[35], ReportGeneration.normalFont));
+        ReportGeneration.AddEmptyLines(1);
         ReportGeneration.AddNumberedIntent("ΠΟΛΙΤΙΣΤΙΚΕΣ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ ΘΩΡΗΚΤΟΥ «Γ.ΑΒΕΡΩΦ»");
         ReportGeneration.AddElement(new Paragraph(data[36], ReportGeneration.normalFont));
+        ReportGeneration.AddEmptyLines(1);
         ReportGeneration.AddNumberedIntent("ΓΕΝΙΚΗ ΕΠΙΘΕΩΡΗΣΗ ΘΩΡΗΚΤΟΥ «Γ.ΑΒΕΡΩΦ»");
         ReportGeneration.AddElement(new Paragraph(data[37], ReportGeneration.normalFont));
     }
